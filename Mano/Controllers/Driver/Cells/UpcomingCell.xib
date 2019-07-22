@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="229" id="KGk-i7-Jjw" customClass="UpcomingCell" customModule="Mano" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="229"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="228.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9k-24-fM7" customClass="RoundedView" customModule="Mano" customModuleProvider="target">
+                        <rect key="frame" x="25" y="30" width="270" height="168.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tomorrow 9:00 AM" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tdv-SN-I2T">
+                                <rect key="frame" x="35" y="15" width="200" height="29"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos Padilla" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="E3D-fH-Nl4">
+                                <rect key="frame" x="35" y="49" width="200" height="23.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rqf-Vq-lcs">
+                                <rect key="frame" x="35" y="77.5" width="200" height="35"/>
+                                <string key="text">Pickup: 86-10 37th Ave,
+ Jackson Heights, NY 11372</string>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4Pf-21-o0H">
+                                <rect key="frame" x="35" y="117.5" width="200" height="35"/>
+                                <string key="text">Drop-off: Elmhurst Hospital
+79-01 Broadway, Elmhurst, NY 11373</string>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="15"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.51372549020000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4Pf-21-o0H" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="3Cr-9n-Pc7"/>
+                            <constraint firstItem="E3D-fH-Nl4" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="6S7-6z-GgW"/>
+                            <constraint firstItem="E3D-fH-Nl4" firstAttribute="top" secondItem="tdv-SN-I2T" secondAttribute="bottom" constant="5" id="CV8-gK-VdI"/>
+                            <constraint firstAttribute="trailing" secondItem="tdv-SN-I2T" secondAttribute="trailing" constant="35" id="Fwh-4e-Q52"/>
+                            <constraint firstItem="tdv-SN-I2T" firstAttribute="top" secondItem="T9k-24-fM7" secondAttribute="top" constant="15" id="GQ9-dW-BIW"/>
+                            <constraint firstItem="4Pf-21-o0H" firstAttribute="top" secondItem="rqf-Vq-lcs" secondAttribute="bottom" constant="5" id="OXH-Wn-Jl7"/>
+                            <constraint firstAttribute="trailing" secondItem="E3D-fH-Nl4" secondAttribute="trailing" constant="35" id="PeF-9L-gv1"/>
+                            <constraint firstItem="rqf-Vq-lcs" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="Zjq-lz-98O"/>
+                            <constraint firstItem="rqf-Vq-lcs" firstAttribute="top" secondItem="E3D-fH-Nl4" secondAttribute="bottom" constant="5" id="aBg-wp-R27"/>
+                            <constraint firstItem="tdv-SN-I2T" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="jXy-U4-hHu"/>
+                            <constraint firstAttribute="trailing" secondItem="rqf-Vq-lcs" secondAttribute="trailing" constant="35" id="pgI-SX-qyC"/>
+                            <constraint firstAttribute="trailing" secondItem="4Pf-21-o0H" secondAttribute="trailing" constant="35" id="w1q-1l-OfM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="T9k-24-fM7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="S9a-T9-39E"/>
+                    <constraint firstItem="T9k-24-fM7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="g3N-ub-gDt"/>
+                    <constraint firstAttribute="bottom" secondItem="T9k-24-fM7" secondAttribute="bottom" constant="30" id="iDf-lb-gXu"/>
+                    <constraint firstAttribute="trailing" secondItem="T9k-24-fM7" secondAttribute="trailing" constant="25" id="xfE-jT-2Yb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="rideDropoffAddress" destination="4Pf-21-o0H" id="v6E-dd-aU0"/>
+                <outlet property="ridePickupAddress" destination="rqf-Vq-lcs" id="QJM-Zk-fFI"/>
+                <outlet property="riderName" destination="E3D-fH-Nl4" id="ybz-2o-5Fk"/>
+                <outlet property="upcomingDate" destination="tdv-SN-I2T" id="vrW-IG-OV5"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="173.77232142857142"/>
+        </tableViewCell>
+    </objects>
+</document>

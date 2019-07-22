@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Mano" customModuleProvider="target">
+            <connections>
+                <outlet property="emailTextField" destination="SJe-bq-do6" id="qox-OF-3wn"/>
+                <outlet property="passwordTextField" destination="XTa-Uu-SBa" id="a29-Uw-9rx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ManoLogo1" translatesAutoresizingMaskIntoConstraints="NO" id="cQa-bK-I4c">
+                    <rect key="frame" x="0.0" y="94" width="414" height="157"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="157" id="Ruk-y4-PMo"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgP-TY-K36">
+                    <rect key="frame" x="156.5" y="386" width="101" height="23.5"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJe-bq-do6" customClass="RoundedTextField" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="41" y="318" width="332" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="hOT-83-REh"/>
+                    </constraints>
+                    <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XTa-Uu-SBa" customClass="RoundedTextField" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="41" y="427.5" width="332" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="FbO-AK-bre"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSk-Zc-WmL" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="128.5" y="519.5" width="157" height="53"/>
+                    <color key="backgroundColor" red="0.9882352941176471" green="0.51372549019607838" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="0em-g5-9DO"/>
+                        <constraint firstAttribute="width" constant="157" id="pyF-AU-ESK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="35"/>
+                    <state key="normal" title="Login">
+                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="loginPressed:" destination="-1" eventType="touchUpInside" id="Xq8-Pg-R8L"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxH-zj-Icc">
+                    <rect key="frame" x="15" y="617.5" width="384" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="EsH-So-uR0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="23"/>
+                    <state key="normal" title="Create Account"/>
+                    <connections>
+                        <action selector="createAccountPressed:" destination="-1" eventType="touchUpInside" id="ulx-Ci-aM5"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROd-U2-NZw">
+                    <rect key="frame" x="177" y="276" width="60.5" height="24"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="SJe-bq-do6" firstAttribute="top" secondItem="ROd-U2-NZw" secondAttribute="bottom" constant="18" id="6Ky-fp-JQz"/>
+                <constraint firstItem="XTa-Uu-SBa" firstAttribute="top" secondItem="xgP-TY-K36" secondAttribute="bottom" constant="18" id="973-K1-w4O"/>
+                <constraint firstItem="rSk-Zc-WmL" firstAttribute="top" secondItem="XTa-Uu-SBa" secondAttribute="bottom" constant="42" id="CvG-o5-FNd"/>
+                <constraint firstItem="SJe-bq-do6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="41" id="CvO-2s-kZH"/>
+                <constraint firstItem="NxH-zj-Icc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="EaZ-O2-NXT"/>
+                <constraint firstItem="rSk-Zc-WmL" firstAttribute="centerX" secondItem="XTa-Uu-SBa" secondAttribute="centerX" id="HgV-4x-END"/>
+                <constraint firstItem="NxH-zj-Icc" firstAttribute="centerX" secondItem="rSk-Zc-WmL" secondAttribute="centerX" id="KDg-fL-91Y"/>
+                <constraint firstItem="xgP-TY-K36" firstAttribute="top" secondItem="SJe-bq-do6" secondAttribute="bottom" constant="18" id="M6Q-SW-G7k"/>
+                <constraint firstItem="cQa-bK-I4c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="N9j-YW-DP0"/>
+                <constraint firstItem="cQa-bK-I4c" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="S1M-ua-FUJ"/>
+                <constraint firstItem="cQa-bK-I4c" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="VRs-iK-d55"/>
+                <constraint firstItem="xgP-TY-K36" firstAttribute="centerX" secondItem="SJe-bq-do6" secondAttribute="centerX" id="YHx-9x-JRe"/>
+                <constraint firstItem="XTa-Uu-SBa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="41" id="fwq-qq-fcF"/>
+                <constraint firstItem="ROd-U2-NZw" firstAttribute="centerX" secondItem="cQa-bK-I4c" secondAttribute="centerX" id="lMo-zC-6Le"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SJe-bq-do6" secondAttribute="trailing" constant="41" id="mGG-Qq-qpj"/>
+                <constraint firstItem="ROd-U2-NZw" firstAttribute="top" secondItem="cQa-bK-I4c" secondAttribute="bottom" constant="25" id="mHb-Fy-4BT"/>
+                <constraint firstItem="NxH-zj-Icc" firstAttribute="top" secondItem="rSk-Zc-WmL" secondAttribute="bottom" constant="45" id="mxx-nc-k9U"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NxH-zj-Icc" secondAttribute="trailing" constant="15" id="q3F-5g-f0c"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XTa-Uu-SBa" secondAttribute="trailing" constant="41" id="sUk-hr-f6f"/>
+                <constraint firstItem="SJe-bq-do6" firstAttribute="centerX" secondItem="ROd-U2-NZw" secondAttribute="centerX" id="sgq-wW-E49"/>
+                <constraint firstItem="XTa-Uu-SBa" firstAttribute="centerX" secondItem="xgP-TY-K36" secondAttribute="centerX" id="u9P-Pl-Ex9"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ManoLogo1" width="750" height="300"/>
+    </resources>
+</document>
