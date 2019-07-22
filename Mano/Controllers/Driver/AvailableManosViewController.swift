@@ -12,6 +12,13 @@ class AvailableManosViewController: UIViewController {
 
     let graphics = GraphicsClient()
     
+    @IBOutlet weak var mapDetailView: RoundViewWithBorder!
+    @IBOutlet weak var passangerName: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var pickupLabel: UILabel!
+    @IBOutlet weak var dropoffLabel: UILabel!
+    
+    
     private var locationManager = CLLocationManager()
     
     
@@ -47,6 +54,7 @@ class AvailableManosViewController: UIViewController {
         setupUI()
         setupMap()
         fetchRides()
+        mapView.addSubview(mapDetailView)
         // Do any additional setup after loading the view.
     }
     func fetchRides(){
@@ -123,6 +131,12 @@ class AvailableManosViewController: UIViewController {
         }
     }
 
+    @IBAction func acceptPressed(_ sender: Any) {
+        
+    }
+    @IBAction func cancelPressed(_ sender: Any) {
+        mapDetailView.isHidden = true
+    }
 }
 
 extension AvailableManosViewController: CLLocationManagerDelegate {
@@ -142,7 +156,13 @@ extension AvailableManosViewController: CLLocationManagerDelegate {
 }
 
 extension AvailableManosViewController: GMSMapViewDelegate {
-    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        mapDetailView.isHidden = false
+        let position = marker.position
+        let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14.0)
+        mapView.animate(to: camera)
+        return true
+    }
 }
 
 extension AvailableManosViewController: UITableViewDelegate, UITableViewDataSource {

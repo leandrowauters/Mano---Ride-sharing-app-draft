@@ -62,4 +62,5 @@ class GraphicsClient {
         animatedViewRail.heightAnchor.constraint(equalToConstant: 5).isActive = true
         animatedViewRail.widthAnchor.constraint(equalTo: customSegmentedBar.widthAnchor).isActive = true
     }
+    
 }

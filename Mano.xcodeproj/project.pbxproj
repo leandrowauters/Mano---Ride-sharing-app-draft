@@ -23,6 +23,7 @@
 		D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40022DF948D00F20AFE /* String+Date.swift */; };
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
+		D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D575579C22E63D9E0063BD15 /* MapDetailedView.xib */; };
 		D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62E822E0215C00F638DF /* ViewController+Alert.swift */; };
 		D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */; };
 		D57D62F322E031C000F638DF /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62F122E031C000F638DF /* CreateAccountViewController.swift */; };
@@ -82,6 +83,7 @@
 		D54FD40022DF948D00F20AFE /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
+		D575579C22E63D9E0063BD15 /* MapDetailedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapDetailedView.xib; sourceTree = "<group>"; };
 		D57D62E822E0215C00F638DF /* ViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 		D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsAPI.swift; sourceTree = "<group>"; };
 		D57D62F122E031C000F638DF /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				D5EF0A9F22E252E40061B67A /* ManosList.xib */,
+				D575579C22E63D9E0063BD15 /* MapDetailedView.xib */,
 				D5EF0AA322E278000061B67A /* ManosList.swift */,
 			);
 			path = Views;
@@ -413,6 +416,7 @@
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
+				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
