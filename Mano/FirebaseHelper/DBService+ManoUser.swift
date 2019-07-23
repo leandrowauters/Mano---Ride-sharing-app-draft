@@ -13,6 +13,7 @@ import Firebase
 extension DBService {
     
     static public var currentManoUser: ManoUser!
+    
     static public func createUser(manoUser: ManoUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(manoUser.userId).setData(
             [ManoUserCollectionKeys.firstNameKey : manoUser.firstName,

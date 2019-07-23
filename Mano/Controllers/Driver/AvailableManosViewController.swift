@@ -13,10 +13,9 @@ class AvailableManosViewController: UIViewController {
     let graphics = GraphicsClient()
     
     @IBOutlet weak var mapDetailView: RoundViewWithBorder!
-    @IBOutlet weak var passangerName: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var pickupLabel: UILabel!
-    @IBOutlet weak var dropoffLabel: UILabel!
+    @IBOutlet weak var dropOffLabel: UILabel!
     
     
     private var locationManager = CLLocationManager()
@@ -82,13 +81,18 @@ class AvailableManosViewController: UIViewController {
 //        let mapView
     }
     func addMarkers() {
+        var index = 0
         for ride in rides {
             let location = CLLocationCoordinate2D(latitude: ride.pickupLat, longitude: ride.pickupLon)
             let marker = GMSMarker()
             marker.position = location
-            marker.map = mapView
+            marker.title = index.description
             marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1))
+            marker.map = mapView
+            print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
+            index += 1
         }
+        
     }
     func setupUI() {
         view.addSubview(customSegmentedBar)
@@ -160,6 +164,11 @@ extension AvailableManosViewController: GMSMapViewDelegate {
         mapDetailView.isHidden = false
         let position = marker.position
         let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14.0)
+        let index = Int(marker.title!)!
+        let ride = rides[index]
+        dateLabel.text = ride.appointmentDate
+        pickupLabel.text = "Pick-up:\n\(ride.pickupAddress)"
+        dropOffLabel.text = "Drop-off:\n\(ride.dropoffAddress)"
         mapView.animate(to: camera)
         return true
     }

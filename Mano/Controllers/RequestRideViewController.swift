@@ -43,9 +43,9 @@ class RequestRideViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        pickupAddress = DBService.currentManoUser.homeAdress
-        pickupLat = DBService.currentManoUser.homeLat
-        pickupLon = DBService.currentManoUser.homeLon
+//        pickupAddress = DBService.currentManoUser.homeAdress
+//        pickupLat = DBService.currentManoUser.homeLat
+//        pickupLon = DBService.currentManoUser.homeLon
     }
     private func setupTapsViews() {
         let dateViewTap = UITapGestureRecognizer(target: self, action: #selector(dateViewPressed))
@@ -85,7 +85,7 @@ class RequestRideViewController: UIViewController {
             showAlert(title: "Please complete missing fields", message: nil)
             return
         }
-        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon) { (error) in
+        DBService.createARide(date: date, passangerId: DBService.currentManoUser.fullName  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon) { (error) in
             if let error = error {
                 self.showAlert(title: "Error creating ride", message: error.localizedDescription)
             }
@@ -119,6 +119,8 @@ extension RequestRideViewController: GMSAutocompleteViewControllerDelegate {
         let coordinate = place.coordinate
         if pickup {
             pickupAddress = address
+            print(address)
+            print(pickupAddress)
             pickupLabel.text = address
             pickupLat = coordinate.latitude
             pickupLon = coordinate.longitude

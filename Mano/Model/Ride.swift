@@ -19,6 +19,7 @@ class Ride: Codable {
     var pickupLon: Double
     var dropoffLat: Double
     var dropoffLon: Double
+    var accepted: Bool
     
     init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String) {
         self.passanger = passanger
