@@ -12,11 +12,13 @@ class MyLocation: Codable {
     var userId: String
     var locationName: String
     var address: String
+    var locationId: String
     
-    init(userId: String, locationName: String, address: String) {
+    init(userId: String, locationName: String, address: String, locationId: String) {
         self.userId = userId
         self.locationName = locationName
         self.address = address
+        self.locationId = locationId
     }
     
     init(dict:[String:Any]) {
@@ -24,5 +26,6 @@ class MyLocation: Codable {
         self.userId = dict[MyLocationsCollectionKeys.locationAddress] as? String ?? ""
         self.address = dict[MyLocationsCollectionKeys.locationAddress] as?
         String ?? ""
+        self.locationId = dict[MyLocationsCollectionKeys.locationIdKey] as? String ?? ""
     }
 }

@@ -20,6 +20,7 @@ class AvailableManosViewController: UIViewController {
     
     private var locationManager = CLLocationManager()
     
+    var selectedRide: Ride!
     
     private var userLocation = CLLocation()
     
@@ -56,6 +57,7 @@ class AvailableManosViewController: UIViewController {
         mapView.addSubview(mapDetailView)
         // Do any additional setup after loading the view.
     }
+    
     func fetchRides(){
         DBService.fetchAllRides { (error, rides) in
             if let error = error {
@@ -75,11 +77,8 @@ class AvailableManosViewController: UIViewController {
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
         mapView.isMyLocationEnabled = true
-        
-        
-
-//        let mapView
     }
+    
     func addMarkers() {
         var index = 0
         for ride in rides {
@@ -92,8 +91,8 @@ class AvailableManosViewController: UIViewController {
             print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
             index += 1
         }
-        
     }
+    
     func setupUI() {
         view.addSubview(customSegmentedBar)
         customSegmentedBar.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +108,7 @@ class AvailableManosViewController: UIViewController {
         manoListView.manosListTableView.dataSource = self
         manoListView.manosListTableView.register(UINib(nibName: "ManosListCell", bundle: nil), forCellReuseIdentifier: "ManosListCell")
     }
+    
     func setupSubViews(views: [UIView]) {
         subViews = views
         for view in views {
@@ -136,11 +136,17 @@ class AvailableManosViewController: UIViewController {
     }
 
     @IBAction func acceptPressed(_ sender: Any) {
-        
+        DBService.updateRideToAccepted(ride: selectedRide) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating ride", message: error.localizedDescription)
+            }
+        }
     }
+    
     @IBAction func cancelPressed(_ sender: Any) {
         mapDetailView.isHidden = true
     }
+    
 }
 
 extension AvailableManosViewController: CLLocationManagerDelegate {
@@ -166,6 +172,7 @@ extension AvailableManosViewController: GMSMapViewDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14.0)
         let index = Int(marker.title!)!
         let ride = rides[index]
+        selectedRide = ride
         dateLabel.text = ride.appointmentDate
         pickupLabel.text = "Pick-up:\n\(ride.pickupAddress)"
         dropOffLabel.text = "Drop-off:\n\(ride.dropoffAddress)"

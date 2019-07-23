@@ -39,8 +39,9 @@ struct RideCollectionKeys {
     static let pickupLonKey = "pickupLon"
     static let dropoffLatKey = "dropoffLat"
     static let dropoffLonKey = "dropoffLon"
-
-
+    static let acceptedKey = "accepted"
+    static let accptedByKey = "accptedBy"
+    static let acceptenceWasSeenKey = "acceptenceWasSeen"
 }
 
 struct MyLocationsCollectionKeys {
@@ -48,5 +49,6 @@ struct MyLocationsCollectionKeys {
     static let userIdKey = "userId"
     static let locationNameKey = "locationName"
     static let locationAddress = "locationAddress"
+    static let locationIdKey = "locationId"
 }
 

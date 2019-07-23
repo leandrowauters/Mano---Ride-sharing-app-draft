@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import GooglePlaces
 class MyLocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
@@ -30,8 +30,15 @@ class MyLocationsViewController: UIViewController, UITableViewDelegate, UITableV
 
     func setup() {
        myLocationsTableView.register(UINib(nibName: "ManosListCell", bundle: nil), forCellReuseIdentifier: "ManosListCell")
+        myLocationsTableView.delegate = self
+        myLocationsTableView.dataSource = self
     }
 
+    @IBAction func addLocationPressed(_ sender: Any) {
+        GoogleHelper.setupAutoCompeteVC(Vc: self)
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return myLocations.count
     }
@@ -49,4 +56,42 @@ class MyLocationsViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
+    
+}
+
+extension MyLocationsViewController: GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        guard let address = place.formattedAddress else {
+            showAlert(title: "Error finding address", message: nil)
+            return}
+        let selectedMyLocation = MyLocation(userId: DBService.currentManoUser.userId, locationName: place.name ?? "Name unavailable", address: address, locationId: place.placeID ?? UUID().uuidString)
+        myLocations.append(selectedMyLocation)
+        DBService.createMyLocation(myLocation: selectedMyLocation) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error creating my location", message: error.localizedDescription)
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    
 }

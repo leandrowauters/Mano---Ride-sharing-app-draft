@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="driverImage" destination="EzO-fx-Tpj" id="anp-F6-Dco"/>
                 <outlet property="driverName" destination="JUM-C2-HD9" id="Iq1-Et-CPc"/>
+                <outlet property="manoDriveLabel" destination="9fX-Rb-egI" id="C69-WS-VGy"/>
                 <outlet property="messageAlert" destination="ut2-TX-fhI" id="cPg-7S-FCc"/>
                 <outlet property="upcomingTableView" destination="UPR-A3-9hi" id="3KR-a0-bhK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -104,7 +105,7 @@
                         <constraint firstAttribute="height" constant="55" id="vMe-oZ-A3L"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj" customClass="RoundedImageView" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="10" y="92.666666666666686" width="120" height="120"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="c2u-xx-BtV"/>

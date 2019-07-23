@@ -12,7 +12,7 @@ import Kingfisher
 import GooglePlaces
 class MoreInfoViewController: UIViewController {
 
-    private var userId: String!
+    private var manoUser: ManoUser!
     private var typeOfUser: String!
     var selectedImage: UIImage?
     private lazy var imagePickerController: UIImagePickerController = {
@@ -105,8 +105,8 @@ class MoreInfoViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, userId: String, typeOfUser: String) {
-        self.userId = userId
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, manoUser: ManoUser, typeOfUser: String) {
+        self.manoUser = manoUser
         self.typeOfUser = typeOfUser
         super.init(nibName: nil, bundle: nil)
     }
@@ -164,18 +164,18 @@ class MoreInfoViewController: UIViewController {
                 return
             }
             guard let userProfileImageData = selectedImage.jpegData(compressionQuality: 0.5) else {return}
-            StorageService.postImage(imageData: userProfileImageData, imageName: userId) { (error, url) in
+            StorageService.postImage(imageData: userProfileImageData, imageName: manoUser.userId) { (error, url) in
                 if let error = error {
                     self.showAlert(title: "Error updating profile image", message: error.localizedDescription)
                     
                 }
                 if let url = url {
                     
-                    DBService.updateDriverMoreInfo(userID: self.userId, profileImage: url.absoluteString, homeAddress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, carMakerModel: carModelMakerText, completion: { (error) in
+                    DBService.updateDriverMoreInfo(userID: self.manoUser.userId, profileImage: url.absoluteString, homeAddress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, carMakerModel: carModelMakerText, completion: { (error) in
                         if let error = error {
                             self.showAlert(title: "Error uploading more info", message: error.localizedDescription)
                         } else {
-                            let bioVC = BioViewController(nibName: nil, bundle: nil, userId: self.userId, typeOfUser: self.typeOfUser)
+                            let bioVC = BioViewController(nibName: nil, bundle: nil, manoUser: self.manoUser, typeOfUser: self.typeOfUser)
                             bioVC.modalPresentationStyle = .overCurrentContext
                             self.present(bioVC, animated: true)
                         }
@@ -184,11 +184,11 @@ class MoreInfoViewController: UIViewController {
             }
 
             } else {
-                DBService.updatePassangerMoreInfo(userID: userId, homeAddress: homeAddress, homeLat: homeLat, homeLon: homeLon , completion: { (error) in
+                DBService.updatePassangerMoreInfo(userID: manoUser.userId, homeAddress: homeAddress, homeLat: homeLat, homeLon: homeLon , completion: { (error) in
                 if let error = error {
                       self.showAlert(title: "Error uploading more info", message: error.localizedDescription)
                 } else {
-                    let bioVC = BioViewController(nibName: nil, bundle: nil, userId: self.userId, typeOfUser: self.typeOfUser)
+                    let bioVC = BioViewController(nibName: nil, bundle: nil, manoUser: self.manoUser, typeOfUser: self.typeOfUser)
                     bioVC.modalPresentationStyle = .overCurrentContext
                     self.present(bioVC, animated: true)
                 }

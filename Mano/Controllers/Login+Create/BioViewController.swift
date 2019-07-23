@@ -12,7 +12,7 @@ class BioViewController: UIViewController {
 
     @IBOutlet weak var bioTextView: UITextView!
     
-    private var userId = String()
+    private var manoUser: ManoUser!
     private var typeOfUser = String()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,8 @@ class BioViewController: UIViewController {
         setupScreenTap()
     }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, userId: String, typeOfUser: String) {
-        self.userId = userId
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, manoUser: ManoUser, typeOfUser: String) {
+        self.manoUser = manoUser
         self.typeOfUser = typeOfUser
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,18 +42,22 @@ class BioViewController: UIViewController {
         if bioTextView.text == "Please tell us about a little about yourself..." || bioTextView.text.isEmpty {
             showAlert(title: "Bio is empty", message: "Plase enter text")
         } else {
-            DBService.updateBio( userId: userId, bioText: bioTextView.text) { (error) in
+            DBService.updateBio( userId: manoUser.userId, bioText: bioTextView.text) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    DBService.currentManoUser = self.manoUser
                 }
+                
             }
+            
         }
     }
     
     @IBAction func okayPressed(_ sender: Any) {
         updateBio()
     
-        let tab = TabBarViewController.setTabBarVC(typeOfUser: typeOfUser, userId:userId)
+        let tab = TabBarViewController.setTabBarVC(typeOfUser: typeOfUser)
             present(tab, animated: true)
         
         }

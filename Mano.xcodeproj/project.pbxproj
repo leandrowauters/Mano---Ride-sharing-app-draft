@@ -24,6 +24,11 @@
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
 		D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D575579C22E63D9E0063BD15 /* MapDetailedView.xib */; };
+		D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */; };
+		D57557A322E761590063BD15 /* RideAcceptedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */; };
+		D57557A622E784CC0063BD15 /* DBService+MyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */; };
+		D57557A922E79C870063BD15 /* MyLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */; };
+		D57557AA22E79C870063BD15 /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */; };
 		D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62E822E0215C00F638DF /* ViewController+Alert.swift */; };
 		D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */; };
 		D57D62F322E031C000F638DF /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62F122E031C000F638DF /* CreateAccountViewController.swift */; };
@@ -84,6 +89,11 @@
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
 		D575579C22E63D9E0063BD15 /* MapDetailedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapDetailedView.xib; sourceTree = "<group>"; };
+		D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideAcceptedAlertViewController.swift; sourceTree = "<group>"; };
+		D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideAcceptedAlertViewController.xib; sourceTree = "<group>"; };
+		D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+MyLocation.swift"; sourceTree = "<group>"; };
+		D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationTableViewCell.swift; sourceTree = "<group>"; };
+		D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
 		D57D62E822E0215C00F638DF /* ViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 		D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsAPI.swift; sourceTree = "<group>"; };
 		D57D62F122E031C000F638DF /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +198,7 @@
 				D54FD40222DF9A4200F20AFE /* DBService.swift */,
 				D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */,
 				D50010E422E6077D006659DA /* DBService+Ride.swift */,
+				D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */,
 			);
 			path = FirebaseHelper;
 			sourceTree = "<group>";
@@ -218,6 +229,22 @@
 				D54FD40022DF948D00F20AFE /* String+Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D57557A422E761610063BD15 /* Messages+Alert */ = {
+			isa = PBXGroup;
+			children = (
+				D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */,
+				D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */,
+			);
+			path = "Messages+Alert";
+			sourceTree = "<group>";
+		};
+		D57557AB22E79C8F0063BD15 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		D57D62E722E0213D00F638DF /* ViewController+Alert */ = {
@@ -280,6 +307,9 @@
 				D5D6A77822E3A997009C0029 /* RequestRideViewController.xib */,
 				D59D1A7022E3BE4900E94D77 /* MyLocationsViewController.swift */,
 				D59D1A7122E3BE4900E94D77 /* MyLocationsViewController.xib */,
+				D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */,
+				D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */,
+				D57557AB22E79C8F0063BD15 /* New Group */,
 			);
 			name = Passenger;
 			sourceTree = "<group>";
@@ -291,6 +321,7 @@
 				D5D6A77622E3A966009C0029 /* Passenger */,
 				D5D1298722E2296D00B5EDB2 /* Driver */,
 				D5E39B9122E01608008A919A /* Login+Create */,
+				D57557A422E761610063BD15 /* Messages+Alert */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -422,6 +453,8 @@
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
 				D50010E322E601A3006659DA /* GoogleService-Info.plist in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
+				D57557A322E761590063BD15 /* RideAcceptedAlertViewController.xib in Resources */,
+				D57557AA22E79C870063BD15 /* MyLocationTableViewCell.xib in Resources */,
 				D5E39B9522E0163E008A919A /* LoginViewController.xib in Resources */,
 				D51CF7C022DF6F3B003F1385 /* Assets.xcassets in Resources */,
 				D5EF0AAF22E376CA0061B67A /* FavoritesViewController.xib in Resources */,
@@ -510,6 +543,7 @@
 				D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
+				D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */,
 				D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */,
 				D5E39B9422E0163E008A919A /* LoginViewController.swift in Sources */,
 				D54FD3FC22DF90FC00F20AFE /* CollectionKeys.swift in Sources */,
@@ -521,6 +555,8 @@
 				D51CF7B622DF6F38003F1385 /* AppDelegate.swift in Sources */,
 				D5D6A77922E3A997009C0029 /* RequestRideViewController.swift in Sources */,
 				D5E984CF22E235F70023B155 /* GraphicsClient.swift in Sources */,
+				D57557A622E784CC0063BD15 /* DBService+MyLocation.swift in Sources */,
+				D57557A922E79C870063BD15 /* MyLocationTableViewCell.swift in Sources */,
 				D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */,
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,

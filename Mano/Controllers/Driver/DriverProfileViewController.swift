@@ -13,8 +13,9 @@ class DriverProfileViewController: UIViewController {
     @IBOutlet weak var driverImage: UIImageView!
     @IBOutlet weak var driverName: UILabel!
     @IBOutlet weak var upcomingTableView: UITableView!
-    
+    @IBOutlet weak var manoDriveLabel: UILabel!
     @IBOutlet weak var messageAlert: CircularView!
+    
     var upcomingEvents = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -29,6 +30,11 @@ class DriverProfileViewController: UIViewController {
     }
 
     func setup() {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            manoDriveLabel.isHidden = true
+            driverImage.image = UIImage(named: "ManoLogo1")
+            
+        }
         upcomingTableView.register(UINib(nibName: "UpcomingCell", bundle: nil), forCellReuseIdentifier: "UpcomingCell")
         upcomingTableView.delegate = self
         upcomingTableView.dataSource = self

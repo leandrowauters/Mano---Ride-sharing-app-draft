@@ -38,6 +38,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="60"/>
                             <state key="normal" title="+"/>
+                            <connections>
+                                <action selector="addLocationPressed:" destination="-1" eventType="touchUpInside" id="DJT-ZY-d5q"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-cf-vld">
                             <rect key="frame" x="30" y="7.3333333333333428" width="274" height="40.666666666666664"/>

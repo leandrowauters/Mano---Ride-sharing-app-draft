@@ -164,7 +164,7 @@ extension CreateAccountViewController : AuthServiceCreateNewAccountDelegate {
     }
     
     func didCreateNewAccount(_ authservice: AuthService, user: ManoUser) {
-        let moreInfoVC = MoreInfoViewController(nibName: nil, bundle: nil, userId: user.userId, typeOfUser: typeOfUser!)
+        let moreInfoVC = MoreInfoViewController(nibName: nil, bundle: nil, manoUser: user, typeOfUser: typeOfUser!)
         unregisterKeyboardNotifications()
         navigationController?.pushViewController(moreInfoVC, animated: true)
         

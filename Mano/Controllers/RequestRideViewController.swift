@@ -38,7 +38,9 @@ class RequestRideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapsViews()
-        
+        pickupAddress = DBService.currentManoUser.homeAdress
+        pickupLat = DBService.currentManoUser.homeLat
+        pickupLon = DBService.currentManoUser.homeLon
         // Do any additional setup after loading the view.
     }
 

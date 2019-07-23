@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RideAcceptedAlertViewController" customModule="Mano" customModuleProvider="target">
+            <connections>
+                <outlet property="subtitle1" destination="tTf-1X-bJL" id="nBb-CJ-oTK"/>
+                <outlet property="subtitle2" destination="ozQ-L9-O5g" id="UnN-0T-ibV"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znx-Xv-kEA" customClass="RoundedView" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="41.333333333333343" y="249.33333333333334" width="331.33333333333326" height="257.33333333333326"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride Accepted!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1U-ae-3bB">
+                            <rect key="frame" x="30" y="24.999999999999968" width="271.33333333333331" height="32.666666666666657"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="28"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTf-1X-bJL">
+                            <rect key="frame" x="30" y="72.666666666666657" width="271.33333333333331" height="25.666666666666671"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="23"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ozQ-L9-O5g">
+                            <rect key="frame" x="30" y="113.33333333333334" width="271.33333333333331" height="26.666666666666657"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="23"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5zf-ZV-BYe" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="28.666666666666657" y="154.99999999999997" width="125" height="50"/>
+                            <color key="backgroundColor" red="0.97254901959999995" green="0.60784313729999995" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="125" id="Mfm-yd-VUo"/>
+                                <constraint firstAttribute="height" constant="50" id="k2I-d5-vch"/>
+                            </constraints>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Add to calendar">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="ArialRoundedMTBold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                            <connections>
+                                <action selector="addToCalendarPressed:" destination="-1" eventType="touchUpInside" id="76N-kc-Kc9"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uz-RB-GBo" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="177.66666666666666" y="154.99999999999997" width="124.99999999999997" height="50"/>
+                            <color key="backgroundColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="RGB-jH-O31"/>
+                                <constraint firstAttribute="width" constant="125" id="dmR-Vf-JnD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <state key="normal" title="Continue"/>
+                            <connections>
+                                <action selector="continuePressed:" destination="-1" eventType="touchUpInside" id="zD3-ug-cNA"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="X1U-ae-3bB" firstAttribute="leading" secondItem="znx-Xv-kEA" secondAttribute="leading" constant="30" id="Dv0-fs-D8O"/>
+                        <constraint firstItem="5zf-ZV-BYe" firstAttribute="centerX" secondItem="znx-Xv-kEA" secondAttribute="centerX" multiplier="0.55" id="JBw-TR-jjg"/>
+                        <constraint firstAttribute="trailing" secondItem="tTf-1X-bJL" secondAttribute="trailing" constant="30" id="Sex-Fe-qso"/>
+                        <constraint firstItem="ozQ-L9-O5g" firstAttribute="leading" secondItem="znx-Xv-kEA" secondAttribute="leading" constant="30" id="TU5-hF-M3G"/>
+                        <constraint firstAttribute="trailing" secondItem="X1U-ae-3bB" secondAttribute="trailing" constant="30" id="UN0-Zb-g7j"/>
+                        <constraint firstItem="ozQ-L9-O5g" firstAttribute="top" secondItem="tTf-1X-bJL" secondAttribute="bottom" constant="15" id="VeY-cQ-zWP"/>
+                        <constraint firstItem="X1U-ae-3bB" firstAttribute="top" secondItem="znx-Xv-kEA" secondAttribute="top" constant="25" id="XnM-cu-mqP"/>
+                        <constraint firstItem="5zf-ZV-BYe" firstAttribute="top" secondItem="ozQ-L9-O5g" secondAttribute="bottom" constant="15" id="Z8n-LV-42T"/>
+                        <constraint firstAttribute="trailing" secondItem="ozQ-L9-O5g" secondAttribute="trailing" constant="30" id="bxo-VZ-axl"/>
+                        <constraint firstItem="4uz-RB-GBo" firstAttribute="centerX" secondItem="ozQ-L9-O5g" secondAttribute="centerX" multiplier="1.45" id="ea4-w7-D5T"/>
+                        <constraint firstItem="tTf-1X-bJL" firstAttribute="leading" secondItem="znx-Xv-kEA" secondAttribute="leading" constant="30" id="gFr-cP-A1i"/>
+                        <constraint firstItem="tTf-1X-bJL" firstAttribute="top" secondItem="X1U-ae-3bB" secondAttribute="bottom" constant="15" id="oU8-z5-Hmn"/>
+                        <constraint firstItem="4uz-RB-GBo" firstAttribute="top" secondItem="ozQ-L9-O5g" secondAttribute="bottom" constant="15" id="udO-Za-oCb"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="znx-Xv-kEA" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="J3A-up-LHe"/>
+                <constraint firstItem="znx-Xv-kEA" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.35" id="WvZ-HS-nTC"/>
+                <constraint firstItem="znx-Xv-kEA" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Z2z-L9-56P"/>
+                <constraint firstItem="znx-Xv-kEA" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="fM7-91-5H0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

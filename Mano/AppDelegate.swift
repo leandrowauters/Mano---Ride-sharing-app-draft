@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     DBService.currentManoUser = manoUser
                         //TO DO
                     
-                        let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser, userId: nil)
+                        let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
                         self.window = UIWindow(frame: UIScreen.main.bounds)
                         self.window?.rootViewController = tab
                         self.window?.makeKeyAndVisible()
