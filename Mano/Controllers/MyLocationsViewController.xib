@@ -30,20 +30,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2du-af-k2U">
                     <rect key="frame" x="0.0" y="145" width="414" height="55"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6Z-VU-5XA">
-                            <rect key="frame" x="334" y="2.6666666666666572" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="Elg-vV-XXa"/>
-                                <constraint firstAttribute="height" constant="50" id="dxr-vP-nTE"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="60"/>
-                            <state key="normal" title="+"/>
-                            <connections>
-                                <action selector="addLocationPressed:" destination="-1" eventType="touchUpInside" id="DJT-ZY-d5q"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-cf-vld">
-                            <rect key="frame" x="30" y="7.3333333333333428" width="274" height="40.666666666666664"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="35"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -51,33 +39,45 @@
                     </subviews>
                     <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="h6Z-VU-5XA" firstAttribute="leading" secondItem="gPq-cf-vld" secondAttribute="trailing" constant="30" id="1JZ-Hc-37h"/>
                         <constraint firstAttribute="height" constant="55" id="CB6-PG-SEI"/>
-                        <constraint firstItem="gPq-cf-vld" firstAttribute="leading" secondItem="2du-af-k2U" secondAttribute="leading" constant="30" id="FPZ-6p-LS2"/>
-                        <constraint firstAttribute="trailing" secondItem="h6Z-VU-5XA" secondAttribute="trailing" constant="30" id="IgZ-5G-iRM"/>
-                        <constraint firstItem="gPq-cf-vld" firstAttribute="centerY" secondItem="h6Z-VU-5XA" secondAttribute="centerY" id="j2q-fR-Ku9"/>
-                        <constraint firstItem="h6Z-VU-5XA" firstAttribute="centerY" secondItem="2du-af-k2U" secondAttribute="centerY" id="o1y-Im-KKj"/>
+                        <constraint firstItem="gPq-cf-vld" firstAttribute="top" secondItem="2du-af-k2U" secondAttribute="top" id="L8d-eN-Aah"/>
+                        <constraint firstAttribute="trailing" secondItem="gPq-cf-vld" secondAttribute="trailing" id="P8P-hW-ezT"/>
+                        <constraint firstItem="gPq-cf-vld" firstAttribute="leading" secondItem="2du-af-k2U" secondAttribute="leading" id="bcj-l7-xSV"/>
+                        <constraint firstAttribute="bottom" secondItem="gPq-cf-vld" secondAttribute="bottom" id="io5-KF-IiP"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PSz-G2-Evb">
-                    <rect key="frame" x="0.0" y="200" width="414" height="536"/>
+                    <rect key="frame" x="0.0" y="255" width="414" height="481"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6Z-VU-5XA">
+                    <rect key="frame" x="0.0" y="200" width="414" height="55"/>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="35"/>
+                    <state key="normal" title="Add +"/>
+                    <connections>
+                        <action selector="addLocationPressed:" destination="-1" eventType="touchUpInside" id="DJT-ZY-d5q"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="PSz-G2-Evb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1ig-aC-3PB"/>
+                <constraint firstItem="h6Z-VU-5XA" firstAttribute="top" secondItem="2du-af-k2U" secondAttribute="bottom" id="0D8-1h-QLS"/>
                 <constraint firstItem="2du-af-k2U" firstAttribute="top" secondItem="4FR-ZK-xPy" secondAttribute="bottom" id="2ob-2k-UaC"/>
-                <constraint firstItem="PSz-G2-Evb" firstAttribute="top" secondItem="2du-af-k2U" secondAttribute="bottom" id="3ct-xF-Wgl"/>
+                <constraint firstItem="PSz-G2-Evb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="94x-Ti-Omh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4FR-ZK-xPy" secondAttribute="trailing" id="9Aj-MP-LMh"/>
+                <constraint firstItem="PSz-G2-Evb" firstAttribute="top" secondItem="h6Z-VU-5XA" secondAttribute="bottom" id="BDh-x2-qhr"/>
+                <constraint firstItem="PSz-G2-Evb" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="I9k-kd-uDq"/>
+                <constraint firstItem="h6Z-VU-5XA" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="L7a-h2-KIh"/>
+                <constraint firstItem="h6Z-VU-5XA" firstAttribute="height" secondItem="2du-af-k2U" secondAttribute="height" id="LDj-Yc-URZ"/>
                 <constraint firstItem="4FR-ZK-xPy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="NW1-47-7Av"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PSz-G2-Evb" secondAttribute="trailing" id="Z2U-u8-67i"/>
+                <constraint firstItem="h6Z-VU-5XA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TNc-Fj-n6a"/>
+                <constraint firstItem="PSz-G2-Evb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bfj-Cv-Msf"/>
                 <constraint firstItem="2du-af-k2U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fEJ-Vl-jgz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PSz-G2-Evb" secondAttribute="bottom" id="jPq-tp-6Nq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2du-af-k2U" secondAttribute="trailing" id="qN2-wK-4Hs"/>
                 <constraint firstItem="4FR-ZK-xPy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z7R-8U-bgo"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="126.35869565217392"/>
         </view>
     </objects>
 </document>

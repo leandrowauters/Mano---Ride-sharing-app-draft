@@ -23,6 +23,8 @@
 		D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40022DF948D00F20AFE /* String+Date.swift */; };
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
+		D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D571BADF22E7B20D00FA9369 /* DriveViewController.swift */; };
+		D571BAE222E7B20D00FA9369 /* DriveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D571BAE022E7B20D00FA9369 /* DriveViewController.xib */; };
 		D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D575579C22E63D9E0063BD15 /* MapDetailedView.xib */; };
 		D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */; };
 		D57557A322E761590063BD15 /* RideAcceptedAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */; };
@@ -88,6 +90,8 @@
 		D54FD40022DF948D00F20AFE /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
+		D571BADF22E7B20D00FA9369 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
+		D571BAE022E7B20D00FA9369 /* DriveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriveViewController.xib; sourceTree = "<group>"; };
 		D575579C22E63D9E0063BD15 /* MapDetailedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapDetailedView.xib; sourceTree = "<group>"; };
 		D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideAcceptedAlertViewController.swift; sourceTree = "<group>"; };
 		D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideAcceptedAlertViewController.xib; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 		D57557AB22E79C8F0063BD15 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */,
+				D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -281,8 +287,11 @@
 				D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */,
 				D5D6A76E22E38ABC009C0029 /* DriverProfileViewController.swift */,
 				D5D6A76F22E38ABC009C0029 /* DriverProfileViewController.xib */,
+				D5D6A77322E39863009C0029 /* UpcomingCell.xib */,
+				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
+				D571BADF22E7B20D00FA9369 /* DriveViewController.swift */,
 			);
 			path = Driver;
 			sourceTree = "<group>";
@@ -295,7 +304,6 @@
 				D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */,
 				D5D6A76922E3814C009C0029 /* FavoritesTableViewCell.xib */,
 				D5D6A77222E39863009C0029 /* UpcomingCell.swift */,
-				D5D6A77322E39863009C0029 /* UpcomingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -307,8 +315,6 @@
 				D5D6A77822E3A997009C0029 /* RequestRideViewController.xib */,
 				D59D1A7022E3BE4900E94D77 /* MyLocationsViewController.swift */,
 				D59D1A7122E3BE4900E94D77 /* MyLocationsViewController.xib */,
-				D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */,
-				D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */,
 				D57557AB22E79C8F0063BD15 /* New Group */,
 			);
 			name = Passenger;
@@ -442,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5D6A76B22E3814C009C0029 /* FavoritesTableViewCell.xib in Resources */,
+				D571BAE222E7B20D00FA9369 /* DriveViewController.xib in Resources */,
 				D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */,
 				D5D6A77A22E3A997009C0029 /* RequestRideViewController.xib in Resources */,
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
@@ -562,6 +569,7 @@
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,
 				D54FD3F922DF8EEA00F20AFE /* ManoUser.swift in Sources */,
+				D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */,
 				D59D1A7222E3BE4900E94D77 /* MyLocationsViewController.swift in Sources */,
 				D5122CE522E1124C00453359 /* BioViewController.swift in Sources */,
 				D5EF0AAB22E282410061B67A /* Ride.swift in Sources */,

@@ -17,4 +17,18 @@ extension DBService {
             }
         }
     }
+    
+    static public func fetchUserMyLocations(userId: String, completion: @escaping (Error?, [MyLocation]?) -> Void) {
+        DBService.firestoreDB
+            .collection(MyLocationsCollectionKeys.collectionKey)
+            .whereField(ManoUserCollectionKeys.userIdKey, isEqualTo: userId)
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(error, nil)
+                } else if let snapshot = snapshot {
+                     let myLocations = snapshot.documents.map{MyLocation.init(dict: $0.data())}
+                    completion(nil, myLocations)
+                }
+        }
+    }
 }

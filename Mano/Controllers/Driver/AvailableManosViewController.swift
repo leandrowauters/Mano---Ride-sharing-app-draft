@@ -55,9 +55,22 @@ class AvailableManosViewController: UIViewController {
         setupMap()
         fetchRides()
         mapView.addSubview(mapDetailView)
+        test()
         // Do any additional setup after loading the view.
     }
-    
+    func test() {
+        let testURL = URL(string: "comgooglemaps-x-callback://")!
+        if UIApplication.shared.canOpenURL(testURL) {
+            let directionsRequest = "comgooglemaps-x-callback://" +
+                "?daddr=John+F.+Kennedy+International+Airport,+Van+Wyck+Expressway,+Jamaica,+New+York" +
+            "&x-success=sourceapp://?resume=true&x-source=AirApp"
+            
+            let directionsURL = URL(string: directionsRequest)!
+            UIApplication.shared.open(directionsURL, options: [:], completionHandler: nil)
+        } else {
+            NSLog("Can't use comgooglemaps-x-callback:// on this device.")
+        }
+    }
     func fetchRides(){
         DBService.fetchAllRides { (error, rides) in
             if let error = error {
