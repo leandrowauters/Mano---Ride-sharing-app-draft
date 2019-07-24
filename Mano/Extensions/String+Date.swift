@@ -29,4 +29,13 @@ extension String {
         }
         return date
     }
+    public func stringToDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a yyyy"
+        dateFormatter.locale = .current
+        guard let date = dateFormatter.date(from: self) else {
+            fatalError()
+        }
+        return date
+    }
 }

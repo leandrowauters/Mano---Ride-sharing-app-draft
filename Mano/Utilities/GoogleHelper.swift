@@ -44,10 +44,31 @@ struct GoogleHelper {
             }
             if let data = data {
                 do{
-                    let duration = try JSONDecoder().decode(GoogleHelperResults.self, from: data)
-                        let etaText = duration.routes.first?.legs.first?.duration.text
-                    let etaInt = duration.routes.first?.legs.first?.duration.value
+                    let result = try JSONDecoder().decode(GoogleHelperResults.self, from: data)
+                        let etaText = result.routes.first?.legs.first?.duration.text
+                    let etaInt = result.routes.first?.legs.first?.duration.value
                     completionHandler(nil, etaText, etaInt)
+                } catch {
+                    completionHandler(appError, nil, nil)
+                }
+            }
+        }
+    }
+    
+    static public func calculateDistanceToLocation(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
+        let endpointUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLat),\(originLon)&destination=\(destinationLat),\(destinationLon)&key=\(GoogleMapsAPI.GoogleMapsAPIKey)"
+        print(endpointUrl)
+        NetworkHelper.shared.performDataTask(endpointURLString: endpointUrl) { (appError, data) in
+            if appError != nil {
+                completionHandler(AppError.badURL("Bad URL"), nil, nil)
+            }
+            if let data = data {
+                do{
+                    let result = try JSONDecoder().decode(GoogleHelperResults.self, from: data)
+                   let estimatedDistanceInText = result.routes.first?.legs.first?.distance.text
+                    let estimatedDistanceInInt = result.routes.first?.legs.first?.distance.value
+                    completionHandler(nil, estimatedDistanceInText, estimatedDistanceInInt)
+                    
                 } catch {
                     completionHandler(appError, nil, nil)
                 }

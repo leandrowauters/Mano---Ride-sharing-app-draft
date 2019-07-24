@@ -67,6 +67,7 @@
 		D5EF0AAF22E376CA0061B67A /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */; };
 		D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635122E7C40000250C96 /* NetworkHelper.swift */; };
 		D5F7635422E7C52700250C96 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635322E7C52700250C96 /* AppError.swift */; };
+		D5F7635622E886E700250C96 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635522E886E700250C96 /* TestHelper.swift */; };
 		ECF38DAE6FB605BAE61124A1 /* Pods_Mano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D079C4836965230C7A0B40 /* Pods_Mano.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +137,7 @@
 		D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		D5F7635122E7C40000250C96 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		D5F7635322E7C52700250C96 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		D5F7635522E886E700250C96 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				D54FD3FD22DF943400F20AFE /* Extensions */,
 				D5E39B9622E0166F008A919A /* Utilities */,
 				D57D62EA22E0235000F638DF /* API+Clients */,
+				D5F7635522E886E700250C96 /* TestHelper.swift */,
 			);
 			path = Mano;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */,
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
+				D5F7635622E886E700250C96 /* TestHelper.swift in Sources */,
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,
 				D54FD3F922DF8EEA00F20AFE /* ManoUser.swift in Sources */,
 				D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */,

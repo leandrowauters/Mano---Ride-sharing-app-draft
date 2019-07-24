@@ -18,6 +18,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
+                self.checkForRideToday()
                 self.ridesTableView.reloadData()
             }
         }
@@ -26,23 +27,29 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         setup()
         fetchYourAcceptedRides()
+
         // Do any additional setup after loading the view.
     }
     
+
     private func setup() {
         ridesTableView.register(UINib(nibName: "UpcomingCell", bundle: nil), forCellReuseIdentifier: "UpcomingCell")
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
         
     }
-    
+    private func checkForRideToday() {
+        if rides.isEmpty {
+            showAlert(title: "No Rides Today", message: nil)
+        }
+    }
     private func fetchYourAcceptedRides() {
         DBService.driverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
             if let error = error {
                 self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                self.rides = rides
+                self.rides = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
             }
         }
     }
@@ -77,6 +84,17 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             if let etaInt = etaInt {
                 print(etaInt)
+            }
+        }
+        GoogleHelper.calculateDistanceToLocation(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
+            if let appError = appError {
+                
+            }
+            if let distanceText = distanceText {
+                print(distanceText)
+            }
+            if let distanceInt = distanceInt {
+                print(distanceInt)
             }
         }
     }

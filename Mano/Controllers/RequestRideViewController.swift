@@ -38,6 +38,7 @@ class RequestRideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapsViews()
+        datePicker.minimumDate = Date()
         pickupAddress = DBService.currentManoUser.homeAdress
         pickupLat = DBService.currentManoUser.homeLat
         pickupLon = DBService.currentManoUser.homeLon
@@ -87,13 +88,15 @@ class RequestRideViewController: UIViewController {
             showAlert(title: "Please complete missing fields", message: nil)
             return
         }
-        DBService.createARide(date: date, passangerId: DBService.currentManoUser.fullName  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon) { (error) in
+        let timeStamp = Date().dateDescription
+        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp) { (error) in
             if let error = error {
                 self.showAlert(title: "Error creating ride", message: error.localizedDescription)
             }
-            
+
         }
         showAlert(title: "Ride request created!", message: "Please wait until a driver accepts request")
+        
     }
 
     

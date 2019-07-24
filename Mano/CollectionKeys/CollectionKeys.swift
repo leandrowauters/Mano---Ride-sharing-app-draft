@@ -44,6 +44,7 @@ struct RideCollectionKeys {
     static let acceptenceWasSeenKey = "acceptenceWasSeen"
     static let driverOnItsWayKey = "driverOnItsWay"
     static let rideETAKey = "rideETA"
+    static let dateRequestedKey = "dateRequested"
 }
 
 struct MyLocationsCollectionKeys {

@@ -141,6 +141,8 @@ class AvailableManosViewController: UIViewController {
                 self.showAlert(title: "Error updating ride", message: error.localizedDescription)
             }
         }
+        showAlert(title: "Drive Accepted!", message: "For more details please contact the passanger")
+        mapDetailView.isHidden = true
     }
     
     @IBAction func cancelPressed(_ sender: Any) {

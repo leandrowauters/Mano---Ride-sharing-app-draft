@@ -16,8 +16,8 @@ extension Date {
     }
     var dateDescription: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
-//        dateFormatter.locale = .current
+        dateFormatter.dateFormat = "MMM d, h:mm a yyyy"
+        dateFormatter.locale = .current
         return dateFormatter.string(from: self)
     }
 }
