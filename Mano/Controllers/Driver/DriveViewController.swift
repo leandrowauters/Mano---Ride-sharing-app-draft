@@ -8,23 +8,77 @@
 
 import UIKit
 
-class DriveViewController: UIViewController {
+class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+
+    @IBOutlet weak var ridesTableView: UITableView!
+    
+    
+    private var rides = [Ride]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.ridesTableView.reloadData()
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setup()
+        fetchYourAcceptedRides()
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func setup() {
+        ridesTableView.register(UINib(nibName: "UpcomingCell", bundle: nil), forCellReuseIdentifier: "UpcomingCell")
+        ridesTableView.delegate = self
+        ridesTableView.dataSource = self
+        
     }
-    */
-
+    
+    private func fetchYourAcceptedRides() {
+        DBService.driverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
+            if let error = error {
+                self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
+            }
+            if let rides = rides {
+                self.rides = rides
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rides.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UpcomingCell", for: indexPath) as? UpcomingCell else {return
+            UITableViewCell()
+        }
+        let ride = rides[indexPath.row]
+        cell.upcomingDate.text = ride.appointmentDate
+        cell.riderName.text = ride.passanger
+        cell.ridePickupAddress.text = ride.pickupAddress
+        cell.rideDropoffAddress.text = ride.dropoffAddress
+        cell.selectionStyle = .none
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 230
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ride = rides[indexPath.row]
+        GoogleHelper.calculateEta(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, duration) in
+            if let appError = appError {
+                print(appError)
+            }
+            if let duration = duration {
+                let legs = duration.routes
+                let distance = legs.first?.legs
+                let result = distance?.first?.distance
+                print(result?.text)
+                print(result?.value)
+            }
+        }
+    }
 }

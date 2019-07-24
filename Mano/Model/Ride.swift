@@ -22,8 +22,9 @@ class Ride: Codable {
     var accepted: Bool
     var accptedBy: String
     var acceptenceWasSeen: Bool
-    
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool) {
+    var driverOnItsWay: Bool
+    var rideETA: String
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool,rideETA: String) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -37,6 +38,8 @@ class Ride: Codable {
         self.accepted = accepted
         self.accptedBy = accptedBy
         self.acceptenceWasSeen = acceptenceWasSeen
+        self.driverOnItsWay = driverOnItsWay
+        self.rideETA = rideETA
     }
     
     init(dict: [String: Any]) {
@@ -53,5 +56,7 @@ class Ride: Codable {
         self.accepted = dict[RideCollectionKeys.acceptedKey] as? Bool ?? false
         self.accptedBy = dict[RideCollectionKeys.accptedByKey] as? String ?? ""
         self.acceptenceWasSeen = dict[RideCollectionKeys.acceptenceWasSeenKey] as? Bool ?? false
+        self.driverOnItsWay = dict[RideCollectionKeys.driverOnItsWayKey] as? Bool ?? false
+        self.rideETA = dict[RideCollectionKeys.rideETAKey] as? String ?? ""
     }
 }

@@ -13,6 +13,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var favoritesListTableView: UITableView!
     
+    
+    
     var favorites = [ManoUser]() {
         didSet{
             DispatchQueue.main.async {

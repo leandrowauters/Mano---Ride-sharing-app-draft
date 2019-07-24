@@ -35,14 +35,16 @@ class TabBarViewController: UITabBarController {
         let requestRideVC = RequestRideViewController()
         let tab = TabBarViewController()
         let myLocations = MyLocationsViewController()
+        let driveVC = DriveViewController()
         var controllers = [UIViewController]()
-        driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 2)
+
 
         if typeOfUser == TypeOfUser.Driver.rawValue {
-            availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "car"), tag: 0)
+            availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "hand"), tag: 0)
             favoritesVC.tabBarItem = UITabBarItem.init(title: "Favorites", image: UIImage(named: "favorites"), tag: 1)
-
-            controllers = [availableManoVC,favoritesVC,driverProfileVC]
+            driveVC.tabBarItem = UITabBarItem.init(title: "Drive", image: UIImage(named: "car"), tag: 2)
+            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 3)
+            controllers = [availableManoVC,favoritesVC,driveVC,driverProfileVC]
             
             UITabBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
             UITabBar.appearance().tintColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
@@ -51,6 +53,7 @@ class TabBarViewController: UITabBarController {
             UITabBar.appearance().tintColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
             requestRideVC.tabBarItem = UITabBarItem(title: "Request", image: UIImage(named: "rider"), tag: 0)
             myLocations.tabBarItem = UITabBarItem(title: "My Locations", image: UIImage(named: "favorites"), tag: 1)
+                    driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 2)
             controllers = [requestRideVC, myLocations, driverProfileVC]
         }
        

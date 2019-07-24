@@ -80,6 +80,9 @@ extension DBService {
                 completion(nil, rideAccepted.first)
             }
         }
+    }
+    
+    static public func driverOnItsWay(ETA: String, completion: @escaping(Error?) -> Void) {
         
     }
 }

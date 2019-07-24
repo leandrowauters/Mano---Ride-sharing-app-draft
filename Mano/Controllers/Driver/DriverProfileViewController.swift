@@ -48,20 +48,11 @@ class DriverProfileViewController: UIViewController {
     @IBAction func messagePressed(_ sender: Any) {
         print("Mesage PRessed")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return upcomingEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,6 +60,11 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             UITableViewCell()
             
         }
+        let upcomingRides = upcomingEvents[indexPath.row]
+        cell.upcomingDate.text = upcomingRides.appointmentDate
+        cell.riderName.text = upcomingRides.passanger
+        cell.ridePickupAddress.text = upcomingRides.pickupAddress
+        cell.rideDropoffAddress.text = upcomingRides.dropoffAddress
         cell.selectionStyle = .none
         return cell
     }

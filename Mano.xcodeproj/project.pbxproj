@@ -65,6 +65,8 @@
 		D5EF0AAB22E282410061B67A /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EF0AAA22E282410061B67A /* Ride.swift */; };
 		D5EF0AAE22E376CA0061B67A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EF0AAC22E376CA0061B67A /* FavoritesViewController.swift */; };
 		D5EF0AAF22E376CA0061B67A /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */; };
+		D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635122E7C40000250C96 /* NetworkHelper.swift */; };
+		D5F7635422E7C52700250C96 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635322E7C52700250C96 /* AppError.swift */; };
 		ECF38DAE6FB605BAE61124A1 /* Pods_Mano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D079C4836965230C7A0B40 /* Pods_Mano.framework */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +134,8 @@
 		D5EF0AAA22E282410061B67A /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		D5EF0AAC22E376CA0061B67A /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
+		D5F7635122E7C40000250C96 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		D5F7635322E7C52700250C96 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,10 +292,10 @@
 				D5D6A76E22E38ABC009C0029 /* DriverProfileViewController.swift */,
 				D5D6A76F22E38ABC009C0029 /* DriverProfileViewController.xib */,
 				D5D6A77322E39863009C0029 /* UpcomingCell.xib */,
+				D571BADF22E7B20D00FA9369 /* DriveViewController.swift */,
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
-				D571BADF22E7B20D00FA9369 /* DriveViewController.swift */,
 			);
 			path = Driver;
 			sourceTree = "<group>";
@@ -353,6 +357,8 @@
 				D5E39B9722E016A8008A919A /* IBDesignableViews.swift */,
 				D5E984CE22E235F70023B155 /* GraphicsClient.swift */,
 				D50010DE22E5F842006659DA /* GoogleHelper.swift */,
+				D5F7635122E7C40000250C96 /* NetworkHelper.swift */,
+				D5F7635322E7C52700250C96 /* AppError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -548,7 +554,9 @@
 				D59D1A7A22E3CA2000E94D77 /* DataPersistanceManager.swift in Sources */,
 				D5EF0AAE22E376CA0061B67A /* FavoritesViewController.swift in Sources */,
 				D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */,
+				D5F7635422E7C52700250C96 /* AppError.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
+				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
 				D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */,
 				D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */,
