@@ -68,16 +68,15 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[indexPath.row]
-        GoogleHelper.calculateEta(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, duration) in
+        GoogleHelper.calculateEta(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, etaText, etaInt) in
             if let appError = appError {
                 print(appError)
             }
-            if let duration = duration {
-                let legs = duration.routes
-                let distance = legs.first?.legs
-                let result = distance?.first?.distance
-                print(result?.text)
-                print(result?.value)
+            if let etaText = etaText {
+                print(etaText)
+            }
+            if let etaInt = etaInt {
+                print(etaInt)
             }
         }
     }

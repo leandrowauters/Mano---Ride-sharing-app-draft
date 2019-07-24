@@ -34,21 +34,22 @@ struct GoogleHelper {
         Vc.present(autocompleteController, animated: true, completion: nil)
     }
     
-    static public func calculateEta(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?,GoogleHelperResults?) -> Void) {
+    static public func calculateEta(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
         let departureTime = Int(Date().timeIntervalSince1970)
         let endpointUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLat),\(originLon)&destination=\(destinationLat),\(destinationLon)&departure_time=\(departureTime)&key=\(GoogleMapsAPI.GoogleMapsAPIKey)"
         print(endpointUrl)
         NetworkHelper.shared.performDataTask(endpointURLString: endpointUrl) { (appError, data) in
             if appError != nil {
-                completionHandler(AppError.badURL("Bad URL"), nil)
+                completionHandler(AppError.badURL("Bad URL"), nil, nil)
             }
             if let data = data {
                 do{
                     let duration = try JSONDecoder().decode(GoogleHelperResults.self, from: data)
-                    print(duration.routes)
-                    completionHandler(nil, duration)
+                        let etaText = duration.routes.first?.legs.first?.duration.text
+                    let etaInt = duration.routes.first?.legs.first?.duration.value
+                    completionHandler(nil, etaText, etaInt)
                 } catch {
-                    completionHandler(appError, nil)
+                    completionHandler(appError, nil, nil)
                 }
             }
         }
@@ -71,7 +72,7 @@ struct Legs: Codable {
 
 struct Distance: Codable {
     let distance: Result
-
+    let duration: Result
 }
 
 struct Result: Codable {
