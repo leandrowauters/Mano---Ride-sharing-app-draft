@@ -33,6 +33,13 @@ struct GoogleHelper {
         autocompleteController.tableCellSeparatorColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
         Vc.present(autocompleteController, animated: true, completion: nil)
     }
+    static public func openGoogleMapDirection(currentLat: Double, currentLon: Double,destinationLat: Double, destinationLon: Double,completion: @escaping(Error?) -> Void) {
+        guard let url = URL(string: "comgooglemaps://?saddr=\(currentLat),\(currentLon)&daddr=\(destinationLat),\(destinationLon)") else {
+            completion(AppError.badURL("Bad URL"))
+            return
+        }
+        UIApplication.shared.open(url)
+    }
     
     static public func calculateEta(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
         let departureTime = Int(Date().timeIntervalSince1970)

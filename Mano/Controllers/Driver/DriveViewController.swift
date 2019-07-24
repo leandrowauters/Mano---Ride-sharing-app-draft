@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -14,7 +15,10 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var ridesTableView: UITableView!
     
-    
+    private var userLocation = CLLocation()
+    private var locationManager = CLLocationManager()
+    private var duration: Int?
+    private var distance: Int?
     private var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -27,24 +31,39 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         setup()
         fetchYourAcceptedRides()
+        setupCoreLocation()
 
         // Do any additional setup after loading the view.
     }
     
+    private func setupCoreLocation() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            // we need to say how accurate the data should be
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // closest location accuracy
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()// this is only while the app is unlocked
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    }
 
     private func setup() {
-        ridesTableView.register(UINib(nibName: "UpcomingCell", bundle: nil), forCellReuseIdentifier: "UpcomingCell")
+        locationManager.delegate = self
+        ridesTableView.register(UINib(nibName: "DriveTableViewCell", bundle: nil), forCellReuseIdentifier: "DriveTableViewCell")
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
         
     }
+    
     private func checkForRideToday() {
         if rides.isEmpty {
             showAlert(title: "No Rides Today", message: nil)
         }
     }
+    
     private func fetchYourAcceptedRides() {
-        DBService.driverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
+        DBService.fetchDriverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
             if let error = error {
                 self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }
@@ -53,49 +72,86 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
     }
+    
+    private func updateRideToOnItsWay(ride: Ride) {
+        DBService.updateDriverOntItsWay(ride: ride) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating ride", message: error.localizedDescription)
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rides.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UpcomingCell", for: indexPath) as? UpcomingCell else {return
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DriveTableViewCell", for: indexPath) as? DriveTableViewCell else {return
             UITableViewCell()
         }
         let ride = rides[indexPath.row]
-        cell.upcomingDate.text = ride.appointmentDate
-        cell.riderName.text = ride.passanger
-        cell.ridePickupAddress.text = ride.pickupAddress
-        cell.rideDropoffAddress.text = ride.dropoffAddress
+        cell.passangerName.text = ride.passanger
+        cell.pickUpAddress.text = "Pick-up:\n \(ride.pickupAddress)"
+        cell.dropoffAddress.text = "Drop-off:\n \(ride.dropoffAddress)"
+        cell.distance.text = "Calculating..."
+        cell.duration.text = "Calculating..."
+        GoogleHelper.calculateDistanceToLocation(originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
+            if let appError = appError {
+                self.showAlert(title: "Error", message: appError.localizedDescription)
+            }
+            if let distanceText = distanceText {
+                DispatchQueue.main.async {
+                    cell.distance.text = "Distance: \(distanceText)"
+                }
+
+            }
+            if let distanceInt = distanceInt {
+                self.distance = distanceInt
+            }
+        }
+        GoogleHelper.calculateEta(originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, durationText, durationInt) in
+            if let appError = appError {
+                self.showAlert(title: "Error", message: appError.localizedDescription)
+            }
+            if let durationText = durationText {
+                DispatchQueue.main.async {
+                    cell.duration.text = "Duration: \(durationText)"
+                }
+            }
+            if let durationInt = durationInt {
+                self.duration = durationInt
+            }
+        }
+
         cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 230
+        return 315
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[indexPath.row]
-        GoogleHelper.calculateEta(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, etaText, etaInt) in
-            if let appError = appError {
-                print(appError)
-            }
-            if let etaText = etaText {
-                print(etaText)
-            }
-            if let etaInt = etaInt {
-                print(etaInt)
-            }
+        showAlert(title: "Begin Drive?", message: "\(ride.passanger) will be notified") { (yes) in
+            self.updateRideToOnItsWay(ride: ride)
+            let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: self.duration!, distance: self.distance!, ride: ride)
+            self.navigationController?.pushViewController(onItsWayVc, animated: true)
         }
-        GoogleHelper.calculateDistanceToLocation(originLat: DBService.currentManoUser.homeLat!, originLon: DBService.currentManoUser.homeLon!, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
-            if let appError = appError {
-                
-            }
-            if let distanceText = distanceText {
-                print(distanceText)
-            }
-            if let distanceInt = distanceInt {
-                print(distanceInt)
-            }
+        
+    }
+}
+
+extension DriveViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
         }
+        locationManager.startUpdatingLocation()
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocation = locations.last else {return}
+        userLocation = currentLocation
+        locationManager.stopUpdatingLocation()
     }
 }

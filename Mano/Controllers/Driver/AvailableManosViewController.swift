@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+
 class AvailableManosViewController: UIViewController {
 
     let graphics = GraphicsClient()

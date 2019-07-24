@@ -42,7 +42,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as? FavoritesTableViewCell else {return UITableViewCell()}
-        cell.favoriteName.text = "Paco Casal"
+        cell.favoriteName.text = "Joseph Garcia"
         cell.favoriteAddress.text = "86-10 37th Ave, Jackson Heights, NY 11372"
         cell.selectionStyle = .none
         return cell

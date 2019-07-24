@@ -32,6 +32,7 @@ class DriverProfileViewController: UIViewController {
 
     func setup() {
         let currentUser = DBService.currentManoUser!
+        driverName.text = currentUser.fullName
         if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
@@ -45,7 +46,7 @@ class DriverProfileViewController: UIViewController {
             }
             
         } else {
-            DBService.driverAcceptedRides(driverId: currentUser.userId) { (error, rides) in
+            DBService.fetchDriverAcceptedRides(driverId: currentUser.userId) { (error, rides) in
                 if let error = error {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
                 }
@@ -73,7 +74,7 @@ class DriverProfileViewController: UIViewController {
     }
     
     @IBAction func settingsPressed(_ sender: Any) {
-        
+        AppDelegate.authservice.signOutAccount()
     }
     
     @IBAction func messagePressed(_ sender: Any) {

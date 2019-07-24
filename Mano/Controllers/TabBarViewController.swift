@@ -42,7 +42,7 @@ class TabBarViewController: UITabBarController {
         if typeOfUser == TypeOfUser.Driver.rawValue {
             availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "hand"), tag: 0)
             favoritesVC.tabBarItem = UITabBarItem.init(title: "Favorites", image: UIImage(named: "favorites"), tag: 1)
-            driveVC.tabBarItem = UITabBarItem.init(title: "Drive", image: UIImage(named: "car"), tag: 2)
+            driveVC.tabBarItem = UITabBarItem.init(title: "Today", image: UIImage(named: "car"), tag: 2)
             driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 3)
             controllers = [availableManoVC,favoritesVC,driveVC,driverProfileVC]
             

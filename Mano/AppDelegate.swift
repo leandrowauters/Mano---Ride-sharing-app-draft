@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        GMSPlacesClient.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         GMSServices.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         FirebaseApp.configure()
-//        AppDelegate.authservice.signOutAccount()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         if let manoUser = AppDelegate.authservice.getCurrentUser() {
             
@@ -39,8 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         //TO DO
                     
                         let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
-                        self.window = UIWindow(frame: UIScreen.main.bounds)
-                        self.window?.rootViewController = tab
+                    let navigationController = UINavigationController(rootViewController: tab)
+                    navigationController.setNavigationBarHidden(true, animated: false)
+                    self.window = UIWindow(frame: UIScreen.main.bounds)
+                    self.window?.rootViewController = navigationController
                         self.window?.makeKeyAndVisible()
                     
                 }

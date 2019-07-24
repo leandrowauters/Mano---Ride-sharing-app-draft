@@ -42,11 +42,10 @@ class BioViewController: UIViewController {
         if bioTextView.text == "Please tell us about a little about yourself..." || bioTextView.text.isEmpty {
             showAlert(title: "Bio is empty", message: "Plase enter text")
         } else {
+            DBService.currentManoUser = self.manoUser
             DBService.updateBio( userId: manoUser.userId, bioText: bioTextView.text) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error", message: error.localizedDescription)
-                } else {
-                    DBService.currentManoUser = self.manoUser
                 }
                 
             }
