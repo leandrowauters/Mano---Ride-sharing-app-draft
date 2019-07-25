@@ -15,7 +15,11 @@ class OnItsWayViewController: UIViewController {
     private var distance: Int!
     private var ride: Ride!
     
-    private var userLocation = CLLocation()
+    private var userLocation = CLLocation() {
+        didSet {
+            self.searchGoogleForDirections()
+        }
+    }
     private var locationManager = CLLocationManager()
     
     @IBOutlet weak var driversImage: RoundedImageView!
@@ -29,6 +33,7 @@ class OnItsWayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupCoreLocation()
         // Do any additional setup after loading the view.
     }
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: Int, distance: Int, ride: Ride) {
@@ -41,6 +46,15 @@ class OnItsWayViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    private func searchGoogleForDirections() {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
+            GoogleHelper.openGoogleMapDirection(currentLat: self.userLocation.coordinate.latitude, currentLon: self.userLocation.coordinate.longitude, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
+                }
+            })
+        }
+    }
     
     private func setup() {
         locationManager.delegate = self
@@ -51,14 +65,22 @@ class OnItsWayViewController: UIViewController {
             pickupAddressLabel.text = ride.pickupAddress
             dropoffAddressLabel.text = ride.dropoffAddress
             distanceLabelAndDuration.text = "15 Mins / 5 Miles"
-            
         }
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-            GoogleHelper.openGoogleMapDirection(currentLat: self.userLocation.coordinate.latitude, currentLon: self.userLocation.coordinate.longitude, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
-                if let error = error {
-                    self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
-                }
-            })
+    }
+    
+    @IBAction func pressedFinish(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    private func setupCoreLocation() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            // we need to say how accurate the data should be
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // closest location accuracy
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()// this is only while the app is unlocked
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
         }
     }
 

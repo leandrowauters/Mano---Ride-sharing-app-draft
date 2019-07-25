@@ -41,8 +41,12 @@ struct GoogleHelper {
         UIApplication.shared.open(url)
     }
     
-    static public func calculateEta(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
+    static public func calculateEta(originLat: Double?, originLon: Double?, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
         let departureTime = Int(Date().timeIntervalSince1970)
+        guard let originLat = originLat,
+            let originLon = originLon else {
+                return
+        }
         let endpointUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLat),\(originLon)&destination=\(destinationLat),\(destinationLon)&departure_time=\(departureTime)&key=\(GoogleMapsAPI.GoogleMapsAPIKey)"
         print(endpointUrl)
         NetworkHelper.shared.performDataTask(endpointURLString: endpointUrl) { (appError, data) in
@@ -62,7 +66,12 @@ struct GoogleHelper {
         }
     }
     
-    static public func calculateDistanceToLocation(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
+    static public func calculateDistanceToLocation(originLat: Double?, originLon: Double?, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
+        guard let originLat = originLat,
+            let originLon = originLon else {
+                print("Wrong coordingate")
+                return
+        }
         let endpointUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLat),\(originLon)&destination=\(destinationLat),\(destinationLon)&key=\(GoogleMapsAPI.GoogleMapsAPIKey)"
         print(endpointUrl)
         NetworkHelper.shared.performDataTask(endpointURLString: endpointUrl) { (appError, data) in

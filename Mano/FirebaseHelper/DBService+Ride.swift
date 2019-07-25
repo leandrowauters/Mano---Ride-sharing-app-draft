@@ -110,7 +110,7 @@ extension DBService {
     static func listenForDriverOnItsWay(completion: @escaping(Error?, Ride?) -> Void) {
         
         var listener: ListenerRegistration!
-        listener = DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.acceptedKey, isEqualTo: true).whereField(RideCollectionKeys.passangerId, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.acceptenceWasSeenKey, isEqualTo: false).addSnapshotListener { (snapshot, error) in
+        listener = DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.passangerId, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.driverOnItsWayKey, isEqualTo: true).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)
             }

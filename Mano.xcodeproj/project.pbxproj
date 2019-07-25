@@ -123,7 +123,7 @@
 		D5D6A76E22E38ABC009C0029 /* DriverProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileViewController.swift; sourceTree = "<group>"; };
 		D5D6A76F22E38ABC009C0029 /* DriverProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverProfileViewController.xib; sourceTree = "<group>"; };
 		D5D6A77222E39863009C0029 /* UpcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCell.swift; sourceTree = "<group>"; };
-		D5D6A77322E39863009C0029 /* UpcomingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingCell.xib; sourceTree = "<group>"; };
+		D5D6A77322E39863009C0029 /* UpcomingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UpcomingCell.xib; path = ../UpcomingCell.xib; sourceTree = "<group>"; };
 		D5D6A77722E3A997009C0029 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
 		D5D6A77822E3A997009C0029 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
 		D5E39B9222E0163E008A919A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -302,7 +302,6 @@
 				D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */,
 				D5D6A76E22E38ABC009C0029 /* DriverProfileViewController.swift */,
 				D5D6A76F22E38ABC009C0029 /* DriverProfileViewController.xib */,
-				D5D6A77322E39863009C0029 /* UpcomingCell.xib */,
 				D571BADF22E7B20D00FA9369 /* DriveViewController.swift */,
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
@@ -316,6 +315,7 @@
 		D5D6A76722E38121009C0029 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				D5D6A77322E39863009C0029 /* UpcomingCell.xib */,
 				D5EF0AA522E2787A0061B67A /* ManosListCell.swift */,
 				D5EF0AA622E2787A0061B67A /* ManosListCell.xib */,
 				D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */,

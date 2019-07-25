@@ -24,7 +24,36 @@ class TabBarViewController: UITabBarController {
                 self.present(rideAcceptedAlertView, animated: true)
             }
         }
-        
+        DBService.listenForDriverOnItsWay { (error, ride) in
+            var distance: Int!
+            var duration: Int!
+            if let error = error {
+                self.showAlert(title: "Error updating to onItsWay", message: nil)
+            }
+            if let ride = ride {
+                GoogleHelper.calculateDistanceToLocation(originLat: nil, originLon: nil, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
+                    if let appError = appError {
+                        self.showAlert(title: "Error", message: appError.localizedDescription)
+                    }
+
+                    if let distanceInt = distanceInt {
+                        distance = distanceInt
+                    }
+                }
+                GoogleHelper.calculateEta(originLat: nil, originLon: nil, destinationLat: ride.pickupLat, destinationLon: ride.dropoffLon) { (appError, durationText, durationInt) in
+                    if let appError = appError {
+                        self.showAlert(title: "Error", message: appError.localizedDescription)
+                    }
+
+                    if let durationInt = durationInt {
+                        duration = durationInt
+                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: duration, distance: distance, ride: ride)
+                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
+
+                    }
+                }
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
