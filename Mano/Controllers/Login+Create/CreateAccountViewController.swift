@@ -164,9 +164,15 @@ extension CreateAccountViewController : AuthServiceCreateNewAccountDelegate {
     }
     
     func didCreateNewAccount(_ authservice: AuthService, user: ManoUser) {
-        let moreInfoVC = MoreInfoViewController(nibName: nil, bundle: nil, manoUser: user, typeOfUser: typeOfUser!)
+
         unregisterKeyboardNotifications()
-        navigationController?.pushViewController(moreInfoVC, animated: true)
+        if typeOfUser == TypeOfUser.Driver.rawValue {
+            let moreDriver = DriverMoreInfoViewController(nibName: nil, bundle: nil, manoUser: user, typeOfUser: typeOfUser!)
+            navigationController?.pushViewController(moreDriver, animated: true)
+        } else {
+            let moreInfoVC = MoreInfoViewController(nibName: nil, bundle: nil, manoUser: user, typeOfUser: typeOfUser!)
+            navigationController?.pushViewController(moreInfoVC, animated: true)
+        }
         
     }
     

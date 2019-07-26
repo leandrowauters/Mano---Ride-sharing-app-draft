@@ -58,7 +58,7 @@ extension DBService {
        let currentUser = DBService.currentManoUser!
         DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.acceptedKey : true , RideCollectionKeys.accptedByKey : DBService.currentManoUser.userId,
                                                                                                              RideCollectionKeys.acceptenceWasSeenKey : false,
-                                                                                                             RideCollectionKeys.driverNameKey : currentUser.fullName, RideCollectionKeys.driverProfileImageKey : currentUser.profileImage!,RideCollectionKeys.driverMakerModelKey : currentUser.carMakerModel!]) { (error) in
+                                                                                                             RideCollectionKeys.driverNameKey : currentUser.fullName, RideCollectionKeys.driverProfileImageKey : currentUser.profileImage!,RideCollectionKeys.driverMakerModelKey : currentUser.carMakerModel!, RideCollectionKeys.licencePlateKey : currentUser.licencePlate!, RideCollectionKeys.carPictureKey : currentUser.carPicture!]) { (error) in
             if let error = error {
                 completion(error)
             }
@@ -99,8 +99,8 @@ extension DBService {
         }
     }
     
-    static public func updateDriverOntItsWay(ride: Ride, completion: @escaping(Error?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.driverOnItsWayKey : true]) { (error) in
+    static public func updateDriverOntItsWay(ride: Ride, originLat: Double, originLon: Double, completion: @escaping(Error?) -> Void) {
+        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.driverOnItsWayKey : true, RideCollectionKeys.originLatKey : originLat, RideCollectionKeys.originLonKey : originLon]) { (error) in
             if let error = error {
                 completion(error)
             }

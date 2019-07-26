@@ -25,6 +25,8 @@ struct ManoUserCollectionKeys {
     static let userIdKey = "userId"
     static let myRidesKey = "myRides"
     static let myPickUpsKey = "myPickUps"
+    static let licencePlateKey = "licencePlate"
+    static let carPictureKey = "carPicture"
 }
 
 struct RideCollectionKeys {
@@ -48,6 +50,10 @@ struct RideCollectionKeys {
     static let driverNameKey = "driverName"
     static let driverProfileImageKey = "driveProfileImage"
     static let driverMakerModelKey = "driverMakerModel"
+    static let originLatKey = "originLat"
+    static let originLonKey = "originLon"
+    static let licencePlateKey = "licencePlate"
+    static let carPictureKey = "carPicture"
 }
 
 struct MyLocationsCollectionKeys {

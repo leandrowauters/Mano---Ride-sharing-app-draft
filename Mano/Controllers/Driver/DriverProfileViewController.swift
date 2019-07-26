@@ -94,6 +94,9 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             UITableViewCell()
             
         }
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            cell.riderName.isHidden = true
+        }
         let upcomingRides = upcomingEvents[indexPath.row]
         cell.upcomingDate.text = upcomingRides.appointmentDate
         cell.riderName.text = upcomingRides.passanger

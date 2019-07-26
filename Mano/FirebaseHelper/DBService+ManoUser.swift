@@ -19,13 +19,8 @@ extension DBService {
             [ManoUserCollectionKeys.firstNameKey : manoUser.firstName,
              ManoUserCollectionKeys.lastNameKey : manoUser.lastName,
              ManoUserCollectionKeys.fullNameKey : manoUser.fullName,
-             ManoUserCollectionKeys.bioKey : manoUser.bio ?? "",
              ManoUserCollectionKeys.typeOfUserKey : manoUser.typeOfUser,
-             ManoUserCollectionKeys.patientsKey : manoUser.patients ?? "",
-             ManoUserCollectionKeys.joinedDateKey : manoUser.joinedDate ,
-             ManoUserCollectionKeys.userIdKey : manoUser.userId ,
-             ManoUserCollectionKeys.myRidesKey : manoUser.myRides ?? "",
-             ManoUserCollectionKeys.myPickUpsKey : manoUser.myPickUps ?? ""
+             ManoUserCollectionKeys.userIdKey : manoUser.userId
             
              
         ]) { (error) in
@@ -46,14 +41,16 @@ extension DBService {
             }
         }
     }
-    static public func updateDriverMoreInfo(userID: String, profileImage: String?, homeAddress: String, homeLat: Double, homeLon: Double, carMakerModel: String, completion: @escaping(Error?) -> Void) {
+    static public func updateDriverMoreInfo(userID: String, profileImage: String?, homeAddress: String, homeLat: Double, homeLon: Double, carMakerModel: String, licencePlate: String, carPhoto: String, completion: @escaping(Error?) -> Void) {
         DBService.firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(userID).updateData([
             
             ManoUserCollectionKeys.homeAddressKey : homeAddress,
             ManoUserCollectionKeys.homeLatKey : homeLat,
             ManoUserCollectionKeys.homeLonKey : homeLon,
             ManoUserCollectionKeys.profileImageKey : profileImage!,
-            ManoUserCollectionKeys.carMakerModelKey : carMakerModel]) { (error) in
+            ManoUserCollectionKeys.carMakerModelKey : carMakerModel,
+            ManoUserCollectionKeys.licencePlateKey : licencePlate,
+            ManoUserCollectionKeys.carPictureKey: carPhoto]) { (error) in
                 completion(error)
         }
         

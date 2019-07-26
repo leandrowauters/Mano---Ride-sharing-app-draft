@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        GMSPlacesClient.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         GMSServices.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         FirebaseApp.configure()
+//        AppDelegate.authservice.signOutAccount()
         
-        window = UIWindow(frame: UIScreen.main.bounds)
         if let manoUser = AppDelegate.authservice.getCurrentUser() {
             
             DBService.fetchManoUser(userId: manoUser.uid) { (error, manoUser) in
@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
             let navigationController = UINavigationController(rootViewController: loginVC)
             navigationController.setNavigationBarHidden(true, animated: false)
+            window = UIWindow(frame: UIScreen.main.bounds)
             window?.rootViewController = navigationController
             window?.makeKeyAndVisible()
         }

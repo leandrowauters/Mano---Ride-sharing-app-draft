@@ -23,6 +23,8 @@
 		D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40022DF948D00F20AFE /* String+Date.swift */; };
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
+		D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */; };
+		D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */; };
 		D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D571BADF22E7B20D00FA9369 /* DriveViewController.swift */; };
 		D571BAE222E7B20D00FA9369 /* DriveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D571BAE022E7B20D00FA9369 /* DriveViewController.xib */; };
 		D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D575579C22E63D9E0063BD15 /* MapDetailedView.xib */; };
@@ -97,6 +99,8 @@
 		D54FD40022DF948D00F20AFE /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
+		D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMoreInfoViewController.swift; sourceTree = "<group>"; };
+		D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverMoreInfoViewController.xib; sourceTree = "<group>"; };
 		D571BADF22E7B20D00FA9369 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		D571BAE022E7B20D00FA9369 /* DriveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriveViewController.xib; sourceTree = "<group>"; };
 		D575579C22E63D9E0063BD15 /* MapDetailedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapDetailedView.xib; sourceTree = "<group>"; };
@@ -360,6 +364,8 @@
 				D57D62F222E031C000F638DF /* CreateAccountViewController.xib */,
 				D59D1A7D22E3D5E300E94D77 /* MoreInfoViewController.swift */,
 				D59D1A7E22E3D5E300E94D77 /* MoreInfoViewController.xib */,
+				D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */,
+				D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */,
 				D5122CE322E1124C00453359 /* BioViewController.swift */,
 				D5122CE422E1124C00453359 /* BioViewController.xib */,
 			);
@@ -473,6 +479,7 @@
 				D5F7636222E8CB7300250C96 /* OnItsWayViewController.xib in Resources */,
 				D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */,
 				D5D6A77A22E3A997009C0029 /* RequestRideViewController.xib in Resources */,
+				D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */,
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
@@ -574,6 +581,7 @@
 				D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */,
 				D5F7635422E7C52700250C96 /* AppError.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
+				D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */,
 				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
 				D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */,

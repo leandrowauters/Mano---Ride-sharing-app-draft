@@ -76,6 +76,7 @@ class RequestRideViewController: UIViewController {
     @objc func pickupViewPressed() {
         pickup = true
         GoogleHelper.setupAutoCompeteVC(Vc: self)
+        
     }
     
     @objc func dropoffViewPressed() {

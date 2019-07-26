@@ -24,8 +24,10 @@ class ManoUser: Codable {
     var userId: String
     var myRides: [String]?
     var myPickUps: [String]?
+    var licencePlate: String?
+    var carPicture: String?
     
-    init(firstName: String, lastName: String, fullName: String, homeAdress: String?,homeLat: Double?,homeLon: Double?, profileImage: String?, carMakerModel: String?, bio: String?, typeOfUser: String, patients: [String]?, joinedDate: String, userId: String, myRides: [String]?, myPickUps: [String]?) {
+    init(firstName: String, lastName: String, fullName: String, homeAdress: String?,homeLat: Double?,homeLon: Double?, profileImage: String?, carMakerModel: String?, bio: String?, typeOfUser: String, patients: [String]?, joinedDate: String, userId: String, myRides: [String]?, myPickUps: [String]?, licencePlate: String?, carPicture: String?) {
         self.firstName = firstName
         self.lastName = lastName
         self.fullName = fullName
@@ -41,6 +43,8 @@ class ManoUser: Codable {
         self.userId = userId
         self.myRides = myRides
         self.myPickUps = myPickUps
+        self.licencePlate = licencePlate
+        self.carPicture = carPicture
     }
     
     init(dict: [String: Any]) {
@@ -59,6 +63,8 @@ class ManoUser: Codable {
         self.userId = dict[ManoUserCollectionKeys.userIdKey] as? String ?? ""
         self.myRides = dict[ManoUserCollectionKeys.myRidesKey] as? [String] ?? [""]
         self.myPickUps = dict[ManoUserCollectionKeys.myPickUpsKey] as? [String] ?? [""]
+        self.licencePlate = dict[ManoUserCollectionKeys.licencePlateKey] as? String ?? ""
+        self.carPicture = dict[ManoUserCollectionKeys.carPictureKey] as? String ?? ""
     }
     
 }

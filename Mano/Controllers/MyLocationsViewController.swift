@@ -44,6 +44,7 @@ class MyLocationsViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBAction func addLocationPressed(_ sender: Any) {
         GoogleHelper.setupAutoCompeteVC(Vc: self)
+       
     }
     
     

@@ -63,9 +63,43 @@ class RoundedImageView: UIImageView {
         layer.cornerRadius = bounds.height / 2.0
         layer.borderWidth = 1
         layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
-    
+        clipsToBounds = true
     }
 }
+
+@IBDesignable
+class CircularImageWhite: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = #colorLiteral(red: 0, green: 0.6754498482, blue: 0.9192627668, alpha: 1)
+        layer.cornerRadius = 30.0
+        clipsToBounds = true
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    }
+}
+
+class RoundedImageViewWhite: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .clear
+        layer.cornerRadius = 30
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        clipsToBounds = true
+    }
+}
+class RoundedImageViewBlue: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .clear
+        layer.cornerRadius = bounds.height / 2.0
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
+        clipsToBounds = true
+    }
+}
+
 @IBDesignable
 class LogoHeaderDriver: UIImageView {
     override func layoutSubviews() {
@@ -121,6 +155,7 @@ class CircularView: UIView {
         clipsToBounds = true
     }
 }
+
 
 @IBDesignable
 class BlueBorderedView: UIView {

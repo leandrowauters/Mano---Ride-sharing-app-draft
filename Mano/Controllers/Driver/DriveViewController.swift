@@ -74,7 +74,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func updateRideToOnItsWay(ride: Ride) {
-        DBService.updateDriverOntItsWay(ride: ride) { (error) in
+        DBService.updateDriverOntItsWay(ride: ride, originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude) { (error) in
             if let error = error {
                 self.showAlert(title: "Error updating ride", message: error.localizedDescription)
             }

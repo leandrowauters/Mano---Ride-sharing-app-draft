@@ -17,7 +17,7 @@ class BioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bioTextView.delegate = self
-        setupScreenTap()
+        addTabBar()
     }
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, manoUser: ManoUser, typeOfUser: String) {
@@ -29,15 +29,20 @@ class BioViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    @objc func dismissKeyboard() {
+
+    
+    
+    func addTabBar() {
+        let bar = UIToolbar()
+        let done = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTapped))
+        bar.items = [done]
+        bar.sizeToFit()
+        bioTextView.inputAccessoryView = bar
+    }
+    
+    @objc func doneTapped() {
         self.view.endEditing(true)
     }
-    
-    func setupScreenTap() {
-        let screenTap = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(screenTap)
-    }
-    
     func updateBio() {
         if bioTextView.text == "Please tell us about a little about yourself..." || bioTextView.text.isEmpty {
             showAlert(title: "Bio is empty", message: "Plase enter text")
@@ -47,11 +52,11 @@ class BioViewController: UIViewController {
                 if let error = error {
                     self.showAlert(title: "Error", message: error.localizedDescription)
                 }
-                
             }
-            
         }
     }
+    
+    
     
     @IBAction func okayPressed(_ sender: Any) {
         updateBio()

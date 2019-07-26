@@ -23,6 +23,15 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    public func showConfimationAlert(title: String?, message: String?, handler: ((UIAlertAction) -> Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     public func showSheetAlert(title: String, message: String?, handler: @escaping (UIAlertController) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         handler(alertController)
