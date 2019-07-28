@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendMessageViewController" customModule="Mano" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ce0-OI-Vno">
+                    <rect key="frame" x="37.5" y="110" width="300" height="467"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da6-ZD-l2y">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                            <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="EuZ-d1-Jc1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="29"/>
+                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujp-Ap-k39" customClass="CircularButtonBlue" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="95" width="240" height="38"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                            <state key="normal" title="On my way">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="11F-T9-1uL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wYb-Al-pim" customClass="CircularButtonBlue" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="148" width="240" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="F1B-vH-HDf"/>
+                                <constraint firstAttribute="height" constant="38" id="xgc-K8-Svz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                            <state key="normal" title="Five minutes away...">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="9cq-6v-Pql"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ido-sn-xCs" customClass="CircularButtonBlue" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="201" width="240" height="38"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                            <state key="normal" title="Running late">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="TCz-ZG-em3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLG-zt-YP3" customClass="CircularButtonBlue" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="254" width="240" height="38"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                            <state key="normal" title="Outside!">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="Jmh-H3-ISr"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-0O-jYh">
+                            <rect key="frame" x="30" y="317" width="240" height="23.5"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hIn-Q3-mr9" customClass="RoundedTextField" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="348.5" width="240" height="17"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="XK1-0O-jYh" secondAttribute="trailing" constant="30" id="1GX-Sn-LJb"/>
+                        <constraint firstItem="XK1-0O-jYh" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="4Vb-wq-Kmh"/>
+                        <constraint firstAttribute="trailing" secondItem="hIn-Q3-mr9" secondAttribute="trailing" constant="30" id="5hA-hH-t5I"/>
+                        <constraint firstItem="ujp-Ap-k39" firstAttribute="top" secondItem="da6-ZD-l2y" secondAttribute="bottom" constant="45" id="6f1-4y-V3l"/>
+                        <constraint firstItem="mLG-zt-YP3" firstAttribute="top" secondItem="ido-sn-xCs" secondAttribute="bottom" constant="15" id="97P-N8-ym3"/>
+                        <constraint firstItem="hIn-Q3-mr9" firstAttribute="top" secondItem="XK1-0O-jYh" secondAttribute="bottom" constant="8" id="D2R-7H-okw"/>
+                        <constraint firstAttribute="trailing" secondItem="ido-sn-xCs" secondAttribute="trailing" constant="30" id="EkV-5i-0to"/>
+                        <constraint firstAttribute="trailing" secondItem="mLG-zt-YP3" secondAttribute="trailing" constant="30" id="GRi-Il-NeD"/>
+                        <constraint firstItem="XK1-0O-jYh" firstAttribute="top" secondItem="mLG-zt-YP3" secondAttribute="bottom" constant="25" id="HeJ-jp-OBP"/>
+                        <constraint firstItem="ujp-Ap-k39" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="MNU-nM-m8Y"/>
+                        <constraint firstItem="wYb-Al-pim" firstAttribute="top" secondItem="ujp-Ap-k39" secondAttribute="bottom" constant="15" id="OXw-yl-WxC"/>
+                        <constraint firstItem="mLG-zt-YP3" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="R7G-MM-Fc7"/>
+                        <constraint firstItem="da6-ZD-l2y" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" id="RNA-BM-dOW"/>
+                        <constraint firstItem="ido-sn-xCs" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="Ym5-Ic-nuH"/>
+                        <constraint firstItem="hIn-Q3-mr9" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="fGa-ek-wRG"/>
+                        <constraint firstAttribute="trailing" secondItem="wYb-Al-pim" secondAttribute="trailing" constant="30" id="fVF-Dl-sdv"/>
+                        <constraint firstItem="ido-sn-xCs" firstAttribute="top" secondItem="wYb-Al-pim" secondAttribute="bottom" constant="15" id="gSK-5a-tr5"/>
+                        <constraint firstAttribute="trailing" secondItem="da6-ZD-l2y" secondAttribute="trailing" id="gws-lF-FMs"/>
+                        <constraint firstItem="wYb-Al-pim" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="lcy-fU-22C"/>
+                        <constraint firstAttribute="trailing" secondItem="ujp-Ap-k39" secondAttribute="trailing" constant="30" id="qmK-o7-1hP"/>
+                        <constraint firstItem="da6-ZD-l2y" firstAttribute="top" secondItem="ce0-OI-Vno" secondAttribute="top" id="xig-Vc-uaW"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.50037457191780821" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ce0-OI-Vno" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.7" id="58A-eJ-sV6"/>
+                <constraint firstItem="ce0-OI-Vno" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="PUE-QI-gec"/>
+                <constraint firstItem="ce0-OI-Vno" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="SEh-i5-6nl"/>
+                <constraint firstItem="ce0-OI-Vno" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="kwc-eu-MKZ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

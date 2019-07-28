@@ -55,6 +55,19 @@ class CircularButton: UIButton {
         
     }
 }
+
+@IBDesignable
+class CircularButtonBlue: UIButton {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView?.contentMode = .scaleAspectFill
+        layer.cornerRadius = bounds.height / 2.0
+        layer.borderWidth = 3
+        layer.borderColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
+        clipsToBounds = true
+        
+    }
+}
 @IBDesignable
 class RoundedImageView: UIImageView {
     override func layoutSubviews() {
@@ -96,6 +109,15 @@ class RoundedImageViewBlue: UIImageView {
         layer.cornerRadius = bounds.height / 2.0
         layer.borderWidth = 5
         layer.borderColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
+        clipsToBounds = true
+    }
+}
+
+class CircularImageNoBorder: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .clear
+        layer.cornerRadius = bounds.height / 2.0
         clipsToBounds = true
     }
 }

@@ -41,7 +41,7 @@ extension DBService {
             }
         }
     }
-    static public func updateDriverMoreInfo(userID: String, profileImage: String?, homeAddress: String, homeLat: Double, homeLon: Double, carMakerModel: String, licencePlate: String, carPhoto: String, completion: @escaping(Error?) -> Void) {
+    static public func updateDriverMoreInfo(userID: String, profileImage: String?, homeAddress: String, homeLat: Double, homeLon: Double, carMakerModel: String, licencePlate: String, carPhoto: String,cellPhone: String, completion: @escaping(Error?) -> Void) {
         DBService.firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(userID).updateData([
             
             ManoUserCollectionKeys.homeAddressKey : homeAddress,
@@ -50,17 +50,17 @@ extension DBService {
             ManoUserCollectionKeys.profileImageKey : profileImage!,
             ManoUserCollectionKeys.carMakerModelKey : carMakerModel,
             ManoUserCollectionKeys.licencePlateKey : licencePlate,
-            ManoUserCollectionKeys.carPictureKey: carPhoto]) { (error) in
+            ManoUserCollectionKeys.carPictureKey: carPhoto, ManoUserCollectionKeys.cellPhoneKey : cellPhone]) { (error) in
                 completion(error)
         }
         
     }
-    static public func updatePassangerMoreInfo(userID: String, homeAddress: String, homeLat: Double, homeLon: Double, completion: @escaping(Error?) -> Void) {
+    static public func updatePassangerMoreInfo(userID: String, homeAddress: String, homeLat: Double, homeLon: Double, cellPhone: String, completion: @escaping(Error?) -> Void) {
         DBService.firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(userID).updateData([
             
             ManoUserCollectionKeys.homeAddressKey : homeAddress,
             ManoUserCollectionKeys.homeLonKey : homeLon,
-            ManoUserCollectionKeys.homeLatKey : homeLat]) { (error) in
+            ManoUserCollectionKeys.homeLatKey : homeLat, ManoUserCollectionKeys.cellPhoneKey : cellPhone]) { (error) in
                 completion(error)
         }
         

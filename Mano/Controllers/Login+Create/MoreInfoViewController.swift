@@ -20,6 +20,7 @@ class MoreInfoViewController: UIViewController {
 
     @IBOutlet weak var homeAddressView: RoundViewWithBorder!
     @IBOutlet weak var homeAddressLabel: UILabel!
+    @IBOutlet weak var cellPhoneTextField: RoundedTextField!
     
 
     
@@ -31,14 +32,21 @@ class MoreInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreenTap()
-
+        cellPhoneTextField.delegate = self
+        
         
         // Do any additional setup after loading the view.
     }
     
 
- 
+    private func setupTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
     
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
 
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, manoUser: ManoUser, typeOfUser: String) {
@@ -69,11 +77,13 @@ class MoreInfoViewController: UIViewController {
     
     func updateMoreInfo() {
         
-        guard let homeAddress = self.homeAddress else {
+        guard let homeAddress = self.homeAddress,
+        let cellPhone = cellPhoneTextField.text,
+        !cellPhone.isEmpty else {
                 showAlert(title: "Please Complete missing fields", message: nil)
                 return
         }
-                DBService.updatePassangerMoreInfo(userID: manoUser.userId, homeAddress: homeAddress, homeLat: homeLat, homeLon: homeLon , completion: { (error) in
+        DBService.updatePassangerMoreInfo(userID: manoUser.userId, homeAddress: homeAddress, homeLat: homeLat, homeLon: homeLon, cellPhone: cellPhone , completion: { (error) in
                 if let error = error {
                       self.showAlert(title: "Error uploading more info", message: error.localizedDescription)
                 } else {

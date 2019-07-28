@@ -39,6 +39,7 @@ class DriverMoreInfoViewController: UIViewController {
     @IBOutlet weak var yourImageImageView: CircularImageWhite!
     
     @IBOutlet weak var yourCarImageImageView: RoundedImageViewWhite!
+    @IBOutlet weak var cellPhoneTextField: RoundedTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +154,8 @@ class DriverMoreInfoViewController: UIViewController {
         guard let homeAddress = homeAddress,
             let carMakeModel = carMakerModel.text,
             let licencePlate = licencePlateModel.text,
+            let cellPhone = cellPhoneTextField.text,
+            !cellPhone.isEmpty,
         !homeAddress.isEmpty,
         !carMakeModel.isEmpty,
             !licencePlate.isEmpty,
@@ -177,8 +180,8 @@ class DriverMoreInfoViewController: UIViewController {
                     }
                     if let url = url {
                         urls.append(url)
-                        let updatedManoUser = ManoUser(firstName: self.manoUser.firstName, lastName: self.manoUser.lastName, fullName: self.manoUser.fullName, homeAdress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, profileImage: urls[0].absoluteString, carMakerModel: carMakeModel, bio: nil, typeOfUser: self.manoUser.typeOfUser, patients: nil, joinedDate: self.manoUser.joinedDate, userId: self.manoUser.userId, myRides: nil, myPickUps: nil, licencePlate: licencePlate, carPicture: urls[1].absoluteString)
-                        DBService.updateDriverMoreInfo(userID: self.manoUser.userId, profileImage: urls[0].absoluteString, homeAddress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, carMakerModel: carMakeModel, licencePlate: licencePlate, carPhoto: urls[1].absoluteString, completion: { (error) in
+                        let updatedManoUser = ManoUser(firstName: self.manoUser.firstName, lastName: self.manoUser.lastName, fullName: self.manoUser.fullName, homeAdress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, profileImage: urls[0].absoluteString, carMakerModel: carMakeModel, bio: nil, typeOfUser: self.manoUser.typeOfUser, patients: nil, joinedDate: self.manoUser.joinedDate, userId: self.manoUser.userId, myRides: nil, myPickUps: nil, licencePlate: licencePlate, carPicture: urls[1].absoluteString,cellPhone: cellPhone)
+                        DBService.updateDriverMoreInfo(userID: self.manoUser.userId, profileImage: urls[0].absoluteString, homeAddress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, carMakerModel: carMakeModel, licencePlate: licencePlate, carPhoto: urls[1].absoluteString, cellPhone: cellPhone, completion: { (error) in
                             if let error = error {
                                 self.showAlert(title: "Error uploading more info", message: error.localizedDescription)
                             } else {

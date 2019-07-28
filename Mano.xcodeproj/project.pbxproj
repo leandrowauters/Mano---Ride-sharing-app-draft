@@ -37,6 +37,8 @@
 		D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */; };
 		D57D62F322E031C000F638DF /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62F122E031C000F638DF /* CreateAccountViewController.swift */; };
 		D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57D62F222E031C000F638DF /* CreateAccountViewController.xib */; };
+		D58D747422EE37B30081424D /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D747222EE37B30081424D /* SendMessageViewController.swift */; };
+		D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58D747322EE37B30081424D /* SendMessageViewController.xib */; };
 		D59D1A7222E3BE4900E94D77 /* MyLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A7022E3BE4900E94D77 /* MyLocationsViewController.swift */; };
 		D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59D1A7122E3BE4900E94D77 /* MyLocationsViewController.xib */; };
 		D59D1A7622E3C73000E94D77 /* DataPersistanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A7522E3C73000E94D77 /* DataPersistanceModel.swift */; };
@@ -113,6 +115,8 @@
 		D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsAPI.swift; sourceTree = "<group>"; };
 		D57D62F122E031C000F638DF /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		D57D62F222E031C000F638DF /* CreateAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateAccountViewController.xib; sourceTree = "<group>"; };
+		D58D747222EE37B30081424D /* SendMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
+		D58D747322EE37B30081424D /* SendMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageViewController.xib; sourceTree = "<group>"; };
 		D59D1A7022E3BE4900E94D77 /* MyLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationsViewController.swift; sourceTree = "<group>"; };
 		D59D1A7122E3BE4900E94D77 /* MyLocationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationsViewController.xib; sourceTree = "<group>"; };
 		D59D1A7522E3C73000E94D77 /* DataPersistanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistanceModel.swift; sourceTree = "<group>"; };
@@ -310,6 +314,8 @@
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
 				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
+				D58D747222EE37B30081424D /* SendMessageViewController.swift */,
+				D58D747322EE37B30081424D /* SendMessageViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
 			);
@@ -486,6 +492,7 @@
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
+				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
 				D50010E322E601A3006659DA /* GoogleService-Info.plist in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
@@ -582,6 +589,7 @@
 				D5F7635422E7C52700250C96 /* AppError.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
 				D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */,
+				D58D747422EE37B30081424D /* SendMessageViewController.swift in Sources */,
 				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
 				D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */,

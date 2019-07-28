@@ -9,8 +9,11 @@
 import UIKit
 import CoreLocation
 import MapKit
+import MessageUI
 
 class OnItsWayViewController: UIViewController {
+
+    
 
     private var duration: Int!
     private var distance: Int!
@@ -72,6 +75,9 @@ class OnItsWayViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         calculateCurrentMilesToPickup()
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            activityIndicator.stopAnimating()
+        }
     }
 
     @objc private func sixtySecondTimer() {
@@ -81,7 +87,6 @@ class OnItsWayViewController: UIViewController {
                 self.time = 0
             } else {
                 self.time += 1
-                print(self.time)
             }
         }
     }
@@ -182,6 +187,8 @@ class OnItsWayViewController: UIViewController {
 
     }
     
+
+    
     @IBAction func morePressed(_ sender: Any) {
         
     }
@@ -202,8 +209,12 @@ class OnItsWayViewController: UIViewController {
     @IBAction func arrivedPressed(_ sender: Any) {
     }
     
+    
     @IBAction func callDriverPressed(_ sender: Any) {
         
+            guard let number = URL(string: "tel://" + ride.driverCell) else { return }
+            UIApplication.shared.open(number)
+
     }
     
     @IBAction func googleMapsPressed(_ sender: Any) {
@@ -215,6 +226,16 @@ class OnItsWayViewController: UIViewController {
     
     @IBAction func callPassanger(_ sender: Any) {
     }
+    @IBAction func messagesDriverPressed(_ sender: Any) {
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
+        sendMessageVC.modalPresentationStyle = .overCurrentContext
+        present(sendMessageVC, animated: true)
+    }
+    @IBAction func messagePassangerPressed(_ sender: Any) {
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self)
+        present(sendMessageVC, animated: true)
+    }
+    
     
 }
 extension OnItsWayViewController: CLLocationManagerDelegate {
@@ -230,4 +251,17 @@ extension OnItsWayViewController: CLLocationManagerDelegate {
         firstLocation = locations.first!
         
     }
+}
+
+extension OnItsWayViewController: MessageDelegate {
+    func messageSent() {
+        dismiss(animated: true)
+        showAlert(title: "Message sent!", message: nil)
+    }
+    
+    func messageError() {
+        showAlert(title: "Error sending message", message: nil)
+    }
+    
+    
 }

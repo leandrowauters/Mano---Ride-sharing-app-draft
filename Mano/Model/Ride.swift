@@ -34,8 +34,10 @@ class Ride: Codable {
     var licencePlate: String
     var carPicture: String
     var passangerKnowsDriverOnItsWay: Bool
+    var passangerCell: String
+    var driverCell: String
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -61,6 +63,8 @@ class Ride: Codable {
         self.licencePlate = licencePlate
         self.carPicture = carPicture
         self.passangerKnowsDriverOnItsWay = passangerKnowsDriverOnItsWay
+        self.passangerCell = passangerCell
+        self.driverCell = driverCell
     }
     
     init(dict: [String: Any]) {
@@ -89,6 +93,8 @@ class Ride: Codable {
         self.licencePlate = dict[RideCollectionKeys.licencePlateKey] as? String ?? ""
         self.carPicture = dict[RideCollectionKeys.carPictureKey] as? String ?? ""
         self.passangerKnowsDriverOnItsWay = dict[RideCollectionKeys.passangerKnowsDriverOnItsWayKey] as? Bool ?? false
+        self.passangerCell = dict[RideCollectionKeys.passangerCellKey] as? String ?? ""
+        self.driverCell = dict[RideCollectionKeys.driverCellKey] as? String ?? ""
     }
     
 }

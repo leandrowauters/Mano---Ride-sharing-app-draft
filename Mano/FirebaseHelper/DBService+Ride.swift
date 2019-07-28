@@ -10,13 +10,13 @@ import Foundation
 import FirebaseFirestore
 extension DBService {
     
-    static public func createARide(date: String, passangerId: String, passangerName: String, pickupAddress: String, dropoffAddress: String, pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double, dateRequested: String, completion: @escaping(Error?)-> Void) {
+    static public func createARide(date: String, passangerId: String, passangerName: String, pickupAddress: String, dropoffAddress: String, pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double, dateRequested: String, passangerCell: String, completion: @escaping(Error?)-> Void) {
        let ref =  DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document()
         firestoreDB.collection(RideCollectionKeys.collectionKey).document(ref.documentID).setData([RideCollectionKeys.appoinmentDateKey : date,
                                                                                                    RideCollectionKeys.passangerId : passangerId,
                                                                                                    RideCollectionKeys.rideIdKey : ref.documentID,
                                                                                                    RideCollectionKeys.passangerName : passangerName,
-                                                                                                   RideCollectionKeys.pickupAddressKey : pickupAddress, RideCollectionKeys.dropoffAddressKey : dropoffAddress, RideCollectionKeys.pickupLatKey : pickupLat, RideCollectionKeys.pickupLonKey : pickupLon, RideCollectionKeys.dropoffLonKey :dropoffLon, RideCollectionKeys.dropoffLatKey : dropoffLat, RideCollectionKeys.dateRequestedKey : dateRequested
+                                                                                                   RideCollectionKeys.pickupAddressKey : pickupAddress, RideCollectionKeys.dropoffAddressKey : dropoffAddress, RideCollectionKeys.pickupLatKey : pickupLat, RideCollectionKeys.pickupLonKey : pickupLon, RideCollectionKeys.dropoffLonKey :dropoffLon, RideCollectionKeys.dropoffLatKey : dropoffLat, RideCollectionKeys.dateRequestedKey : dateRequested, RideCollectionKeys.passangerCellKey : passangerCell
                                                                 
         ]) { (error) in
             if let error = error {
@@ -58,7 +58,7 @@ extension DBService {
        let currentUser = DBService.currentManoUser!
         DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.acceptedKey : true , RideCollectionKeys.accptedByKey : DBService.currentManoUser.userId,
                                                                                                              RideCollectionKeys.acceptenceWasSeenKey : false,
-                                                                                                             RideCollectionKeys.driverNameKey : currentUser.fullName, RideCollectionKeys.driverProfileImageKey : currentUser.profileImage!,RideCollectionKeys.driverMakerModelKey : currentUser.carMakerModel!, RideCollectionKeys.licencePlateKey : currentUser.licencePlate!, RideCollectionKeys.carPictureKey : currentUser.carPicture!]) { (error) in
+                                                                                                             RideCollectionKeys.driverNameKey : currentUser.fullName, RideCollectionKeys.driverProfileImageKey : currentUser.profileImage!,RideCollectionKeys.driverMakerModelKey : currentUser.carMakerModel!, RideCollectionKeys.licencePlateKey : currentUser.licencePlate!, RideCollectionKeys.carPictureKey : currentUser.carPicture!, RideCollectionKeys.driverCellKey : currentUser.cellPhone]) { (error) in
             if let error = error {
                 completion(error)
             }

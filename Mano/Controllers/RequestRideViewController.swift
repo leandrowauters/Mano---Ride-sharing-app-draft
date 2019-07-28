@@ -89,7 +89,7 @@ class RequestRideViewController: UIViewController {
             return
         }
         let timeStamp = Date().dateDescription
-        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp) { (error) in
+        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp, passangerCell: DBService.currentManoUser.cellPhone!) { (error) in
             if let error = error {
                 self.showAlert(title: "Error creating ride", message: error.localizedDescription)
             }
