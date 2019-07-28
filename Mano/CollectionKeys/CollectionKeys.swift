@@ -45,7 +45,8 @@ struct RideCollectionKeys {
     static let accptedByKey = "accptedBy"
     static let acceptenceWasSeenKey = "acceptenceWasSeen"
     static let driverOnItsWayKey = "driverOnItsWay"
-    static let rideETAKey = "rideETA"
+    static let durationKey = "duration"
+    static let distanceKey = "distance"
     static let dateRequestedKey = "dateRequested"
     static let driverNameKey = "driverName"
     static let driverProfileImageKey = "driveProfileImage"
@@ -54,6 +55,7 @@ struct RideCollectionKeys {
     static let originLonKey = "originLon"
     static let licencePlateKey = "licencePlate"
     static let carPictureKey = "carPicture"
+    static let passangerKnowsDriverOnItsWayKey = "passangerKnowsDriverOnItsWay"
 }
 
 struct MyLocationsCollectionKeys {

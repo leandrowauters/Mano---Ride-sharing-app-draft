@@ -23,7 +23,8 @@ class Ride: Codable {
     var accptedBy: String
     var acceptenceWasSeen: Bool
     var driverOnItsWay: Bool
-    var rideETA: String
+    var durtation: Int
+    var distance: Double
     var dateRequested: String
     var driverName: String
     var driveProfileImage: String
@@ -32,8 +33,9 @@ class Ride: Codable {
     var originLon: Double
     var licencePlate: String
     var carPicture: String
+    var passangerKnowsDriverOnItsWay: Bool
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool,rideETA: String, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -48,7 +50,8 @@ class Ride: Codable {
         self.accptedBy = accptedBy
         self.acceptenceWasSeen = acceptenceWasSeen
         self.driverOnItsWay = driverOnItsWay
-        self.rideETA = rideETA
+        self.durtation = duration
+        self.distance = distance
         self.dateRequested = dateRequested
         self.driverName = driverName
         self.driveProfileImage = driveProfileImage
@@ -57,6 +60,7 @@ class Ride: Codable {
         self.originLon = originLon
         self.licencePlate = licencePlate
         self.carPicture = carPicture
+        self.passangerKnowsDriverOnItsWay = passangerKnowsDriverOnItsWay
     }
     
     init(dict: [String: Any]) {
@@ -74,7 +78,8 @@ class Ride: Codable {
         self.accptedBy = dict[RideCollectionKeys.accptedByKey] as? String ?? ""
         self.acceptenceWasSeen = dict[RideCollectionKeys.acceptenceWasSeenKey] as? Bool ?? false
         self.driverOnItsWay = dict[RideCollectionKeys.driverOnItsWayKey] as? Bool ?? false
-        self.rideETA = dict[RideCollectionKeys.rideETAKey] as? String ?? ""
+        self.durtation = dict[RideCollectionKeys.durationKey] as? Int ?? 0
+        self.distance = dict[RideCollectionKeys.distanceKey] as? Double ?? 0.0
         self.dateRequested = dict[RideCollectionKeys.dateRequestedKey] as? String ?? ""
         self.driverName = dict[RideCollectionKeys.driverNameKey] as? String ?? ""
         self.driveProfileImage = dict[RideCollectionKeys.driverProfileImageKey] as? String ?? ""
@@ -83,6 +88,7 @@ class Ride: Codable {
         self.originLon = dict[RideCollectionKeys.originLonKey] as? Double ?? 00
         self.licencePlate = dict[RideCollectionKeys.licencePlateKey] as? String ?? ""
         self.carPicture = dict[RideCollectionKeys.carPictureKey] as? String ?? ""
+        self.passangerKnowsDriverOnItsWay = dict[RideCollectionKeys.passangerKnowsDriverOnItsWayKey] as? Bool ?? false
     }
     
 }

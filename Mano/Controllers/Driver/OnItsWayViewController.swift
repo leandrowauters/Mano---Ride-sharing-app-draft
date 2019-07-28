@@ -15,10 +15,12 @@ class OnItsWayViewController: UIViewController {
     private var duration: Int!
     private var distance: Int!
     private var ride: Ride!
+    private var graphics =  GraphicsClient()
+    var time = 0
     private var firstLocation = CLLocation()
     private var userLocation = CLLocation() {
         didSet {
-            calculateCurrentMilesToPickup()
+            
         }
     }
     private var locationManager = CLLocationManager()
@@ -37,23 +39,54 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var callView: UIView!
     
     @IBOutlet weak var arrivedButton: RoundedButton!
     @IBOutlet weak var carImageView: UIImageView!
+    @IBOutlet weak var driverView: UIView!
+    @IBOutlet weak var callDriverButton: UIButton!
+    @IBOutlet weak var passangerName: UILabel!
+    @IBOutlet weak var destinationAddress: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var pulseView: CircularView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupCoreLocation()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            showConfimationAlert(title: "Open Google Maps", message: nil) { (okay) in
-                self.searchGoogleForDirections()
+           sixtySecondTimer()
+        } else {
+            DBService.listenForDistanceDurationUpdates(ride: ride) { (error, ride) in
+                if let error = error {
+                    self.showAlert(title: "Error listening to updates", message: error.localizedDescription)
+                }
+                if let ride = ride {
+                    self.durationLabel.text = "Duration: \n\(ride.durtation)"
+                    self.distanceLabel.text = "Distance: \n\(ride.distance)"
+                }
             }
         }
+        setupCoreLocation()
         
-        
-        // Do any additional setup after loading the view.
+
     }
+    override func viewDidAppear(_ animated: Bool) {
+        calculateCurrentMilesToPickup()
+    }
+
+    @objc private func sixtySecondTimer() {
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            if self.time == 30 {
+                self.calculateCurrentMilesToPickup()
+                self.time = 0
+            } else {
+                self.time += 1
+                print(self.time)
+            }
+        }
+    }
+
+
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: Int, distance: Int, ride: Ride) {
         self.duration = duration
         self.distance = distance
@@ -82,7 +115,13 @@ class OnItsWayViewController: UIViewController {
 //        return milesDistance
 //    }
     func calculateCurrentMilesToPickup() {
-        let destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+        var destinationCLLocation = CLLocation()
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            destinationCLLocation = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
+        } else {
+            destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+        }
+
         let request = MKDirections.Request()
         let source = MKPlacemark(coordinate: userLocation.coordinate)
         let destination = MKPlacemark(coordinate: destinationCLLocation.coordinate)
@@ -100,8 +139,15 @@ class OnItsWayViewController: UIViewController {
                 let milesRounded = Double(round(10*miles)/10)
                 let time = route.expectedTravelTime
                 let timeRoundedToSeconds = Int((time / 60).rounded(FloatingPointRoundingRule.down))
-                self.distanceLabel.text = "Distance: \n \(milesRounded.description)"
-                self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description)"
+                self.distanceLabel.text = "Distance: \n \(milesRounded.description) Mil"
+                self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description) Min"
+                self.activityIndicator.stopAnimating()
+                DBService.updateDistanceAndDuration(ride: self.ride, duration: timeRoundedToSeconds, distance: milesRounded, completion: { (error) in
+                    if let error = error {
+                       self.showAlert(title: "Error updating", message: error.localizedDescription)
+                    }
+                    
+                })
             }
         }
 
@@ -112,16 +158,28 @@ class OnItsWayViewController: UIViewController {
     }
     private func setup() {
         locationManager.delegate = self
-        if let userPhotoURL = URL(string: ride.driveProfileImage),
-            let userCarPhotoURL = URL(string: ride.carPicture){
+        graphics.pulsating(view: pulseView)
+        if let userPhotoURL = URL(string: ride.driveProfileImage)
+           {
             driverImage.kf.setImage(with: userPhotoURL)
             driverNameLabel.text = ride.driverName
             driverMakerModel.text = ride.driverMakerModel
             driverLicense.text = ride.licencePlate
-            carImageView.kf.setImage(with: userCarPhotoURL)
-            distanceLabel.text = distance.description
-            durationLabel.text = duration.description
         }
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            passangerName.text = ride.passanger
+            destinationAddress.text = ride.pickupAddress
+            carImageView.isHidden = true
+            callDriverButton.isHidden = true
+            
+        } else {
+            if let userCarPhotoURL = URL(string: ride.carPicture) {
+                carImageView.kf.setImage(with: userCarPhotoURL)
+                driverView.isHidden = true
+                
+            }
+        }
+
     }
     
     @IBAction func morePressed(_ sender: Any) {
@@ -144,7 +202,20 @@ class OnItsWayViewController: UIViewController {
     @IBAction func arrivedPressed(_ sender: Any) {
     }
     
-
+    @IBAction func callDriverPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func googleMapsPressed(_ sender: Any) {
+        showConfimationAlert(title: "Open Google Maps", message: nil) { (okay) in
+            self.searchGoogleForDirections()
+        }
+    }
+    
+    
+    @IBAction func callPassanger(_ sender: Any) {
+    }
+    
 }
 extension OnItsWayViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

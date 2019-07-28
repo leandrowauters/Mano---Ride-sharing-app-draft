@@ -115,7 +115,7 @@ extension LoginViewController : AuthServiceExistingAccountDelegate {
             if let manoUser = manoUser {
                 DBService.currentManoUser = manoUser
                 let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
-                self.present(tab, animated: true)
+                self.navigationController?.pushViewController(tab, animated: true)
             }
         }
         
