@@ -8,6 +8,7 @@
 
 import UIKit
 import GooglePlaces
+import UserNotifications
 class RequestRideViewController: UIViewController {
     
     private var pickupAddress: String?
@@ -102,7 +103,14 @@ class RequestRideViewController: UIViewController {
     
     @IBAction func requestPressed(_ sender: Any) {
         createRide()
+        let notification = Notification.init(name: Notification.Name)
+        notification.alertBody = "Welcome to the app!" // text that will be displayed in the notification
         
+        notification.fireDate = NSDate(timeIntervalSinceNow: 2)
+        notification.soundName = UILocalNotificationDefaultSoundName
+        
+        notification.userInfo = ["title": "Title", "UUID": "12345"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     /*

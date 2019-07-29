@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import MessageUI
+import Toucan
 
 class OnItsWayViewController: UIViewController {
 

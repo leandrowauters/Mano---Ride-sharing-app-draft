@@ -217,7 +217,7 @@ func imagePickerController(_ picker: UIImagePickerController,
             print("original image is nil")
             return
         }
-        let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 500, height: 500))
+        let resizedImage = Toucan.init(image: originalImage).resize(CGSize(width: 414  , height: 250))
         if firstImageSelected{
             selectedYourImage = resizedImage.image
             yourImageImageView.image = selectedYourImage

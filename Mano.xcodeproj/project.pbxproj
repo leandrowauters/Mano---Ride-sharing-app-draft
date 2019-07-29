@@ -16,6 +16,8 @@
 		D51CF7BE22DF6F39003F1385 /* Mano.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */; };
 		D51CF7C022DF6F3B003F1385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */; };
 		D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */; };
+		D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */; };
+		D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9622EE708C003C9CCA /* InvitationHelper.swift */; };
 		D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546E95722DF8BFD000CF6AD /* AuthService.swift */; };
 		D54FD3F922DF8EEA00F20AFE /* ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD3F822DF8EEA00F20AFE /* ManoUser.swift */; };
 		D54FD3FC22DF90FC00F20AFE /* CollectionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD3FB22DF90FC00F20AFE /* CollectionKeys.swift */; };
@@ -94,6 +96,9 @@
 		D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D51CF7C222DF6F3B003F1385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D51CF7C422DF6F3B003F1385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D542BC9022EE4E40003C9CCA /* Mano.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mano.entitlements; sourceTree = "<group>"; };
+		D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRecieved.swift; sourceTree = "<group>"; };
+		D542BC9622EE708C003C9CCA /* InvitationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationHelper.swift; sourceTree = "<group>"; };
 		D546E95722DF8BFD000CF6AD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		D54FD3F822DF8EEA00F20AFE /* ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManoUser.swift; sourceTree = "<group>"; };
 		D54FD3FB22DF90FC00F20AFE /* CollectionKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionKeys.swift; sourceTree = "<group>"; };
@@ -198,6 +203,7 @@
 		D51CF7B422DF6F38003F1385 /* Mano */ = {
 			isa = PBXGroup;
 			children = (
+				D542BC9022EE4E40003C9CCA /* Mano.entitlements */,
 				D51CF7B522DF6F38003F1385 /* AppDelegate.swift */,
 				D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */,
 				D51CF7C422DF6F3B003F1385 /* Info.plist */,
@@ -213,6 +219,7 @@
 				D5E39B9622E0166F008A919A /* Utilities */,
 				D57D62EA22E0235000F638DF /* API+Clients */,
 				D5F7635522E886E700250C96 /* TestHelper.swift */,
+				D542BC9622EE708C003C9CCA /* InvitationHelper.swift */,
 			);
 			path = Mano;
 			sourceTree = "<group>";
@@ -236,6 +243,7 @@
 				D54FD3F822DF8EEA00F20AFE /* ManoUser.swift */,
 				D5EF0AAA22E282410061B67A /* Ride.swift */,
 				D59D1A7722E3C8D200E94D77 /* MyLocation.swift */,
+				D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +458,9 @@
 							com.apple.Keychain = {
 								enabled = 0;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.SafariKeychain = {
 								enabled = 0;
 							};
@@ -581,6 +592,7 @@
 				D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */,
 				D5D6A76A22E3814C009C0029 /* FavoritesTableViewCell.swift in Sources */,
 				D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */,
+				D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */,
 				D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */,
 				D59D1A7822E3C8D200E94D77 /* MyLocation.swift in Sources */,
 				D59D1A7A22E3CA2000E94D77 /* DataPersistanceManager.swift in Sources */,
@@ -610,6 +622,7 @@
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
 				D5F7635622E886E700250C96 /* TestHelper.swift in Sources */,
+				D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */,
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,
 				D54FD3F922DF8EEA00F20AFE /* ManoUser.swift in Sources */,
 				D5F7636122E8CB7300250C96 /* OnItsWayViewController.swift in Sources */,
@@ -756,6 +769,7 @@
 			baseConfigurationReference = CECD7656A3F3E53D6A59F896 /* Pods-Mano.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mano/Mano.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ5CF8LT37;
@@ -777,6 +791,7 @@
 			baseConfigurationReference = 64A8F5805886CA0F9CFA728C /* Pods-Mano.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mano/Mano.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DQ5CF8LT37;
