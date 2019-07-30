@@ -11,12 +11,20 @@ import MessageUI
 
 protocol MessageDelegate: AnyObject {
     func messageSent()
-    func messageError()
+    func messageError(error: String)
 }
 class SendMessageViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        delegate.messageSent()
+        switch result {
+        case .sent:
+            delegate.messageSent()
+        case .failed:
+            delegate.messageError(error: "Failed")
+        default:
+            return
+        }
     }
+    
     
     var number: String!
     
@@ -52,6 +60,9 @@ class SendMessageViewController: UIViewController, MFMessageComposeViewControlle
         sendMessage(message: sender.titleLabel!.text!, number: number)
     }
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true)
+    }
     /*
     // MARK: - Navigation
 

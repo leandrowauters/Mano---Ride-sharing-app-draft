@@ -74,7 +74,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func updateRideToOnItsWay(ride: Ride) {
-        DBService.updateDriverOntItsWay(ride: ride, originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude) { (error) in
+        DBService.updateDriverOntItsWay(ride: ride, originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude, pickup: true) { (error) in
             if let error = error {
                 self.showAlert(title: "Error updating ride", message: error.localizedDescription)
             }
@@ -133,12 +133,11 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[indexPath.row]
-        showAlert(title: "Begin Drive?", message: "\(ride.passanger) will be notified") { (yes) in
+        showConfimationAlert(title: "Begin Drive?", message: "\(ride.passanger) will be notified") { (okay) in
             self.updateRideToOnItsWay(ride: ride)
             let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: self.duration!, distance: self.distance!, ride: ride)
             self.navigationController?.pushViewController(onItsWayVc, animated: true)
         }
-        
     }
 }
 

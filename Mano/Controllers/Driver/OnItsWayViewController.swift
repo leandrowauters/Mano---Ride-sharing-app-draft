@@ -20,7 +20,8 @@ class OnItsWayViewController: UIViewController {
     private var distance: Int!
     private var ride: Ride!
     private var graphics =  GraphicsClient()
-    var time = 0
+    var thirtySecondTimer = 0
+    var sixtySecondTimer = 0
     private var firstLocation = CLLocation()
     private var userLocation = CLLocation() {
         didSet {
@@ -47,51 +48,66 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var arrivedButton: RoundedButton!
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var driverView: UIView!
-    @IBOutlet weak var callDriverButton: UIButton!
     @IBOutlet weak var passangerName: UILabel!
     @IBOutlet weak var destinationAddress: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pulseView: CircularView!
+    @IBOutlet weak var messageView: BorderedView!
+    @IBOutlet weak var phoneView: BorderedView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-           sixtySecondTimer()
-        } else {
-            DBService.listenForDistanceDurationUpdates(ride: ride) { (error, ride) in
-                if let error = error {
-                    self.showAlert(title: "Error listening to updates", message: error.localizedDescription)
-                }
-                if let ride = ride {
-                    self.durationLabel.text = "Duration: \n\(ride.durtation)"
-                    self.distanceLabel.text = "Distance: \n\(ride.distance)"
-                }
-            }
-        }
         setupCoreLocation()
-        
 
+        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        calculateCurrentMilesToPickup()
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            setupBackgroundNotifications()
+            thirtyMinTimer()
+            calculateCurrentMilesToPickup()
+        } else {
             activityIndicator.stopAnimating()
         }
     }
 
-    @objc private func sixtySecondTimer() {
+    private func addTapGestures() {
+        let phoneViewTap = UITapGestureRecognizer(target: self, action: #selector (phoneViewTapped))
+        let messageViewTap = UITapGestureRecognizer(target: self, action: #selector(messageViewTapped))
+        phoneView.addGestureRecognizer(phoneViewTap)
+        messageView.addGestureRecognizer(messageViewTap)
+    }
+    
+    @objc func phoneViewTapped() {
+        guard let number = URL(string: "tel://" + ride.driverCell) else { return }
+        UIApplication.shared.open(number)
+    }
+    
+    @objc func messageViewTapped() {
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
+        sendMessageVC.modalPresentationStyle = .overCurrentContext
+        present(sendMessageVC, animated: true)
+    }
+    @objc private func thirtyMinTimer() {
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-            if self.time == 30 {
+            if self.thirtySecondTimer == 30 {
                 self.calculateCurrentMilesToPickup()
-                self.time = 0
+                self.thirtySecondTimer = 0
             } else {
-                self.time += 1
+                self.thirtySecondTimer += 1
             }
         }
     }
-
+    
+    
+    
+    private func setupBackgroundNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(thirtyMinTimer), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(thirtyMinTimer) , name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: Int, distance: Int, ride: Ride) {
         self.duration = duration
@@ -102,6 +118,11 @@ class OnItsWayViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     private func searchGoogleForDirections() {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
@@ -148,18 +169,8 @@ class OnItsWayViewController: UIViewController {
                 self.distanceLabel.text = "Distance: \n \(milesRounded.description) Mil"
                 self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description) Min"
                 self.activityIndicator.stopAnimating()
-                DBService.updateDistanceAndDuration(ride: self.ride, duration: timeRoundedToSeconds, distance: milesRounded, completion: { (error) in
-                    if let error = error {
-                       self.showAlert(title: "Error updating", message: error.localizedDescription)
-                    }
-                    
-                })
             }
         }
-
-//        let distanceInMeters = userLocation.distance(from: destinationCLLocation)
-//        let miles = distanceInMeters * 0.000621371
-//        let milesRounded = Double(round(10*miles)/10)
 
     }
     private func setup() {
@@ -171,18 +182,18 @@ class OnItsWayViewController: UIViewController {
             driverNameLabel.text = ride.driverName
             driverMakerModel.text = ride.driverMakerModel
             driverLicense.text = ride.licencePlate
+            addTapGestures()
+            durationLabel.text = "Message"
+            distanceLabel.text = "Call"
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             passangerName.text = ride.passanger
             destinationAddress.text = ride.pickupAddress
             carImageView.isHidden = true
-            callDriverButton.isHidden = true
-            
         } else {
             if let userCarPhotoURL = URL(string: ride.carPicture) {
                 carImageView.kf.setImage(with: userCarPhotoURL)
                 driverView.isHidden = true
-                
             }
         }
 
@@ -211,12 +222,7 @@ class OnItsWayViewController: UIViewController {
     }
     
     
-    @IBAction func callDriverPressed(_ sender: Any) {
-        
-            guard let number = URL(string: "tel://" + ride.driverCell) else { return }
-            UIApplication.shared.open(number)
 
-    }
     
     @IBAction func googleMapsPressed(_ sender: Any) {
         showConfimationAlert(title: "Open Google Maps", message: nil) { (okay) in
@@ -227,13 +233,10 @@ class OnItsWayViewController: UIViewController {
     
     @IBAction func callPassanger(_ sender: Any) {
     }
-    @IBAction func messagesDriverPressed(_ sender: Any) {
-        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
-        sendMessageVC.modalPresentationStyle = .overCurrentContext
-        present(sendMessageVC, animated: true)
-    }
+
     @IBAction func messagePassangerPressed(_ sender: Any) {
         let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self)
+        sendMessageVC.modalPresentationStyle = .overCurrentContext
         present(sendMessageVC, animated: true)
     }
     
@@ -250,19 +253,19 @@ extension OnItsWayViewController: CLLocationManagerDelegate {
         guard let currentLocation = locations.last else {return}
         userLocation = currentLocation
         firstLocation = locations.first!
-        
     }
 }
 
 extension OnItsWayViewController: MessageDelegate {
+    func messageError(error: String) {
+        showAlert(title: "Error sending message", message: "Error: \(error)")
+    }
+    
     func messageSent() {
         dismiss(animated: true)
         showAlert(title: "Message sent!", message: nil)
     }
     
-    func messageError() {
-        showAlert(title: "Error sending message", message: nil)
-    }
     
     
 }

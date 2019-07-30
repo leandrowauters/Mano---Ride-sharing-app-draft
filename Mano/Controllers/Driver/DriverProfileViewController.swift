@@ -121,4 +121,28 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
         let ride = group.map { "\($0.key)" }
         return ride[section]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ride = upcomingEvents[indexPath.row]
+        var title = String()
+        var message: String?
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            title = "Cancel ride?"
+            message = "\(ride.passanger) will be notified"
+        } else {
+            title = "Cancel appointment?"
+            if let driver = ride.driverName {
+            message = "\(driver) will be notified"
+            } else {
+                message = nil
+            }
+        }
+        deleteActionSheet(title: title , messega: message) { (cancelled) in
+            DBService.deleteRide(ride: ride , completion: { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error deleting ride", message: error.localizedDescription)
+                }
+            })
+        }
+    }
 }

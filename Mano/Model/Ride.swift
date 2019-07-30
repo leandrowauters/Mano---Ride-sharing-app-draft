@@ -26,7 +26,7 @@ class Ride: Codable {
     var durtation: Int
     var distance: Double
     var dateRequested: String
-    var driverName: String
+    var driverName: String?
     var driveProfileImage: String
     var driverMakerModel: String
     var originLat: Double
@@ -36,8 +36,10 @@ class Ride: Codable {
     var passangerKnowsDriverOnItsWay: Bool
     var passangerCell: String
     var driverCell: String
+    var pickup: Bool
+    var dropoff: Bool
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -65,6 +67,8 @@ class Ride: Codable {
         self.passangerKnowsDriverOnItsWay = passangerKnowsDriverOnItsWay
         self.passangerCell = passangerCell
         self.driverCell = driverCell
+        self.pickup = pickup
+        self.dropoff = dropoff
     }
     
     init(dict: [String: Any]) {
@@ -95,6 +99,8 @@ class Ride: Codable {
         self.passangerKnowsDriverOnItsWay = dict[RideCollectionKeys.passangerKnowsDriverOnItsWayKey] as? Bool ?? false
         self.passangerCell = dict[RideCollectionKeys.passangerCellKey] as? String ?? ""
         self.driverCell = dict[RideCollectionKeys.driverCellKey] as? String ?? ""
+        self.pickup = dict[RideCollectionKeys.pickupKey] as? Bool ?? false
+        self.dropoff = dict[RideCollectionKeys.dropoffKey] as? Bool ?? false
     }
     
 }

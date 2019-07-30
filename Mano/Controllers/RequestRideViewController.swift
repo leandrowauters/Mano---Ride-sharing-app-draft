@@ -9,6 +9,7 @@
 import UIKit
 import GooglePlaces
 import UserNotifications
+import FirebaseMessaging
 class RequestRideViewController: UIViewController {
     
     private var pickupAddress: String?
@@ -35,20 +36,29 @@ class RequestRideViewController: UIViewController {
     @IBOutlet weak var dropoffLabel: UILabel!
     
     @IBOutlet weak var datePicker: RoundDatePicker!
+    @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        rideAlreadyCreated { (alreadyCreated) in
+            if alreadyCreated {
+                self.alertView.isHidden = false
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
+        }
         setupTapsViews()
         datePicker.minimumDate = Date()
         pickupAddress = DBService.currentManoUser.homeAdress
         pickupLat = DBService.currentManoUser.homeLat
         pickupLon = DBService.currentManoUser.homeLon
     }
+    
 
     override func viewDidAppear(_ animated: Bool) {
-//        pickupAddress = DBService.currentManoUser.homeAdress
-//        pickupLat = DBService.currentManoUser.homeLat
-//        pickupLon = DBService.currentManoUser.homeLon
+
     }
     private func setupTapsViews() {
         let dateViewTap = UITapGestureRecognizer(target: self, action: #selector(dateViewPressed))
@@ -59,6 +69,21 @@ class RequestRideViewController: UIViewController {
         pickupView.addGestureRecognizer(pickupViewTap)
         let dropoffViewTap = UITapGestureRecognizer(target: self, action: #selector(dropoffViewPressed))
         dropoffView.addGestureRecognizer(dropoffViewTap)
+    }
+    
+    func rideAlreadyCreated(completion: @escaping(Bool) -> Void) {
+        DBService.fetchPassangerRides(passangerId: DBService.currentManoUser.userId) { (error, rides) in
+            if let error = error {
+                self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+            }
+            if let rides = rides {
+                if !rides.isEmpty {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
     }
     
     @objc func dateViewPressed(){
@@ -103,14 +128,6 @@ class RequestRideViewController: UIViewController {
     
     @IBAction func requestPressed(_ sender: Any) {
         createRide()
-        let notification = Notification.init(name: Notification.Name)
-        notification.alertBody = "Welcome to the app!" // text that will be displayed in the notification
-        
-        notification.fireDate = NSDate(timeIntervalSinceNow: 2)
-        notification.soundName = UILocalNotificationDefaultSoundName
-        
-        notification.userInfo = ["title": "Title", "UUID": "12345"]
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     /*

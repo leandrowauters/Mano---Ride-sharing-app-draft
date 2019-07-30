@@ -31,6 +31,27 @@ class RoundedTextField: UITextField {
 }
 
 @IBDesignable
+class RoundedBlueTextField: UITextField {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        layer.cornerRadius = bounds.height / 2.0
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+        
+        textAlignment = .center
+        autocorrectionType = .no
+        
+        if (self.isSecureTextEntry) {
+            self.textColor = UIColor.black
+        } else {
+            font = UIFont(name: "Arial Rounded MT Bold", size: 22)
+            textColor = #colorLiteral(red: 0, green: 0.6754498482, blue: 0.9192627668, alpha: 1)
+        }
+    }
+}
+
+@IBDesignable
 class RoundedButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()

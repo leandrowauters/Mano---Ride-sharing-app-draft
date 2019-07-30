@@ -16,6 +16,7 @@
 		D51CF7BE22DF6F39003F1385 /* Mano.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */; };
 		D51CF7C022DF6F3B003F1385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */; };
 		D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */; };
+		D53AFD9522F0BFDA00822583 /* MainTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53AFD9422F0BFDA00822583 /* MainTimer.swift */; };
 		D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */; };
 		D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9622EE708C003C9CCA /* InvitationHelper.swift */; };
 		D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546E95722DF8BFD000CF6AD /* AuthService.swift */; };
@@ -81,6 +82,19 @@
 		ECF38DAE6FB605BAE61124A1 /* Pods_Mano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D079C4836965230C7A0B40 /* Pods_Mano.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D542BCA722EE8D1F003C9CCA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		64A8F5805886CA0F9CFA728C /* Pods-Mano.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mano.release.xcconfig"; path = "Target Support Files/Pods-Mano/Pods-Mano.release.xcconfig"; sourceTree = "<group>"; };
 		CECD7656A3F3E53D6A59F896 /* Pods-Mano.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mano.debug.xcconfig"; path = "Target Support Files/Pods-Mano/Pods-Mano.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +110,7 @@
 		D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D51CF7C222DF6F3B003F1385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D51CF7C422DF6F3B003F1385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D53AFD9422F0BFDA00822583 /* MainTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTimer.swift; sourceTree = "<group>"; };
 		D542BC9022EE4E40003C9CCA /* Mano.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mano.entitlements; sourceTree = "<group>"; };
 		D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRecieved.swift; sourceTree = "<group>"; };
 		D542BC9622EE708C003C9CCA /* InvitationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationHelper.swift; sourceTree = "<group>"; };
@@ -394,6 +409,7 @@
 				D50010DE22E5F842006659DA /* GoogleHelper.swift */,
 				D5F7635122E7C40000250C96 /* NetworkHelper.swift */,
 				D5F7635322E7C52700250C96 /* AppError.swift */,
+				D53AFD9422F0BFDA00822583 /* MainTimer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -429,6 +445,7 @@
 				D51CF7B022DF6F38003F1385 /* Resources */,
 				72B924EBF35D8307B42110E4 /* [CP] Copy Pods Resources */,
 				4692B755DB88F50B592D51BE /* [CP] Embed Pods Frameworks */,
+				D542BCA722EE8D1F003C9CCA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -445,7 +462,7 @@
 		D51CF7AA22DF6F38003F1385 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Leandro Wauters";
 				TargetAttributes = {
@@ -454,6 +471,9 @@
 						SystemCapabilities = {
 							com.apple.AutoFillCredentialProvider = {
 								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
 							};
 							com.apple.Keychain = {
 								enabled = 0;
@@ -584,6 +604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D53AFD9522F0BFDA00822583 /* MainTimer.swift in Sources */,
 				D5D6A77022E38ABC009C0029 /* DriverProfileViewController.swift in Sources */,
 				D5D1298622E228DA00B5EDB2 /* TabBarViewController.swift in Sources */,
 				D5E984CC22E233230023B155 /* AvailableManosViewController.swift in Sources */,
@@ -768,6 +789,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CECD7656A3F3E53D6A59F896 /* Pods-Mano.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mano/Mano.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -790,6 +812,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 64A8F5805886CA0F9CFA728C /* Pods-Mano.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mano/Mano.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

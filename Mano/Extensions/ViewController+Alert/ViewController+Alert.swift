@@ -41,4 +41,15 @@ extension UIViewController {
         alertController.addAction(cancel)
         present(alertController, animated: true)
     }
+    
+    public func deleteActionSheet(title: String, messega: String?, handler: ((UIAlertAction) -> Void)?) {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: handler)
+        let cancel = UIAlertAction(title: "No", style: .cancel) { (action) in
+            self.dismiss(animated: true)
+        }
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancel)
+        present(alertController, animated: true)
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-
+import FirebaseMessaging
 class AvailableManosViewController: UIViewController {
 
     let graphics = GraphicsClient()
@@ -56,7 +56,6 @@ class AvailableManosViewController: UIViewController {
         setupMap()
         fetchRides()
         mapView.addSubview(mapDetailView)
-        // Do any additional setup after loading the view.
     }
 
     func fetchRides(){

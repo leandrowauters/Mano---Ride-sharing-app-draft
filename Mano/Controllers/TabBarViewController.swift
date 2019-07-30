@@ -24,9 +24,9 @@ class TabBarViewController: UITabBarController {
                 self.showAlert(title: "Error fetching accepted ride", message: error.localizedDescription)
             }
             if let ride = ride {
-//                let rideAcceptedAlertView = RideAcceptedAlertViewController(nibName: nil, bundle: nil, ride: ride)
-//                rideAcceptedAlertView.modalPresentationStyle = .overCurrentContext
-//                self.present(rideAcceptedAlertView, animated: true)
+                let rideAcceptedAlertView = RideAcceptedAlertViewController(nibName: nil, bundle: nil, ride: ride)
+                rideAcceptedAlertView.modalPresentationStyle = .overCurrentContext
+                self.present(rideAcceptedAlertView, animated: true)
             }
         }
         DBService.listenForDriverOnItsWay { (error, ride) in
@@ -52,18 +52,18 @@ class TabBarViewController: UITabBarController {
                                 duration = durationInt
                                 DispatchQueue.main.async {
                                     
-//                                    self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
-//
-//                                        DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
-//                                            if let error = error {
-//                                                print(error.localizedDescription)
-//                                            }
-//
-//                                        })
-//                                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: duration, distance: distance, ride: ride)
-//                                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
-//
-//                                    })
+                                    self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
+
+                                        DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
+                                            if let error = error {
+                                                print(error.localizedDescription)
+                                            }
+
+                                        })
+                                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: duration, distance: distance, ride: ride)
+                                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
+
+                                    })
 
                                 }
                             }
