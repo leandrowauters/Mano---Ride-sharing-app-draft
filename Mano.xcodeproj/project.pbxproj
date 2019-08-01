@@ -52,6 +52,8 @@
 		D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A7D22E3D5E300E94D77 /* MoreInfoViewController.swift */; };
 		D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59D1A7E22E3D5E300E94D77 /* MoreInfoViewController.xib */; };
 		D59D1A8222E3E41100E94D77 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A8122E3E41100E94D77 /* StorageService.swift */; };
+		D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */; };
+		D5A33CC122F3691C00DD28D6 /* OnWayToDropoffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */; };
 		D5D1298622E228DA00B5EDB2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */; };
 		D5D6A76A22E3814C009C0029 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */; };
 		D5D6A76B22E3814C009C0029 /* FavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5D6A76922E3814C009C0029 /* FavoritesTableViewCell.xib */; };
@@ -149,6 +151,8 @@
 		D59D1A7D22E3D5E300E94D77 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		D59D1A7E22E3D5E300E94D77 /* MoreInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreInfoViewController.xib; sourceTree = "<group>"; };
 		D59D1A8122E3E41100E94D77 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWayToDropoffViewController.swift; sourceTree = "<group>"; };
+		D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnWayToDropoffViewController.xib; sourceTree = "<group>"; };
 		D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		D5D6A76922E3814C009C0029 /* FavoritesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesTableViewCell.xib; sourceTree = "<group>"; };
@@ -345,6 +349,8 @@
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
 				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
+				D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */,
+				D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
 			);
@@ -517,6 +523,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5A33CC122F3691C00DD28D6 /* OnWayToDropoffViewController.xib in Resources */,
 				D5D6A76B22E3814C009C0029 /* FavoritesTableViewCell.xib in Resources */,
 				D571BAE222E7B20D00FA9369 /* DriveViewController.xib in Resources */,
 				D5F7636222E8CB7300250C96 /* OnItsWayViewController.xib in Resources */,
@@ -650,6 +657,7 @@
 				D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */,
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
+				D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */,
 				D5F7635622E886E700250C96 /* TestHelper.swift in Sources */,
 				D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */,
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,

@@ -14,6 +14,7 @@ class RequestRideViewController: UIViewController {
     
     private var pickupAddress: String?
     private var dropoffAdress: String?
+    private var dropoffName: String?
     private var pickupLat: Double!
     private var pickupLon: Double!
     private var dropoffLat: Double!
@@ -46,6 +47,7 @@ class RequestRideViewController: UIViewController {
                 self.alertView.isHidden = false
                 self.activityIndicator.stopAnimating()
             } else {
+                self.alertView.isHidden = true
                 self.activityIndicator.stopAnimating()
             }
         }
@@ -115,7 +117,7 @@ class RequestRideViewController: UIViewController {
             return
         }
         let timeStamp = Date().dateDescription
-        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp, passangerCell: DBService.currentManoUser.cellPhone!) { (error) in
+        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, dropoffName: dropoffName, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp, passangerCell: DBService.currentManoUser.cellPhone!) { (error) in
             if let error = error {
                 self.showAlert(title: "Error creating ride", message: error.localizedDescription)
             }
@@ -150,11 +152,13 @@ extension RequestRideViewController: GMSAutocompleteViewControllerDelegate {
         if pickup {
             pickupAddress = address
             print(address)
-            print(pickupAddress)
             pickupLabel.text = address
             pickupLat = coordinate.latitude
             pickupLon = coordinate.longitude
         } else {
+            if let name = place.name{
+                dropoffName = name
+            }
             dropoffAdress = address
             dropoffLabel.text = address
             dropoffLat = coordinate.latitude

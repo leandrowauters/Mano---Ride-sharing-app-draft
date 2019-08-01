@@ -36,7 +36,7 @@ class TabBarViewController: UITabBarController {
             }
             if let ride = ride {
                 let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-                GoogleHelper.calculateCurrentMilesToPickup(ride: ride, userLocation: location, completion: { (miles, time) in
+                GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: location, completion: { (miles, time) in
                     self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
                         
                         DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in

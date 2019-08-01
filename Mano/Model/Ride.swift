@@ -13,6 +13,7 @@ class Ride: Codable {
     var passangerId: String
     var rideId: String
     var pickupAddress: String
+    var dropoffName: String
     var dropoffAddress: String
     var appointmentDate: String
     var pickupLat: Double
@@ -39,12 +40,13 @@ class Ride: Codable {
     var pickup: Bool
     var dropoff: Bool
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
         self.pickupAddress = pickupAddress
         self.dropoffAddress = dropoffAddress
+        self.dropoffName = dropoffName
         self.appointmentDate = appointmentDate
         self.pickupLat = pickupLat
         self.pickupLon = pickupLon
@@ -77,6 +79,7 @@ class Ride: Codable {
         self.rideId = dict[RideCollectionKeys.rideIdKey] as? String ?? ""
         self.pickupAddress = dict[RideCollectionKeys.pickupAddressKey] as? String ?? ""
         self.dropoffAddress = dict[RideCollectionKeys.dropoffAddressKey] as? String ?? ""
+        self.dropoffName = dict[RideCollectionKeys.dropoffNameKey] as? String ?? ""
         self.appointmentDate = dict[RideCollectionKeys.appoinmentDateKey] as? String ?? ""
         self.pickupLat = dict[RideCollectionKeys.pickupLatKey] as? Double ?? 0.0
         self.pickupLon = dict[RideCollectionKeys.pickupLonKey] as? Double ?? 0.0

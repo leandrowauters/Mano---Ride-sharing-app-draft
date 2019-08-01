@@ -86,9 +86,14 @@ struct GoogleHelper {
         }
     }
     
-    static public func calculateCurrentMilesToPickup(ride: Ride, userLocation: CLLocation , completion: @escaping(String, String) -> Void) {
-        let destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+    static public func calculateMilesAndTimeToDestination(pickup: Bool,ride: Ride, userLocation: CLLocation , completion: @escaping(String, String) -> Void) {
         
+        var destinationCLLocation = CLLocation()
+        if pickup {
+            destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+        } else {
+            destinationCLLocation = CLLocation(latitude: ride.dropoffLat, longitude: ride.dropoffLon)
+        }
         let request = MKDirections.Request()
         let source = MKPlacemark(coordinate: userLocation.coordinate)
         let destination = MKPlacemark(coordinate: destinationCLLocation.coordinate)
@@ -114,6 +119,7 @@ struct GoogleHelper {
         }
         
     }
+
 }
 
 struct GoogleHelperResults: Codable {

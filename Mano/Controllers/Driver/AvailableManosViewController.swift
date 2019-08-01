@@ -29,7 +29,6 @@ class AvailableManosViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.manoListView.manosListTableView.reloadData()
-                self.mapView.reloadInputViews()
                 self.addMarkers()
             }
         }
@@ -81,6 +80,7 @@ class AvailableManosViewController: UIViewController {
     
     func addMarkers() {
         var index = 0
+        mapView.clear()
         for ride in rides {
             let location = CLLocationCoordinate2D(latitude: ride.pickupLat, longitude: ride.pickupLon)
             let marker = GMSMarker()
@@ -91,6 +91,7 @@ class AvailableManosViewController: UIViewController {
             print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
             index += 1
         }
+        self.mapView.reloadInputViews()
     }
     
     func setupUI() {

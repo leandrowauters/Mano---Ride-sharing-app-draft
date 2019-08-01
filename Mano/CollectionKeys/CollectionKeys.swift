@@ -37,6 +37,7 @@ struct RideCollectionKeys {
     static let passangerId = "passangerId"
     static let pickupAddressKey = "pickupAddress"
     static let dropoffAddressKey = "dropoffAddress"
+    static let dropoffNameKey = "dropoffName"
     static let appoinmentDateKey = "appointmentDate"
     static let pickupLatKey = "pickupLat"
     static let pickupLonKey = "pickupLon"

@@ -29,6 +29,7 @@
                 <outlet property="phoneImage" destination="Qde-WG-gdu" id="8Hc-vP-xDt"/>
                 <outlet property="phoneView" destination="juJ-sD-l0L" id="1yo-Gf-Gbg"/>
                 <outlet property="pulseView" destination="1tr-iV-mut" id="tEE-XA-hM5"/>
+                <outlet property="titleLabel" destination="0o4-L9-l0G" id="nFU-Fs-VAZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -112,20 +113,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FO-MJ-lYG" customClass="BorderedView" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="646" width="414" height="90"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4P-xs-Fn3">
-                            <rect key="frame" x="120" y="35" width="41" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4P-xs-Fn3">
+                            <rect key="frame" x="120" y="35" width="234" height="20"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X3j-Re-Yh5">
-                            <rect key="frame" x="120" y="10" width="41" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X3j-Re-Yh5">
+                            <rect key="frame" x="120" y="10" width="234" height="20"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu2-6f-qhI">
-                            <rect key="frame" x="120" y="60" width="41" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu2-6f-qhI">
+                            <rect key="frame" x="120" y="60" width="234" height="20"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -135,9 +136,12 @@
                     <constraints>
                         <constraint firstItem="p4P-xs-Fn3" firstAttribute="leading" secondItem="8FO-MJ-lYG" secondAttribute="leading" constant="120" id="6x4-dH-xrv"/>
                         <constraint firstItem="X3j-Re-Yh5" firstAttribute="leading" secondItem="8FO-MJ-lYG" secondAttribute="leading" constant="120" id="7W0-Ch-eOu"/>
+                        <constraint firstAttribute="trailing" secondItem="Fu2-6f-qhI" secondAttribute="trailing" constant="60" id="Cl7-Lb-fD6"/>
                         <constraint firstItem="Fu2-6f-qhI" firstAttribute="leading" secondItem="8FO-MJ-lYG" secondAttribute="leading" constant="120" id="I7Y-0q-6Ph"/>
                         <constraint firstItem="p4P-xs-Fn3" firstAttribute="top" secondItem="X3j-Re-Yh5" secondAttribute="bottom" constant="5" id="OM9-Tt-yu6"/>
+                        <constraint firstAttribute="trailing" secondItem="X3j-Re-Yh5" secondAttribute="trailing" constant="60" id="QWF-dJ-Njc"/>
                         <constraint firstItem="Fu2-6f-qhI" firstAttribute="top" secondItem="p4P-xs-Fn3" secondAttribute="bottom" constant="5" id="WP2-tM-yPs"/>
+                        <constraint firstAttribute="trailing" secondItem="p4P-xs-Fn3" secondAttribute="trailing" constant="60" id="a7z-ql-QRy"/>
                         <constraint firstItem="p4P-xs-Fn3" firstAttribute="centerY" secondItem="8FO-MJ-lYG" secondAttribute="centerY" id="cM0-Hr-jBd"/>
                         <constraint firstAttribute="height" constant="90" id="csB-0M-qN9"/>
                     </constraints>
@@ -148,7 +152,7 @@
                         <constraint firstAttribute="height" constant="250" id="1KK-6U-BzF"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver on it's way" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o4-L9-l0G">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver on it's way" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0o4-L9-l0G">
                     <rect key="frame" x="0.0" y="146" width="414" height="50"/>
                     <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="35"/>

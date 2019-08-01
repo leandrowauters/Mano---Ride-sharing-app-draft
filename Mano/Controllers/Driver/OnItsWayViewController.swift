@@ -21,20 +21,9 @@ class OnItsWayViewController: UIViewController {
     private var ride: Ride!
     private var graphics =  GraphicsClient()
     var thirtySecondTimer = 0
-    var sixtySecondTimer = 0
-    private var firstLocation = CLLocation()
-    private var userLocation = CLLocation() {
-        didSet {
-            
-        }
-    }
+    private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
     
-    private var distanceToLocation: Double! {
-        didSet {
-            self.distanceLabel.text = distanceToLocation.description
-        }
-    }
 
     @IBOutlet weak var driverImage: RoundedImageViewBlue!
     @IBOutlet weak var driverNameLabel: UILabel!
@@ -45,6 +34,7 @@ class OnItsWayViewController: UIViewController {
     
     @IBOutlet weak var durationLabel: UILabel!
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var arrivedButton: RoundedButton!
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var driverView: UIView!
@@ -68,7 +58,6 @@ class OnItsWayViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            setupBackgroundNotifications()
             thirtyMinTimer()
             calculateCurrentMilesToPickup()
         } else {
@@ -96,11 +85,7 @@ class OnItsWayViewController: UIViewController {
     }
     
     
-    
-    private func setupBackgroundNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(thirtyMinTimer), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(thirtyMinTimer) , name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
+
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: String?, distance: String?, ride: Ride) {
         self.duration = duration
@@ -135,7 +120,7 @@ class OnItsWayViewController: UIViewController {
 //        return milesDistance
 //    }
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateCurrentMilesToPickup(ride: ride, userLocation: userLocation) { (miles, time) in
+        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time) in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             self.activityIndicator.stopAnimating()
@@ -152,6 +137,7 @@ class OnItsWayViewController: UIViewController {
             driverLicense.text = ride.licencePlate
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            titleLabel.text = "On way to pick-up"
             passangerName.text = ride.passanger
             destinationAddress.text = ride.pickupAddress
             carImageView.isHidden = true
@@ -189,7 +175,7 @@ class OnItsWayViewController: UIViewController {
     }
     
     @IBAction func arrivedPressed(_ sender: Any) {
-        let arriveVc = ArrivedViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self)
+        let arriveVc = ArrivedViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self, arriveDelegate: self)
         arriveVc.modalPresentationStyle = .overCurrentContext
         present(arriveVc, animated: true)
     }
@@ -205,7 +191,7 @@ class OnItsWayViewController: UIViewController {
     
     
     @IBAction func callPassanger(_ sender: Any) {
-        guard let number = URL(string: "tel://" + ride.passanger) else { return }
+        guard let number = URL(string: "tel://" + ride.passangerCell) else { return }
         UIApplication.shared.open(number)
     }
 
@@ -237,7 +223,6 @@ extension OnItsWayViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else {return}
         userLocation = currentLocation
-        firstLocation = locations.first!
     }
 }
 
@@ -249,5 +234,12 @@ extension OnItsWayViewController: MessageDelegate {
     func messageSent() {
         dismiss(animated: true)
         showAlert(title: "Message sent!", message: nil)
+    }
+}
+
+extension OnItsWayViewController: ArriveViewDelegate {
+    func userPressBeginDropOff() {
+        let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+        navigationController?.pushViewController(onWayToDropOffVC, animated: true)
     }
 }
