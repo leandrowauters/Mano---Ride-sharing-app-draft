@@ -95,32 +95,9 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.dropoffAddress.text = "Drop-off:\n \(ride.dropoffAddress)"
         cell.distance.text = "Calculating..."
         cell.duration.text = "Calculating..."
-        GoogleHelper.calculateDistanceToLocation(originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
-            if let appError = appError {
-                self.showAlert(title: "Error", message: appError.localizedDescription)
-            }
-            if let distanceText = distanceText {
-                DispatchQueue.main.async {
-                    cell.distance.text = "Distance: \(distanceText)"
-                }
-
-            }
-            if let distanceInt = distanceInt {
-                self.distance = distanceInt
-            }
-        }
-        GoogleHelper.calculateEta(originLat: userLocation.coordinate.latitude, originLon: userLocation.coordinate.longitude, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, durationText, durationInt) in
-            if let appError = appError {
-                self.showAlert(title: "Error", message: appError.localizedDescription)
-            }
-            if let durationText = durationText {
-                DispatchQueue.main.async {
-                    cell.duration.text = "Duration: \(durationText)"
-                }
-            }
-            if let durationInt = durationInt {
-                self.duration = durationInt
-            }
+        GoogleHelper.calculateCurrentMilesToPickup(ride: ride, userLocation: userLocation) { (miles, time) in
+            cell.distance.text = "Distance: \(miles) Mil"
+            cell.duration.text = "Duration: \(time)"
         }
 
         cell.selectionStyle = .none
@@ -135,7 +112,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let ride = rides[indexPath.row]
         showConfimationAlert(title: "Begin Drive?", message: "\(ride.passanger) will be notified") { (okay) in
             self.updateRideToOnItsWay(ride: ride)
-            let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: self.duration!, distance: self.distance!, ride: ride)
+            let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
             self.navigationController?.pushViewController(onItsWayVc, animated: true)
         }
     }

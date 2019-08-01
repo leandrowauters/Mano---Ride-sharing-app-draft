@@ -36,8 +36,8 @@ class RoundedBlueTextField: UITextField {
         super.layoutSubviews()
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         layer.cornerRadius = bounds.height / 2.0
-        layer.borderWidth = 5
-        layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+        layer.borderWidth = 3
+        layer.borderColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
         
         textAlignment = .center
         autocorrectionType = .no

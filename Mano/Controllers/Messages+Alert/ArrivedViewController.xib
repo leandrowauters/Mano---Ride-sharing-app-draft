@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArrivedViewController" customModule="Mano" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRy-tb-6XP" customClass="RoundedView" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="41.5" y="229" width="331" height="448"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zO-Gd-ram" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="35" width="271" height="45"/>
+                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="Fus-jP-svk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <state key="normal" title="Text: &quot;I'm outside&quot;">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="textImOutsidePressed:" destination="-1" eventType="touchUpInside" id="xgf-iH-lSw"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TwZ-Hq-lDN" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="115" width="271" height="45"/>
+                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="BYC-mA-BTh"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Keh-Bs-GaD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <state key="normal" title="Call">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="callPressed:" destination="-1" eventType="touchUpInside" id="eBf-Xt-qf4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMq-0R-rNp" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="195" width="271" height="45"/>
+                            <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="4kp-ts-Wub"/>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="Pud-l1-o3G"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="TJC-of-SRe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <state key="normal" title="Begin Drop-off">
+                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="beginDropOffPressed:" destination="-1" eventType="touchUpInside" id="ypn-Ai-pGw"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="te8-2d-CgL" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="275" width="271" height="45"/>
+                            <color key="backgroundColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="DrV-P1-CVR"/>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="tZn-Oh-nAx"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="wd4-Qw-NFY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="gzt-l8-td2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="nMq-0R-rNp" firstAttribute="top" secondItem="TwZ-Hq-lDN" secondAttribute="bottom" constant="35" id="33n-Wm-fNg"/>
+                        <constraint firstAttribute="trailing" secondItem="1zO-Gd-ram" secondAttribute="trailing" constant="30" id="6E2-2a-APj"/>
+                        <constraint firstItem="te8-2d-CgL" firstAttribute="top" secondItem="nMq-0R-rNp" secondAttribute="bottom" constant="35" id="9n0-vr-I32"/>
+                        <constraint firstItem="TwZ-Hq-lDN" firstAttribute="leading" secondItem="LRy-tb-6XP" secondAttribute="leading" constant="30" id="Amr-ku-yQV"/>
+                        <constraint firstAttribute="trailing" secondItem="nMq-0R-rNp" secondAttribute="trailing" constant="30" id="EGg-zx-3X5"/>
+                        <constraint firstItem="1zO-Gd-ram" firstAttribute="top" secondItem="LRy-tb-6XP" secondAttribute="top" constant="35" id="I1u-U8-s1A"/>
+                        <constraint firstItem="TwZ-Hq-lDN" firstAttribute="top" secondItem="1zO-Gd-ram" secondAttribute="bottom" constant="35" id="Olw-6K-lMN"/>
+                        <constraint firstItem="nMq-0R-rNp" firstAttribute="leading" secondItem="LRy-tb-6XP" secondAttribute="leading" constant="30" id="Ov5-Qr-vsY"/>
+                        <constraint firstAttribute="trailing" secondItem="TwZ-Hq-lDN" secondAttribute="trailing" constant="30" id="agk-Fx-PNw"/>
+                        <constraint firstItem="1zO-Gd-ram" firstAttribute="leading" secondItem="LRy-tb-6XP" secondAttribute="leading" constant="30" id="ivT-An-30t"/>
+                        <constraint firstItem="te8-2d-CgL" firstAttribute="leading" secondItem="LRy-tb-6XP" secondAttribute="leading" constant="30" id="uRr-DX-kSD"/>
+                        <constraint firstAttribute="trailing" secondItem="te8-2d-CgL" secondAttribute="trailing" constant="30" id="vMU-g2-pse"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.50232769691780821" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="LRy-tb-6XP" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="0Uc-96-rbl"/>
+                <constraint firstItem="LRy-tb-6XP" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Aa2-gO-lav"/>
+                <constraint firstItem="LRy-tb-6XP" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="GXj-Cq-Pp8"/>
+                <constraint firstItem="LRy-tb-6XP" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="uVS-Jw-Klv"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

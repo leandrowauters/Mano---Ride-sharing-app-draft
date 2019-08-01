@@ -100,9 +100,13 @@ class MainTimer {
     
     
     
-    func timeString(time:TimeInterval) -> String {
+    static func timeString(time:TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
-        return String(format: "%02i:%02i", hours, minutes)
+        if time >= 3600{
+            return "\(hours) hrs , \(minutes) Min"
+        } else {
+           return "\(minutes) Min"
+        }
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import GooglePlaces
+import MapKit
 
 
 struct GoogleHelper {
@@ -83,6 +84,35 @@ struct GoogleHelper {
                 }
             }
         }
+    }
+    
+    static public func calculateCurrentMilesToPickup(ride: Ride, userLocation: CLLocation , completion: @escaping(String, String) -> Void) {
+        let destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+        
+        let request = MKDirections.Request()
+        let source = MKPlacemark(coordinate: userLocation.coordinate)
+        let destination = MKPlacemark(coordinate: destinationCLLocation.coordinate)
+        request.source = MKMapItem(placemark: source)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = MKDirectionsTransportType.automobile
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            if let response = response, let route = response.routes.last {
+                let responseDistance = route.distance
+                let miles = responseDistance * 0.000621371
+                let milesRounded = Double(round(10*miles)/10)
+                let time = route.expectedTravelTime
+                let timeRoundedToSeconds = MainTimer.timeString(time: time)
+                completion(milesRounded.description, timeRoundedToSeconds)
+//                self.distanceLabel.text = "Distance: \n \(milesRounded.description) Mil"
+//                self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description)"
+//                self.activityIndicator.stopAnimating()
+            }
+        }
+        
     }
 }
 

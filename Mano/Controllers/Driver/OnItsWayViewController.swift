@@ -16,8 +16,8 @@ class OnItsWayViewController: UIViewController {
 
     
 
-    private var duration: Int!
-    private var distance: Int!
+    private var duration: String!
+    private var distance: String!
     private var ride: Ride!
     private var graphics =  GraphicsClient()
     var thirtySecondTimer = 0
@@ -54,6 +54,8 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var pulseView: CircularView!
     @IBOutlet weak var messageView: BorderedView!
     @IBOutlet weak var phoneView: BorderedView!
+    @IBOutlet weak var messageImage: UIImageView!
+    @IBOutlet weak var phoneImage: UIImageView!
     
     
     override func viewDidLoad() {
@@ -81,16 +83,7 @@ class OnItsWayViewController: UIViewController {
         messageView.addGestureRecognizer(messageViewTap)
     }
     
-    @objc func phoneViewTapped() {
-        guard let number = URL(string: "tel://" + ride.driverCell) else { return }
-        UIApplication.shared.open(number)
-    }
-    
-    @objc func messageViewTapped() {
-        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
-        sendMessageVC.modalPresentationStyle = .overCurrentContext
-        present(sendMessageVC, animated: true)
-    }
+
     @objc private func thirtyMinTimer() {
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
             if self.thirtySecondTimer == 30 {
@@ -109,7 +102,7 @@ class OnItsWayViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(thirtyMinTimer) , name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: Int, distance: Int, ride: Ride) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, duration: String?, distance: String?, ride: Ride) {
         self.duration = duration
         self.distance = distance
         self.ride = ride
@@ -142,36 +135,11 @@ class OnItsWayViewController: UIViewController {
 //        return milesDistance
 //    }
     func calculateCurrentMilesToPickup() {
-        var destinationCLLocation = CLLocation()
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
-            destinationCLLocation = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-        } else {
-            destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+        GoogleHelper.calculateCurrentMilesToPickup(ride: ride, userLocation: userLocation) { (miles, time) in
+            self.distanceLabel.text = "Distance: \n \(miles) Mil"
+            self.durationLabel.text = "Duration: \n \(time)"
+            self.activityIndicator.stopAnimating()
         }
-
-        let request = MKDirections.Request()
-        let source = MKPlacemark(coordinate: userLocation.coordinate)
-        let destination = MKPlacemark(coordinate: destinationCLLocation.coordinate)
-        request.source = MKMapItem(placemark: source)
-        request.destination = MKMapItem(placemark: destination)
-        request.transportType = MKDirectionsTransportType.automobile
-        let directions = MKDirections(request: request)
-        directions.calculate { (response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            if let response = response, let route = response.routes.last {
-                let responseDistance = route.distance
-                let miles = responseDistance * 0.000621371
-                let milesRounded = Double(round(10*miles)/10)
-                let time = route.expectedTravelTime
-                let timeRoundedToSeconds = Int((time / 60).rounded(FloatingPointRoundingRule.down))
-                self.distanceLabel.text = "Distance: \n \(milesRounded.description) Mil"
-                self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description) Min"
-                self.activityIndicator.stopAnimating()
-            }
-        }
-
     }
     private func setup() {
         locationManager.delegate = self
@@ -182,18 +150,20 @@ class OnItsWayViewController: UIViewController {
             driverNameLabel.text = ride.driverName
             driverMakerModel.text = ride.driverMakerModel
             driverLicense.text = ride.licencePlate
-            addTapGestures()
-            durationLabel.text = "Message"
-            distanceLabel.text = "Call"
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             passangerName.text = ride.passanger
             destinationAddress.text = ride.pickupAddress
             carImageView.isHidden = true
+            phoneImage.isHidden = true
+            messageImage.isHidden = true
         } else {
             if let userCarPhotoURL = URL(string: ride.carPicture) {
                 carImageView.kf.setImage(with: userCarPhotoURL)
                 driverView.isHidden = true
+                addTapGestures()
+                durationLabel.text = "Duration:\n Approx. \(duration ?? "N/A")"
+                distanceLabel.text = "Call / Message"
             }
         }
 
@@ -219,6 +189,9 @@ class OnItsWayViewController: UIViewController {
     }
     
     @IBAction func arrivedPressed(_ sender: Any) {
+        let arriveVc = ArrivedViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self)
+        arriveVc.modalPresentationStyle = .overCurrentContext
+        present(arriveVc, animated: true)
     }
     
     
@@ -232,6 +205,8 @@ class OnItsWayViewController: UIViewController {
     
     
     @IBAction func callPassanger(_ sender: Any) {
+        guard let number = URL(string: "tel://" + ride.passanger) else { return }
+        UIApplication.shared.open(number)
     }
 
     @IBAction func messagePassangerPressed(_ sender: Any) {
@@ -240,6 +215,16 @@ class OnItsWayViewController: UIViewController {
         present(sendMessageVC, animated: true)
     }
     
+    @objc func phoneViewTapped() {
+        guard let number = URL(string: "tel://" + ride.driverCell) else { return }
+        UIApplication.shared.open(number)
+    }
+    
+    @objc func messageViewTapped() {
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
+        sendMessageVC.modalPresentationStyle = .overCurrentContext
+        present(sendMessageVC, animated: true)
+    }
     
 }
 extension OnItsWayViewController: CLLocationManagerDelegate {
@@ -265,7 +250,4 @@ extension OnItsWayViewController: MessageDelegate {
         dismiss(animated: true)
         showAlert(title: "Message sent!", message: nil)
     }
-    
-    
-    
 }

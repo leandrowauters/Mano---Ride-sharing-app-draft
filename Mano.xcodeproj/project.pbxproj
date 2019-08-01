@@ -36,6 +36,8 @@
 		D57557A622E784CC0063BD15 /* DBService+MyLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */; };
 		D57557A922E79C870063BD15 /* MyLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */; };
 		D57557AA22E79C870063BD15 /* MyLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */; };
+		D57CBBD022F0E5830046CF2F /* ArrivedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CBBCE22F0E5830046CF2F /* ArrivedViewController.swift */; };
+		D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57CBBCF22F0E5830046CF2F /* ArrivedViewController.xib */; };
 		D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62E822E0215C00F638DF /* ViewController+Alert.swift */; };
 		D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */; };
 		D57D62F322E031C000F638DF /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D62F122E031C000F638DF /* CreateAccountViewController.swift */; };
@@ -131,6 +133,8 @@
 		D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+MyLocation.swift"; sourceTree = "<group>"; };
 		D57557A722E79C860063BD15 /* MyLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationTableViewCell.swift; sourceTree = "<group>"; };
 		D57557A822E79C860063BD15 /* MyLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLocationTableViewCell.xib; sourceTree = "<group>"; };
+		D57CBBCE22F0E5830046CF2F /* ArrivedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedViewController.swift; sourceTree = "<group>"; };
+		D57CBBCF22F0E5830046CF2F /* ArrivedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivedViewController.xib; sourceTree = "<group>"; };
 		D57D62E822E0215C00F638DF /* ViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 		D57D62EB22E0237200F638DF /* GoogleMapsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsAPI.swift; sourceTree = "<group>"; };
 		D57D62F122E031C000F638DF /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -284,8 +288,12 @@
 		D57557A422E761610063BD15 /* Messages+Alert */ = {
 			isa = PBXGroup;
 			children = (
+				D58D747222EE37B30081424D /* SendMessageViewController.swift */,
+				D58D747322EE37B30081424D /* SendMessageViewController.xib */,
 				D57557A022E761590063BD15 /* RideAcceptedAlertViewController.swift */,
 				D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */,
+				D57CBBCE22F0E5830046CF2F /* ArrivedViewController.swift */,
+				D57CBBCF22F0E5830046CF2F /* ArrivedViewController.xib */,
 			);
 			path = "Messages+Alert";
 			sourceTree = "<group>";
@@ -337,8 +345,6 @@
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
 				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
-				D58D747222EE37B30081424D /* SendMessageViewController.swift */,
-				D58D747322EE37B30081424D /* SendMessageViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
 			);
@@ -521,6 +527,7 @@
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
+				D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
@@ -606,6 +613,7 @@
 			files = (
 				D53AFD9522F0BFDA00822583 /* MainTimer.swift in Sources */,
 				D5D6A77022E38ABC009C0029 /* DriverProfileViewController.swift in Sources */,
+				D57CBBD022F0E5830046CF2F /* ArrivedViewController.swift in Sources */,
 				D5D1298622E228DA00B5EDB2 /* TabBarViewController.swift in Sources */,
 				D5E984CC22E233230023B155 /* AvailableManosViewController.swift in Sources */,
 				D57D62F322E031C000F638DF /* CreateAccountViewController.swift in Sources */,

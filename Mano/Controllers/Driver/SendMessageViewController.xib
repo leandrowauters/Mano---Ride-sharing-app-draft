@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendMessageViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="otherTextfield" destination="hIn-Q3-mr9" id="Ioj-M3-jwP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -77,26 +78,20 @@
                                 <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="Jmh-H3-ISr"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XK1-0O-jYh">
-                            <rect key="frame" x="30" y="317" width="240" height="23.5"/>
-                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
-                            <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hIn-Q3-mr9" customClass="RoundedBlueTextField" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="30" y="348.5" width="240" height="30"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Other" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hIn-Q3-mr9" customClass="RoundedBlueTextField" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="30" y="307" width="240" height="38"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="3RQ-4S-rsl"/>
+                                <constraint firstAttribute="height" constant="38" id="3RQ-4S-rsl"/>
                             </constraints>
                             <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daT-gZ-pXG" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="50" y="422" width="200" height="30"/>
+                            <rect key="frame" x="50" y="404" width="200" height="38"/>
                             <color key="backgroundColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="pLc-hZ-Y4c"/>
+                                <constraint firstAttribute="height" constant="38" id="pLc-hZ-Y4c"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                             <state key="normal" title="Cancel"/>
@@ -107,15 +102,11 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="XK1-0O-jYh" secondAttribute="trailing" constant="30" id="1GX-Sn-LJb"/>
-                        <constraint firstItem="XK1-0O-jYh" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="4Vb-wq-Kmh"/>
                         <constraint firstAttribute="trailing" secondItem="hIn-Q3-mr9" secondAttribute="trailing" constant="30" id="5hA-hH-t5I"/>
                         <constraint firstItem="ujp-Ap-k39" firstAttribute="top" secondItem="da6-ZD-l2y" secondAttribute="bottom" constant="45" id="6f1-4y-V3l"/>
                         <constraint firstItem="mLG-zt-YP3" firstAttribute="top" secondItem="ido-sn-xCs" secondAttribute="bottom" constant="15" id="97P-N8-ym3"/>
-                        <constraint firstItem="hIn-Q3-mr9" firstAttribute="top" secondItem="XK1-0O-jYh" secondAttribute="bottom" constant="8" id="D2R-7H-okw"/>
                         <constraint firstAttribute="trailing" secondItem="ido-sn-xCs" secondAttribute="trailing" constant="30" id="EkV-5i-0to"/>
                         <constraint firstAttribute="trailing" secondItem="mLG-zt-YP3" secondAttribute="trailing" constant="30" id="GRi-Il-NeD"/>
-                        <constraint firstItem="XK1-0O-jYh" firstAttribute="top" secondItem="mLG-zt-YP3" secondAttribute="bottom" constant="25" id="HeJ-jp-OBP"/>
                         <constraint firstItem="ujp-Ap-k39" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="MNU-nM-m8Y"/>
                         <constraint firstItem="wYb-Al-pim" firstAttribute="top" secondItem="ujp-Ap-k39" secondAttribute="bottom" constant="15" id="OXw-yl-WxC"/>
                         <constraint firstItem="mLG-zt-YP3" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="R7G-MM-Fc7"/>
@@ -129,7 +120,8 @@
                         <constraint firstAttribute="trailing" secondItem="da6-ZD-l2y" secondAttribute="trailing" id="gws-lF-FMs"/>
                         <constraint firstItem="wYb-Al-pim" firstAttribute="leading" secondItem="ce0-OI-Vno" secondAttribute="leading" constant="30" id="lcy-fU-22C"/>
                         <constraint firstAttribute="trailing" secondItem="ujp-Ap-k39" secondAttribute="trailing" constant="30" id="qmK-o7-1hP"/>
-                        <constraint firstAttribute="bottom" secondItem="daT-gZ-pXG" secondAttribute="bottom" constant="15" id="r4k-al-9bC"/>
+                        <constraint firstAttribute="bottom" secondItem="daT-gZ-pXG" secondAttribute="bottom" constant="25" id="r4k-al-9bC"/>
+                        <constraint firstItem="hIn-Q3-mr9" firstAttribute="top" secondItem="mLG-zt-YP3" secondAttribute="bottom" constant="15" id="rRx-TJ-Hbh"/>
                         <constraint firstItem="da6-ZD-l2y" firstAttribute="top" secondItem="ce0-OI-Vno" secondAttribute="top" id="xig-Vc-uaW"/>
                     </constraints>
                 </view>

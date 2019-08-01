@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 class TabBarViewController: UITabBarController {
     
 
@@ -30,46 +30,26 @@ class TabBarViewController: UITabBarController {
             }
         }
         DBService.listenForDriverOnItsWay { (error, ride) in
-            var distance: Int!
-            var duration: Int!
+
             if let error = error {
                 self.showAlert(title: "Error updating to onItsWay", message: error.localizedDescription)
             }
             if let ride = ride {
-                GoogleHelper.calculateDistanceToLocation(originLat: ride.originLat, originLon: ride.originLon, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (appError, distanceText, distanceInt) in
-                    if let appError = appError {
-                        self.showAlert(title: "Error", message: appError.localizedDescription)
-                    }
-                    
-                    if let distanceInt = distanceInt {
-                        distance = distanceInt
-                        GoogleHelper.calculateEta(originLat: ride.originLat, originLon: ride.originLon, destinationLat: ride.pickupLat, destinationLon: ride.dropoffLon) { (appError, durationText, durationInt) in
-                            if let appError = appError {
-                                self.showAlert(title: "Error", message: appError.localizedDescription)
+                let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
+                GoogleHelper.calculateCurrentMilesToPickup(ride: ride, userLocation: location, completion: { (miles, time) in
+                    self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
+                        
+                        DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
+                            if let error = error {
+                                print(error.localizedDescription)
                             }
                             
-                            if let durationInt = durationInt {
-                                duration = durationInt
-                                DispatchQueue.main.async {
-                                    
-                                    self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
-
-                                        DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
-                                            if let error = error {
-                                                print(error.localizedDescription)
-                                            }
-
-                                        })
-                                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: duration, distance: distance, ride: ride)
-                                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
-
-                                    })
-
-                                }
-                            }
-                        }
-                    }
-                }
+                        })
+                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: miles, ride: ride)
+                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
+                        
+                    })
+                })
             }
         }
     }
