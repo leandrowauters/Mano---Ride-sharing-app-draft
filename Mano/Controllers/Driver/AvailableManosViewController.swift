@@ -22,9 +22,18 @@ class AvailableManosViewController: UIViewController {
     private var locationManager = CLLocationManager()
     
     var selectedRide: Ride!
-    
+
     private var userLocation = CLLocation()
     
+    var filteredRides = [Ride]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.manoListView.manosListTableView.reloadData()
+                self.addMarkers()
+            }
+        }
+    }
+    var filtering = false
     var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -92,19 +101,58 @@ class AvailableManosViewController: UIViewController {
     func addMarkers() {
         var index = 0
         mapView.clear()
-        for ride in rides {
-            let location = CLLocationCoordinate2D(latitude: ride.pickupLat, longitude: ride.pickupLon)
-            let marker = GMSMarker()
-            marker.position = location
-            marker.title = index.description
-            if Calendar.current.isDateInTomorrow(ride.appointmentDate.stringToDate()) {
-                marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9725490196, green: 0.6078431373, blue: 0.1450980392, alpha: 1))
+        if filtering {
+            for ride in filteredRides {
+                let location = CLLocationCoordinate2D(latitude: ride.pickupLat, longitude: ride.pickupLon)
+                let marker = GMSMarker()
+                marker.position = location
+                marker.title = index.description
+                let appointmentDate = ride.appointmentDate.stringToDate()
+                let dateRequested = ride.dateRequested.stringToDate()
+                print(ride.rideId)
+                if appointmentDate.isInSameWeek() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+                }
+                if appointmentDate.isTodayOrTomorrow() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
+                }
+                if appointmentDate.isOther() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.6754498482, blue: 0.9192627668, alpha: 1))
+                }
+                if dateRequested.isNew() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
+                }
+                marker.map = mapView
+                print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
+                index += 1
             }
-            
-            marker.map = mapView
-            print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
-            index += 1
+        } else {
+            for ride in rides {
+                let location = CLLocationCoordinate2D(latitude: ride.pickupLat, longitude: ride.pickupLon)
+                let marker = GMSMarker()
+                marker.position = location
+                marker.title = index.description
+                let appointmentDate = ride.appointmentDate.stringToDate()
+                let dateRequested = ride.dateRequested.stringToDate()
+                print(ride.rideId)
+                if appointmentDate.isInSameWeek() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+                }
+                if appointmentDate.isTodayOrTomorrow() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
+                }
+                if appointmentDate.isOther() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.6754498482, blue: 0.9192627668, alpha: 1))
+                }
+                if dateRequested.isNew() {
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
+                }
+                marker.map = mapView
+                print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
+                index += 1
+            }
         }
+
         self.mapView.reloadInputViews()
     }
     
@@ -217,7 +265,13 @@ extension AvailableManosViewController: GMSMapViewDelegate {
         let position = marker.position
         let camera = GMSCameraPosition.camera(withLatitude: position.latitude, longitude: position.longitude, zoom: 14.0)
         let index = Int(marker.title!)!
-        let ride = rides[index]
+        var ride: Ride!
+        if filtering {
+            ride = filteredRides[index]
+        } else {
+            ride = rides[index]
+        }
+        
         selectedRide = ride
         dateLabel.text = ride.appointmentDate
         pickupLabel.text = "Pick-up:\n\(ride.pickupAddress)"
@@ -250,19 +304,23 @@ extension AvailableManosViewController: UITableViewDelegate, UITableViewDataSour
 
 extension AvailableManosViewController: FilterViewDelegate {
     func thisWeekTapped() {
-        rides = rides.filter({Date().isInSameWeek(date: $0.dateRequested.stringToDate())})
+        filtering = true
+        filteredRides = rides.filter({$0.appointmentDate.stringToDate().isInSameWeek()})
     }
     
     func tomorrowTapped() {
-        print("Tomorrow")
+        filtering = true
+        filteredRides = rides.filter({$0.appointmentDate.stringToDate().isTodayOrTomorrow()})
     }
     
     func otherTapped() {
-        print("Other")
+        filtering = true
+       filteredRides = rides.filter({$0.appointmentDate.stringToDate().isOther()})
     }
     
     func newViewTapped() {
-        print("New")
+        filtering = true
+        filteredRides = rides.filter({$0.dateRequested.stringToDate().isNew()})
     }
     
     

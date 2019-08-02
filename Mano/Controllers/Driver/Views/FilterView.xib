@@ -91,7 +91,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="Tomorrow"/>
+                            <state key="normal" title="Soon"/>
                             <connections>
                                 <action selector="tomorrowPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="NML-ks-cfQ"/>
                             </connections>

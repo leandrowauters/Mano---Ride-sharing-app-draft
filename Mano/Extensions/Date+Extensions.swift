@@ -20,7 +20,32 @@ extension Date {
         dateFormatter.locale = .current
         return dateFormatter.string(from: self)
     }
-    func isInSameWeek(date: Date) -> Bool {
-        return Calendar.current.isDate(self, equalTo: date, toGranularity: .weekOfYear)
+    func isInSameWeek() -> Bool {
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: self).day
+        if let days = days {
+            if days < 7 && !isTodayOrTomorrow(){
+                return true
+            }
+        }
+        return false
+    }
+    func isTodayOrTomorrow()  -> Bool {
+        return Calendar.current.isDateInToday(self) || Calendar.current.isDateInTomorrow(self)
+    }
+    
+    func isNew() -> Bool {
+        let minutes = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute
+        if let minutes = minutes {
+            if minutes < 60 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isOther() -> Bool {
+        return !isTodayOrTomorrow() && !isInSameWeek()
     }
 }
+
+
