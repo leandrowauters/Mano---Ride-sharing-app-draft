@@ -59,7 +59,8 @@ class OnWayToDropoffViewController: UIViewController {
             driverNameLabel.text = ride.driverName
             driverMakeModelLabel.text = ride.driverMakerModel
             driverLicencePlateLabel.text = ride.licencePlate
-            destinationName.text = ride.dropoffAddress
+            destinationName.text = ride.dropoffName
+            destinationAddress.text = ride.dropoffAddress
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
             arrivedButton.isHidden = true

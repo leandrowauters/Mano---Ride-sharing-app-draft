@@ -20,4 +20,7 @@ extension Date {
         dateFormatter.locale = .current
         return dateFormatter.string(from: self)
     }
+    func isInSameWeek(date: Date) -> Bool {
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: .weekOfYear)
+    }
 }

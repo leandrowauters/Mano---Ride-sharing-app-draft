@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FilterView" customModule="Mano" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="119" height="198"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvF-dn-z4V">
+                    <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JY-sn-UPc" customClass="CircularView" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="79" y="10" width="30" height="30"/>
+                            <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="Np4-fV-Tue"/>
+                                <constraint firstAttribute="width" secondItem="8JY-sn-UPc" secondAttribute="height" id="zwl-l3-Oj4"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEB-vT-Wig">
+                            <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="New"/>
+                            <connections>
+                                <action selector="NewButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="iZI-Ud-GvS"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="8JY-sn-UPc" secondAttribute="trailing" constant="10" id="Rhu-bj-SLS"/>
+                        <constraint firstItem="fEB-vT-Wig" firstAttribute="width" secondItem="gvF-dn-z4V" secondAttribute="width" id="TLD-zv-RvW"/>
+                        <constraint firstItem="fEB-vT-Wig" firstAttribute="height" secondItem="gvF-dn-z4V" secondAttribute="height" id="UHL-jQ-0xd"/>
+                        <constraint firstItem="8JY-sn-UPc" firstAttribute="top" secondItem="gvF-dn-z4V" secondAttribute="top" constant="10" id="idZ-cO-OOM"/>
+                        <constraint firstItem="fEB-vT-Wig" firstAttribute="centerY" secondItem="gvF-dn-z4V" secondAttribute="centerY" id="jVi-MI-Lh6"/>
+                        <constraint firstItem="fEB-vT-Wig" firstAttribute="centerX" secondItem="gvF-dn-z4V" secondAttribute="centerX" id="mJR-7M-YfG"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BB0-4L-Ugm">
+                    <rect key="frame" x="0.0" y="49.5" width="119" height="49.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-HN-Hd8" customClass="CircularView" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="79" y="10" width="30" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="MSc-HN-Hd8" secondAttribute="height" id="gYQ-Pd-CRp"/>
+                                <constraint firstAttribute="width" constant="30" id="rXv-yx-z2T"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h06-us-oHs">
+                            <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="This Week"/>
+                            <connections>
+                                <action selector="thisWeekPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="gTB-R8-cIE"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="h06-us-oHs" firstAttribute="height" secondItem="BB0-4L-Ugm" secondAttribute="height" id="1lU-ut-BGn"/>
+                        <constraint firstItem="h06-us-oHs" firstAttribute="centerY" secondItem="BB0-4L-Ugm" secondAttribute="centerY" id="3vf-7s-rWF"/>
+                        <constraint firstItem="h06-us-oHs" firstAttribute="width" secondItem="BB0-4L-Ugm" secondAttribute="width" id="E6j-f1-5Q0"/>
+                        <constraint firstItem="h06-us-oHs" firstAttribute="centerX" secondItem="BB0-4L-Ugm" secondAttribute="centerX" id="XDf-rq-zNR"/>
+                        <constraint firstItem="MSc-HN-Hd8" firstAttribute="top" secondItem="BB0-4L-Ugm" secondAttribute="top" constant="10" id="c0i-F9-rsJ"/>
+                        <constraint firstAttribute="trailing" secondItem="MSc-HN-Hd8" secondAttribute="trailing" constant="10" id="ycN-2e-3ev"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kO8-hk-iWM">
+                    <rect key="frame" x="0.0" y="99" width="119" height="49.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKw-cC-fAL" customClass="CircularView" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="79" y="10" width="30" height="30"/>
+                            <color key="backgroundColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="hKw-cC-fAL" secondAttribute="height" id="9ts-wU-Nh2"/>
+                                <constraint firstAttribute="width" constant="30" id="uN6-qK-DEX"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbG-Ma-Wd3">
+                            <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Tomorrow"/>
+                            <connections>
+                                <action selector="tomorrowPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="NML-ks-cfQ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="hKw-cC-fAL" secondAttribute="trailing" constant="10" id="0zI-39-zyf"/>
+                        <constraint firstItem="sbG-Ma-Wd3" firstAttribute="width" secondItem="kO8-hk-iWM" secondAttribute="width" id="2la-Wk-Ez7"/>
+                        <constraint firstItem="sbG-Ma-Wd3" firstAttribute="height" secondItem="kO8-hk-iWM" secondAttribute="height" id="FIC-yS-NJ9"/>
+                        <constraint firstItem="hKw-cC-fAL" firstAttribute="top" secondItem="kO8-hk-iWM" secondAttribute="top" constant="10" id="HRl-OF-eos"/>
+                        <constraint firstItem="sbG-Ma-Wd3" firstAttribute="centerX" secondItem="kO8-hk-iWM" secondAttribute="centerX" id="Qt7-eP-6QJ"/>
+                        <constraint firstItem="sbG-Ma-Wd3" firstAttribute="centerY" secondItem="kO8-hk-iWM" secondAttribute="centerY" id="bFZ-qO-ipB"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpX-gQ-Gkm">
+                    <rect key="frame" x="0.0" y="148.5" width="119" height="49.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OW-Ce-lSr" customClass="CircularView" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="79" y="10" width="30" height="30"/>
+                            <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="fdP-bk-rtV"/>
+                                <constraint firstAttribute="width" secondItem="1OW-Ce-lSr" secondAttribute="height" id="wfD-AO-4hy"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cHi-OL-Ozq">
+                            <rect key="frame" x="0.0" y="0.0" width="119" height="49.5"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                            <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Other"/>
+                            <connections>
+                                <action selector="otherPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="aZz-1s-S2Q"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="cHi-OL-Ozq" firstAttribute="centerX" secondItem="kpX-gQ-Gkm" secondAttribute="centerX" id="2x4-j3-6Zo"/>
+                        <constraint firstAttribute="trailing" secondItem="1OW-Ce-lSr" secondAttribute="trailing" constant="10" id="DPd-UJ-jay"/>
+                        <constraint firstItem="cHi-OL-Ozq" firstAttribute="width" secondItem="kpX-gQ-Gkm" secondAttribute="width" id="EcN-sK-xZu"/>
+                        <constraint firstItem="cHi-OL-Ozq" firstAttribute="centerY" secondItem="kpX-gQ-Gkm" secondAttribute="centerY" id="WG3-ce-YIC"/>
+                        <constraint firstItem="cHi-OL-Ozq" firstAttribute="height" secondItem="kpX-gQ-Gkm" secondAttribute="height" id="YKX-pN-lsd"/>
+                        <constraint firstItem="1OW-Ce-lSr" firstAttribute="top" secondItem="kpX-gQ-Gkm" secondAttribute="top" constant="10" id="jup-eS-MPc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gvF-dn-z4V" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.25" id="0wW-Ux-K3z"/>
+                <constraint firstItem="BB0-4L-Ugm" firstAttribute="width" secondItem="fEB-vT-Wig" secondAttribute="width" id="9Pe-08-Ru3"/>
+                <constraint firstItem="gvF-dn-z4V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Dbq-99-Cpe"/>
+                <constraint firstItem="BB0-4L-Ugm" firstAttribute="height" secondItem="fEB-vT-Wig" secondAttribute="height" id="FYc-k3-LW0"/>
+                <constraint firstItem="kpX-gQ-Gkm" firstAttribute="width" secondItem="sbG-Ma-Wd3" secondAttribute="width" id="Lby-0r-JGq"/>
+                <constraint firstItem="kO8-hk-iWM" firstAttribute="height" secondItem="h06-us-oHs" secondAttribute="height" id="POz-hU-aBk"/>
+                <constraint firstItem="kO8-hk-iWM" firstAttribute="top" secondItem="BB0-4L-Ugm" secondAttribute="bottom" id="RoZ-HQ-bdH"/>
+                <constraint firstItem="kpX-gQ-Gkm" firstAttribute="top" secondItem="kO8-hk-iWM" secondAttribute="bottom" id="XFl-NO-Ysy"/>
+                <constraint firstItem="kO8-hk-iWM" firstAttribute="centerX" secondItem="h06-us-oHs" secondAttribute="centerX" id="aVQ-CV-yLD"/>
+                <constraint firstItem="kpX-gQ-Gkm" firstAttribute="height" secondItem="sbG-Ma-Wd3" secondAttribute="height" id="cTm-Iu-HuT"/>
+                <constraint firstItem="BB0-4L-Ugm" firstAttribute="top" secondItem="gvF-dn-z4V" secondAttribute="bottom" id="fFm-zB-NVA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gvF-dn-z4V" secondAttribute="trailing" id="hrZ-f4-Tis"/>
+                <constraint firstItem="kpX-gQ-Gkm" firstAttribute="centerX" secondItem="sbG-Ma-Wd3" secondAttribute="centerX" id="lGl-eL-LdB"/>
+                <constraint firstItem="BB0-4L-Ugm" firstAttribute="centerX" secondItem="fEB-vT-Wig" secondAttribute="centerX" id="njn-Ku-kbG"/>
+                <constraint firstItem="kO8-hk-iWM" firstAttribute="width" secondItem="h06-us-oHs" secondAttribute="width" id="shC-MC-zcr"/>
+                <constraint firstItem="gvF-dn-z4V" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xOX-Sj-fSF"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="newButton" destination="fEB-vT-Wig" id="SPQ-RP-Y5k"/>
+            </connections>
+            <point key="canvasLocation" x="516.66666666666674" y="-214.95535714285714"/>
+        </view>
+    </objects>
+</document>

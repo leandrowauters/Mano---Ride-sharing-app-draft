@@ -45,7 +45,17 @@ class AvailableManosViewController: UIViewController {
     lazy var mapView = GMSMapView()
     
     lazy var manoListView = Bundle.main.loadNibNamed("ManosList", owner: self, options: nil)?.first as! ManosList
-    
+    lazy var filterView =  Bundle.main.loadNibNamed("FilterView", owner: self, options: nil)?.first as! FilterView
+    lazy var filterButton: RoundedButton  = {
+       var button = RoundedButton()
+        button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
+        button.setTitle("Filter", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.1607843137, green: 0.1725490196, blue: 0.1843137255, alpha: 0.5148223459)
+        button.titleLabel?.font = UIFont(name: "Arial Rounded MT Bold", size: 17)
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
     private var subViews = [UIView]()
     @IBOutlet weak var manoImage: UIImageView!
     
@@ -54,6 +64,7 @@ class AvailableManosViewController: UIViewController {
         setupUI()
         setupMap()
         fetchRides()
+        setupMapViewSubViews()
         mapView.addSubview(mapDetailView)
     }
 
@@ -86,7 +97,10 @@ class AvailableManosViewController: UIViewController {
             let marker = GMSMarker()
             marker.position = location
             marker.title = index.description
-            marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1))
+            if Calendar.current.isDateInTomorrow(ride.appointmentDate.stringToDate()) {
+                marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9725490196, green: 0.6078431373, blue: 0.1450980392, alpha: 1))
+            }
+            
             marker.map = mapView
             print("LAT: \(ride.pickupLat) , LON: \(ride.pickupLon)")
             index += 1
@@ -123,6 +137,24 @@ class AvailableManosViewController: UIViewController {
         }
         views.first!.isHidden = false
     }
+    
+    func setupMapViewSubViews() {
+        mapView.addSubview(filterView)
+        mapView.addSubview(filterButton)
+        filterView.delegate = self
+        filterButton.translatesAutoresizingMaskIntoConstraints = false
+        filterView.translatesAutoresizingMaskIntoConstraints = false
+        filterButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 15).isActive = true
+        filterButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -12).isActive = true
+        filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        filterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        filterView.centerXAnchor.constraint(equalTo: filterButton.centerXAnchor, constant: 0).isActive = true
+        filterView.topAnchor.constraint(equalTo: filterButton.bottomAnchor, constant: 10).isActive = true
+        filterView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        filterView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        filterView.isHidden = true
+
+    }
     @objc func customSegmentedBarPressed(sender: UISegmentedControl){
         for i in 0...subViews.count - 1 {
             if i == sender.selectedSegmentIndex{
@@ -149,7 +181,18 @@ class AvailableManosViewController: UIViewController {
     @IBAction func cancelPressed(_ sender: Any) {
         mapDetailView.isHidden = true
     }
+
+    @objc func filterButtonPressed() {
+        if filterView.isHidden {
+            filterView.isHidden = false
+        } else {
+            filterView.isHidden = true
+        }
+    }
     
+    @objc func tapPressed() {
+        
+    }
 }
 
 extension AvailableManosViewController: CLLocationManagerDelegate {
@@ -202,5 +245,25 @@ extension AvailableManosViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 190
     }
+    
+}
+
+extension AvailableManosViewController: FilterViewDelegate {
+    func thisWeekTapped() {
+        rides = rides.filter({Date().isInSameWeek(date: $0.dateRequested.stringToDate())})
+    }
+    
+    func tomorrowTapped() {
+        print("Tomorrow")
+    }
+    
+    func otherTapped() {
+        print("Other")
+    }
+    
+    func newViewTapped() {
+        print("New")
+    }
+    
     
 }

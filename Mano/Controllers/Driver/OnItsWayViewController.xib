@@ -247,9 +247,9 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-iV-mut" customClass="CircularView" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="20" y="651" width="80" height="80"/>
-                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.49863548801369861" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.50061536815068497" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T3O-aR-qxC" customClass="CircularImageNoBorder" customModule="Mano" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T3O-aR-qxC" customClass="CircularImageNoBorder" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="20" y="651" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="T3O-aR-qxC" secondAttribute="height" multiplier="1:1" id="HN4-yi-rJh"/>
@@ -257,7 +257,7 @@
                     </constraints>
                 </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BFV-go-o9g">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="147.33333333333334"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.4960669948630137" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
@@ -271,7 +271,7 @@
                 <constraint firstItem="1tr-iV-mut" firstAttribute="width" secondItem="T3O-aR-qxC" secondAttribute="width" id="AEM-sy-DKJ"/>
                 <constraint firstItem="1NL-J0-TjU" firstAttribute="top" secondItem="0o4-L9-l0G" secondAttribute="bottom" id="AlC-M0-8EX"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="centerY" secondItem="c65-z6-GKY" secondAttribute="centerY" id="Bx7-LN-WY0"/>
-                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.2" id="Fru-67-D5l"/>
+                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="Fru-67-D5l"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="height" secondItem="c65-z6-GKY" secondAttribute="height" id="Hkv-3F-57B"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BFV-go-o9g" secondAttribute="trailing" id="JK1-8U-Yld"/>
                 <constraint firstItem="1tr-iV-mut" firstAttribute="height" secondItem="T3O-aR-qxC" secondAttribute="height" id="KbU-vM-ek9"/>

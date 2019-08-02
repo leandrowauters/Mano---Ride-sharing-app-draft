@@ -10,13 +10,14 @@ import UIKit
 import MessageUI
 
 protocol ArriveViewDelegate: AnyObject {
-    func userPressBeginDropOff()
+    func userPressBeginDropOff(ride: Ride)
 }
 
 class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
     let delegate: MessageDelegate!
     let arriveDelegate: ArriveViewDelegate
+    let ride: Ride!
     private var number: String!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,11 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         // Do any additional setup after loading the view.
     }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, number: String, delegate: MessageDelegate, arriveDelegate: ArriveViewDelegate) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, number: String, delegate: MessageDelegate, arriveDelegate: ArriveViewDelegate, ride: Ride) {
         self.number = number
         self.delegate = delegate
         self.arriveDelegate = arriveDelegate
+        self.ride = ride
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +44,14 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         UIApplication.shared.open(number)
     }
     @IBAction func beginDropOffPressed(_ sender: Any) {
-        arriveDelegate.userPressBeginDropOff()
+        DBService.updateRideToDropoff(ride: ride) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
+            }
+
+        }
+        self.dismiss(animated: true)
+        self.arriveDelegate.userPressBeginDropOff(ride: ride)
     }
     @IBAction func cancelPressed(_ sender: Any) {
         dismiss(animated: true)

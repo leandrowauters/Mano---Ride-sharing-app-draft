@@ -150,6 +150,7 @@ class OnItsWayViewController: UIViewController {
                 addTapGestures()
                 durationLabel.text = "Duration:\n Approx. \(duration ?? "N/A")"
                 distanceLabel.text = "Call / Message"
+                listenToDropoffChanges()
             }
         }
 
@@ -175,7 +176,7 @@ class OnItsWayViewController: UIViewController {
     }
     
     @IBAction func arrivedPressed(_ sender: Any) {
-        let arriveVc = ArrivedViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self, arriveDelegate: self)
+        let arriveVc = ArrivedViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self, arriveDelegate: self, ride: ride)
         arriveVc.modalPresentationStyle = .overCurrentContext
         present(arriveVc, animated: true)
     }
@@ -189,6 +190,17 @@ class OnItsWayViewController: UIViewController {
         }
     }
     
+    private func listenToDropoffChanges() {
+        DBService.listenToDropoff(ride: ride) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+                self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
+            }
+        }
+    }
     
     @IBAction func callPassanger(_ sender: Any) {
         guard let number = URL(string: "tel://" + ride.passangerCell) else { return }
@@ -238,8 +250,9 @@ extension OnItsWayViewController: MessageDelegate {
 }
 
 extension OnItsWayViewController: ArriveViewDelegate {
-    func userPressBeginDropOff() {
+    func userPressBeginDropOff(ride: Ride) {
         let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
-        navigationController?.pushViewController(onWayToDropOffVC, animated: true)
+        self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
     }
+    
 }

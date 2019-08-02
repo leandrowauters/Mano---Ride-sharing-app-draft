@@ -120,6 +120,19 @@ extension DBService {
             }
         }
     }
+    
+    static public func listenToDropoff(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.dropoffKey, isEqualTo: true).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                completion(error, nil)
+            }
+            if let snapshot = snapshot{
+                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+                completion(nil, rideAccepted.first)
+            }
+            
+        }
+    }
     static public func updatePassangerKnowsDriverOnItsWay(ride: Ride, completion: @escaping(Error?) -> Void) {
         DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.passangerKnowsDriverOnItsWayKey : true]) { (error) in
             if let error = error {
