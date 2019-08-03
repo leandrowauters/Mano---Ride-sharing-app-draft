@@ -14,6 +14,7 @@ enum AppError: Error {
     case networkError(Error)
     case badStatusCode(String)
     case propertyListEncodingError(Error)
+    case calendarError(String)
     
     public func errorMessage() -> String {
         switch self {
@@ -27,6 +28,8 @@ enum AppError: Error {
             return "bad status code: \(message)"
         case .propertyListEncodingError(let error):
             return "property list encoding error: \(error)"
+        case .calendarError(let message):
+            return "Calendar error: \(message)"
         }
     }
 }

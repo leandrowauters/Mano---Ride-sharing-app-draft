@@ -224,8 +224,10 @@ class AvailableManosViewController: UIViewController {
                 self.showAlert(title: "Error updating ride", message: error.localizedDescription)
             }
         }
-        showAlert(title: "Drive Accepted!", message: "For more details please contact the passanger")
         mapDetailView.isHidden = true
+        let rideAcceptedAlert = RideAcceptedAlertViewController(nibName: nil, bundle: nil, ride: selectedRide)
+        rideAcceptedAlert.modalPresentationStyle = .overCurrentContext
+        present(rideAcceptedAlert, animated: true)
     }
     
     @IBAction func cancelPressed(_ sender: Any) {

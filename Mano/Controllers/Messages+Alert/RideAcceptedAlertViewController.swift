@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import EventKit
 
 class RideAcceptedAlertViewController: UIViewController {
 
@@ -25,14 +25,24 @@ class RideAcceptedAlertViewController: UIViewController {
     
     private func setupUI() {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            
+            subtitle1.text = ride.appointmentDate
+            subtitle2.text = "Please contact \(ride.passanger) for more details"
         } else {
             subtitle1.text = ride.appointmentDate
             subtitle2.text = ride.dropoffAddress
         }
     }
     @IBAction func addToCalendarPressed(_ sender: Any) {
-        
+        EventKitHelper.shared.addToCalendar(ride: ride) { (error, calendar)  in
+            if let error = error {
+                self.showAlert(title: "Error adding to calendar", message: error.errorMessage())
+                self.dismiss(animated: true)
+            }
+            if let calendar = calendar {
+                self.showAlert(title: "Added!", message: "Calendar: \(calendar)")
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     @IBAction func continuePressed(_ sender: Any) {

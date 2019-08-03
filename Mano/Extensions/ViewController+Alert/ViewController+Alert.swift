@@ -25,8 +25,8 @@ extension UIViewController {
     
     public func showConfimationAlert(title: String?, message: String?, handler: ((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: handler)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Yes", style: .default, handler: handler)
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
@@ -41,13 +41,18 @@ extension UIViewController {
         alertController.addAction(cancel)
         present(alertController, animated: true)
     }
+
     
-    public func deleteActionSheet(title: String, messega: String?, handler: ((UIAlertAction) -> Void)?) {
+    public func profileAlertSheet(title: String, contact: String, handler: ((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: handler)
-        let cancel = UIAlertAction(title: "No", style: .cancel) { (action) in
+        let deleteAction = UIAlertAction(title: "Cancel Ride", style: .destructive, handler: handler)
+        let addToCalendar = UIAlertAction(title: "Add To Calendar", style: .default, handler: handler)
+        let contact = UIAlertAction(title: contact, style: .default, handler: handler)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             self.dismiss(animated: true)
         }
+        alertController.addAction(addToCalendar)
+        alertController.addAction(contact)
         alertController.addAction(deleteAction)
         alertController.addAction(cancel)
         present(alertController, animated: true)

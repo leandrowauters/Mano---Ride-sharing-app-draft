@@ -105,7 +105,7 @@
                         <constraint firstAttribute="height" constant="55" id="vMe-oZ-A3L"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj" customClass="RoundedImageView" customModule="Mano" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj" customClass="RoundedImageView" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="10" y="92.666666666666686" width="120" height="120"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="c2u-xx-BtV"/>

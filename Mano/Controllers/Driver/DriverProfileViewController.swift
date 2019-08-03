@@ -124,25 +124,39 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = upcomingEvents[indexPath.row]
-        var title = String()
-        var message: String?
+        var contact = String()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            title = "Cancel ride?"
-            message = "\(ride.passanger) will be notified"
+            contact = "Contact Passenger"
         } else {
-            title = "Cancel appointment?"
-            if let driver = ride.driverName {
-            message = "\(driver) will be notified"
-            } else {
-                message = nil
-            }
+            contact = "Contact Driver"
         }
-        deleteActionSheet(title: title , messega: message) { (cancelled) in
-            DBService.deleteRide(ride: ride , completion: { (error) in
-                if let error = error {
-                    self.showAlert(title: "Error deleting ride", message: error.localizedDescription)
-                }
-            })
+        profileAlertSheet(title: "Choose Option", contact: contact) { (alert) in
+            switch alert.title {
+            case "Cancel Ride":
+                self.showConfimationAlert(title: "Cancel Ride", message: "Are you sure?", handler: { (yes) in
+                    DBService.deleteRide(ride: ride , completion: { (error) in
+                        if let error = error {
+                            self.showAlert(title: "Error deleting ride", message: error.localizedDescription)
+                        }
+                    })
+                })
+            case "Add To Calendar":
+                EventKitHelper.shared.addToCalendar(ride: ride, completion: { (error, calendar) in
+                    if let error = error {
+                        self.showAlert(title: "Error Adding to calendar", message: error.errorMessage())
+                    }
+                    if let calendar = calendar {
+                        self.showAlert(title: "Added!", message: "Calendar: \(calendar)")
+                    }
+                })
+            case "Contact Passenger":
+                return
+            case "Contact Driver":
+                return
+            default:
+                return
+            }
+            
         }
     }
 }
