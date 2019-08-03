@@ -36,7 +36,15 @@ extension DBService {
                 var rides = [Ride]()
                 for document in snapshot.documents {
                     let ride = Ride.init(dict: document.data())
-                    rides.append(ride)
+                    if ride.appointmentDate.stringToDate().dayWasYesterday() {
+                        deleteRide(ride: ride, completion: { (error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        })
+                    } else {
+                      rides.append(ride)
+                    }
                 }
                 completion(nil, rides)
             }

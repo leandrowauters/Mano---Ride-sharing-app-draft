@@ -33,6 +33,9 @@ extension Date {
         return Calendar.current.isDateInToday(self) || Calendar.current.isDateInTomorrow(self)
     }
     
+    func dayWasYesterday() -> Bool{
+        return Calendar.current.isDateInYesterday(self)
+    }
     func isNew() -> Bool {
         let minutes = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute
         if let minutes = minutes {

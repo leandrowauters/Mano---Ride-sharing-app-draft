@@ -135,6 +135,8 @@ class AvailableManosViewController: UIViewController {
                 let appointmentDate = ride.appointmentDate.stringToDate()
                 let dateRequested = ride.dateRequested.stringToDate()
                 print(ride.rideId)
+                mapView.tintColor = .white
+                mapView.backgroundColor = .white
                 if appointmentDate.isInSameWeek() {
                     marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
                 }
@@ -233,14 +235,14 @@ class AvailableManosViewController: UIViewController {
     @objc func filterButtonPressed() {
         if filterView.isHidden {
             filterView.isHidden = false
+            filterButton.setTitle("Cancel", for: .normal)
         } else {
+            filteredRides = rides
             filterView.isHidden = true
+            filterButton.setTitle("Filter", for: .normal)
         }
     }
     
-    @objc func tapPressed() {
-        
-    }
 }
 
 extension AvailableManosViewController: CLLocationManagerDelegate {
