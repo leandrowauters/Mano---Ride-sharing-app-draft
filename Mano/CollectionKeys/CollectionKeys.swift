@@ -51,6 +51,7 @@ struct RideCollectionKeys {
     static let distanceKey = "distance"
     static let dateRequestedKey = "dateRequested"
     static let driverNameKey = "driverName"
+    static let driverIdKey = "driverId"
     static let driverProfileImageKey = "driveProfileImage"
     static let driverMakerModelKey = "driverMakerModel"
     static let originLatKey = "originLat"
@@ -70,5 +71,17 @@ struct MyLocationsCollectionKeys {
     static let locationNameKey = "locationName"
     static let locationAddress = "locationAddress"
     static let locationIdKey = "locationId"
+}
+
+struct MessageCollectionKeys {
+    static let collectionKey = "Messages"
+    static let senderKey = "sender"
+    static let recipientKey = "recipient"
+    static let senderIdKey = "senderId"
+    static let recipientIdKey = "recipientId"
+    static let messageKey = "message"
+    static let messageIdKey = "messageId"
+    static let messageDateKey = "messageDate"
+    static let readKey = "read"
 }
 

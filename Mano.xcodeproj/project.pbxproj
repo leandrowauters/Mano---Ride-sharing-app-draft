@@ -79,6 +79,10 @@
 		D5EF0AAE22E376CA0061B67A /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EF0AAC22E376CA0061B67A /* FavoritesViewController.swift */; };
 		D5EF0AAF22E376CA0061B67A /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */; };
 		D5F43FFE22F61E3B00DB0D01 /* EventKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F43FFD22F61E3B00DB0D01 /* EventKitHelper.swift */; };
+		D5F4400122F64C7100DB0D01 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */; };
+		D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400022F64C7100DB0D01 /* MessageViewController.xib */; };
+		D5F4400422F6515300DB0D01 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400322F6515300DB0D01 /* Message.swift */; };
+		D5F4400622F653EC00DB0D01 /* DBService+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400522F653EC00DB0D01 /* DBService+Message.swift */; };
 		D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635122E7C40000250C96 /* NetworkHelper.swift */; };
 		D5F7635422E7C52700250C96 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635322E7C52700250C96 /* AppError.swift */; };
 		D5F7635622E886E700250C96 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635522E886E700250C96 /* TestHelper.swift */; };
@@ -181,6 +185,10 @@
 		D5EF0AAC22E376CA0061B67A /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		D5EF0AAD22E376CA0061B67A /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		D5F43FFD22F61E3B00DB0D01 /* EventKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitHelper.swift; sourceTree = "<group>"; };
+		D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		D5F4400022F64C7100DB0D01 /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		D5F4400322F6515300DB0D01 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D5F4400522F653EC00DB0D01 /* DBService+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Message.swift"; sourceTree = "<group>"; };
 		D5F7635122E7C40000250C96 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		D5F7635322E7C52700250C96 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5F7635522E886E700250C96 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
@@ -262,6 +270,7 @@
 				D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */,
 				D50010E422E6077D006659DA /* DBService+Ride.swift */,
 				D57557A522E784CC0063BD15 /* DBService+MyLocation.swift */,
+				D5F4400522F653EC00DB0D01 /* DBService+Message.swift */,
 			);
 			path = FirebaseHelper;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 				D5EF0AAA22E282410061B67A /* Ride.swift */,
 				D59D1A7722E3C8D200E94D77 /* MyLocation.swift */,
 				D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */,
+				D5F4400322F6515300DB0D01 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -398,6 +408,8 @@
 				D5D1298722E2296D00B5EDB2 /* Driver */,
 				D5E39B9122E01608008A919A /* Login+Create */,
 				D57557A422E761610063BD15 /* Messages+Alert */,
+				D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */,
+				D5F4400022F64C7100DB0D01 /* MessageViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -542,6 +554,7 @@
 				D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */,
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
+				D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */,
@@ -638,6 +651,7 @@
 				D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */,
 				D5D6A76A22E3814C009C0029 /* FavoritesTableViewCell.swift in Sources */,
 				D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */,
+				D5F4400622F653EC00DB0D01 /* DBService+Message.swift in Sources */,
 				D5D7F5EC22F39321004CBA6C /* FilterView.swift in Sources */,
 				D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */,
 				D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */,
@@ -649,12 +663,14 @@
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
 				D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */,
 				D58D747422EE37B30081424D /* SendMessageViewController.swift in Sources */,
+				D5F4400422F6515300DB0D01 /* Message.swift in Sources */,
 				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
 				D57557A222E761590063BD15 /* RideAcceptedAlertViewController.swift in Sources */,
 				D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */,
 				D5E39B9422E0163E008A919A /* LoginViewController.swift in Sources */,
 				D54FD3FC22DF90FC00F20AFE /* CollectionKeys.swift in Sources */,
+				D5F4400122F64C7100DB0D01 /* MessageViewController.swift in Sources */,
 				D5EF0AA422E278000061B67A /* ManosList.swift in Sources */,
 				D5EF0AA722E2787A0061B67A /* ManosListCell.swift in Sources */,
 				D5F43FFE22F61E3B00DB0D01 /* EventKitHelper.swift in Sources */,

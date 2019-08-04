@@ -27,6 +27,7 @@ class DriverProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -150,9 +151,13 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
                     }
                 })
             case "Contact Passenger":
-                return
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger)
+                messageVC.modalPresentationStyle = .overCurrentContext
+                self.present(messageVC, animated: true)
             case "Contact Driver":
-                return
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName)
+                messageVC.modalPresentationStyle = .overCurrentContext
+                self.present(messageVC, animated: true)
             default:
                 return
             }

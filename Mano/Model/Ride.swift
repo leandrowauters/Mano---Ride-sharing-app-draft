@@ -27,7 +27,8 @@ class Ride: Codable {
     var durtation: Int
     var distance: Double
     var dateRequested: String
-    var driverName: String?
+    var driverName: String
+    var driverId: String
     var driveProfileImage: String
     var driverMakerModel: String
     var originLat: Double
@@ -40,7 +41,7 @@ class Ride: Codable {
     var pickup: Bool
     var dropoff: Bool
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -60,6 +61,7 @@ class Ride: Codable {
         self.distance = distance
         self.dateRequested = dateRequested
         self.driverName = driverName
+        self.driverId = driverId
         self.driveProfileImage = driveProfileImage
         self.driverMakerModel = driverMakerModel
         self.originLat = originLat
@@ -93,6 +95,7 @@ class Ride: Codable {
         self.distance = dict[RideCollectionKeys.distanceKey] as? Double ?? 0.0
         self.dateRequested = dict[RideCollectionKeys.dateRequestedKey] as? String ?? ""
         self.driverName = dict[RideCollectionKeys.driverNameKey] as? String ?? ""
+        self.driverId = dict[RideCollectionKeys.driverIdKey] as? String ?? ""
         self.driveProfileImage = dict[RideCollectionKeys.driverProfileImageKey] as? String ?? ""
         self.driverMakerModel = dict[RideCollectionKeys.driverMakerModelKey] as? String ?? ""
         self.originLat = dict[RideCollectionKeys.originLatKey] as? Double ?? 0.0

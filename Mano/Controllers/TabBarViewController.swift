@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
             self.tabBar.unselectedItemTintColor = UIColor.white
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -52,6 +52,13 @@ class TabBarViewController: UITabBarController {
                 })
             }
         }
+        DBService.fetchYourMessages { (error, messages) in
+            if let messages = messages {
+                DBService.messagesRecieved = messages
+                let newMessage = messages.filter({$0.read == false})
+                self.tabBar.items!.last!.badgeValue = newMessage.count.description
+            }
+        }
     }
     
     static func setTabBarVC(typeOfUser: String) -> UITabBarController{
@@ -63,7 +70,7 @@ class TabBarViewController: UITabBarController {
         let myLocations = MyLocationsViewController()
         let driveVC = DriveViewController()
         var controllers = [UIViewController]()
-
+        
 
         if typeOfUser == TypeOfUser.Driver.rawValue {
             availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "hand"), tag: 0)
@@ -79,7 +86,7 @@ class TabBarViewController: UITabBarController {
             UITabBar.appearance().tintColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
             requestRideVC.tabBarItem = UITabBarItem(title: "Request", image: UIImage(named: "rider"), tag: 0)
             myLocations.tabBarItem = UITabBarItem(title: "My Locations", image: UIImage(named: "favorites"), tag: 1)
-                    driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 2)
+            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 2)
             controllers = [requestRideVC, myLocations, driverProfileVC]
         }
        

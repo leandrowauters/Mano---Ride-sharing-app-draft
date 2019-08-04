@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
                     DBService.currentManoUser = manoUser
                         //TO DO
                     
-                        let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
+                    let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
                     let navigationController = UINavigationController(rootViewController: tab)
                     navigationController.setNavigationBarHidden(true, animated: false)
                     self.window = UIWindow(frame: UIScreen.main.bounds)

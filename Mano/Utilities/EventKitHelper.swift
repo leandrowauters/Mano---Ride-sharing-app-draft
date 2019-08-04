@@ -60,7 +60,7 @@ class EventKitHelper {
         } else {
             event.title = ride.dropoffName
             event.location = ride.dropoffAddress
-            event.notes = "Driver: \(ride.driverName!)"
+            event.notes = "Driver: \(ride.driverName)"
         }
         let predicate = store.predicateForEvents(withStart: startDate, end: endDate, calendars: store.calendars(for: .event))
         for eventCreated in store.events(matching: predicate) {
