@@ -82,7 +82,7 @@
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Type your message here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-v9-cYy">
-                    <rect key="frame" x="0.0" y="150" width="414" height="586"/>
+                    <rect key="frame" x="25" y="160" width="364" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
@@ -92,13 +92,13 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="GrC-Pr-3Qh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GFT-0w-YVg"/>
-                <constraint firstItem="8qe-v9-cYy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lyy-b7-YXd"/>
-                <constraint firstItem="8qe-v9-cYy" firstAttribute="top" secondItem="anu-Lg-6Bh" secondAttribute="bottom" id="SDf-1G-SX8"/>
+                <constraint firstItem="8qe-v9-cYy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="Lyy-b7-YXd"/>
+                <constraint firstItem="8qe-v9-cYy" firstAttribute="top" secondItem="anu-Lg-6Bh" secondAttribute="bottom" constant="10" id="SDf-1G-SX8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="anu-Lg-6Bh" secondAttribute="trailing" id="Y0b-4r-l9V"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8qe-v9-cYy" secondAttribute="bottom" id="Ypz-DI-555"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8qe-v9-cYy" secondAttribute="bottom" constant="25" id="Ypz-DI-555"/>
                 <constraint firstItem="anu-Lg-6Bh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hUU-L1-Rav"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GrC-Pr-3Qh" secondAttribute="trailing" id="iov-hV-Wcf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8qe-v9-cYy" secondAttribute="trailing" id="xKG-bA-vt5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8qe-v9-cYy" secondAttribute="trailing" constant="25" id="xKG-bA-vt5"/>
                 <constraint firstItem="anu-Lg-6Bh" firstAttribute="top" secondItem="GrC-Pr-3Qh" secondAttribute="bottom" id="xnS-c3-CzI"/>
                 <constraint firstItem="GrC-Pr-3Qh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zke-aE-NXC"/>
             </constraints>

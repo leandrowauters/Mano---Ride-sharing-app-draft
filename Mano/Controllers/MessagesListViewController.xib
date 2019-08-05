@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesListViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="inboxButton" destination="uMS-hv-VI3" id="eCI-vT-Chz"/>
                 <outlet property="messagesTableView" destination="yxq-T8-U6t" id="rO8-uN-9C5"/>
+                <outlet property="sentButton" destination="5gp-Yv-JwZ" id="RiU-yy-jeK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

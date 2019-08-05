@@ -14,6 +14,9 @@ class MessageViewController: UIViewController {
     var recipientName: String!
     var message: Message?
     var seeMessage = Bool()
+    var reply = false
+    var messageToSend: String?
+    var sent: Bool
     @IBOutlet weak var messageToLabel: UILabel!
     @IBOutlet weak var textField: UITextView!
     @IBOutlet weak var sendButton: UIButton!
@@ -25,23 +28,29 @@ class MessageViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, recipientId: String, recipientName: String, message: Message?) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, recipientId: String, recipientName: String, message: Message?, sent: Bool) {
         self.recipientId = recipientId
         self.recipientName = recipientName
         self.message = message
+        self.sent = sent
         super.init(nibName: nil, bundle: nil)
     }
     
     private func setup() {
+        textField.delegate = self
+        if sent {
+            sendButton.isHidden = true
+        }
         if let message = message {
             seeMessage = true
             sendButton.setTitle("Reply", for: .normal)
             messageToLabel.text = "From: \(message.sender)"
-            textField.text = message.message
+            textField.text = "\(message.messageDate)" + "\n" + message.message
             textField.isUserInteractionEnabled = false
         } else {
+            messageToSend = textField.text
             seeMessage = false
-            textField.delegate = self
+            
             messageToLabel.text = "To: \(recipientName ?? "No name")"
         }
     }
@@ -53,6 +62,22 @@ class MessageViewController: UIViewController {
         textField.inputAccessoryView = bar
     }
     
+    private func replyMessage(word: String) -> String {
+        var wordToReturn = String()
+        var newLineCount = 0
+        for char in word {
+            
+            if char == "\n" {
+                newLineCount += 1
+            }
+            if newLineCount == 4{
+                wordToReturn.append(char)
+            }
+            
+        }
+        wordToReturn.removeFirst()
+        return wordToReturn
+    }
     @objc func doneTapped() {
         self.view.endEditing(true)
     }
@@ -65,15 +90,19 @@ class MessageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+
+    
     @IBAction func sendPressed(_ sender: Any) {
         if seeMessage {
             sendButton.setTitle("Send", for: .normal)
             seeMessage = false
+            reply = true
             textField.becomeFirstResponder()
-            textField.text = ""
+            textField.text = message!.message + "\n" + "\n" + "> Reply" + "\n" + "\n"
             messageToLabel.text = "To: \(recipientName ?? "")"
+            textField.isUserInteractionEnabled = true
         } else {
-            guard let message = textField.text,
+            guard let message = messageToSend,
                 !message.isEmpty else {
                     showAlert(title: "Please write message", message: nil)
                     return
@@ -96,8 +125,16 @@ class MessageViewController: UIViewController {
 }
 
 extension MessageViewController: UITextViewDelegate {
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
+        if !reply {
         textView.text = ""
+        }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        if reply {
+            messageToSend = replyMessage(word: textView.text)
+        }
+    }
 }

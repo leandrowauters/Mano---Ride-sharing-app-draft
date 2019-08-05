@@ -154,11 +154,11 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
                     }
                 })
             case "Contact Passenger":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil)
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil, sent: false)
                 messageVC.modalPresentationStyle = .overCurrentContext
                 self.present(messageVC, animated: true)
             case "Contact Driver":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil)
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil, sent: false)
                 messageVC.modalPresentationStyle = .overCurrentContext
                 self.present(messageVC, animated: true)
             default:

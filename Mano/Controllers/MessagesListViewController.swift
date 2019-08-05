@@ -12,6 +12,10 @@ class MessagesListViewController: UIViewController {
 
     @IBOutlet weak var messagesTableView: UITableView!
     
+    @IBOutlet weak var inboxButton: BlueBorderedButton!
+    
+    @IBOutlet weak var sentButton: BlueBorderedButton!
+    
     var messages = [Message]() {
         didSet {
             DispatchQueue.main.async {
@@ -33,6 +37,8 @@ class MessagesListViewController: UIViewController {
     }
 
     private func setup() {
+        inboxButton.setTitleColor(.white, for: .normal)
+        inboxButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
         messagesTableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: "MessageTableViewCell")
         messagesTableView.dataSource = self
         messagesTableView.delegate = self
@@ -53,10 +59,21 @@ class MessagesListViewController: UIViewController {
         }
     }
     @IBAction func inboxPressed(_ sender: Any) {
+        inboxButton.setTitleColor(.white, for: .normal)
+        inboxButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
+        sentButton.setTitleColor(#colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1), for: .normal)
+        sentButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        
         fetchInbox()
+        
     }
     @IBAction func sentPressed(_ sender: Any) {
         inbox = false
+        sentButton.setTitleColor(.white, for: .normal)
+        sentButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
+        inboxButton.setTitleColor(#colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1), for: .normal)
+        inboxButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        
         DBService.fetchMessagesSent { (error, messagesSent) in
             if let error = error {
                 self.showAlert(title: "Error fetching messages", message: error.localizedDescription)
@@ -103,9 +120,10 @@ extension MessagesListViewController: UITableViewDelegate, UITableViewDataSource
             if let error = error {
                 self.showAlert(title: "Error updating message", message: error.localizedDescription)
             } else {
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: message.senderId, recipientName: message.sender, message: message)
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: message.senderId, recipientName: message.sender, message: message, sent: !self.inbox)
                 self.navigationController?.pushViewController(messageVC, animated: true)
             }
         }
     }
+    
 }
