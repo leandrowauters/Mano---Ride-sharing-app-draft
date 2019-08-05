@@ -36,7 +36,6 @@
                                     <state key="normal" image="envelope"/>
                                     <connections>
                                         <action selector="messagePressed:" destination="-1" eventType="touchUpInside" id="Niz-Bp-oVg"/>
-                                        <action selector="settingsPressed:" destination="-1" eventType="touchUpInside" id="FLv-Kk-Dgm"/>
                                     </connections>
                                 </button>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-TX-fhI" customClass="CircularView" customModule="Mano" customModuleProvider="target">

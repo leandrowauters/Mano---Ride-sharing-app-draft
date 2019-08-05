@@ -210,6 +210,15 @@ class BlueBorderedView: UIView {
 }
 
 @IBDesignable
+class BlueBorderedButton: UIButton {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.borderWidth = 3
+        layer.borderColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
+    }
+}
+
+@IBDesignable
 class RoundViewWithBorder: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()

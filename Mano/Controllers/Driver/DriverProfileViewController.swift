@@ -30,13 +30,17 @@ class DriverProfileViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        checkForNewMessages()
+    }
     func setup() {
         let currentUser = DBService.currentManoUser!
         driverName.text = currentUser.fullName
         if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
+            driverImage.contentMode = .scaleAspectFit
             DBService.fetchPassangerRides(passangerId: currentUser.userId) { (error, rides) in
                 if let error = error {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
@@ -61,33 +65,43 @@ class DriverProfileViewController: UIViewController {
             }
             driverImage.kf.setImage(with: profilePicURL)
         }
+        
         upcomingTableView.register(UINib(nibName: "UpcomingCell", bundle: nil), forCellReuseIdentifier: "UpcomingCell")
         upcomingTableView.delegate = self
         upcomingTableView.dataSource = self
         upcomingTableView.separatorStyle = .none
     }
     
-    private func grouping(rides: [Ride]) -> [String : [Ride]] {
-        let dictionary = Dictionary(grouping: rides, by: { (element: Ride) in
-            return element.appointmentDate
-        })
-        return dictionary
+    private func checkForNewMessages() {
+        DBService.fetchYourMessages { (error, messages) in
+            if let messages = messages {
+                DBService.messagesRecieved = messages
+                let newMessage = messages.filter({$0.read == false})
+                if !newMessage.isEmpty{
+                    self.tabBarItem.badgeValue = newMessage.count.description
+                    self.messageAlert.isHidden = false
+                } else {
+                    self.tabBarItem.badgeValue = nil
+                    self.messageAlert.isHidden = true
+                }
+            }
+        }
     }
+
     
     @IBAction func settingsPressed(_ sender: Any) {
         AppDelegate.authservice.signOutAccount()
     }
     
     @IBAction func messagePressed(_ sender: Any) {
-        print("Mesage PRessed")
+        let messageListVc = MessagesListViewController()
+        navigationController?.pushViewController(messageListVc, animated: true)
     }
 
 }
 extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let group = grouping(rides: upcomingEvents)
-        let rides = group.map {$0.value}
-        return rides[section].count
+        return upcomingEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,17 +125,6 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
         return 230
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        let group = grouping(rides: upcomingEvents)
-        let rides = group.map {$0.value}
-        return rides.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let group = grouping(rides: upcomingEvents)
-        let ride = group.map { "\($0.key)" }
-        return ride[section]
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = upcomingEvents[indexPath.row]
@@ -151,11 +154,11 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
                     }
                 })
             case "Contact Passenger":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger)
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil)
                 messageVC.modalPresentationStyle = .overCurrentContext
                 self.present(messageVC, animated: true)
             case "Contact Driver":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName)
+                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil)
                 messageVC.modalPresentationStyle = .overCurrentContext
                 self.present(messageVC, animated: true)
             default:

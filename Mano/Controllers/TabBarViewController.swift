@@ -56,7 +56,9 @@ class TabBarViewController: UITabBarController {
             if let messages = messages {
                 DBService.messagesRecieved = messages
                 let newMessage = messages.filter({$0.read == false})
+                if !newMessage.isEmpty{
                 self.tabBar.items!.last!.badgeValue = newMessage.count.description
+                }
             }
         }
     }

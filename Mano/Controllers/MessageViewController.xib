@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageViewController" customModule="Mano" customModuleProvider="target">
             <connections>
                 <outlet property="messageToLabel" destination="0CM-h9-E1G" id="6fr-NF-vjj"/>
+                <outlet property="sendButton" destination="36z-Uk-8eH" id="wIl-Kf-mXO"/>
                 <outlet property="textField" destination="8qe-v9-cYy" id="gEl-Sg-h75"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

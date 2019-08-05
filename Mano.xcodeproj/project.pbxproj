@@ -83,6 +83,10 @@
 		D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400022F64C7100DB0D01 /* MessageViewController.xib */; };
 		D5F4400422F6515300DB0D01 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400322F6515300DB0D01 /* Message.swift */; };
 		D5F4400622F653EC00DB0D01 /* DBService+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400522F653EC00DB0D01 /* DBService+Message.swift */; };
+		D5F4400922F7964400DB0D01 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */; };
+		D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */; };
+		D5F4400D22F7994300DB0D01 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */; };
+		D5F4400E22F7994300DB0D01 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */; };
 		D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635122E7C40000250C96 /* NetworkHelper.swift */; };
 		D5F7635422E7C52700250C96 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635322E7C52700250C96 /* AppError.swift */; };
 		D5F7635622E886E700250C96 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635522E886E700250C96 /* TestHelper.swift */; };
@@ -189,6 +193,10 @@
 		D5F4400022F64C7100DB0D01 /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
 		D5F4400322F6515300DB0D01 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D5F4400522F653EC00DB0D01 /* DBService+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Message.swift"; sourceTree = "<group>"; };
+		D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
+		D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesListViewController.xib; sourceTree = "<group>"; };
+		D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		D5F7635122E7C40000250C96 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		D5F7635322E7C52700250C96 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5F7635522E886E700250C96 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
@@ -384,6 +392,8 @@
 				D5D6A77222E39863009C0029 /* UpcomingCell.swift */,
 				D5F7635B22E8C09700250C96 /* DriveTableViewCell.swift */,
 				D5F7635C22E8C09700250C96 /* DriveTableViewCell.xib */,
+				D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */,
+				D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -410,6 +420,8 @@
 				D57557A422E761610063BD15 /* Messages+Alert */,
 				D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */,
 				D5F4400022F64C7100DB0D01 /* MessageViewController.xib */,
+				D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */,
+				D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -551,10 +563,12 @@
 				D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */,
 				D5D7F5EA22F38CC9004CBA6C /* FilterView.xib in Resources */,
 				D5D6A77A22E3A997009C0029 /* RequestRideViewController.xib in Resources */,
+				D5F4400E22F7994300DB0D01 /* MessageTableViewCell.xib in Resources */,
 				D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */,
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
 				D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */,
+				D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */,
@@ -661,8 +675,10 @@
 				D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */,
 				D5F7635422E7C52700250C96 /* AppError.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
+				D5F4400922F7964400DB0D01 /* MessagesListViewController.swift in Sources */,
 				D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */,
 				D58D747422EE37B30081424D /* SendMessageViewController.swift in Sources */,
+				D5F4400D22F7994300DB0D01 /* MessageTableViewCell.swift in Sources */,
 				D5F4400422F6515300DB0D01 /* Message.swift in Sources */,
 				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,

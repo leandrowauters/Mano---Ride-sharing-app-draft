@@ -39,4 +39,25 @@ extension DBService {
             }
         }
     }
+    
+    static public func fetchMessagesSent(completion: @escaping(Error?, [Message]?) -> Void) {
+        firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.senderIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                completion(error, nil)
+            }
+            if let snapshot = snapshot {
+                let messages = snapshot.documents.map({Message.init(dict: $0.data())})
+                completion(nil, messages)
+            }
+        }
+    }
+    
+    static public func updateToMessageToRead(message: Message, completion: @escaping(Error?) -> Void) {
+        firestoreDB.collection(MessageCollectionKeys.collectionKey).document(message.messageId).updateData([MessageCollectionKeys.readKey : true]) { (error) in
+            if let error = error {
+                completion(error)
+            }
+            completion(nil)
+        }
+    }
 }
