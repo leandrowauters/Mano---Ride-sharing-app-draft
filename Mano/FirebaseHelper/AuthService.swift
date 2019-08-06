@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
 
 protocol AuthServiceCreateNewAccountDelegate: AnyObject {
     func didRecieveErrorCreatingAccount(_ authservice: AuthService, error: Error)
@@ -24,6 +25,10 @@ protocol AuthServiceSignOutDelegate: AnyObject {
     func didSignOut(_ authservice: AuthService)
 }
 
+protocol AuthServiceSignInWithGoogleAccount: AnyObject {
+    
+}
+
 enum TypeOfUser: String {
     case Rider, Driver
 }
@@ -32,6 +37,7 @@ final class AuthService {
     weak var authserviceCreateNewAccountDelegate: AuthServiceCreateNewAccountDelegate?
     weak var authserviceExistingAccountDelegate: AuthServiceExistingAccountDelegate?
     weak var authserviceSignOutDelegate: AuthServiceSignOutDelegate?
+     
     
     public func createAccount(firstName: String, lastName: String, password: String, email: String, typeOfUser: String) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
@@ -53,6 +59,14 @@ final class AuthService {
         
     }
     
+    public func googleUserCreateAccount(manoUser: ManoUser) {
+        DBService.createUser(manoUser: manoUser, completion: { (error) in
+            if let error = error {
+                self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)
+            }
+            self.authserviceCreateNewAccountDelegate?.didCreateNewAccount(self, user: manoUser)
+        })
+    }
 
 
     public func signInExistingAccount(email: String, password: String) {
@@ -64,6 +78,8 @@ final class AuthService {
             }
         }
     }
+    
+
     public func getCurrentUser() -> User? {
         return Auth.auth().currentUser
     }

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DriverMoreInfoViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="fQY-l6-43r" id="pV4-cw-6z2"/>
                 <outlet property="carMakerModel" destination="hSj-cw-DTY" id="uDp-8x-imS"/>
                 <outlet property="cellPhoneTextField" destination="jsk-H7-7Bn" id="hK7-dF-gE9"/>
                 <outlet property="contentView" destination="JJa-Wl-VgW" id="6y4-MW-3RA"/>
@@ -200,13 +201,21 @@
                         <constraint firstItem="JJa-Wl-VgW" firstAttribute="width" secondItem="5oT-sS-n0u" secondAttribute="width" id="rqf-nR-6FP"/>
                     </constraints>
                 </scrollView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fQY-l6-43r">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="1138"/>
+                    <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.50420055650684936" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="fQY-l6-43r" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="4q2-4q-yql"/>
+                <constraint firstItem="fQY-l6-43r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="P0V-7G-FnZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="5oT-sS-n0u" secondAttribute="bottom" id="PJO-ct-AZC"/>
                 <constraint firstItem="5oT-sS-n0u" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kH2-hW-hLT"/>
+                <constraint firstItem="fQY-l6-43r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="l6a-7o-K5j"/>
                 <constraint firstItem="5oT-sS-n0u" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mqJ-YF-l3v"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5oT-sS-n0u" secondAttribute="trailing" id="ne5-9Z-FqS"/>
+                <constraint firstAttribute="trailing" secondItem="fQY-l6-43r" secondAttribute="trailing" id="o17-4y-RJl"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

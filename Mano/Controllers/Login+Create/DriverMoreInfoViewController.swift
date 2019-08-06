@@ -41,10 +41,12 @@ class DriverMoreInfoViewController: UIViewController {
     @IBOutlet weak var yourCarImageImageView: RoundedImageViewWhite!
     @IBOutlet weak var cellPhoneTextField: RoundedTextField!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImageViewTaps()
         setupDelegations()
+        setupTap()
         // Do any additional setup after loading the view.
     }
     
@@ -57,8 +59,9 @@ class DriverMoreInfoViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
     
-    
+
     func setupImageViewTaps() {
         let yourPhotoImageTap = UITapGestureRecognizer.init(target: self , action: #selector(yourImagePressed))
         let yourCarImageTap = UITapGestureRecognizer(target: self, action: #selector(yourCarImagePressed))
@@ -151,6 +154,7 @@ class DriverMoreInfoViewController: UIViewController {
     }
     
     @IBAction func continuePressed(_ sender: Any) {
+        activityIndicator.startAnimating()
         guard let homeAddress = homeAddress,
             let carMakeModel = carMakerModel.text,
             let licencePlate = licencePlateModel.text,

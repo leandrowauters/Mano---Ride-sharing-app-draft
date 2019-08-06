@@ -70,7 +70,11 @@ class TabBarViewController: UITabBarController {
             if let rides = rides {
                 let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
                 if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-                self.tabBar.items![2].badgeValue = ridesToday.count.description
+                    if !ridesToday.isEmpty{
+                        self.tabBar.items![2].badgeValue = ridesToday.count.description
+                    } else {
+                        self.tabBar.items![2].badgeValue = nil
+                    }
                 }
             }
         }

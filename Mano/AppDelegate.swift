@@ -15,10 +15,15 @@ import Toucan
 import Kingfisher
 import UserNotifications
 import FirebaseMessaging
-
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenterDelegate, MessagingDelegate {
+
+    
+   
+
+    
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
@@ -26,11 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-       GMSPlacesClient.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
+      GMSPlacesClient.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         GMSServices.provideAPIKey(GoogleMapsAPI.GoogleMapsAPIKey)
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
 //        AppDelegate.authservice.signOutAccount()
         
         if let manoUser = AppDelegate.authservice.getCurrentUser() {
@@ -213,6 +220,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+        -> Bool {
+            return GIDSignIn.sharedInstance().handle(url,
+                                                     sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                     annotation: [:])
+    }
+    
+
 }
 
 

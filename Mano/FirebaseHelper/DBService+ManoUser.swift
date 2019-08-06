@@ -75,6 +75,8 @@ extension DBService {
                 } else if let snapshot = snapshot?.documents.first {
                     let manoUser = ManoUser.init(dict: snapshot.data())
                     completion(nil, manoUser)
+                } else {
+                    completion(nil, nil)
                 }
         }
     }

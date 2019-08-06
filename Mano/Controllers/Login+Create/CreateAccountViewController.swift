@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class CreateAccountViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: RoundedTextField!
@@ -30,6 +30,8 @@ class CreateAccountViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var googleUserView: UIView!
+    var user: User?
     private var typeOfUser: String?
     private var authservice = AppDelegate.authservice
     private var scrollUp = Bool()
@@ -37,6 +39,7 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         setupTextFieldDelegatesAndType()
         setupScreenTap()
+        setup()
         authservice.authserviceCreateNewAccountDelegate = self
     }
     
@@ -50,6 +53,23 @@ class CreateAccountViewController: UIViewController {
         unregisterKeyboardNotifications()
     }
 
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, user: User?) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    private func setup() {
+        if let user = user {
+            emailTextField.text = user.email
+            let names = user.displayName?.components(separatedBy: " ")
+            firstNameTextField.text = names?.first
+            lastNameTextField.text = names?.last
+            googleUserView.isHidden = false
+        }
+    }
     func setupScreenTap() {
         let screenTap = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(screenTap)
@@ -142,6 +162,19 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func createPressed(_ sender: Any) {
         createNewUser()
+    }
+    @IBAction func confirmPressed(_ sender: Any) {
+        guard let firstName = firstNameTextField.text,
+        let lastName = lastNameTextField.text,
+            let typeOfUser = typeOfUser,
+        !firstName.isEmpty,
+            !lastName.isEmpty else {showAlert(title: "Please complete missing fields", message: nil)
+                return
+        }
+        let joineDate = Date().dateDescription
+        let manoUser = ManoUser(firstName: firstName, lastName: lastName, fullName: (user?.displayName)!, homeAdress: nil, homeLat: nil, homeLon: nil, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: typeOfUser, patients: nil, joinedDate:joineDate , userId: user!.uid, myRides: nil, myPickUps: nil, licencePlate: nil, carPicture: nil, cellPhone: nil)
+        authservice.googleUserCreateAccount(manoUser: manoUser)
+        
     }
     
 }

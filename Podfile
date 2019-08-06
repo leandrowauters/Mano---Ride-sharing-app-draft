@@ -16,4 +16,5 @@ target 'Mano' do
     	pod 'Kingfisher'
 	pod 'GooglePlaces'
 	pod 'Firebase/Messaging'
+	pod 'GoogleSignIn'
 end
