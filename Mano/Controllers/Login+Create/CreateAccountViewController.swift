@@ -28,6 +28,7 @@ class CreateAccountViewController: UIViewController {
     
     @IBOutlet weak var contentView: UIView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var typeOfUser: String?
     private var authservice = AppDelegate.authservice
@@ -94,6 +95,7 @@ class CreateAccountViewController: UIViewController {
     }
     
     private func createNewUser(){
+        activityIndicator.startAnimating()
         guard let email = emailTextField.text,
             let password = passwordTextField.text,
             let confirmPassword = confirmTextField.text,

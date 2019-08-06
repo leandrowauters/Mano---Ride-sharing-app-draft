@@ -32,6 +32,7 @@ class MoreInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScreenTap()
+        setupTap()
         cellPhoneTextField.delegate = self
         
         

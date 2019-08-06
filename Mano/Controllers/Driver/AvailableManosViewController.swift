@@ -111,7 +111,7 @@ class AvailableManosViewController: UIViewController {
                 let dateRequested = ride.dateRequested.stringToDate()
                 print(ride.rideId)
                 if appointmentDate.isInSameWeek() {
-                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1))
                 }
                 if appointmentDate.isTodayOrTomorrow() {
                     marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
@@ -138,7 +138,7 @@ class AvailableManosViewController: UIViewController {
                 mapView.tintColor = .white
                 mapView.backgroundColor = .white
                 if appointmentDate.isInSameWeek() {
-                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+                    marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1))
                 }
                 if appointmentDate.isTodayOrTomorrow() {
                     marker.icon = GMSMarker.markerImage(with: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
@@ -198,11 +198,17 @@ class AvailableManosViewController: UIViewController {
         filterButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -12).isActive = true
         filterButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         filterButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        filterButton.layer.borderWidth = 1
+        filterButton.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         filterView.centerXAnchor.constraint(equalTo: filterButton.centerXAnchor, constant: 0).isActive = true
         filterView.topAnchor.constraint(equalTo: filterButton.bottomAnchor, constant: 10).isActive = true
         filterView.widthAnchor.constraint(equalToConstant: 120).isActive = true
         filterView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         filterView.isHidden = true
+        filterView.layer.cornerRadius = 10
+        filterView.clipsToBounds = true
+        filterView.layer.borderWidth = 1
+        filterView.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
     }
     @objc func customSegmentedBarPressed(sender: UISegmentedControl){

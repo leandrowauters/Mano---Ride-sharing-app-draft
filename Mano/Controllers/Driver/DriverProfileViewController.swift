@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import MessageUI
 class DriverProfileViewController: UIViewController {
 
     @IBOutlet weak var driverImage: UIImageView!
@@ -15,6 +16,7 @@ class DriverProfileViewController: UIViewController {
     @IBOutlet weak var upcomingTableView: UITableView!
     @IBOutlet weak var manoDriveLabel: UILabel!
     @IBOutlet weak var messageAlert: CircularView!
+    @IBOutlet weak var optionView: BlueBorderedView!
     
     var upcomingEvents = [Ride]() {
         didSet {
@@ -24,6 +26,8 @@ class DriverProfileViewController: UIViewController {
             }
         }
     }
+    private var authservice = AppDelegate.authservice
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -37,6 +41,7 @@ class DriverProfileViewController: UIViewController {
     func setup() {
         let currentUser = DBService.currentManoUser!
         driverName.text = currentUser.fullName
+        authservice.authserviceSignOutDelegate = self
         if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
@@ -46,7 +51,8 @@ class DriverProfileViewController: UIViewController {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
                 }
                 if let rides = rides {
-                    self.upcomingEvents = rides
+                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
+                    self.upcomingEvents = ridesSortedByDate
                 }
             }
             
@@ -56,7 +62,8 @@ class DriverProfileViewController: UIViewController {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
                 }
                 if let rides = rides {
-                    self.upcomingEvents = rides
+                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
+                    self.upcomingEvents = ridesSortedByDate
                 }
             }
             guard let profilePicURL = URL(string: currentUser.profileImage!) else {
@@ -88,15 +95,39 @@ class DriverProfileViewController: UIViewController {
         }
     }
 
-    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["manonyc.contact@gmail.com"])
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            showAlert(title: "Cannot send email", message: "Please contact manonyc.contact@gmail.com")
+        }
+    }
     @IBAction func settingsPressed(_ sender: Any) {
-        AppDelegate.authservice.signOutAccount()
+       optionView.isHidden = !optionView.isHidden
     }
     
     @IBAction func messagePressed(_ sender: Any) {
         let messageListVc = MessagesListViewController()
         navigationController?.pushViewController(messageListVc, animated: true)
     }
+    
+    @IBAction func signoutPressed(_ sender: Any) {
+         AppDelegate.authservice.signOutAccount()
+    }
+    
+    @IBAction func contactPressed(_ sender: Any) {
+        sendEmail()
+    }
+    
+
+    
+    
+    
+    
 
 }
 extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -166,5 +197,25 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             }
             
         }
+    }
+}
+
+extension DriverProfileViewController: AuthServiceSignOutDelegate {
+    func didSignOutWithError(_ authservice: AuthService, error: Error) {
+        
+    }
+    
+    func didSignOut(_ authservice: AuthService) {
+        let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        navigationController.setNavigationBarHidden(true, animated: false)
+        present(navigationController, animated: true)
+        
+    }
+}
+
+extension DriverProfileViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 }

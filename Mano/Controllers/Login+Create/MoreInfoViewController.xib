@@ -77,7 +77,7 @@
                         <action selector="donePressed:" destination="-1" eventType="touchUpInside" id="E5M-X4-JlD"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRj-7P-rl2" customClass="RoundedTextField" customModule="Mano" customModuleProvider="target">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ex. 555-555-5555" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRj-7P-rl2" customClass="RoundedTextField" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="30" y="394" width="354" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="RIi-Yo-SAb"/>

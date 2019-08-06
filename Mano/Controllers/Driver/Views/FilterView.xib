@@ -51,7 +51,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSc-HN-Hd8" customClass="CircularView" customModule="Mano" customModuleProvider="target">
                             <rect key="frame" x="79" y="10" width="30" height="30"/>
-                            <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="MSc-HN-Hd8" secondAttribute="height" id="gYQ-Pd-CRp"/>
                                 <constraint firstAttribute="width" constant="30" id="rXv-yx-z2T"/>

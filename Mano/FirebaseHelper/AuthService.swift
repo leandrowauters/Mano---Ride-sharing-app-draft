@@ -76,4 +76,18 @@ final class AuthService {
             authserviceSignOutDelegate?.didSignOutWithError(self, error: error)
         }
     }
+    
+    public func deleteAccount(completion: @escaping(Error?) -> Void) {
+        Auth.auth().currentUser?.delete(completion: { (error) in
+            if let error = error {
+                completion(error)
+            }
+            DBService.deleteAccount(user: DBService.currentManoUser, completion: { (error) in
+                if let error = error {
+                    completion(error)
+                }
+                completion(nil)
+            })
+        })
+    }
 }

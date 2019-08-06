@@ -10,15 +10,15 @@ import Foundation
 
 struct DataPersistanceModel {
     
-    private static var myLocations = [MyLocation]()
-    private static let saveLocationFileName = "SavedGames.plist"
+    private static var manoUsers = [ManoUser]()
+    private static let saveLocationFileName = "SavedManoUser.plist"
     
-    static func getMyLocations() -> [MyLocation]{
+    static func getManoUser() -> [ManoUser]{
         let path = DataPersistanceManager.filepathToDocumentsDirectory(filename: saveLocationFileName).path
         if FileManager.default.fileExists(atPath: path) {
             if let data = FileManager.default.contents(atPath: path){
                 do {
-                    myLocations = try PropertyListDecoder().decode([MyLocation].self, from: data)
+                    manoUsers = try PropertyListDecoder().decode([ManoUser].self, from: data)
                 }catch {
                     print ("property list dedoding error:\(error)")
                 }
@@ -26,22 +26,22 @@ struct DataPersistanceModel {
         } else {
             print("\(saveLocationFileName) does not exist")
         }
-        return myLocations
+        return manoUsers
     }
     
-    static func addMyLocation(myLocation: MyLocation){
-        myLocations.append(myLocation)
-        saveMyLocation()
+    static func addManoUser(manoUser: ManoUser){
+        manoUsers.append(manoUser)
+        saveManoUser()
     }
     
-    static func deleteGame(myLocation: MyLocation, atIndex index: Int){
-        myLocations.remove(at: index)
-        saveMyLocation()
+    static func deleteGame(manoUser: ManoUser, atIndex index: Int){
+        manoUsers.remove(at: index)
+        saveManoUser()
     }
-    static func saveMyLocation(){
+    static func saveManoUser(){
         let path = DataPersistanceManager.filepathToDocumentsDirectory(filename: saveLocationFileName)
         do{
-            let data = try PropertyListEncoder().encode(myLocations)
+            let data = try PropertyListEncoder().encode(manoUsers)
             try data.write(to: path, options:  .atomic)
         }catch{
             print("Property list encoding error \(error)")

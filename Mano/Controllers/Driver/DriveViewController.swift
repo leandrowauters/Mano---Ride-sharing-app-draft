@@ -14,6 +14,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 
     @IBOutlet weak var ridesTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
@@ -53,7 +54,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ridesTableView.register(UINib(nibName: "DriveTableViewCell", bundle: nil), forCellReuseIdentifier: "DriveTableViewCell")
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
-        
+        ridesTableView.separatorStyle = .none
     }
     
     private func checkForRideToday() {
@@ -110,8 +111,10 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[indexPath.row]
+        self.activityIndicator.startAnimating()
         showConfimationAlert(title: "Begin Drive?", message: "\(ride.passanger) will be notified") { (okay) in
             self.updateRideToOnItsWay(ride: ride)
+            self.activityIndicator.stopAnimating()
             let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
             self.navigationController?.pushViewController(onItsWayVc, animated: true)
         }

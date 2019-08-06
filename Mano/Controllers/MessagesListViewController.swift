@@ -54,7 +54,8 @@ class MessagesListViewController: UIViewController {
                 self.showAlert(title: "Error fetching messages", message: error.localizedDescription)
             }
             if let inboxMessages = inboxMessages {
-                self.messages = inboxMessages
+                let messagesSorted = inboxMessages.sorted{$0.messageDate < $1.messageDate}
+                self.messages = messagesSorted
             }
         }
     }
@@ -79,7 +80,8 @@ class MessagesListViewController: UIViewController {
                 self.showAlert(title: "Error fetching messages", message: error.localizedDescription)
             }
             if let messagesSent = messagesSent {
-                self.messages = messagesSent
+                let messagesSorted = messagesSent.sorted{$0.messageDate < $1.messageDate}
+                self.messages = messagesSorted
             }
         }
     }

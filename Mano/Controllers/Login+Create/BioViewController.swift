@@ -48,6 +48,7 @@ class BioViewController: UIViewController {
             showAlert(title: "Bio is empty", message: "Plase enter text")
         } else {
             DBService.currentManoUser = self.manoUser
+            DataPersistanceModel.addManoUser(manoUser: manoUser)
             DBService.updateBio( userId: manoUser.userId, bioText: bioTextView.text) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error", message: error.localizedDescription)

@@ -58,6 +58,19 @@ class TabBarViewController: UITabBarController {
                 let newMessage = messages.filter({$0.read == false})
                 if !newMessage.isEmpty{
                 self.tabBar.items!.last!.badgeValue = newMessage.count.description
+                } else {
+                    self.tabBar.items!.last!.badgeValue = nil
+                }
+            }
+        }
+        DBService.fetchDriverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
+            if let error = error {
+                self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
+            }
+            if let rides = rides {
+                let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
+                if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
+                self.tabBar.items![2].badgeValue = ridesToday.count.description
                 }
             }
         }
@@ -76,7 +89,7 @@ class TabBarViewController: UITabBarController {
 
         if typeOfUser == TypeOfUser.Driver.rawValue {
             availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "hand"), tag: 0)
-            favoritesVC.tabBarItem = UITabBarItem.init(title: "Favorites", image: UIImage(named: "favorites"), tag: 1)
+            favoritesVC.tabBarItem = UITabBarItem.init(title: "Regular", image: UIImage(named: "favorites"), tag: 1)
             driveVC.tabBarItem = UITabBarItem.init(title: "Today", image: UIImage(named: "car"), tag: 2)
             driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 3)
             controllers = [availableManoVC,favoritesVC,driveVC,driverProfileVC]

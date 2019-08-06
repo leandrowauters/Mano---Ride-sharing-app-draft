@@ -249,8 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				D542BC9022EE4E40003C9CCA /* Mano.entitlements */,
-				D51CF7B522DF6F38003F1385 /* AppDelegate.swift */,
 				D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */,
+				D51CF7B522DF6F38003F1385 /* AppDelegate.swift */,
 				D51CF7C422DF6F3B003F1385 /* Info.plist */,
 				D50010E222E601A3006659DA /* GoogleService-Info.plist */,
 				D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */,

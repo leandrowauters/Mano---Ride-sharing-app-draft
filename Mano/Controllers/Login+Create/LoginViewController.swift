@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: RoundedTextField!
     
     @IBOutlet weak var passwordTextField: RoundedTextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
 
     private var authservice = AppDelegate.authservice
@@ -57,6 +58,7 @@ class LoginViewController: UIViewController {
     }
     
     private func signInCurrentUser(){
+        activityIndicator.startAnimating()
         guard let email = emailTextField.text,
             !email.isEmpty,
             let password = passwordTextField.text,
@@ -114,6 +116,7 @@ extension LoginViewController : AuthServiceExistingAccountDelegate {
             }
             if let manoUser = manoUser {
                 DBService.currentManoUser = manoUser
+                DataPersistanceModel.addManoUser(manoUser: manoUser)
                 let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
                 self.navigationController?.pushViewController(tab, animated: true)
             }

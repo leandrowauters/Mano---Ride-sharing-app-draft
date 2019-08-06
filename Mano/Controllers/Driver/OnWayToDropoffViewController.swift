@@ -97,7 +97,8 @@ class OnWayToDropoffViewController: UIViewController {
         }
     }
     private func searchGoogleForDirections() {
-        GoogleHelper.openGoogleMapDirection(currentLat: ride.originLat, currentLon: ride.originLon, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
+        let currentLocation = userLocation.coordinate
+        GoogleHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.dropoffLat, destinationLon: self.ride.dropoffLon, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }

@@ -16,6 +16,7 @@
                 <outlet property="driverName" destination="JUM-C2-HD9" id="Iq1-Et-CPc"/>
                 <outlet property="manoDriveLabel" destination="9fX-Rb-egI" id="C69-WS-VGy"/>
                 <outlet property="messageAlert" destination="ut2-TX-fhI" id="cPg-7S-FCc"/>
+                <outlet property="optionView" destination="w9y-lN-d5q" id="Shv-HE-Cvg"/>
                 <outlet property="upcomingTableView" destination="UPR-A3-9hi" id="3KR-a0-bhK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -127,6 +128,44 @@
                     <rect key="frame" x="0.0" y="225" width="414" height="511"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9y-lN-d5q" customClass="BlueBorderedView" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="25" y="75" width="150" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6px-LO-5gy" customClass="BlueBorderedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                            <state key="normal" title="Sign out">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="signoutPressed:" destination="-1" eventType="touchUpInside" id="XAp-Iq-m37"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0h-nZ-Px2">
+                            <rect key="frame" x="0.0" y="60" width="150" height="60"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                            <state key="normal" title="Contact">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="contactPressed:" destination="-1" eventType="touchUpInside" id="1na-jp-kX2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="z0h-nZ-Px2" firstAttribute="top" secondItem="6px-LO-5gy" secondAttribute="bottom" id="6f3-bd-k7j"/>
+                        <constraint firstItem="6px-LO-5gy" firstAttribute="top" secondItem="w9y-lN-d5q" secondAttribute="top" id="B7q-Vc-wc8"/>
+                        <constraint firstItem="6px-LO-5gy" firstAttribute="height" secondItem="w9y-lN-d5q" secondAttribute="height" multiplier="0.5" id="F8y-c8-rm1"/>
+                        <constraint firstAttribute="trailing" secondItem="z0h-nZ-Px2" secondAttribute="trailing" id="LJn-Wx-PxG"/>
+                        <constraint firstAttribute="trailing" secondItem="6px-LO-5gy" secondAttribute="trailing" id="Muz-dP-w5H"/>
+                        <constraint firstItem="z0h-nZ-Px2" firstAttribute="leading" secondItem="w9y-lN-d5q" secondAttribute="leading" id="V47-Oo-3JQ"/>
+                        <constraint firstAttribute="width" constant="150" id="Y7F-Kp-ZNN"/>
+                        <constraint firstAttribute="bottom" secondItem="z0h-nZ-Px2" secondAttribute="bottom" id="ZpU-Nd-Be5"/>
+                        <constraint firstItem="6px-LO-5gy" firstAttribute="leading" secondItem="w9y-lN-d5q" secondAttribute="leading" id="gYI-UF-7P0"/>
+                        <constraint firstAttribute="height" constant="120" id="myT-n9-Ouf"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -149,7 +188,9 @@
                 <constraint firstItem="OHt-td-Loj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fmD-Fn-JtR"/>
                 <constraint firstItem="EzO-fx-Tpj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="mXI-MM-ScE"/>
                 <constraint firstItem="JUM-C2-HD9" firstAttribute="leading" secondItem="EzO-fx-Tpj" secondAttribute="trailing" constant="14" id="nwc-Ts-T3o"/>
+                <constraint firstItem="w9y-lN-d5q" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="55" id="oRD-kK-eRP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UPR-A3-9hi" secondAttribute="bottom" id="x4I-n1-X0M"/>
+                <constraint firstItem="w9y-lN-d5q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="yFw-o9-Hq4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="47.826086956521742" y="43.206521739130437"/>

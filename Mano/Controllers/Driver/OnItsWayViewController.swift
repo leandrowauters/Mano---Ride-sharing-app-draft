@@ -64,7 +64,6 @@ class OnItsWayViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
     }
-
     private func addTapGestures() {
         let phoneViewTap = UITapGestureRecognizer(target: self, action: #selector (phoneViewTapped))
         let messageViewTap = UITapGestureRecognizer(target: self, action: #selector(messageViewTapped))
@@ -103,8 +102,9 @@ class OnItsWayViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     private func searchGoogleForDirections() {
+        let currentLocation = userLocation.coordinate
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-            GoogleHelper.openGoogleMapDirection(currentLat: ride.originLat, currentLon: ride.originLon, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
+            GoogleHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }
