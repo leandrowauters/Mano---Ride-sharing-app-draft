@@ -36,10 +36,10 @@ extension DBService {
                 var rides = [Ride]()
                 for document in snapshot.documents {
                     let ride = Ride.init(dict: document.data())
-                    if ride.appointmentDate.stringToDate().dayWasYesterday() {
+                    if ride.appointmentDate.stringToDate().dateExpired() {
                         deleteRide(ride: ride, completion: { (error) in
                             if let error = error {
-                                print(error.localizedDescription)
+                                completion(error, nil)
                             }
                         })
                     } else {
@@ -57,8 +57,20 @@ extension DBService {
                 completion(error,nil)
             }
             if let snapshot = snapshot {
-                let passengersRides = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil,passengersRides)
+                var passengerRides = [Ride]()
+                for document in snapshot.documents {
+                    let passangerRide = Ride.init(dict: document.data())
+                    if passangerRide.appointmentDate.stringToDate().dateExpired() {
+                        deleteRide(ride: passangerRide, completion: { (error) in
+                            if let error = error {
+                                completion(error, nil)
+                            }
+                        })
+                    } else {
+                        passengerRides.append(passangerRide)
+                    }
+                }
+                completion(nil, passengerRides)
             }
         }
     }

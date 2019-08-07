@@ -77,6 +77,9 @@ class AvailableManosViewController: UIViewController {
         mapView.addSubview(mapDetailView)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+       fetchRides()
+    }
     func fetchRides(){
         DBService.fetchAllRides { (error, rides) in
             if let error = error {

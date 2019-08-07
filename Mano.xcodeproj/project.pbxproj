@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D50010DF22E5F842006659DA /* GoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010DE22E5F842006659DA /* GoogleHelper.swift */; };
-		D50010E322E601A3006659DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D50010E222E601A3006659DA /* GoogleService-Info.plist */; };
 		D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010E422E6077D006659DA /* DBService+Ride.swift */; };
 		D5122CE522E1124C00453359 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5122CE322E1124C00453359 /* BioViewController.swift */; };
 		D5122CE622E1124C00453359 /* BioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5122CE422E1124C00453359 /* BioViewController.xib */; };
@@ -26,6 +25,7 @@
 		D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40022DF948D00F20AFE /* String+Date.swift */; };
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
+		D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D55E963F22FA592900CC9496 /* GoogleService-Info.plist */; };
 		D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */; };
 		D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */; };
 		D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D571BADF22E7B20D00FA9369 /* DriveViewController.swift */; };
@@ -115,7 +115,6 @@
 		CECD7656A3F3E53D6A59F896 /* Pods-Mano.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mano.debug.xcconfig"; path = "Target Support Files/Pods-Mano/Pods-Mano.debug.xcconfig"; sourceTree = "<group>"; };
 		D0D079C4836965230C7A0B40 /* Pods_Mano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D50010DE22E5F842006659DA /* GoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHelper.swift; sourceTree = "<group>"; };
-		D50010E222E601A3006659DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D50010E422E6077D006659DA /* DBService+Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Ride.swift"; sourceTree = "<group>"; };
 		D5122CE322E1124C00453359 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		D5122CE422E1124C00453359 /* BioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BioViewController.xib; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		D54FD40022DF948D00F20AFE /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
+		D55E963F22FA592900CC9496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMoreInfoViewController.swift; sourceTree = "<group>"; };
 		D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverMoreInfoViewController.xib; sourceTree = "<group>"; };
 		D571BADF22E7B20D00FA9369 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */,
 				D51CF7B522DF6F38003F1385 /* AppDelegate.swift */,
 				D51CF7C422DF6F3B003F1385 /* Info.plist */,
-				D50010E222E601A3006659DA /* GoogleService-Info.plist */,
+				D55E963F22FA592900CC9496 /* GoogleService-Info.plist */,
 				D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */,
 				D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */,
 				D5E39B9022E015FD008A919A /* Controllers */,
@@ -571,12 +571,12 @@
 				D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
+				D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */,
 				D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
-				D50010E322E601A3006659DA /* GoogleService-Info.plist in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
 				D57557A322E761590063BD15 /* RideAcceptedAlertViewController.xib in Resources */,
 				D57557AA22E79C870063BD15 /* MyLocationTableViewCell.xib in Resources */,

@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
         }
 
         application.registerForRemoteNotifications()
+        
         // Override point for customization after application launch.
         return true
     }
@@ -227,7 +228,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
                                                      sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                                                      annotation: [:])
     }
-    
 
 }
 

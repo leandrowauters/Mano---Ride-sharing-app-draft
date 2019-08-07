@@ -45,7 +45,7 @@ class BioViewController: UIViewController {
     }
     func updateBio() {
         if bioTextView.text == "Please tell us about a little about yourself..." || bioTextView.text.isEmpty {
-            showAlert(title: "Bio is empty", message: "Plase enter text")
+            showAlert(title: "Bio is empty", message: "Please enter text")
         } else {
             DBService.currentManoUser = self.manoUser
             DBService.updateBio( userId: manoUser.userId, bioText: bioTextView.text) { (error) in

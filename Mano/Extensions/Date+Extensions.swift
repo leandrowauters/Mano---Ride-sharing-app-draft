@@ -36,6 +36,15 @@ extension Date {
     func dayWasYesterday() -> Bool{
         return Calendar.current.isDateInYesterday(self)
     }
+    func dateExpired() -> Bool {
+      let seconds = Calendar.current.dateComponents([.second], from: Date(), to: self).second
+        if let seconds = seconds {
+            if seconds <= 0 {
+               return true
+            }
+        }
+        return false
+    }
     func isNew() -> Bool {
         let minutes = Calendar.current.dateComponents([.minute], from: self, to: Date()).minute
         if let minutes = minutes {

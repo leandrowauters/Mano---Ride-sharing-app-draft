@@ -60,7 +60,15 @@ class RequestRideViewController: UIViewController {
     
 
     override func viewDidAppear(_ animated: Bool) {
-
+        rideAlreadyCreated { (alreadyCreated) in
+            if alreadyCreated {
+                self.alertView.isHidden = false
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.alertView.isHidden = true
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
     private func setupTapsViews() {
         let dateViewTap = UITapGestureRecognizer(target: self, action: #selector(dateViewPressed))
