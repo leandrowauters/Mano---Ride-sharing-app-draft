@@ -44,12 +44,17 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         UIApplication.shared.open(number)
     }
     @IBAction func beginDropOffPressed(_ sender: Any) {
-        DBService.updateRideToDropoff(ride: ride) { (error) in
+        DBService.updateRideStatus(ride: ride, status: RideStatus.changedToDropoff.rawValue) { (error) in
             if let error = error {
-                self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
+               self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
             }
-
         }
+//        DBService.updateRideToDropoff(ride: ride) { (error) in
+//            if let error = error {
+//                self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
+//            }
+//
+//        }
         self.dismiss(animated: true)
         self.arriveDelegate.userPressBeginDropOff(ride: ride)
     }

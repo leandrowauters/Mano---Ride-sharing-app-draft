@@ -63,6 +63,8 @@ struct RideCollectionKeys {
     static let driverCellKey = "driverCell"
     static let dropoffKey = "dropoff"
     static let pickupKey = "pickup"
+    static let waitingForRequestKey = "waitingForRequest"
+    static let rideStatusKey = "rideStatus"
 }
 
 struct MyLocationsCollectionKeys {

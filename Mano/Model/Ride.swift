@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum RideStatus: String {
+    case changedToPickup
+    case onPickup
+    case changedToDropoff
+    case onDropoff
+    case changeToWaitingRequest
+    case onWaitingToRequest
+}
 class Ride: Codable {
     var passanger: String
     var passangerId: String
@@ -40,8 +48,10 @@ class Ride: Codable {
     var driverCell: String
     var pickup: Bool
     var dropoff: Bool
+    var waitingForRequest: Bool
+    var rideStatus: String
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -73,6 +83,8 @@ class Ride: Codable {
         self.driverCell = driverCell
         self.pickup = pickup
         self.dropoff = dropoff
+        self.waitingForRequest = waitingForRequest
+        self.rideStatus = rideStatus
     }
     
     init(dict: [String: Any]) {
@@ -107,6 +119,8 @@ class Ride: Codable {
         self.driverCell = dict[RideCollectionKeys.driverCellKey] as? String ?? ""
         self.pickup = dict[RideCollectionKeys.pickupKey] as? Bool ?? false
         self.dropoff = dict[RideCollectionKeys.dropoffKey] as? Bool ?? false
+        self.waitingForRequest = dict[RideCollectionKeys.waitingForRequestKey] as? Bool ?? false
+        self.rideStatus = dict[RideCollectionKeys.rideStatusKey] as? String ?? ""
     }
     
 }

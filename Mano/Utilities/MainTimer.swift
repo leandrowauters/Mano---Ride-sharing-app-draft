@@ -106,7 +106,7 @@ class MainTimer {
         if time >= 3600{
             return "\(hours) hrs , \(minutes) Min"
         } else {
-           return "\(minutes) Min"
+           return "\(minutes) Mins"
         }
     }
 }

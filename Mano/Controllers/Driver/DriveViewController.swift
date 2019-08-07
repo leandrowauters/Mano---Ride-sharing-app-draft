@@ -96,7 +96,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.dropoffAddress.text = "Drop-off:\n \(ride.dropoffAddress)"
         cell.distance.text = "Calculating..."
         cell.duration.text = "Calculating..."
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time) in
+        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             cell.distance.text = "Distance: \(miles) Mil"
             cell.duration.text = "Duration: \(time)"
         }

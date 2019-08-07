@@ -64,6 +64,7 @@ class OnWayToDropoffViewController: UIViewController {
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
             arrivedButton.isHidden = true
+            listenToWaitingForRequest()
         }
     }
     
@@ -90,7 +91,7 @@ class OnWayToDropoffViewController: UIViewController {
         }
     }
     func calculateMilesToDropoff() {
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: false, ride: ride, userLocation: userLocation) { (miles, time) in
+        GoogleHelper.calculateMilesAndTimeToDestination(pickup: false, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             self.activityIndicator.stopAnimating()
@@ -105,7 +106,29 @@ class OnWayToDropoffViewController: UIViewController {
             })
     }
     
+    private func listenToWaitingForRequest() {
+        DBService.listenToWaitingForRequest(ride: ride) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                let waitingForRequestVC = WaitingForRequestViewController(nibName: nil, bundle: nil, ride: ride)
+                self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+            }
+        }
+    }
+    
     @IBAction func arrivedPressed(_ sender: Any) {
+        showConfimationAlert(title: "Arrived", message: "Are you sure?") { (okay) in
+            DBService.updateToWaitingForRequest(ride: self.ride, completion: { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error updating request", message: error.localizedDescription)
+                } else {
+                    let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: self.ride)
+                    self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+                }
+            })
+        }
     }
     
     @IBAction func googleMapsPressed(_ sender: Any) {
@@ -113,17 +136,8 @@ class OnWayToDropoffViewController: UIViewController {
             self.searchGoogleForDirections()
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
 extension OnWayToDropoffViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {

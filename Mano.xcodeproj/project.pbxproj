@@ -26,6 +26,8 @@
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
 		D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D55E963F22FA592900CC9496 /* GoogleService-Info.plist */; };
+		D55E964322FB182900CC9496 /* WaitingForRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */; };
+		D55E964422FB182900CC9496 /* WaitingForRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */; };
 		D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */; };
 		D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */; };
 		D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D571BADF22E7B20D00FA9369 /* DriveViewController.swift */; };
@@ -136,6 +138,8 @@
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
 		D55E963F22FA592900CC9496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForRequestViewController.swift; sourceTree = "<group>"; };
+		D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingForRequestViewController.xib; sourceTree = "<group>"; };
 		D56F4F0022EA439C004E103E /* DriverMoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverMoreInfoViewController.swift; sourceTree = "<group>"; };
 		D56F4F0122EA439C004E103E /* DriverMoreInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverMoreInfoViewController.xib; sourceTree = "<group>"; };
 		D571BADF22E7B20D00FA9369 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
 				D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */,
 				D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */,
+				D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */,
+				D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */,
 				D5EF0AA922E2788B0061B67A /* Views */,
 				D5D6A76722E38121009C0029 /* Cells */,
 			);
@@ -573,6 +579,7 @@
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */,
 				D57CBBD122F0E5830046CF2F /* ArrivedViewController.xib in Resources */,
+				D55E964422FB182900CC9496 /* WaitingForRequestViewController.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
@@ -695,6 +702,7 @@
 				D59D1A8222E3E41100E94D77 /* StorageService.swift in Sources */,
 				D51CF7B622DF6F38003F1385 /* AppDelegate.swift in Sources */,
 				D5D6A77922E3A997009C0029 /* RequestRideViewController.swift in Sources */,
+				D55E964322FB182900CC9496 /* WaitingForRequestViewController.swift in Sources */,
 				D5E984CF22E235F70023B155 /* GraphicsClient.swift in Sources */,
 				D57557A622E784CC0063BD15 /* DBService+MyLocation.swift in Sources */,
 				D57557A922E79C870063BD15 /* MyLocationTableViewCell.swift in Sources */,

@@ -199,6 +199,14 @@ class CircularView: UIView {
     }
 }
 
+@IBDesignable
+class CircularViewNoBorder: UIView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.height / 2
+        clipsToBounds = true
+    }
+}
 
 @IBDesignable
 class BlueBorderedView: UIView {

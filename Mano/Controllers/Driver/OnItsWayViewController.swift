@@ -97,10 +97,7 @@ class OnItsWayViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-    }
+
     private func searchGoogleForDirections() {
         let currentLocation = userLocation.coordinate
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
@@ -120,7 +117,7 @@ class OnItsWayViewController: UIViewController {
 //        return milesDistance
 //    }
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time) in
+        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             self.activityIndicator.stopAnimating()
@@ -148,7 +145,7 @@ class OnItsWayViewController: UIViewController {
                 carImageView.kf.setImage(with: userCarPhotoURL)
                 driverView.isHidden = true
                 addTapGestures()
-                durationLabel.text = "Duration:\n Approx. \(duration ?? "N/A")"
+                durationLabel.text = "Distance:\n Approx. \(duration ?? "N/A") Away"
                 distanceLabel.text = "Call / Message"
                 listenToDropoffChanges()
             }
@@ -191,7 +188,7 @@ class OnItsWayViewController: UIViewController {
     }
     
     private func listenToDropoffChanges() {
-        DBService.listenToDropoff(ride: ride) { (error, ride) in
+        DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToDropoff.rawValue) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
             }
@@ -199,7 +196,17 @@ class OnItsWayViewController: UIViewController {
                 let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
                 self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
             }
+
         }
+//        DBService.listenToDropoff(ride: ride) { (error, ride) in
+//            if let error = error {
+//                self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
+//            }
+//            if let ride = ride {
+//                let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+//                self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
+//            }
+//        }
     }
     
     @IBAction func callPassanger(_ sender: Any) {

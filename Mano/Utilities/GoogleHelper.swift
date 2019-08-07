@@ -86,7 +86,7 @@ struct GoogleHelper {
         }
     }
     
-    static public func calculateMilesAndTimeToDestination(pickup: Bool,ride: Ride, userLocation: CLLocation , completion: @escaping(String, String) -> Void) {
+    static public func calculateMilesAndTimeToDestination(pickup: Bool,ride: Ride, userLocation: CLLocation , completion: @escaping(String, String, Double, Double) -> Void) {
         
         var destinationCLLocation = CLLocation()
         if pickup {
@@ -111,7 +111,7 @@ struct GoogleHelper {
                 let milesRounded = Double(round(10*miles)/10)
                 let time = route.expectedTravelTime
                 let timeRoundedToSeconds = MainTimer.timeString(time: time)
-                completion(milesRounded.description, timeRoundedToSeconds)
+                completion(milesRounded.description, timeRoundedToSeconds, milesRounded, time)
 //                self.distanceLabel.text = "Distance: \n \(milesRounded.description) Mil"
 //                self.durationLabel.text = "Duration: \n \(timeRoundedToSeconds.description)"
 //                self.activityIndicator.stopAnimating()

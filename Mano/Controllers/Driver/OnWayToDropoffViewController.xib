@@ -66,7 +66,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJD-JH-a3A" customClass="BorderedView" customModule="Mano" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="396" width="414" height="250"/>
+                    <rect key="frame" x="0.0" y="394" width="414" height="253"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n1J-0r-W28">
                             <rect key="frame" x="50" y="15" width="314" height="32.666666666666664"/>
@@ -81,7 +81,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyt-3V-IbC">
-                            <rect key="frame" x="334" y="170" width="50" height="50"/>
+                            <rect key="frame" x="334" y="173" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="2Ix-I5-8rI"/>
                                 <constraint firstAttribute="width" constant="50" id="QQf-1f-EFs"/>
@@ -92,7 +92,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRr-Ck-rOF" customClass="CircularButton" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="30" y="175" width="100" height="40"/>
+                            <rect key="frame" x="30" y="178" width="100" height="40"/>
                             <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="IXw-qP-iOq"/>
@@ -119,7 +119,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ii-QK-tYW" customClass="BorderedView" customModule="Mano" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="296" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="295" width="414" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AF1-OP-u3h">
                             <rect key="frame" x="50" y="15" width="314" height="29"/>
@@ -197,12 +197,12 @@
                 <constraint firstItem="ymK-bb-5y3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CUY-ZI-MWk"/>
                 <constraint firstItem="bJD-JH-a3A" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Cew-Pc-IZp"/>
                 <constraint firstItem="WjX-Dc-8cc" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HJs-rY-dbU"/>
-                <constraint firstItem="bJD-JH-a3A" firstAttribute="top" secondItem="1ii-QK-tYW" secondAttribute="bottom" id="Ok9-hM-6Ra"/>
+                <constraint firstItem="bJD-JH-a3A" firstAttribute="top" secondItem="1ii-QK-tYW" secondAttribute="bottom" constant="-1" id="Ok9-hM-6Ra"/>
                 <constraint firstItem="1ii-QK-tYW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QLm-gN-4wA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ymK-bb-5y3" secondAttribute="trailing" id="Qnf-v9-TFE"/>
-                <constraint firstItem="1ii-QK-tYW" firstAttribute="top" secondItem="ymK-bb-5y3" secondAttribute="bottom" id="SEC-ba-VyM"/>
+                <constraint firstItem="1ii-QK-tYW" firstAttribute="top" secondItem="ymK-bb-5y3" secondAttribute="bottom" constant="-1" id="SEC-ba-VyM"/>
                 <constraint firstItem="6KD-gy-jmR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TXQ-wp-UqS"/>
-                <constraint firstItem="6KD-gy-jmR" firstAttribute="top" secondItem="bJD-JH-a3A" secondAttribute="bottom" id="URg-9M-9o7"/>
+                <constraint firstItem="6KD-gy-jmR" firstAttribute="top" secondItem="bJD-JH-a3A" secondAttribute="bottom" constant="-1" id="URg-9M-9o7"/>
                 <constraint firstItem="1ii-QK-tYW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UaM-H0-did"/>
                 <constraint firstItem="aTy-xe-KhY" firstAttribute="top" secondItem="23Y-sU-836" secondAttribute="bottom" id="WaZ-30-3dI"/>
                 <constraint firstItem="va7-Gw-sgA" firstAttribute="centerY" secondItem="6KD-gy-jmR" secondAttribute="centerY" id="YNL-dJ-zb2"/>
