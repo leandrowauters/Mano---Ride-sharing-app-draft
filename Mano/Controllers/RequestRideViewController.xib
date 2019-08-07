@@ -274,7 +274,7 @@
                         <constraint firstItem="qh0-15-4Bh" firstAttribute="height" secondItem="fEb-BR-z1Y" secondAttribute="height" multiplier="0.2" id="gcc-ED-jYK"/>
                     </constraints>
                 </view>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eI5-ab-PRk">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eI5-ab-PRk">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="846"/>
                     <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.50420055649999995" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>

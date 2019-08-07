@@ -15,7 +15,7 @@ class MessageViewController: UIViewController {
     var message: Message?
     var seeMessage = Bool()
     var reply = false
-    var messageToSend: String?
+//    var messageToSend: String?
     var sent: Bool
     @IBOutlet weak var messageToLabel: UILabel!
     @IBOutlet weak var textField: UITextView!
@@ -48,7 +48,6 @@ class MessageViewController: UIViewController {
             textField.text = "\(message.messageDate)" + "\n" + message.message
             textField.isUserInteractionEnabled = false
         } else {
-            messageToSend = textField.text
             seeMessage = false
             
             messageToLabel.text = "To: \(recipientName ?? "No name")"
@@ -102,13 +101,19 @@ class MessageViewController: UIViewController {
             messageToLabel.text = "To: \(recipientName ?? "")"
             textField.isUserInteractionEnabled = true
         } else {
-            guard let message = messageToSend,
-                !message.isEmpty else {
+            var messageToSend: Message!
+            
+            guard var message = textField.text else {
                     showAlert(title: "Please write message", message: nil)
                     return
             }
             let sentDate = Date().dateDescription
-            let messageToSend = Message(sender: DBService.currentManoUser.fullName, recipient: recipientName, senderId: DBService.currentManoUser.userId , recipientId: recipientId, message: message, messageId: "", messageDate: sentDate, read: false)
+            if reply {
+                message = replyMessage(word: message)
+            }
+            messageToSend = Message(sender: DBService.currentManoUser.fullName, recipient: recipientName, senderId: DBService.currentManoUser.userId , recipientId: recipientId, message: message, messageId: "", messageDate: sentDate, read: false)
+            
+
             DBService.sendMessage(message: messageToSend) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error sending message", message: error.localizedDescription)
@@ -134,7 +139,7 @@ extension MessageViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if reply {
-            messageToSend = replyMessage(word: textView.text)
+//            messageToSend = replyMessage(word: textView.text)
         }
     }
 }

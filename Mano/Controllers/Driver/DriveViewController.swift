@@ -118,6 +118,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
             self.navigationController?.pushViewController(onItsWayVc, animated: true)
         }
+        self.activityIndicator.stopAnimating()
     }
 }
 

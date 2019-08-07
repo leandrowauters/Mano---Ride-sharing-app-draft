@@ -17,6 +17,8 @@
                 <outlet property="manoDriveLabel" destination="9fX-Rb-egI" id="C69-WS-VGy"/>
                 <outlet property="messageAlert" destination="ut2-TX-fhI" id="cPg-7S-FCc"/>
                 <outlet property="optionView" destination="w9y-lN-d5q" id="Shv-HE-Cvg"/>
+                <outlet property="secondButton" destination="t3b-dc-7RH" id="3cX-SK-gFE"/>
+                <outlet property="topButton" destination="MES-57-kY0" id="mUg-4M-heb"/>
                 <outlet property="upcomingTableView" destination="UPR-A3-9hi" id="3KR-a0-bhK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -88,24 +90,6 @@
                         <constraint firstAttribute="height" constant="55" id="vMe-oZ-A3L"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MES-57-kY0" customClass="BlueBorderedButton" customModule="Mano" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="180" width="414" height="40"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Y9m-bc-AoG"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
-                    <state key="normal" title="Upcoming">
-                        <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj" customClass="RoundedImageView" customModule="Mano" customModuleProvider="target">
-                    <rect key="frame" x="10" y="92.666666666666686" width="120" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="120" id="c2u-xx-BtV"/>
-                        <constraint firstAttribute="width" secondItem="EzO-fx-Tpj" secondAttribute="height" multiplier="1:1" id="nZv-TR-yzo"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JUM-C2-HD9">
                     <rect key="frame" x="144" y="138" width="233" height="29"/>
                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
@@ -119,9 +103,53 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPR-A3-9hi">
-                    <rect key="frame" x="0.0" y="220" width="414" height="516"/>
+                    <rect key="frame" x="0.0" y="212.66666666666669" width="414" height="523.33333333333326"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CZl-kJ-277">
+                    <rect key="frame" x="0.0" y="180" width="414" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MES-57-kY0" customClass="BlueBorderedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Y9m-bc-AoG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="54" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="350" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Upcoming" image="icons8-down_squared">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="topButtonPressed:" destination="-1" eventType="touchUpInside" id="j1I-JX-JCe"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-dc-7RH" customClass="BlueBorderedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="qth-XT-Z6a"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="21" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="350" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="History">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="secondButtonPressed:" destination="-1" eventType="touchUpInside" id="0P2-aP-Nj7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-fx-Tpj" customClass="RoundedImageView" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="10" y="92.666666666666686" width="120" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="c2u-xx-BtV"/>
+                        <constraint firstAttribute="width" secondItem="EzO-fx-Tpj" secondAttribute="height" multiplier="1:1" id="nZv-TR-yzo"/>
+                    </constraints>
+                </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9y-lN-d5q" customClass="BlueBorderedView" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="25" y="75" width="150" height="120"/>
                     <subviews>
@@ -173,18 +201,18 @@
                 <constraint firstAttribute="trailing" secondItem="7t2-xp-FFS" secondAttribute="trailing" id="Kkl-Uv-TMg"/>
                 <constraint firstItem="UPR-A3-9hi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="N4Q-X0-5ie"/>
                 <constraint firstItem="EzO-fx-Tpj" firstAttribute="centerY" secondItem="OHt-td-Loj" secondAttribute="centerY" id="NG7-Ax-zeO"/>
+                <constraint firstItem="UPR-A3-9hi" firstAttribute="top" secondItem="EzO-fx-Tpj" secondAttribute="bottom" id="Rel-Wk-Vv2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JUM-C2-HD9" secondAttribute="trailing" constant="37" id="S7e-1N-Z9E"/>
-                <constraint firstItem="MES-57-kY0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Vfn-4q-VEN"/>
                 <constraint firstItem="JUM-C2-HD9" firstAttribute="centerY" secondItem="EzO-fx-Tpj" secondAttribute="centerY" id="X1p-Vv-D2C"/>
+                <constraint firstItem="CZl-kJ-277" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="eRn-OS-KNz"/>
                 <constraint firstItem="OHt-td-Loj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fmD-Fn-JtR"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MES-57-kY0" secondAttribute="trailing" id="hAU-Fk-jM6"/>
-                <constraint firstItem="UPR-A3-9hi" firstAttribute="top" secondItem="MES-57-kY0" secondAttribute="bottom" id="kdd-Ps-hwu"/>
                 <constraint firstItem="EzO-fx-Tpj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="mXI-MM-ScE"/>
                 <constraint firstItem="JUM-C2-HD9" firstAttribute="leading" secondItem="EzO-fx-Tpj" secondAttribute="trailing" constant="14" id="nwc-Ts-T3o"/>
                 <constraint firstItem="w9y-lN-d5q" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="55" id="oRD-kK-eRP"/>
+                <constraint firstItem="CZl-kJ-277" firstAttribute="top" secondItem="OHt-td-Loj" secondAttribute="bottom" id="ocJ-De-Bxq"/>
+                <constraint firstItem="CZl-kJ-277" firstAttribute="centerX" secondItem="OHt-td-Loj" secondAttribute="centerX" id="s4j-hL-yku"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UPR-A3-9hi" secondAttribute="bottom" id="x4I-n1-X0M"/>
                 <constraint firstItem="w9y-lN-d5q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="yFw-o9-Hq4"/>
-                <constraint firstItem="MES-57-kY0" firstAttribute="top" secondItem="OHt-td-Loj" secondAttribute="bottom" id="zBP-yx-YN5"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="47.826086956521742" y="43.206521739130437"/>
@@ -192,6 +220,7 @@
     </objects>
     <resources>
         <image name="envelope" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="icons8-down_squared" width="32" height="32"/>
         <image name="settings" width="33.333332061767578" height="33.333332061767578"/>
     </resources>
 </document>

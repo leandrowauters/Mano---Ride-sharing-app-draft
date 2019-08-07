@@ -18,6 +18,8 @@ class DriverProfileViewController: UIViewController {
     @IBOutlet weak var messageAlert: CircularView!
     @IBOutlet weak var optionView: BlueBorderedView!
     
+    @IBOutlet weak var topButton: BlueBorderedButton!
+    @IBOutlet weak var secondButton: BlueBorderedButton!
     var upcomingEvents = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -27,11 +29,11 @@ class DriverProfileViewController: UIViewController {
         }
     }
     private var authservice = AppDelegate.authservice
-    
+    let currentUser = DBService.currentManoUser!
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
+        upcomingRides()
         // Do any additional setup after loading the view.
     }
     
@@ -39,33 +41,17 @@ class DriverProfileViewController: UIViewController {
         checkForNewMessages()
     }
     func setup() {
-        let currentUser = DBService.currentManoUser!
+        
         driverName.text = currentUser.fullName
         authservice.authserviceSignOutDelegate = self
         if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
             driverImage.contentMode = .scaleAspectFit
-            DBService.fetchPassangerRides(passangerId: currentUser.userId) { (error, rides) in
-                if let error = error {
-                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
-                }
-                if let rides = rides {
-                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
-                    self.upcomingEvents = ridesSortedByDate
-                }
-            }
+
             
         } else {
-            DBService.fetchDriverAcceptedRides(driverId: currentUser.userId) { (error, rides) in
-                if let error = error {
-                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
-                }
-                if let rides = rides {
-                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
-                    self.upcomingEvents = ridesSortedByDate
-                }
-            }
+
             guard let profilePicURL = URL(string: currentUser.profileImage!) else {
                 self.showAlert(title: "Error fetching profile image", message: nil)
                 return
@@ -79,6 +65,29 @@ class DriverProfileViewController: UIViewController {
         upcomingTableView.separatorStyle = .none
     }
     
+    private func upcomingRides() {
+        if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            DBService.fetchPassangerRides(passangerId: currentUser.userId) { (error, rides) in
+                if let error = error {
+                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+                }
+                if let rides = rides {
+                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
+                    self.upcomingEvents = ridesSortedByDate
+                }
+            }
+        } else {
+            DBService.fetchDriverAcceptedRides(driverId: currentUser.userId) { (error, rides) in
+                if let error = error {
+                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+                }
+                if let rides = rides {
+                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
+                    self.upcomingEvents = ridesSortedByDate
+                }
+            }
+        }
+    }
     private func checkForNewMessages() {
         DBService.fetchYourMessages { (error, messages) in
             if let messages = messages {
@@ -123,6 +132,23 @@ class DriverProfileViewController: UIViewController {
         sendEmail()
     }
     
+    @IBAction func topButtonPressed(_ sender: UIButton) {
+            self.secondButton.isHidden = !self.secondButton.isHidden
+        self.view.layoutIfNeeded()
+
+    }
+    
+    @IBAction func secondButtonPressed(_ sender: UIButton) {
+        if sender.currentTitle == "Upcoming" {
+            topButton.setTitle("Upcoming", for: .normal)
+            upcomingRides()
+            sender.setTitle("History", for: .normal)
+        } else {
+            topButton.setTitle("History", for: .normal)
+            sender.setTitle("Upcoming", for: .normal)
+        }
+        self.secondButton.isHidden = !self.secondButton.isHidden
+    }
 
     
     
