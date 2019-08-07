@@ -28,25 +28,45 @@ class SendMessageViewController: UIViewController, MFMessageComposeViewControlle
     }
     
     @IBOutlet weak var otherTextfield: RoundedBlueTextField!
+    @IBOutlet weak var buttonOne: CircularButtonBlue!
+    @IBOutlet weak var buttonTwo: CircularButtonBlue!
+    @IBOutlet weak var buttonThree: CircularButtonBlue!
+    @IBOutlet weak var buttonFour: CircularButtonBlue!
+    
+    
+    
+    
+    
+    
     
     var number: String!
-    
+    var passenger: Bool!
     weak var delegate: MessageDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         otherTextfield.delegate = self
-        // Do any additional setup after loading the view.
+        setup()
     }
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, number: String, delegate: MessageDelegate) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, number: String, delegate: MessageDelegate, passenger: Bool) {
         self.number = number
         self.delegate = delegate
+        self.passenger = passenger
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setup() {
+        if passenger {
+            buttonOne.setTitle("ETA?", for: .normal)
+            buttonTwo.setTitle("Waiting outside", for: .normal)
+            buttonThree.setTitle("Coming", for: .normal)
+            buttonFour.isHidden = true
+        }
     }
     private func registerKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)

@@ -157,28 +157,28 @@ extension DBService {
 //        }
 //    }
     
-    static public func updateToWaitingForRequest(ride: Ride, completion: @escaping(Error?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.waitingForRequestKey : true, RideCollectionKeys.dropoffKey : false]) { (error) in
-            if let error = error {
-                completion(error)
-            } else {
-                completion(nil)
-            }
-        }
-    }
-    
-    static public func listenToWaitingForRequest(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.waitingForRequestKey, isEqualTo: true).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error, nil)
-            }
-            if let snapshot = snapshot{
-                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil, rideAccepted.first)
-            }
-            
-        }
-    }
+//    static public func updateToWaitingForRequest(ride: Ride, completion: @escaping(Error?) -> Void) {
+//        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.waitingForRequestKey : true, RideCollectionKeys.dropoffKey : false]) { (error) in
+//            if let error = error {
+//                completion(error)
+//            } else {
+//                completion(nil)
+//            }
+//        }
+//    }
+//
+//    static public func listenToWaitingForRequest(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+//        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.waitingForRequestKey, isEqualTo: true).addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                completion(error, nil)
+//            }
+//            if let snapshot = snapshot{
+//                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+//                completion(nil, rideAccepted.first)
+//            }
+//
+//        }
+//    }
 
     static public func updateRideStatus(ride: Ride, status: String, completion: @escaping(Error?) -> Void) {
         DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.rideStatusKey : status]) { (error) in
@@ -202,44 +202,44 @@ extension DBService {
         }
     }
     
-    static public func listenToChangeToPickUp(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changedToPickup.rawValue).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error, nil)
-            }
-            if let snapshot = snapshot{
-                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil, rideAccepted.first)
-            }
-            
-        }
-    }
+//    static public func listenToChangeToPickUp(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+//        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changedToPickup.rawValue).addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                completion(error, nil)
+//            }
+//            if let snapshot = snapshot{
+//                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+//                completion(nil, rideAccepted.first)
+//            }
+//
+//        }
+//    }
     
-    static public func listenToChangeToDropoff(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changedToDropoff.rawValue).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error, nil)
-            }
-            if let snapshot = snapshot{
-                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil, rideAccepted.first)
-            }
-            
-        }
-    }
-    
-    static public func listenToChangeToWaitingForRequest(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changeToWaitingRequest.rawValue).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error, nil)
-            }
-            if let snapshot = snapshot{
-                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil, rideAccepted.first)
-            }
-            
-        }
-    }
+//    static public func listenToChangeToDropoff(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+//        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changedToDropoff.rawValue).addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                completion(error, nil)
+//            }
+//            if let snapshot = snapshot{
+//                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+//                completion(nil, rideAccepted.first)
+//            }
+//
+//        }
+//    }
+//
+//    static public func listenToChangeToWaitingForRequest(ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+//        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changeToWaitingRequest.rawValue).addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                completion(error, nil)
+//            }
+//            if let snapshot = snapshot{
+//                let rideAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+//                completion(nil, rideAccepted.first)
+//            }
+//
+//        }
+//    }
     
 
     static public func updatePassangerKnowsDriverOnItsWay(ride: Ride, completion: @escaping(Error?) -> Void) {
@@ -265,6 +265,30 @@ extension DBService {
             if let snapshot = snapshot {
                 let driverOnItsWay = snapshot.documents.map{Ride.init(dict: $0.data())}
                 completion(nil, driverOnItsWay.first)
+            }
+        }
+    }
+    
+    static public func getRideStatusInProgressDriver(completion: @escaping(Error?, Ride?) -> Void) {
+        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.driverIdKey, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.driverOnItsWayKey, isEqualTo: true).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(error,nil)
+            }
+            if let snapshot = snapshot {
+                let ride = snapshot.documents.map{Ride.init(dict: $0.data())}.first
+                completion(nil, ride)
+            }
+        }
+    }
+    
+    static public func getRideStatusInProgressPassenger(completion: @escaping(Error?, Ride?) -> Void) {
+        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.passangerId, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.driverOnItsWayKey, isEqualTo: true).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(error,nil)
+            }
+            if let snapshot = snapshot {
+                let ride = snapshot.documents.map{Ride.init(dict: $0.data())}.first
+                completion(nil, ride)
             }
         }
     }

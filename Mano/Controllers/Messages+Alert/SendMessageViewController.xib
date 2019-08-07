@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendMessageViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="buttonFour" destination="mLG-zt-YP3" id="Q72-rW-Mk6"/>
+                <outlet property="buttonOne" destination="ujp-Ap-k39" id="RHV-iu-CfK"/>
+                <outlet property="buttonThree" destination="ido-sn-xCs" id="xfw-RJ-3b6"/>
+                <outlet property="buttonTwo" destination="wYb-Al-pim" id="DkC-Yv-Ysy"/>
                 <outlet property="otherTextfield" destination="hIn-Q3-mr9" id="Ioj-M3-jwP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

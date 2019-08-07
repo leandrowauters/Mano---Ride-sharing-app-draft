@@ -51,6 +51,7 @@ class OnWayToDropoffViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     private func setup() {
+        changeToOnDropoff()
         locationManager.delegate = self
         graphics.pulsating(view: pulseView)
         if let userPhotoURL = URL(string: ride.driveProfileImage)
@@ -65,6 +66,7 @@ class OnWayToDropoffViewController: UIViewController {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
             arrivedButton.isHidden = true
             listenToWaitingForRequest()
+            
         }
     }
     
@@ -105,9 +107,15 @@ class OnWayToDropoffViewController: UIViewController {
                 }
             })
     }
-    
+    private func changeToOnDropoff() {
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoff.rawValue) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+        }
+    }
     private func listenToWaitingForRequest() {
-        DBService.listenToWaitingForRequest(ride: ride) { (error, ride) in
+        DBService.listenForRideStatus(ride: ride, status: RideStatus.changeToWaitingRequest.rawValue) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
             }
@@ -120,7 +128,7 @@ class OnWayToDropoffViewController: UIViewController {
     
     @IBAction func arrivedPressed(_ sender: Any) {
         showConfimationAlert(title: "Arrived", message: "Are you sure?") { (okay) in
-            DBService.updateToWaitingForRequest(ride: self.ride, completion: { (error) in
+            DBService.updateRideStatus(ride: self.ride, status: RideStatus.changeToWaitingRequest.rawValue, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error updating request", message: error.localizedDescription)
                 } else {

@@ -75,4 +75,16 @@ class GraphicsClient {
         
     }
     
+    func pulsatingNoReverse(view: UIView) {
+        
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 1.5
+        pulseAnimation.toValue = 2
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        pulseAnimation.repeatCount = .greatestFiniteMagnitude
+        view.layer.add(pulseAnimation, forKey: nil)
+        view.layoutIfNeeded()
+        
+    }
+    
 }

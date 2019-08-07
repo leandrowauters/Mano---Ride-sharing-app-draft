@@ -52,6 +52,27 @@ class TabBarViewController: UITabBarController {
                 })
             }
         }
+        
+        DBService.getRideStatusInProgressDriver { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error getting ride status", message: error.localizedDescription)
+            }
+            
+            if let ride = ride {
+                self.switchRideStatus(ride: ride)
+            }
+        }
+        
+        DBService.getRideStatusInProgressPassenger { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error getting ride status", message: error.localizedDescription)
+            }
+            
+            if let ride = ride {
+                self.switchRideStatus(ride: ride)
+
+            }
+        }
         DBService.fetchYourMessages { (error, messages) in
             if let messages = messages {
                 DBService.messagesRecieved = messages
@@ -80,6 +101,29 @@ class TabBarViewController: UITabBarController {
         }
     }
     
+    private func switchRideStatus(ride: Ride) {
+        self.showAlert(title: "Ride in progress", message: nil, handler: { (okay) in
+            switch ride.rideStatus {
+            case RideStatus.onPickup.rawValue:
+                let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
+                GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
+                    
+                    let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: miles, ride: ride)
+                    self.navigationController?.pushViewController(onItsWayVc, animated: true)
+                    
+                    
+                })
+            case RideStatus.onDropoff.rawValue:
+                let onWayToDropoffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+                self.navigationController?.pushViewController(onWayToDropoffVC, animated: true)
+            case RideStatus.onWaitingToRequest.rawValue:
+                let waitingForRequestVC = WaitingForRequestViewController(nibName: nil, bundle: nil, ride: ride)
+                self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+            default:
+                return
+            }
+        })
+    }
     static func setTabBarVC(typeOfUser: String) -> UITabBarController{
         let availableManoVC = AvailableManosViewController()
         let favoritesVC = FavoritesViewController()

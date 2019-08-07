@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 import MapKit
-import MessageUI
+
 import Toucan
 
 class OnItsWayViewController: UIViewController {
@@ -52,14 +52,16 @@ class OnItsWayViewController: UIViewController {
         super.viewDidLoad()
         setup()
         setupCoreLocation()
-
-        
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            changeToOnPickup()
+        }       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             thirtyMinTimer()
             calculateCurrentMilesToPickup()
+            
         } else {
             activityIndicator.stopAnimating()
         }
@@ -106,6 +108,14 @@ class OnItsWayViewController: UIViewController {
                     self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }
             })
+        }
+    }
+    
+    private func changeToOnPickup() {
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onPickup.rawValue) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
         }
     }
 //    func getAverageDistance() -> Double {
@@ -210,23 +220,27 @@ class OnItsWayViewController: UIViewController {
     }
     
     @IBAction func callPassanger(_ sender: Any) {
-        guard let number = URL(string: "tel://" + ride.passangerCell) else { return }
+        guard let number = URL(string: "tel://" + ride.passangerCell) else {
+            self.showAlert(title: "Wrong number", message: nil)
+            return }
         UIApplication.shared.open(number)
     }
 
     @IBAction func messagePassangerPressed(_ sender: Any) {
-        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self)
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.passangerCell, delegate: self,passenger: false)
         sendMessageVC.modalPresentationStyle = .overCurrentContext
         present(sendMessageVC, animated: true)
     }
     
     @objc func phoneViewTapped() {
-        guard let number = URL(string: "tel://" + ride.driverCell) else { return }
+        guard let number = URL(string: "tel://" + ride.driverCell) else {
+            self.showAlert(title: "Wrong number", message: nil)
+            return }
         UIApplication.shared.open(number)
     }
     
     @objc func messageViewTapped() {
-        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self)
+        let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self,passenger: true)
         sendMessageVC.modalPresentationStyle = .overCurrentContext
         present(sendMessageVC, animated: true)
     }
