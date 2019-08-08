@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="distanceLabel" destination="l5B-Lz-X7J" id="f1W-QJ-Tk8"/>
                 <outlet property="driverView" destination="dLZ-Ki-AFy" id="93a-Lp-Dkn"/>
-                <outlet property="mapImageView" destination="QSw-VO-vYh" id="u5x-fq-mmt"/>
                 <outlet property="messageLabel" destination="vbI-M5-BEa" id="w7q-Qc-qF7"/>
                 <outlet property="passengerView" destination="Xu3-c5-ZDr" id="sdS-fa-9q9"/>
                 <outlet property="pulsingView" destination="Iky-ne-B5p" id="CDs-pR-iHF"/>
@@ -120,12 +119,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLZ-Ki-AFy">
                     <rect key="frame" x="0.0" y="449" width="414" height="287"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="QSw-VO-vYh">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="287"/>
-                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hq-6j-rsm" customClass="CircularViewNoBorder" customModule="Mano" customModuleProvider="target">
                             <rect key="frame" x="177" y="84.666666666666629" width="60" height="60"/>
-                            <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="5hq-6j-rsm" secondAttribute="height" multiplier="1:1" id="CYi-Xa-LGh"/>
                                 <constraint firstAttribute="width" constant="60" id="yhS-DT-TQm"/>
@@ -133,7 +129,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iky-ne-B5p" customClass="CircularViewNoBorder" customModule="Mano" customModuleProvider="target">
                             <rect key="frame" x="177" y="84.666666666666629" width="60" height="60"/>
-                            <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="0.4978595890410959" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="0.49480950342465752" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Iky-ne-B5p" secondAttribute="height" multiplier="1:1" id="JwY-vd-i0v"/>
                                 <constraint firstAttribute="width" constant="60" id="dbn-Cz-hqz"/>
@@ -142,23 +138,19 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharing Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSh-fx-OGE">
                             <rect key="frame" x="136.66666666666669" y="152.66666666666663" width="140.66666666666669" height="20"/>
                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                            <color key="textColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="5hq-6j-rsm" firstAttribute="centerX" secondItem="dLZ-Ki-AFy" secondAttribute="centerX" id="1od-i4-rvj"/>
-                        <constraint firstItem="QSw-VO-vYh" firstAttribute="leading" secondItem="dLZ-Ki-AFy" secondAttribute="leading" id="2pY-yE-tpo"/>
                         <constraint firstItem="Iky-ne-B5p" firstAttribute="centerY" secondItem="5hq-6j-rsm" secondAttribute="centerY" id="3yY-Q1-AVN"/>
                         <constraint firstItem="Iky-ne-B5p" firstAttribute="width" secondItem="5hq-6j-rsm" secondAttribute="width" id="6hi-uf-ut9"/>
                         <constraint firstItem="5hq-6j-rsm" firstAttribute="centerY" secondItem="dLZ-Ki-AFy" secondAttribute="centerY" multiplier="0.8" id="FKo-iM-HXB"/>
                         <constraint firstItem="Iky-ne-B5p" firstAttribute="height" secondItem="5hq-6j-rsm" secondAttribute="height" id="GWD-qR-NYB"/>
                         <constraint firstItem="NSh-fx-OGE" firstAttribute="centerX" secondItem="Iky-ne-B5p" secondAttribute="centerX" id="GWF-C4-Xck"/>
-                        <constraint firstAttribute="bottom" secondItem="QSw-VO-vYh" secondAttribute="bottom" id="Mhm-oX-hQo"/>
-                        <constraint firstAttribute="trailing" secondItem="QSw-VO-vYh" secondAttribute="trailing" id="Vcn-4h-WP4"/>
                         <constraint firstItem="NSh-fx-OGE" firstAttribute="top" secondItem="5hq-6j-rsm" secondAttribute="bottom" constant="8" id="Ylv-ym-5gW"/>
-                        <constraint firstItem="QSw-VO-vYh" firstAttribute="top" secondItem="dLZ-Ki-AFy" secondAttribute="top" id="Z7b-hb-QaL"/>
                         <constraint firstItem="Iky-ne-B5p" firstAttribute="centerX" secondItem="5hq-6j-rsm" secondAttribute="centerX" id="Zhu-ms-xQa"/>
                         <constraint firstItem="Iky-ne-B5p" firstAttribute="width" secondItem="Iky-ne-B5p" secondAttribute="height" multiplier="1:1" id="yRh-Jh-3lw"/>
                     </constraints>
@@ -217,7 +209,6 @@
         </view>
     </objects>
     <resources>
-        <image name="map" width="500" height="354"/>
         <image name="message" width="50" height="50"/>
         <image name="phone" width="50" height="50"/>
     </resources>

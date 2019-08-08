@@ -15,6 +15,8 @@ enum RideStatus: String {
     case onDropoff
     case changeToWaitingRequest
     case onWaitingToRequest
+    case changedToReturnDrive
+    case onPickupReturnRide
 }
 class Ride: Codable {
     var passanger: String
@@ -32,7 +34,7 @@ class Ride: Codable {
     var accptedBy: String
     var acceptenceWasSeen: Bool
     var driverOnItsWay: Bool
-    var durtation: Int
+    var duration: Int
     var distance: Double
     var dateRequested: String
     var driverName: String
@@ -67,7 +69,7 @@ class Ride: Codable {
         self.accptedBy = accptedBy
         self.acceptenceWasSeen = acceptenceWasSeen
         self.driverOnItsWay = driverOnItsWay
-        self.durtation = duration
+        self.duration = duration
         self.distance = distance
         self.dateRequested = dateRequested
         self.driverName = driverName
@@ -103,7 +105,7 @@ class Ride: Codable {
         self.accptedBy = dict[RideCollectionKeys.accptedByKey] as? String ?? ""
         self.acceptenceWasSeen = dict[RideCollectionKeys.acceptenceWasSeenKey] as? Bool ?? false
         self.driverOnItsWay = dict[RideCollectionKeys.driverOnItsWayKey] as? Bool ?? false
-        self.durtation = dict[RideCollectionKeys.durationKey] as? Int ?? 0
+        self.duration = dict[RideCollectionKeys.durationKey] as? Int ?? 0
         self.distance = dict[RideCollectionKeys.distanceKey] as? Double ?? 0.0
         self.dateRequested = dict[RideCollectionKeys.dateRequestedKey] as? String ?? ""
         self.driverName = dict[RideCollectionKeys.driverNameKey] as? String ?? ""

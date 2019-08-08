@@ -16,7 +16,7 @@ class OnItsWayViewController: UIViewController {
 
     
 
-    private var duration: String!
+    private var duration: String?
     private var distance: String!
     private var ride: Ride!
     private var graphics =  GraphicsClient()
@@ -44,8 +44,9 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var pulseView: CircularView!
     @IBOutlet weak var messageView: BorderedView!
     @IBOutlet weak var phoneView: BorderedView!
-    @IBOutlet weak var messageImage: UIImageView!
-    @IBOutlet weak var phoneImage: UIImageView!
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var phoneButton: UIButton!
+    
     
     
     override func viewDidLoad() {
@@ -53,7 +54,11 @@ class OnItsWayViewController: UIViewController {
         setup()
         setupCoreLocation()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            if ride.rideStatus == RideStatus.changedToReturnDrive.rawValue{
+               changeToOnPickup()
+            } else {
             changeToOnPickup()
+            }
         }       
     }
     
@@ -66,12 +71,7 @@ class OnItsWayViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
     }
-    private func addTapGestures() {
-        let phoneViewTap = UITapGestureRecognizer(target: self, action: #selector (phoneViewTapped))
-        let messageViewTap = UITapGestureRecognizer(target: self, action: #selector(messageViewTapped))
-        phoneView.addGestureRecognizer(phoneViewTap)
-        messageView.addGestureRecognizer(messageViewTap)
-    }
+
     
 
     @objc private func thirtyMinTimer() {
@@ -118,6 +118,13 @@ class OnItsWayViewController: UIViewController {
             }
         }
     }
+    private func changeToReturnPick() {
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onPickupReturnRide.rawValue) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+        }
+    }
 //    func getAverageDistance() -> Double {
 //
 //        let coreLocDistance = firstLocation.distance(from: userLocation)
@@ -148,15 +155,19 @@ class OnItsWayViewController: UIViewController {
             passangerName.text = ride.passanger
             destinationAddress.text = ride.pickupAddress
             carImageView.isHidden = true
-            phoneImage.isHidden = true
-            messageImage.isHidden = true
+            phoneButton.isHidden = true
+            messageButton.isHidden = true
         } else {
             if let userCarPhotoURL = URL(string: ride.carPicture) {
                 carImageView.kf.setImage(with: userCarPhotoURL)
                 driverView.isHidden = true
-                addTapGestures()
-                durationLabel.text = "Distance:\n Approx. \(duration ?? "N/A") Away"
-                distanceLabel.text = "Call / Message"
+                if let duration = duration {
+                  durationLabel.text = "Distance:\n Approx. \(duration) Away"
+                } else {
+                    durationLabel.text = "Waiting for driver response"
+                }
+                
+                distanceLabel.isHidden = true
                 listenToDropoffChanges()
             }
         }
@@ -232,18 +243,20 @@ class OnItsWayViewController: UIViewController {
         present(sendMessageVC, animated: true)
     }
     
-    @objc func phoneViewTapped() {
+    @IBAction func callDriverPressed(_ sender: Any) {
         guard let number = URL(string: "tel://" + ride.driverCell) else {
             self.showAlert(title: "Wrong number", message: nil)
             return }
         UIApplication.shared.open(number)
     }
-    
-    @objc func messageViewTapped() {
+    @IBAction func messageDriverPressed(_ sender: Any) {
         let sendMessageVC = SendMessageViewController(nibName: nil, bundle: nil, number: ride.driverCell, delegate: self,passenger: true)
         sendMessageVC.modalPresentationStyle = .overCurrentContext
         present(sendMessageVC, animated: true)
     }
+
+    
+
     
 }
 extension OnItsWayViewController: CLLocationManagerDelegate {

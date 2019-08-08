@@ -123,16 +123,7 @@ class DriverMoreInfoViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    private func getShortertString(string: String) -> String {
-        var newWord = String()
-        for character in string {
-            if character == "," {
-                return newWord
-            }
-            newWord.append(character)
-        }
-        return String()
-    }
+
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, manoUser: ManoUser, typeOfUser: String) {
         self.manoUser = manoUser
         self.typeOfUser = typeOfUser
@@ -240,7 +231,7 @@ extension DriverMoreInfoViewController: GMSAutocompleteViewControllerDelegate {
             return}
         let coordinate = place.coordinate
         self.homeAddress = homeAddress
-        let shortertAddress = getShortertString(string: homeAddress)
+        let shortertAddress = GoogleHelper.getShortertString(string: homeAddress)
         homeAddressButton.setTitle(shortertAddress, for: .normal)
         homeLon = coordinate.longitude
         homeLat = coordinate.latitude

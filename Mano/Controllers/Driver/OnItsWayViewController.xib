@@ -23,10 +23,10 @@
                 <outlet property="driverNameLabel" destination="X3j-Re-Yh5" id="mWF-hv-qbU"/>
                 <outlet property="driverView" destination="dL8-my-DxU" id="3Nl-mO-5La"/>
                 <outlet property="durationLabel" destination="j8w-0m-80o" id="WM1-dt-V1F"/>
-                <outlet property="messageImage" destination="l7T-Wj-hOO" id="1vb-UH-2aN"/>
+                <outlet property="messageButton" destination="MuZ-Qb-iYg" id="86c-Jf-JM5"/>
                 <outlet property="messageView" destination="1NL-J0-TjU" id="vm5-ir-Uox"/>
                 <outlet property="passangerName" destination="Dn1-rh-cXh" id="YbP-df-li3"/>
-                <outlet property="phoneImage" destination="Qde-WG-gdu" id="8Hc-vP-xDt"/>
+                <outlet property="phoneButton" destination="LLH-pA-lyd" id="G95-Ye-xw7"/>
                 <outlet property="phoneView" destination="juJ-sD-l0L" id="1yo-Gf-Gbg"/>
                 <outlet property="pulseView" destination="1tr-iV-mut" id="tEE-XA-hM5"/>
                 <outlet property="titleLabel" destination="0o4-L9-l0G" id="nFU-Fs-VAZ"/>
@@ -65,30 +65,38 @@
                             <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="messageBlue" translatesAutoresizingMaskIntoConstraints="NO" id="l7T-Wj-hOO">
-                            <rect key="frame" x="253.33333333333337" y="40" width="50" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-pA-lyd">
+                            <rect key="frame" x="94.333333333333329" y="20" width="59.999999999999986" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="7hM-ee-nlL"/>
-                                <constraint firstAttribute="height" constant="50" id="YLg-IU-NGb"/>
+                                <constraint firstAttribute="height" constant="60" id="21K-ZN-RAa"/>
+                                <constraint firstAttribute="width" constant="60" id="62Z-WX-rTH"/>
                             </constraints>
-                        </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phoneBlue" translatesAutoresizingMaskIntoConstraints="NO" id="Qde-WG-gdu">
-                            <rect key="frame" x="99.333333333333329" y="40" width="49.999999999999986" height="50"/>
+                            <state key="normal" image="phoneBlue"/>
+                            <connections>
+                                <action selector="callDriverPressed:" destination="-1" eventType="touchUpInside" id="T5g-Vl-AYc"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuZ-Qb-iYg">
+                            <rect key="frame" x="259.66666666666669" y="20" width="60" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="DL9-V1-euS"/>
-                                <constraint firstAttribute="width" constant="50" id="NJm-6N-o7u"/>
+                                <constraint firstAttribute="width" constant="60" id="6Ky-MC-qh3"/>
+                                <constraint firstAttribute="height" constant="60" id="Th8-yl-HS2"/>
                             </constraints>
-                        </imageView>
+                            <state key="normal" image="messageBlue"/>
+                            <connections>
+                                <action selector="messageDriverPressed:" destination="-1" eventType="touchUpInside" id="oOB-pc-14u"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="MPN-ks-anr" secondAttribute="trailing" constant="40" id="5Yk-Tm-P1B"/>
-                        <constraint firstItem="l7T-Wj-hOO" firstAttribute="centerY" secondItem="Qde-WG-gdu" secondAttribute="centerY" id="6uM-vu-zfc"/>
-                        <constraint firstAttribute="bottom" secondItem="Qde-WG-gdu" secondAttribute="bottom" constant="10" id="8IQ-N1-fAk"/>
-                        <constraint firstItem="Qde-WG-gdu" firstAttribute="centerX" secondItem="juJ-sD-l0L" secondAttribute="centerX" multiplier="0.6" id="C6h-VP-aDu"/>
-                        <constraint firstItem="l7T-Wj-hOO" firstAttribute="leading" secondItem="Qde-WG-gdu" secondAttribute="trailing" constant="104" id="NKk-KJ-JAT"/>
+                        <constraint firstItem="MuZ-Qb-iYg" firstAttribute="centerX" secondItem="juJ-sD-l0L" secondAttribute="centerX" multiplier="1.4" id="9XP-n0-JOH"/>
+                        <constraint firstItem="LLH-pA-lyd" firstAttribute="centerY" secondItem="juJ-sD-l0L" secondAttribute="centerY" id="JF4-zE-0q6"/>
                         <constraint firstAttribute="height" constant="100" id="QDz-ms-Fkq"/>
                         <constraint firstItem="MPN-ks-anr" firstAttribute="top" secondItem="juJ-sD-l0L" secondAttribute="top" constant="10" id="XkR-YS-50l"/>
+                        <constraint firstItem="MuZ-Qb-iYg" firstAttribute="centerY" secondItem="juJ-sD-l0L" secondAttribute="centerY" id="v7D-yz-vcn"/>
+                        <constraint firstItem="LLH-pA-lyd" firstAttribute="centerX" secondItem="juJ-sD-l0L" secondAttribute="centerX" multiplier="0.6" id="vVK-5p-7PR"/>
                         <constraint firstItem="MPN-ks-anr" firstAttribute="leading" secondItem="juJ-sD-l0L" secondAttribute="leading" constant="40" id="wlZ-fJ-DJa"/>
                     </constraints>
                 </view>

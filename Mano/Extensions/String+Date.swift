@@ -34,7 +34,8 @@ extension String {
         dateFormatter.dateFormat = "MMM d, h:mm a yyyy"
         dateFormatter.locale = .current
         guard let date = dateFormatter.date(from: self) else {
-            fatalError()
+            return Date()
+//            fatalError()
         }
         return date
     }

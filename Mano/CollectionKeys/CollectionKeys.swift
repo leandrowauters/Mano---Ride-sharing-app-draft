@@ -87,3 +87,29 @@ struct MessageCollectionKeys {
     static let readKey = "read"
 }
 
+struct ReturnRideCollectionKeys {
+    static let collectionKey = "Return Ride"
+    static let rideIdKey = "rideId"
+    static let passangerName = "passangerName"
+    static let passangerId = "passangerId"
+    static let pickupAddressKey = "pickupAddress"
+    static let dropoffAddressKey = "dropoffAddress"
+    static let dropoffNameKey = "dropoffName"
+    static let pickupLatKey = "pickupLat"
+    static let pickupLonKey = "pickupLon"
+    static let dropoffLatKey = "dropoffLat"
+    static let dropoffLonKey = "dropoffLon"
+    static let driverOnItsWayKey = "driverOnItsWay"
+    static let durationKey = "duration"
+    static let distanceKey = "distance"
+    static let driverNameKey = "driverName"
+    static let driverIdKey = "driverId"
+    static let driverProfileImageKey = "driveProfileImage"
+    static let driverMakerModelKey = "driverMakerModel"
+    static let licencePlateKey = "licencePlate"
+    static let carPictureKey = "carPicture"
+    static let passangerCellKey = "passangerCell"
+    static let driverCellKey = "driverCell"
+    static let rideStatusKey = "rideStatus"
+}
+

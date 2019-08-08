@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseLocationViewController" customModule="Mano" customModuleProvider="target">
+            <connections>
+                <outlet property="locationButton" destination="8sV-1t-52p" id="VdI-3A-TqU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLI-pa-Jwn" customClass="RoundedView" customModule="Mano" customModuleProvider="target">
+                    <rect key="frame" x="41.333333333333343" y="249.33333333333334" width="331.33333333333326" height="257.33333333333326"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Dropoff Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2e0-3a-2Uj">
+                            <rect key="frame" x="10" y="29.999999999999972" width="311.33333333333331" height="24.333333333333329"/>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="21"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sV-1t-52p" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="49.999999999999986" y="103.66666666666666" width="231.33333333333331" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="04M-zO-ak3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                            <state key="normal" title="Home">
+                                <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="locationButtonPressed:" destination="-1" eventType="touchUpInside" id="gaf-6l-Yh3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCF-Ur-C9K" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="90.000000000000014" y="192.33333333333334" width="151.33333333333337" height="50"/>
+                            <color key="backgroundColor" red="0.98823529409999999" green="0.51372549020000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="Ryj-oJ-bb4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="25"/>
+                            <state key="normal" title="Done">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="donePressed:" destination="-1" eventType="touchUpInside" id="jPo-2C-cZb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="8sV-1t-52p" firstAttribute="centerX" secondItem="CLI-pa-Jwn" secondAttribute="centerX" id="4EX-4O-SRF"/>
+                        <constraint firstAttribute="trailing" secondItem="2e0-3a-2Uj" secondAttribute="trailing" constant="10" id="Cm1-G8-lHw"/>
+                        <constraint firstAttribute="bottom" secondItem="jCF-Ur-C9K" secondAttribute="bottom" constant="15" id="Y19-jE-iO8"/>
+                        <constraint firstAttribute="trailing" secondItem="jCF-Ur-C9K" secondAttribute="trailing" constant="90" id="gNc-BV-dej"/>
+                        <constraint firstAttribute="trailing" secondItem="8sV-1t-52p" secondAttribute="trailing" constant="50" id="hIf-3c-l7T"/>
+                        <constraint firstItem="8sV-1t-52p" firstAttribute="centerY" secondItem="CLI-pa-Jwn" secondAttribute="centerY" id="iSc-xq-yiE"/>
+                        <constraint firstItem="8sV-1t-52p" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="50" id="lD8-vo-Wsl"/>
+                        <constraint firstItem="2e0-3a-2Uj" firstAttribute="top" secondItem="CLI-pa-Jwn" secondAttribute="top" constant="30" id="qUx-6u-i6I"/>
+                        <constraint firstItem="jCF-Ur-C9K" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="90" id="un5-gg-3Xv"/>
+                        <constraint firstItem="2e0-3a-2Uj" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="10" id="zdl-Uw-5Qo"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.51217358732876717" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CLI-pa-Jwn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="DuF-Dd-KUJ"/>
+                <constraint firstItem="CLI-pa-Jwn" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="JSC-pp-jB9"/>
+                <constraint firstItem="CLI-pa-Jwn" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.35" id="LsO-eD-mxx"/>
+                <constraint firstItem="CLI-pa-Jwn" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="csZ-s8-7gw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

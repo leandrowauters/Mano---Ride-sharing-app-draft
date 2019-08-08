@@ -86,6 +86,17 @@ struct GoogleHelper {
         }
     }
     
+    static public func getShortertString(string: String) -> String {
+        var newWord = String()
+        for character in string {
+            if character == "," {
+                return newWord
+            }
+            newWord.append(character)
+        }
+        return String()
+    }
+    
     static public func calculateMilesAndTimeToDestination(pickup: Bool,ride: Ride, userLocation: CLLocation , completion: @escaping(String, String, Double, Double) -> Void) {
         
         var destinationCLLocation = CLLocation()

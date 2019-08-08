@@ -56,6 +56,8 @@
 		D59D1A8222E3E41100E94D77 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A8122E3E41100E94D77 /* StorageService.swift */; };
 		D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */; };
 		D5A33CC122F3691C00DD28D6 /* OnWayToDropoffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */; };
+		D5CCF96422FC631900DC7D59 /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF96222FC631900DC7D59 /* ChooseLocationViewController.swift */; };
+		D5CCF96522FC631900DC7D59 /* ChooseLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5CCF96322FC631900DC7D59 /* ChooseLocationViewController.xib */; };
 		D5D1298622E228DA00B5EDB2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */; };
 		D5D6A76A22E3814C009C0029 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */; };
 		D5D6A76B22E3814C009C0029 /* FavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5D6A76922E3814C009C0029 /* FavoritesTableViewCell.xib */; };
@@ -168,6 +170,8 @@
 		D59D1A8122E3E41100E94D77 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWayToDropoffViewController.swift; sourceTree = "<group>"; };
 		D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnWayToDropoffViewController.xib; sourceTree = "<group>"; };
+		D5CCF96222FC631900DC7D59 /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
+		D5CCF96322FC631900DC7D59 /* ChooseLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseLocationViewController.xib; sourceTree = "<group>"; };
 		D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		D5D6A76822E3814C009C0029 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		D5D6A76922E3814C009C0029 /* FavoritesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesTableViewCell.xib; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 				D57557A122E761590063BD15 /* RideAcceptedAlertViewController.xib */,
 				D57CBBCE22F0E5830046CF2F /* ArrivedViewController.swift */,
 				D57CBBCF22F0E5830046CF2F /* ArrivedViewController.xib */,
+				D5CCF96222FC631900DC7D59 /* ChooseLocationViewController.swift */,
+				D5CCF96322FC631900DC7D59 /* ChooseLocationViewController.xib */,
 			);
 			path = "Messages+Alert";
 			sourceTree = "<group>";
@@ -582,6 +588,7 @@
 				D55E964422FB182900CC9496 /* WaitingForRequestViewController.xib in Resources */,
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
+				D5CCF96522FC631900DC7D59 /* ChooseLocationViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
@@ -710,6 +717,7 @@
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
 				D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */,
+				D5CCF96422FC631900DC7D59 /* ChooseLocationViewController.swift in Sources */,
 				D5F7635622E886E700250C96 /* TestHelper.swift in Sources */,
 				D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */,
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,

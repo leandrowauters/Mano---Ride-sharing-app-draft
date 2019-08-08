@@ -39,13 +39,22 @@ class WaitingForRequestViewController: UIViewController {
             thirtyMinTimer()
             calculateCurrentMilesToPickup()
             graphics.pulsatingNoReverse(view: pulsingView)
+            DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnDrive.rawValue) { (error, ride) in
+                if let error = error {
+                    self.showAlert(title: "Error listening for ride status", message: error.localizedDescription)
+                }
+                if let ride = ride {
+                    let onItsWayVC = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
+                    self.navigationController?.pushViewController(onItsWayVC, animated: true)
+                }
+            }
         } else {
             DBService.listenForDistanceDurationUpdates(ride: ride) { (error, ride) in
                 if let error = error {
                     self.showAlert(title: "Error listening", message: error.localizedDescription)
                 }
                 if let ride = ride {
-                    self.distanceLabel.text = "Distance: \n \(MainTimer.timeString(time: TimeInterval(ride.durtation))) away"
+                    self.distanceLabel.text = "Distance: \n \(MainTimer.timeString(time: TimeInterval(ride.duration))) away"
                 }
             }
         }
@@ -61,8 +70,9 @@ class WaitingForRequestViewController: UIViewController {
     
     private func setup() {
         changeToOnWaitingRequest()
+        locationManager.delegate = self
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            locationManager.delegate = self
+            
             titleLabel.text = "Waiting For  Request "
             messageLabel.text = "PLEASE KEEP APP OPEN TO SHARE LOCATION"
         } else {
@@ -85,6 +95,7 @@ class WaitingForRequestViewController: UIViewController {
         }
     }
     
+ 
     
     private func changeToOnWaitingRequest() {
         DBService.updateRideStatus(ride: ride, status: RideStatus.onWaitingToRequest.rawValue) { (error) in
@@ -128,6 +139,10 @@ class WaitingForRequestViewController: UIViewController {
     }
     
     @IBAction func requestRidePressed(_ sender: Any) {
+        let currentLocation = userLocation.coordinate
+        let chooseLocationVC = ChooseLocationViewController(nibName: nil, bundle: nil, ride: ride, currentLat: currentLocation.latitude, currentLon: currentLocation.longitude)
+        chooseLocationVC.modalPresentationStyle = .overCurrentContext
+        present(chooseLocationVC, animated: true)
         
     }
     @IBAction func phonePressed(_ sender: Any) {
