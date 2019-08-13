@@ -110,13 +110,13 @@ class RequestRideViewController: UIViewController {
     }
     @objc func pickupViewPressed() {
         pickup = true
-        GoogleHelper.setupAutoCompeteVC(Vc: self)
+        MapsHelper.setupAutoCompeteVC(Vc: self)
         
     }
     
     @objc func dropoffViewPressed() {
         pickup = false
-        GoogleHelper.setupAutoCompeteVC(Vc: self)
+        MapsHelper.setupAutoCompeteVC(Vc: self)
     }
     
     func createRide() {

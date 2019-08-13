@@ -11,7 +11,7 @@ import GooglePlaces
 import MapKit
 
 
-struct GoogleHelper {
+struct MapsHelper {
     static public func setupAutoCompeteVC(Vc: UIViewController) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = Vc as? GMSAutocompleteViewControllerDelegate
@@ -35,7 +35,7 @@ struct GoogleHelper {
         autocompleteController.tableCellSeparatorColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
         Vc.present(autocompleteController, animated: true, completion: nil)
     }
-    static public func openGoogleMapDirection(currentLat: Double, currentLon: Double,destinationLat: Double, destinationLon: Double,completion: @escaping(Error?) -> Void) {
+    static public func openGoogleMapDirection(currentLat: Double, currentLon: Double, destinationLat: Double, destinationLon: Double,completion: @escaping(Error?) -> Void) {
         guard let url = URL(string: "comgooglemaps://?saddr=\(currentLat),\(currentLon)&daddr=\(destinationLat),\(destinationLon)") else {
             completion(AppError.badURL("Bad URL"))
             return
@@ -43,6 +43,26 @@ struct GoogleHelper {
         UIApplication.shared.open(url)
     }
     
+    static public func openWazeDirection(destinationLat: Double, destinationLon: Double, completion: @escaping(Error?) -> Void) {
+        if UIApplication.shared.canOpenURL(URL(string: "waze://")!) {
+            guard let url = URL(string: "waze://?ll=\(destinationLat),\(destinationLon)&navigate=yes") else {
+                completion(AppError.badURL("Bad URL"))
+                return
+            }
+            UIApplication.shared.open(url)
+        }
+        else {
+            UIApplication.shared.open(URL(string: "http://itunes.apple.com/us/app/id323229106")!)
+        }
+    }
+    
+    static public func openAppleMapsForDirection(currentLocation: CLLocationCoordinate2D, destinationLat: Double, destinationLon: Double) {
+        let source = MKMapItem(placemark: MKPlacemark(coordinate: currentLocation))
+        source.name = "Source"
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationLat, longitude: destinationLon)))
+        destination.name = "Destination"
+        MKMapItem.openMaps(with: [source,destination], launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+    }
     static public func calculateEta(originLat: Double, originLon: Double, destinationLat: Double, destinationLon: Double, completionHandler: @escaping(AppError?, String? , Int?) -> Void) {
         let departureTime = Int(Date().timeIntervalSince1970)
         let endpointUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=\(originLat),\(originLon)&destination=\(destinationLat),\(destinationLon)&departure_time=\(departureTime)&key=\(GoogleMapsAPI.GoogleMapsAPIKey)"

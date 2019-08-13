@@ -46,6 +46,7 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var phoneView: BorderedView!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var mapOptionView: RoundViewWithBorder10!
     
     
     
@@ -54,7 +55,7 @@ class OnItsWayViewController: UIViewController {
         setup()
         setupCoreLocation()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            if ride.rideStatus == RideStatus.changedToReturnDrive.rawValue{
+            if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
                changeToReturnPick()
             } else {
             changeToOnPickup()
@@ -68,9 +69,12 @@ class OnItsWayViewController: UIViewController {
             calculateCurrentMilesToPickup()
             
         } else {
-            if ride.rideStatus == RideStatus.changedToReturnDrive.rawValue{
+            if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
                 changeToReturnPick()
                 listenToDuration()
+                listenToDropoffReturn()
+            } else {
+                listenToDropoffChanges()
             }
             activityIndicator.stopAnimating()
         }
@@ -110,7 +114,7 @@ class OnItsWayViewController: UIViewController {
     private func searchGoogleForDirections() {
         let currentLocation = userLocation.coordinate
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-            GoogleHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
+            MapsHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.pickupLat, destinationLon: self.ride.pickupLon, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }
@@ -118,6 +122,13 @@ class OnItsWayViewController: UIViewController {
         }
     }
     
+    private func openWaze() {
+        MapsHelper.openWazeDirection(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error opening Waze", message: error.localizedDescription)
+            }
+        }
+    }
     private func changeToOnPickup() {
         DBService.updateRideStatus(ride: ride, status: RideStatus.onPickup.rawValue) { (error) in
             if let error = error {
@@ -134,7 +145,7 @@ class OnItsWayViewController: UIViewController {
     }
 
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
+        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
@@ -173,7 +184,7 @@ class OnItsWayViewController: UIViewController {
                 }
                 
                 distanceLabel.isHidden = true
-                listenToDropoffChanges()
+                
             }
         }
 
@@ -204,13 +215,25 @@ class OnItsWayViewController: UIViewController {
         present(arriveVc, animated: true)
     }
     
+    @IBAction func mapOptionPressed(_ sender: Any) {
+        mapOptionView.isHidden = !mapOptionView.isHidden
+        
+    }
     
-
+    
     
     @IBAction func googleMapsPressed(_ sender: Any) {
         showConfimationAlert(title: "Open Google Maps", message: nil) { (okay) in
             self.searchGoogleForDirections()
         }
+    }
+    
+    @IBAction func wazePressed(_ sender: Any) {
+        openWaze()
+    }
+    
+    @IBAction func appleMapsPressed(_ sender: Any) {
+        MapsHelper.openAppleMapsForDirection(currentLocation: userLocation.coordinate, destinationLat: ride.pickupLat, destinationLon: ride.pickupLon)
     }
     
     private func listenToDropoffChanges() {
@@ -226,15 +249,18 @@ class OnItsWayViewController: UIViewController {
             }
 
         }
-//        DBService.listenToDropoff(ride: ride) { (error, ride) in
-//            if let error = error {
-//                self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
-//            }
-//            if let ride = ride {
-//                let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
-//                self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
-//            }
-//        }
+    }
+    
+    private func listenToDropoffReturn() {
+        DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnDropoff.rawValue) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error listening to ride status", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                let onWayToDropoffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+                self.navigationController?.pushViewController(onWayToDropoffVC, animated: true)
+            }
+        }
     }
     
     private func listenToDuration() {
@@ -303,6 +329,13 @@ extension OnItsWayViewController: MessageDelegate {
 
 extension OnItsWayViewController: ArriveViewDelegate {
     func userPressBeginDropOff(ride: Ride) {
+        if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue {
+            DBService.updateRideStatus(ride: ride, status: RideStatus.changedToReturnDropoff.rawValue) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error updating ride status", message: error.localizedDescription)
+                }
+            }
+        }
         let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
         self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
     }

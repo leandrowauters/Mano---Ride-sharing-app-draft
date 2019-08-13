@@ -15,8 +15,10 @@ enum RideStatus: String {
     case onDropoff
     case changeToWaitingRequest
     case onWaitingToRequest
-    case changedToReturnDrive
+    case changedToReturnPickup
     case onPickupReturnRide
+    case changedToReturnDropoff
+    case onDropoffReturnRide
 }
 class Ride: Codable {
     var passanger: String

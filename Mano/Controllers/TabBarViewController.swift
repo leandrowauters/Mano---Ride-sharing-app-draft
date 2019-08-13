@@ -36,7 +36,7 @@ class TabBarViewController: UITabBarController {
             }
             if let ride = ride {
                 let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-                GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
+                MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
                     self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
                         
                         DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
@@ -106,7 +106,7 @@ class TabBarViewController: UITabBarController {
             switch ride.rideStatus {
             case RideStatus.onPickup.rawValue:
                 let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-                GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
+                MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
                     
                     let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: miles, ride: ride)
                     self.navigationController?.pushViewController(onItsWayVc, animated: true)

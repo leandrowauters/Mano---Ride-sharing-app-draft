@@ -40,7 +40,7 @@ class WaitingForRequestViewController: UIViewController {
             thirtyMinTimer()
             calculateCurrentMilesToPickup()
             graphics.pulsatingNoReverse(view: pulsingView)
-            DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnDrive.rawValue) { (error, ride) in
+            DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnPickup.rawValue) { (error, ride) in
                 if let error = error {
                     self.showAlert(title: "Error listening for ride status", message: error.localizedDescription)
                 }
@@ -124,7 +124,7 @@ class WaitingForRequestViewController: UIViewController {
     }
     
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
+        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(time) Away"
             DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
                 if let error = error {

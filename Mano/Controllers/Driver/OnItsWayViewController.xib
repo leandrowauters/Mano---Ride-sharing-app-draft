@@ -23,6 +23,7 @@
                 <outlet property="driverNameLabel" destination="X3j-Re-Yh5" id="mWF-hv-qbU"/>
                 <outlet property="driverView" destination="dL8-my-DxU" id="3Nl-mO-5La"/>
                 <outlet property="durationLabel" destination="j8w-0m-80o" id="WM1-dt-V1F"/>
+                <outlet property="mapOptionView" destination="RNB-kk-bfQ" id="0pf-Qp-e7j"/>
                 <outlet property="messageButton" destination="MuZ-Qb-iYg" id="86c-Jf-JM5"/>
                 <outlet property="messageView" destination="1NL-J0-TjU" id="vm5-ir-Uox"/>
                 <outlet property="passangerName" destination="Dn1-rh-cXh" id="YbP-df-li3"/>
@@ -189,9 +190,9 @@
                                 <constraint firstAttribute="width" constant="50" id="0gV-P0-ena"/>
                                 <constraint firstAttribute="height" constant="50" id="u4W-IA-5kQ"/>
                             </constraints>
-                            <state key="normal" image="googleMaps"/>
+                            <state key="normal" image="map"/>
                             <connections>
-                                <action selector="googleMapsPressed:" destination="-1" eventType="touchUpInside" id="Sze-O4-Jip"/>
+                                <action selector="mapOptionPressed:" destination="-1" eventType="touchUpInside" id="qpQ-7v-hq3"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP7-Ur-D5Q">
@@ -234,11 +235,53 @@
                                 <action selector="messagePassangerPressed:" destination="-1" eventType="touchUpInside" id="sbj-OJ-Wdo"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-kk-bfQ" customClass="RoundViewWithBorder10" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="128" y="90" width="172" height="70"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-kk-bfQ" customClass="RoundViewWithBorder10" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="89.666666666666671" y="90" width="248.66666666666663" height="70"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnd-kQ-dbk">
+                                    <rect key="frame" x="25" y="10" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="6tu-Lv-NQb"/>
+                                        <constraint firstAttribute="width" constant="50" id="R7u-Ra-U4j"/>
+                                    </constraints>
+                                    <state key="normal" image="googleMaps"/>
+                                    <connections>
+                                        <action selector="googleMapsPressed:" destination="-1" eventType="touchUpInside" id="u8U-lb-zSV"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-W7-aDB">
+                                    <rect key="frame" x="173.66666666666663" y="10" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="8CF-Fc-6SO"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="CXW-wA-5MY"/>
+                                        <constraint firstAttribute="height" constant="50" id="D89-QA-mkP"/>
+                                        <constraint firstAttribute="width" constant="50" id="QnP-QT-7df"/>
+                                    </constraints>
+                                    <state key="normal" image="waze"/>
+                                    <connections>
+                                        <action selector="wazePressed:" destination="-1" eventType="touchUpInside" id="kCZ-Ry-S0X"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufg-R0-VjN">
+                                    <rect key="frame" x="99.333333333333329" y="10" width="49.999999999999986" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="RIM-D9-VNJ"/>
+                                        <constraint firstAttribute="height" constant="50" id="hm0-Wl-b7P"/>
+                                    </constraints>
+                                    <state key="normal" image="appleMap"/>
+                                    <connections>
+                                        <action selector="appleMapsPressed:" destination="-1" eventType="touchUpInside" id="5nj-Hl-uL9"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="172" id="qvw-rQ-ycc"/>
+                                <constraint firstItem="ufg-R0-VjN" firstAttribute="centerX" secondItem="RNB-kk-bfQ" secondAttribute="centerX" id="G2b-H0-E2O"/>
+                                <constraint firstItem="tnd-kQ-dbk" firstAttribute="leading" secondItem="RNB-kk-bfQ" secondAttribute="leading" constant="25" id="KyZ-RH-YFa"/>
+                                <constraint firstItem="ufg-R0-VjN" firstAttribute="centerY" secondItem="RNB-kk-bfQ" secondAttribute="centerY" id="ZrL-aZ-Hqd"/>
+                                <constraint firstAttribute="trailing" secondItem="c8h-W7-aDB" secondAttribute="trailing" constant="25" id="het-eP-NXj"/>
+                                <constraint firstItem="tnd-kQ-dbk" firstAttribute="centerY" secondItem="RNB-kk-bfQ" secondAttribute="centerY" id="jwa-l6-hO1"/>
+                                <constraint firstItem="c8h-W7-aDB" firstAttribute="centerY" secondItem="tnd-kQ-dbk" secondAttribute="centerY" id="s40-Xe-Y3U"/>
                                 <constraint firstAttribute="height" constant="70" id="ufH-rb-BS9"/>
                             </constraints>
                         </view>
@@ -260,6 +303,7 @@
                         <constraint firstItem="a59-ax-dhj" firstAttribute="height" secondItem="KP7-Ur-D5Q" secondAttribute="height" id="ar8-yK-EqM"/>
                         <constraint firstItem="EsG-IJ-erm" firstAttribute="leading" secondItem="dL8-my-DxU" secondAttribute="leading" id="gil-YV-MMJ"/>
                         <constraint firstItem="a59-ax-dhj" firstAttribute="centerY" secondItem="KP7-Ur-D5Q" secondAttribute="centerY" id="ixm-x0-7Ca"/>
+                        <constraint firstItem="RNB-kk-bfQ" firstAttribute="width" secondItem="dL8-my-DxU" secondAttribute="width" multiplier="0.6" id="jYQ-KM-7w9"/>
                         <constraint firstAttribute="trailing" secondItem="EsG-IJ-erm" secondAttribute="trailing" id="pJe-xZ-GRi"/>
                     </constraints>
                 </view>
@@ -275,7 +319,7 @@
                     </constraints>
                 </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BFV-go-o9g">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="368"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.4960669948630137" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
@@ -289,7 +333,7 @@
                 <constraint firstItem="1tr-iV-mut" firstAttribute="width" secondItem="T3O-aR-qxC" secondAttribute="width" id="AEM-sy-DKJ"/>
                 <constraint firstItem="1NL-J0-TjU" firstAttribute="top" secondItem="0o4-L9-l0G" secondAttribute="bottom" id="AlC-M0-8EX"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="centerY" secondItem="c65-z6-GKY" secondAttribute="centerY" id="Bx7-LN-WY0"/>
-                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Fru-67-D5l"/>
+                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="Fru-67-D5l"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="height" secondItem="c65-z6-GKY" secondAttribute="height" id="Hkv-3F-57B"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BFV-go-o9g" secondAttribute="trailing" id="JK1-8U-Yld"/>
                 <constraint firstItem="1tr-iV-mut" firstAttribute="height" secondItem="T3O-aR-qxC" secondAttribute="height" id="KbU-vM-ek9"/>
@@ -325,10 +369,13 @@
         </view>
     </objects>
     <resources>
+        <image name="appleMap" width="48" height="48"/>
         <image name="googleMaps" width="48" height="48"/>
+        <image name="map" width="50" height="50"/>
         <image name="message" width="50" height="50"/>
         <image name="messageBlue" width="50" height="50"/>
         <image name="phone" width="50" height="50"/>
         <image name="phoneBlue" width="50" height="50"/>
+        <image name="waze" width="96" height="96"/>
     </resources>
 </document>

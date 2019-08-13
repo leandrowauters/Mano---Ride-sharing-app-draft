@@ -34,6 +34,13 @@ class OnWayToDropoffViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
+                changeToOnDropoffReturn()
+            } else {
+                changeToOnDropoff()
+            }
+        }
         setup()
         setupCoreLocation()
         thirtyMinTimer()
@@ -54,7 +61,6 @@ class OnWayToDropoffViewController: UIViewController {
     
     
     private func setup() {
-        changeToOnDropoff()
         locationManager.delegate = self
         graphics.pulsating(view: pulseView)
         if let userPhotoURL = URL(string: ride.driveProfileImage)
@@ -98,7 +104,7 @@ class OnWayToDropoffViewController: UIViewController {
         }
     }
     func calculateMilesToDropoff() {
-        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
+        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             self.activityIndicator.stopAnimating()
@@ -106,7 +112,7 @@ class OnWayToDropoffViewController: UIViewController {
     }
     private func searchGoogleForDirections() {
         let currentLocation = userLocation.coordinate
-        GoogleHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.dropoffLat, destinationLon: self.ride.dropoffLon, completion: { (error) in
+        MapsHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.dropoffLat, destinationLon: self.ride.dropoffLon, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }
@@ -114,6 +120,14 @@ class OnWayToDropoffViewController: UIViewController {
     }
     private func changeToOnDropoff() {
         DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoff.rawValue) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func  changeToOnDropoffReturn() {
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoffReturnRide.rawValue) { (error) in
             if let error = error {
                 self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
             }

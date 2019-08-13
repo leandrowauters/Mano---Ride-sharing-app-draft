@@ -33,11 +33,11 @@ class ChooseLocationViewController: UIViewController {
     }
 
     @IBAction func locationButtonPressed(_ sender: Any) {
-        GoogleHelper.setupAutoCompeteVC(Vc: self)
+        MapsHelper.setupAutoCompeteVC(Vc: self)
     }
     
     @IBAction func donePressed(_ sender: Any) {
-        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnDrive.rawValue, ride: ride) { (error, ride) in
+        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnPickup.rawValue, ride: ride) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to new ride", message: error.localizedDescription)
             }
@@ -69,7 +69,7 @@ extension ChooseLocationViewController: GMSAutocompleteViewControllerDelegate {
             return}
         let coordinate = place.coordinate
         self.dropoffAddress = dropoffAddress
-        let shorterAddress = GoogleHelper.getShortertString(string: dropoffAddress)
+        let shorterAddress = MapsHelper.getShortertString(string: dropoffAddress)
         locationButton.setTitle(shorterAddress, for: .normal)
         dropoffLat = coordinate.latitude
         dropoffLon = coordinate.longitude

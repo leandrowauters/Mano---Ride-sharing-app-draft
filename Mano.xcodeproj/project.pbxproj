@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D50010DF22E5F842006659DA /* GoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010DE22E5F842006659DA /* GoogleHelper.swift */; };
+		D50010DF22E5F842006659DA /* MapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010DE22E5F842006659DA /* MapsHelper.swift */; };
 		D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010E422E6077D006659DA /* DBService+Ride.swift */; };
 		D5122CE522E1124C00453359 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5122CE322E1124C00453359 /* BioViewController.swift */; };
 		D5122CE622E1124C00453359 /* BioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5122CE422E1124C00453359 /* BioViewController.xib */; };
@@ -118,7 +118,7 @@
 		64A8F5805886CA0F9CFA728C /* Pods-Mano.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mano.release.xcconfig"; path = "Target Support Files/Pods-Mano/Pods-Mano.release.xcconfig"; sourceTree = "<group>"; };
 		CECD7656A3F3E53D6A59F896 /* Pods-Mano.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mano.debug.xcconfig"; path = "Target Support Files/Pods-Mano/Pods-Mano.debug.xcconfig"; sourceTree = "<group>"; };
 		D0D079C4836965230C7A0B40 /* Pods_Mano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D50010DE22E5F842006659DA /* GoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHelper.swift; sourceTree = "<group>"; };
+		D50010DE22E5F842006659DA /* MapsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsHelper.swift; sourceTree = "<group>"; };
 		D50010E422E6077D006659DA /* DBService+Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Ride.swift"; sourceTree = "<group>"; };
 		D5122CE322E1124C00453359 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		D5122CE422E1124C00453359 /* BioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BioViewController.xib; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 			children = (
 				D5E39B9722E016A8008A919A /* IBDesignableViews.swift */,
 				D5E984CE22E235F70023B155 /* GraphicsClient.swift */,
-				D50010DE22E5F842006659DA /* GoogleHelper.swift */,
+				D50010DE22E5F842006659DA /* MapsHelper.swift */,
 				D5F7635122E7C40000250C96 /* NetworkHelper.swift */,
 				D5F7635322E7C52700250C96 /* AppError.swift */,
 				D53AFD9422F0BFDA00822583 /* MainTimer.swift */,
@@ -727,7 +727,7 @@
 				D59D1A7222E3BE4900E94D77 /* MyLocationsViewController.swift in Sources */,
 				D5122CE522E1124C00453359 /* BioViewController.swift in Sources */,
 				D5EF0AAB22E282410061B67A /* Ride.swift in Sources */,
-				D50010DF22E5F842006659DA /* GoogleHelper.swift in Sources */,
+				D50010DF22E5F842006659DA /* MapsHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

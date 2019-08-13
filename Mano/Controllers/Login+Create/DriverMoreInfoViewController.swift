@@ -136,7 +136,7 @@ class DriverMoreInfoViewController: UIViewController {
     }
     
     @IBAction func homeAddressPressed(_ sender: Any) {
-        GoogleHelper.setupAutoCompeteVC(Vc: self)
+        MapsHelper.setupAutoCompeteVC(Vc: self)
     }
     
     private func setupTap() {
@@ -231,7 +231,7 @@ extension DriverMoreInfoViewController: GMSAutocompleteViewControllerDelegate {
             return}
         let coordinate = place.coordinate
         self.homeAddress = homeAddress
-        let shortertAddress = GoogleHelper.getShortertString(string: homeAddress)
+        let shortertAddress = MapsHelper.getShortertString(string: homeAddress)
         homeAddressButton.setTitle(shortertAddress, for: .normal)
         homeLon = coordinate.longitude
         homeLat = coordinate.latitude

@@ -67,7 +67,7 @@ class MoreInfoViewController: UIViewController {
         homeAddressView.addGestureRecognizer(homeAddressTap)
     }
     @objc func presentAutocompleteVC() {
-        GoogleHelper.setupAutoCompeteVC(Vc: self)
+        MapsHelper.setupAutoCompeteVC(Vc: self)
         
     }
 
