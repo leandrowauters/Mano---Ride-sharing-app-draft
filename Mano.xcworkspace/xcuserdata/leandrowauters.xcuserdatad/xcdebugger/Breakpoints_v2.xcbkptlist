@@ -6,32 +6,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mano/Controllers/Driver/OnWayToDropoffViewController.swift"
-            timestampString = "586978902.547552"
+            filePath = "Mano/Controllers/Driver/WaitingForRequestViewController.swift"
+            timestampString = "587406357.456295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "calculateCurrentMilesToPickup()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mano.WaitingForRequestViewController.calculateCurrentMilesToPickup() -&gt; ()"
+                  moduleName = "Mano"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leandrowauters/Documents/Mano/Mano/Mano/Controllers/Driver/WaitingForRequestViewController.swift"
+                  timestampString = "587405679.248019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Double, Swift.Double) -&gt; () in Mano.WaitingForRequestViewController.calculateCurrentMilesToPickup() -&gt; ()"
+                  moduleName = "Mano"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leandrowauters/Documents/Mano/Mano/Mano/Controllers/Driver/WaitingForRequestViewController.swift"
+                  timestampString = "587405679.251497"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mano/Controllers/Driver/WaitingForRequestViewController.swift"
+            timestampString = "587406357.458505"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "thirtyMinTimer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mano/Controllers/Driver/WaitingForRequestViewController.swift"
-            timestampString = "586979890.050673"
+            timestampString = "587406607.8619291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "thirtyMinTimer()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

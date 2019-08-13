@@ -97,14 +97,14 @@ struct GoogleHelper {
         return String()
     }
     
-    static public func calculateMilesAndTimeToDestination(pickup: Bool,ride: Ride, userLocation: CLLocation , completion: @escaping(String, String, Double, Double) -> Void) {
+    static public func calculateMilesAndTimeToDestination(destinationLat: Double, destinationLon: Double, userLocation: CLLocation , completion: @escaping(String, String, Double, Double) -> Void) {
         
-        var destinationCLLocation = CLLocation()
-        if pickup {
-            destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
-        } else {
-            destinationCLLocation = CLLocation(latitude: ride.dropoffLat, longitude: ride.dropoffLon)
-        }
+        let destinationCLLocation = CLLocation(latitude: destinationLat, longitude: destinationLon)
+//        if pickup {
+//            destinationCLLocation = CLLocation(latitude: ride.pickupLat, longitude: ride.pickupLon)
+//        } else {
+//            destinationCLLocation = CLLocation(latitude: ride.dropoffLat, longitude: ride.dropoffLon)
+//        }
         let request = MKDirections.Request()
         let source = MKPlacemark(coordinate: userLocation.coordinate)
         let destination = MKPlacemark(coordinate: destinationCLLocation.coordinate)

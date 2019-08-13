@@ -23,7 +23,7 @@ class OnItsWayViewController: UIViewController {
     var thirtySecondTimer = 0
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
-    
+    private var timer: Timer?
 
     @IBOutlet weak var driverImage: RoundedImageViewBlue!
     @IBOutlet weak var driverNameLabel: UILabel!
@@ -55,7 +55,7 @@ class OnItsWayViewController: UIViewController {
         setupCoreLocation()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             if ride.rideStatus == RideStatus.changedToReturnDrive.rawValue{
-               changeToOnPickup()
+               changeToReturnPick()
             } else {
             changeToOnPickup()
             }
@@ -68,6 +68,10 @@ class OnItsWayViewController: UIViewController {
             calculateCurrentMilesToPickup()
             
         } else {
+            if ride.rideStatus == RideStatus.changedToReturnDrive.rawValue{
+                changeToReturnPick()
+                listenToDuration()
+            }
             activityIndicator.stopAnimating()
         }
     }
@@ -75,12 +79,14 @@ class OnItsWayViewController: UIViewController {
     
 
     @objc private func thirtyMinTimer() {
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-            if self.thirtySecondTimer == 30 {
-                self.calculateCurrentMilesToPickup()
-                self.thirtySecondTimer = 0
-            } else {
-                self.thirtySecondTimer += 1
+        if timer != nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+                if self.thirtySecondTimer == 30 {
+                    self.calculateCurrentMilesToPickup()
+                    self.thirtySecondTimer = 0
+                } else {
+                    self.thirtySecondTimer += 1
+                }
             }
         }
     }
@@ -95,6 +101,7 @@ class OnItsWayViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -125,18 +132,16 @@ class OnItsWayViewController: UIViewController {
             }
         }
     }
-//    func getAverageDistance() -> Double {
-//
-//        let coreLocDistance = firstLocation.distance(from: userLocation)
-//
-//        let googleDistance = Double(self.distance)
-//        let milesDistance = (googleDistance - Double(coreLocDistance)) * 0.000621371
-//        return milesDistance
-//    }
+
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: true, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
+        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
+            DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error updating ride", message: error.localizedDescription)
+                }
+            })
             self.activityIndicator.stopAnimating()
         }
     }
@@ -214,6 +219,8 @@ class OnItsWayViewController: UIViewController {
                 self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
             }
             if let ride = ride {
+                self.timer?.invalidate()
+                self.timer = nil
                 let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
                 self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
             }
@@ -228,6 +235,17 @@ class OnItsWayViewController: UIViewController {
 //                self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
 //            }
 //        }
+    }
+    
+    private func listenToDuration() {
+        DBService.listenForDistanceDurationUpdates(ride: ride) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error listening", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                self.durationLabel.text = "Distance: \n \(MainTimer.timeString(time: TimeInterval(ride.duration))) away"
+            }
+        }
     }
     
     @IBAction func callPassanger(_ sender: Any) {

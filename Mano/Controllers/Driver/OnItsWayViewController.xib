@@ -184,10 +184,10 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OsL-4K-25O">
-                            <rect key="frame" x="197" y="174" width="42" height="42"/>
+                            <rect key="frame" x="189" y="170" width="50" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="42" id="0gV-P0-ena"/>
-                                <constraint firstAttribute="height" constant="42" id="u4W-IA-5kQ"/>
+                                <constraint firstAttribute="width" constant="50" id="0gV-P0-ena"/>
+                                <constraint firstAttribute="height" constant="50" id="u4W-IA-5kQ"/>
                             </constraints>
                             <state key="normal" image="googleMaps"/>
                             <connections>
@@ -195,7 +195,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP7-Ur-D5Q">
-                            <rect key="frame" x="117" y="170" width="50" height="50"/>
+                            <rect key="frame" x="109" y="170" width="50" height="50"/>
                             <state key="normal" image="phone"/>
                             <connections>
                                 <action selector="callPassanger:" destination="-1" eventType="touchUpInside" id="tiR-SE-XNb"/>
@@ -228,21 +228,31 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a59-ax-dhj">
-                            <rect key="frame" x="37" y="170" width="50" height="50"/>
+                            <rect key="frame" x="29" y="170" width="50" height="50"/>
                             <state key="normal" image="message"/>
                             <connections>
                                 <action selector="messagePassangerPressed:" destination="-1" eventType="touchUpInside" id="sbj-OJ-Wdo"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-kk-bfQ" customClass="RoundViewWithBorder10" customModule="Mano" customModuleProvider="target">
+                            <rect key="frame" x="128" y="90" width="172" height="70"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="172" id="qvw-rQ-ycc"/>
+                                <constraint firstAttribute="height" constant="70" id="ufH-rb-BS9"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="OsL-4K-25O" firstAttribute="centerY" secondItem="v28-SN-4ph" secondAttribute="centerY" id="1W6-tH-6xP"/>
+                        <constraint firstItem="RNB-kk-bfQ" firstAttribute="centerX" secondItem="OsL-4K-25O" secondAttribute="centerX" id="5CL-iA-Cb0"/>
                         <constraint firstItem="KP7-Ur-D5Q" firstAttribute="centerY" secondItem="OsL-4K-25O" secondAttribute="centerY" id="5VP-LF-VWY"/>
                         <constraint firstItem="v28-SN-4ph" firstAttribute="leading" secondItem="OsL-4K-25O" secondAttribute="trailing" constant="30" id="B7J-Mb-Mhq"/>
                         <constraint firstItem="a59-ax-dhj" firstAttribute="width" secondItem="KP7-Ur-D5Q" secondAttribute="width" id="EJV-5G-2eU"/>
                         <constraint firstItem="EsG-IJ-erm" firstAttribute="top" secondItem="dL8-my-DxU" secondAttribute="top" id="F5E-rS-f1U"/>
                         <constraint firstAttribute="bottom" secondItem="v28-SN-4ph" secondAttribute="bottom" constant="30" id="JN8-Xj-ACR"/>
+                        <constraint firstItem="OsL-4K-25O" firstAttribute="top" secondItem="RNB-kk-bfQ" secondAttribute="bottom" constant="10" id="QnM-Uw-1c6"/>
                         <constraint firstAttribute="trailing" secondItem="v28-SN-4ph" secondAttribute="trailing" constant="30" id="Sc2-v6-2cj"/>
                         <constraint firstItem="KP7-Ur-D5Q" firstAttribute="leading" secondItem="a59-ax-dhj" secondAttribute="trailing" constant="30" id="T54-S5-hq4"/>
                         <constraint firstItem="OsL-4K-25O" firstAttribute="leading" secondItem="KP7-Ur-D5Q" secondAttribute="trailing" constant="30" id="TQy-mg-gs7"/>
@@ -265,7 +275,7 @@
                     </constraints>
                 </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="BFV-go-o9g">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="368"/>
                     <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="0.4960669948630137" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
@@ -279,7 +289,7 @@
                 <constraint firstItem="1tr-iV-mut" firstAttribute="width" secondItem="T3O-aR-qxC" secondAttribute="width" id="AEM-sy-DKJ"/>
                 <constraint firstItem="1NL-J0-TjU" firstAttribute="top" secondItem="0o4-L9-l0G" secondAttribute="bottom" id="AlC-M0-8EX"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="centerY" secondItem="c65-z6-GKY" secondAttribute="centerY" id="Bx7-LN-WY0"/>
-                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="Fru-67-D5l"/>
+                <constraint firstItem="BFV-go-o9g" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="Fru-67-D5l"/>
                 <constraint firstItem="dL8-my-DxU" firstAttribute="height" secondItem="c65-z6-GKY" secondAttribute="height" id="Hkv-3F-57B"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BFV-go-o9g" secondAttribute="trailing" id="JK1-8U-Yld"/>
                 <constraint firstItem="1tr-iV-mut" firstAttribute="height" secondItem="T3O-aR-qxC" secondAttribute="height" id="KbU-vM-ek9"/>

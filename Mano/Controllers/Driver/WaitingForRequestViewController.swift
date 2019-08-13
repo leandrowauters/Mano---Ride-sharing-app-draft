@@ -25,6 +25,7 @@ class WaitingForRequestViewController: UIViewController {
     var thirtySecondTimer = 0
     var ride: Ride!
     var graphics = GraphicsClient()
+    var timer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCoreLocation()
@@ -44,8 +45,11 @@ class WaitingForRequestViewController: UIViewController {
                     self.showAlert(title: "Error listening for ride status", message: error.localizedDescription)
                 }
                 if let ride = ride {
+                    self.timer?.invalidate()
+                    self.timer = nil
                     let onItsWayVC = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
                     self.navigationController?.pushViewController(onItsWayVC, animated: true)
+                    
                 }
             }
         } else {
@@ -68,6 +72,7 @@ class WaitingForRequestViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     private func setup() {
         changeToOnWaitingRequest()
         locationManager.delegate = self
@@ -106,18 +111,20 @@ class WaitingForRequestViewController: UIViewController {
     }
     
     @objc private func thirtyMinTimer() {
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-            if self.thirtySecondTimer == 30 {
-                self.calculateCurrentMilesToPickup()
-                self.thirtySecondTimer = 0
-            } else {
-                self.thirtySecondTimer += 1
+        if timer != nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+                if self.thirtySecondTimer == 30 {
+                    self.calculateCurrentMilesToPickup()
+                    self.thirtySecondTimer = 0
+                } else {
+                    self.thirtySecondTimer += 1
+                }
             }
         }
     }
     
     func calculateCurrentMilesToPickup() {
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: false, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
+        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(time) Away"
             DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
                 if let error = error {
@@ -140,7 +147,7 @@ class WaitingForRequestViewController: UIViewController {
     
     @IBAction func requestRidePressed(_ sender: Any) {
         let currentLocation = userLocation.coordinate
-        let chooseLocationVC = ChooseLocationViewController(nibName: nil, bundle: nil, ride: ride, currentLat: currentLocation.latitude, currentLon: currentLocation.longitude)
+        let chooseLocationVC = ChooseLocationViewController(nibName: nil, bundle: nil, ride: ride, currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, delegate: self)
         chooseLocationVC.modalPresentationStyle = .overCurrentContext
         present(chooseLocationVC, animated: true)
         
@@ -200,6 +207,18 @@ extension WaitingForRequestViewController: MFMessageComposeViewControllerDelegat
             showAlert(title: "Error sending message", message: "Error unknown")
         }
     }
+    
+    
+}
+
+extension WaitingForRequestViewController: ChooseLocationDelegate {
+    func choseLocation(ride: Ride) {
+        dismiss(animated: true)
+        let onItsWayVC = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
+        navigationController?.pushViewController(onItsWayVC, animated: true)
+    }
+    
+
     
     
 }

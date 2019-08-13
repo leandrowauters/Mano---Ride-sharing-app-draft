@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "500_F_87453588_4MixP1y8RFcXawUQfAOmF7YonSxyA334.jpg",
+      "filename" : "icons8-apple_map.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-apple_map-1.png",
       "scale" : "2x"
     },
     {

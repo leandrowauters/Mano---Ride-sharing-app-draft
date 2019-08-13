@@ -9,6 +9,9 @@
 import UIKit
 import GooglePlaces
 
+protocol ChooseLocationDelegate: AnyObject {
+    func choseLocation(ride: Ride)
+}
 class ChooseLocationViewController: UIViewController {
 
     var dropoffAddress: String!
@@ -17,6 +20,7 @@ class ChooseLocationViewController: UIViewController {
     var currentLat: Double!
     var currentLon: Double!
     var ride: Ride!
+    weak var delegate: ChooseLocationDelegate!
     
     @IBOutlet weak var locationButton: RoundedButton!
     
@@ -33,17 +37,20 @@ class ChooseLocationViewController: UIViewController {
     }
     
     @IBAction func donePressed(_ sender: Any) {
-        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnDrive.rawValue, ride: ride) { (error) in
+        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnDrive.rawValue, ride: ride) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to new ride", message: error.localizedDescription)
-            } else {
-                GoogleHelper.calculateMilesAndTimeToDestination(pickup: , ride: <#T##Ride#>, userLocation: <#T##CLLocation#>, completion: <#T##(String, String, Double, Double) -> Void#>)
+            }
+            if let ride = ride {
+
+                self.delegate.choseLocation(ride: ride)
             }
         }
     }
 
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, ride: Ride, currentLat: Double, currentLon: Double) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, ride: Ride, currentLat: Double, currentLon: Double, delegate: ChooseLocationDelegate) {
         self.ride = ride
+        self.delegate = delegate
         self.currentLat = currentLat
         self.currentLon = currentLon
         super.init(nibName: nil, bundle: nil)

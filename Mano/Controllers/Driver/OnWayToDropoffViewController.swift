@@ -16,6 +16,7 @@ class OnWayToDropoffViewController: UIViewController {
     var thirtySecondTimer = 0
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
+    private var timer: Timer?
     
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -50,6 +51,8 @@ class OnWayToDropoffViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     private func setup() {
         changeToOnDropoff()
         locationManager.delegate = self
@@ -83,17 +86,19 @@ class OnWayToDropoffViewController: UIViewController {
     }
     
     @objc private func thirtyMinTimer() {
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-            if self.thirtySecondTimer == 30 {
-                self.calculateMilesToDropoff()
-                self.thirtySecondTimer = 0
-            } else {
-                self.thirtySecondTimer += 1
+        if timer != nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+                if self.thirtySecondTimer == 30 {
+                    self.calculateMilesToDropoff()
+                    self.thirtySecondTimer = 0
+                } else {
+                    self.thirtySecondTimer += 1
+                }
             }
         }
     }
     func calculateMilesToDropoff() {
-        GoogleHelper.calculateMilesAndTimeToDestination(pickup: false, ride: ride, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
+        GoogleHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
             self.activityIndicator.stopAnimating()
@@ -120,6 +125,8 @@ class OnWayToDropoffViewController: UIViewController {
                 self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
             }
             if let ride = ride {
+                self.timer = nil
+                self.timer?.invalidate()
                 let waitingForRequestVC = WaitingForRequestViewController(nibName: nil, bundle: nil, ride: ride)
                 self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
             }
@@ -134,6 +141,7 @@ class OnWayToDropoffViewController: UIViewController {
                 } else {
                     let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: self.ride)
                     self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+                    
                 }
             })
         }
