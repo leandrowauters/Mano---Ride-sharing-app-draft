@@ -15,6 +15,7 @@ protocol ChooseLocationDelegate: AnyObject {
 class ChooseLocationViewController: UIViewController {
 
     var dropoffAddress: String!
+    var dropoffName: String!
     var dropoffLat: Double!
     var dropoffLon: Double!
     var currentLat: Double!
@@ -28,6 +29,7 @@ class ChooseLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dropoffAddress = DBService.currentManoUser.homeAdress
+        dropoffName = ""
         dropoffLon = DBService.currentManoUser.homeLon
         dropoffLat = DBService.currentManoUser.homeLat
     }
@@ -37,7 +39,7 @@ class ChooseLocationViewController: UIViewController {
     }
     
     @IBAction func donePressed(_ sender: Any) {
-        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnPickup.rawValue, ride: ride) { (error, ride) in
+        DBService.updateToNewRide(pickupAddress: ride.dropoffAddress, pickupLat: currentLat, pickupLon: currentLon, dropoffAddress: dropoffAddress, dropoffName: dropoffName , dropoffLat: dropoffLat, dropoffLon: dropoffLon, rideStatus: RideStatus.changedToReturnPickup.rawValue, ride: ride) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to new ride", message: error.localizedDescription)
             }
@@ -47,6 +49,11 @@ class ChooseLocationViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
 
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, ride: Ride, currentLat: Double, currentLon: Double, delegate: ChooseLocationDelegate) {
         self.ride = ride
@@ -67,6 +74,11 @@ extension ChooseLocationViewController: GMSAutocompleteViewControllerDelegate {
         guard let dropoffAddress = place.formattedAddress else {
             showAlert(title: "Error finding address", message: nil)
             return}
+        if let dropoffName = place.name {
+            self.dropoffName = dropoffName
+        } else {
+            self.dropoffName = ""
+        }
         let coordinate = place.coordinate
         self.dropoffAddress = dropoffAddress
         let shorterAddress = MapsHelper.getShortertString(string: dropoffAddress)

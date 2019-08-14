@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "yellowPing25.png",
+      "filename" : "icons8-wheel-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yellowPing50.png",
+      "filename" : "icons8-wheel.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yellowPing100.png",
+      "filename" : "icons8-wheel-2.png",
       "scale" : "3x"
     }
   ],

@@ -55,7 +55,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XO7-VO-LPs" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
                             <rect key="frame" x="46.333333333333329" y="110.00000000000006" width="125.99999999999999" height="41"/>
-                            <color key="backgroundColor" red="0.98823529409999999" green="0.51372549020000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="126" id="5M6-40-WJI"/>
                                 <constraint firstAttribute="height" constant="41" id="AKl-L2-dHg"/>

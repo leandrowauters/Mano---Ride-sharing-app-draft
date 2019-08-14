@@ -313,9 +313,10 @@ extension DBService {
         })
     }
     
-    static public func updateToNewRide(pickupAddress: String, pickupLat: Double, pickupLon: Double, dropoffAddress: String, dropoffLat: Double, dropoffLon: Double, rideStatus: String, ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
+    static public func updateToNewRide(pickupAddress: String, pickupLat: Double, pickupLon: Double, dropoffAddress: String, dropoffName: String, dropoffLat: Double, dropoffLon: Double, rideStatus: String, ride: Ride, completion: @escaping(Error?, Ride?) -> Void) {
         firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.pickupAddressKey : pickupAddress, RideCollectionKeys.pickupLatKey : pickupLat, RideCollectionKeys.pickupLonKey : pickupLon, RideCollectionKeys.dropoffAddressKey : dropoffAddress, RideCollectionKeys.dropoffLonKey : dropoffLon, RideCollectionKeys.dropoffLatKey : dropoffLat,
-                                                                            RideCollectionKeys.rideStatusKey : rideStatus]) { (error) in
+                                                                            RideCollectionKeys.rideStatusKey : rideStatus,
+                                                                            RideCollectionKeys.dropoffNameKey : dropoffName]) { (error) in
             if let error = error {
                 completion(error, nil)
             } else {

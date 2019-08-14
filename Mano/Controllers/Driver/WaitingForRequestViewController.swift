@@ -78,7 +78,7 @@ class WaitingForRequestViewController: UIViewController {
         locationManager.delegate = self
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             
-            titleLabel.text = "Waiting For  Request "
+            titleLabel.text = "Waiting For Request "
             messageLabel.text = "PLEASE KEEP APP OPEN TO SHARE LOCATION"
         } else {
             messageLabel.text = "PLEASE GIVE DRIVER ENOUGH TIME BEFORE YOUR REQUEST"

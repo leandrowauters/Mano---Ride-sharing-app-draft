@@ -29,6 +29,8 @@ class OnWayToDropoffViewController: UIViewController {
     @IBOutlet weak var driverMakeModelLabel: UILabel!
     @IBOutlet weak var driverLicencePlateLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var mapOptionView: RoundViewWithBorder10!
+    @IBOutlet weak var driverView: UIView!
     
     
     
@@ -39,6 +41,9 @@ class OnWayToDropoffViewController: UIViewController {
                 changeToOnDropoffReturn()
             } else {
                 changeToOnDropoff()
+            }
+        } else {
+            if ride.rideStatus == RideStatus.changedToReturnDropoff.rawValue || ride.rideStatus == RideStatus.onDropoffReturnRide.rawValue {
             }
         }
         setup()
@@ -73,8 +78,9 @@ class OnWayToDropoffViewController: UIViewController {
             destinationAddress.text = ride.dropoffAddress
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
-            arrivedButton.isHidden = true
+            driverView.isHidden = true
             listenToWaitingForRequest()
+            
             
         }
     }
@@ -161,11 +167,31 @@ class OnWayToDropoffViewController: UIViewController {
         }
     }
     
+    private func openWaze() {
+        MapsHelper.openWazeDirection(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon) { (error) in
+            self.showAlert(title: "Error opening waze", message: error?.localizedDescription)
+        }
+    }
+    
+
+    
+    @IBAction func mapOptionPressed(_ sender: Any) {
+        mapOptionView.isHidden = !mapOptionView.isHidden
+    }
     @IBAction func googleMapsPressed(_ sender: Any) {
         showConfimationAlert(title: "Open Google Maps", message: nil) { (okay) in
             self.searchGoogleForDirections()
         }
     }
+    @IBAction func appleMapPressed(_ sender: Any) {
+        MapsHelper.openAppleMapsForDirection(currentLocation: userLocation.coordinate, destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon)
+    }
+    
+    @IBAction func wazeDirectionPressed(_ sender: Any) {
+        openWaze()
+    }
+    
+    
 }
 
 extension OnWayToDropoffViewController: CLLocationManagerDelegate {
