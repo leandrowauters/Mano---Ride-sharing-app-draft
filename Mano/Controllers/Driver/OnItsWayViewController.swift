@@ -17,13 +17,15 @@ class OnItsWayViewController: UIViewController {
     
 
     private var duration: String?
-    private var distance: String!
+    private var distance: String?
     private var ride: Ride!
     private var graphics =  GraphicsClient()
     var thirtySecondTimer = 0
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
     private var timer: Timer?
+    private var firstTime = true
+
 
     @IBOutlet weak var driverImage: RoundedImageViewBlue!
     @IBOutlet weak var driverNameLabel: UILabel!
@@ -148,12 +150,24 @@ class OnItsWayViewController: UIViewController {
         MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon, userLocation: userLocation) { (miles, time, milesInt, timeInt)  in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
+            if self.firstTime {
+                self.updateTotalMiles(miles: milesInt)
+                self.firstTime = false
+            }
             DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
                 if let error = error {
                     self.showAlert(title: "Error updating ride", message: error.localizedDescription)
                 }
             })
             self.activityIndicator.stopAnimating()
+        }
+    }
+    
+   private func updateTotalMiles(miles: Double) {
+        DBService.updateTotalMiles(miles: miles) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updaing total miles", message: error.localizedDescription)
+            }
         }
     }
     private func setup() {
@@ -339,5 +353,4 @@ extension OnItsWayViewController: ArriveViewDelegate {
         let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
         self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
     }
-    
 }

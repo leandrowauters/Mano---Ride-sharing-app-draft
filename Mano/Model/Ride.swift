@@ -54,8 +54,9 @@ class Ride: Codable {
     var dropoff: Bool
     var waitingForRequest: Bool
     var rideStatus: String
+    var totalMiles: Double
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String, totalMiles: Double) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -89,6 +90,7 @@ class Ride: Codable {
         self.dropoff = dropoff
         self.waitingForRequest = waitingForRequest
         self.rideStatus = rideStatus
+        self.totalMiles = totalMiles
     }
     
     init(dict: [String: Any]) {
@@ -125,6 +127,7 @@ class Ride: Codable {
         self.dropoff = dict[RideCollectionKeys.dropoffKey] as? Bool ?? false
         self.waitingForRequest = dict[RideCollectionKeys.waitingForRequestKey] as? Bool ?? false
         self.rideStatus = dict[RideCollectionKeys.rideStatusKey] as? String ?? ""
+        self.totalMiles = dict[RideCollectionKeys.totalMilesKey] as? Double ?? 0.0
     }
     
 }

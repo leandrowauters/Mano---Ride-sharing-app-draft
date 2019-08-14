@@ -45,7 +45,7 @@ class TabBarViewController: UITabBarController {
                             }
                             
                         })
-                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: miles, ride: ride)
+                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: nil, ride: ride)
                         self.navigationController?.pushViewController(onItsWayVc, animated: true)
                         
                     })
@@ -108,7 +108,7 @@ class TabBarViewController: UITabBarController {
                 let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
                 MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
                     
-                    let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: miles, ride: ride)
+                    let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: nil, ride: ride)
                     self.navigationController?.pushViewController(onItsWayVc, animated: true)
                     
                     

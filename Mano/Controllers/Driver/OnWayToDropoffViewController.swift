@@ -17,6 +17,7 @@ class OnWayToDropoffViewController: UIViewController {
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
     private var timer: Timer?
+    private var firstTime = true
     
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -113,6 +114,10 @@ class OnWayToDropoffViewController: UIViewController {
         MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             self.distanceLabel.text = "Distance: \n \(miles) Mil"
             self.durationLabel.text = "Duration: \n \(time)"
+            if self.firstTime {
+                self.updateTotalMiles(miles: milesInt)
+                self.firstTime = false
+            }
             self.activityIndicator.stopAnimating()
         }
     }
@@ -124,6 +129,15 @@ class OnWayToDropoffViewController: UIViewController {
                 }
             })
     }
+    
+    private func updateTotalMiles(miles: Double) {
+        DBService.updateTotalMiles(miles: miles) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updaing total miles", message: error.localizedDescription)
+            }
+        }
+    }
+    
     private func changeToOnDropoff() {
         DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoff.rawValue) { (error) in
             if let error = error {
@@ -155,15 +169,15 @@ class OnWayToDropoffViewController: UIViewController {
     
     @IBAction func arrivedPressed(_ sender: Any) {
         showConfimationAlert(title: "Arrived", message: "Are you sure?") { (okay) in
-            DBService.updateRideStatus(ride: self.ride, status: RideStatus.changeToWaitingRequest.rawValue, completion: { (error) in
-                if let error = error {
-                    self.showAlert(title: "Error updating request", message: error.localizedDescription)
-                } else {
-                    let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: self.ride)
-                    self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
-                    
-                }
-            })
+                    DBService.updateRideStatus(ride: self.ride, status: RideStatus.changeToWaitingRequest.rawValue, completion: { (error) in
+                        if let error = error {
+                            self.showAlert(title: "Error updating request", message: error.localizedDescription)
+                        } else {
+                            let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: self.ride)
+                            self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+                            
+                        }
+                    })
         }
     }
     

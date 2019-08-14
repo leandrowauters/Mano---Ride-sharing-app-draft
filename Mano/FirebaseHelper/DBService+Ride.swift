@@ -293,10 +293,22 @@ extension DBService {
         }
     }
     
-    static public func updateDistanceAndDuration(ride: Ride, duration: Int, distance: Double, completion: @escaping(Error?) -> Void) {
-        firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.distanceKey : distance, RideCollectionKeys.durationKey : duration]) { (error) in
+    static public func updateTotalMiles(miles: Double, completion: @escaping(Error?) -> Void) {
+        
+        firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.driverIdKey, isEqualTo: DBService.currentManoUser.userId).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(error)
+            }
+            if let snapshot = snapshot {
+                let ride = snapshot.documents.map{Ride.init(dict: $0.data())}.first
+                if let ride = ride { firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.totalMilesKey : ride.totalMiles + miles]) { (error) in
+                        if let error = error {
+                        completion(error)
+                        } else {
+                            completion(nil)
+                        }
+                    }
+                }
             }
         }
     }

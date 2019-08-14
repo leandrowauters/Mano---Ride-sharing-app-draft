@@ -84,7 +84,7 @@ class MoreInfoViewController: UIViewController {
                 showAlert(title: "Please Complete missing fields", message: nil)
                 return
         }
-        let updatedManoUser = ManoUser(firstName: self.manoUser.firstName, lastName: self.manoUser.lastName, fullName: self.manoUser.fullName, homeAdress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: self.manoUser.typeOfUser, patients: nil, joinedDate: self.manoUser.joinedDate, userId: self.manoUser.userId, myRides: nil, myPickUps: nil, licencePlate: nil, carPicture: nil,cellPhone: cellPhone)
+        let updatedManoUser = ManoUser(firstName: self.manoUser.firstName, lastName: self.manoUser.lastName, fullName: self.manoUser.fullName, homeAdress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: self.manoUser.typeOfUser, patients: nil, joinedDate: self.manoUser.joinedDate, userId: self.manoUser.userId, numberOfRides: nil, numberOfMiles:  nil, licencePlate: nil, carPicture: nil,cellPhone: cellPhone)
         DBService.updatePassangerMoreInfo(userID: manoUser.userId, homeAddress: homeAddress, homeLat: homeLat, homeLon: homeLon, cellPhone: cellPhone , completion: { (error) in
                 if let error = error {
                       self.showAlert(title: "Error uploading more info", message: error.localizedDescription)

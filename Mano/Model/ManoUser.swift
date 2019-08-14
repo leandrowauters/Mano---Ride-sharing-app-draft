@@ -22,13 +22,13 @@ class ManoUser: Codable {
     var patients: [String]?
     var joinedDate: String
     var userId: String
-    var myRides: [String]?
-    var myPickUps: [String]?
+    var numberOfRides: Int?
+    var numberOfMiles: Double?
     var licencePlate: String?
     var carPicture: String?
     var cellPhone: String?
     
-    init(firstName: String, lastName: String, fullName: String, homeAdress: String?,homeLat: Double?,homeLon: Double?, profileImage: String?, carMakerModel: String?, bio: String?, typeOfUser: String, patients: [String]?, joinedDate: String, userId: String, myRides: [String]?, myPickUps: [String]?, licencePlate: String?, carPicture: String?,cellPhone: String?) {
+    init(firstName: String, lastName: String, fullName: String, homeAdress: String?,homeLat: Double?,homeLon: Double?, profileImage: String?, carMakerModel: String?, bio: String?, typeOfUser: String, patients: [String]?, joinedDate: String, userId: String, numberOfRides: Int?, numberOfMiles: Double?, licencePlate: String?, carPicture: String?,cellPhone: String?) {
         self.firstName = firstName
         self.lastName = lastName
         self.fullName = fullName
@@ -42,8 +42,8 @@ class ManoUser: Codable {
         self.patients = patients
         self.joinedDate = joinedDate
         self.userId = userId
-        self.myRides = myRides
-        self.myPickUps = myPickUps
+        self.numberOfRides = numberOfRides
+        self.numberOfMiles = numberOfMiles
         self.licencePlate = licencePlate
         self.carPicture = carPicture
         self.cellPhone = cellPhone
@@ -63,8 +63,8 @@ class ManoUser: Codable {
         self.patients = dict[ManoUserCollectionKeys.patientsKey] as? [String] ?? [""]
         self.joinedDate = dict[ManoUserCollectionKeys.joinedDateKey] as? String ?? ""
         self.userId = dict[ManoUserCollectionKeys.userIdKey] as? String ?? ""
-        self.myRides = dict[ManoUserCollectionKeys.myRidesKey] as? [String] ?? [""]
-        self.myPickUps = dict[ManoUserCollectionKeys.myPickUpsKey] as? [String] ?? [""]
+        self.numberOfRides = dict[ManoUserCollectionKeys.numberOfRides] as? Int ?? 0
+        self.numberOfMiles = dict[ManoUserCollectionKeys.numberOfMiles] as? Double ?? 0.0
         self.licencePlate = dict[ManoUserCollectionKeys.licencePlateKey] as? String ?? ""
         self.carPicture = dict[ManoUserCollectionKeys.carPictureKey] as? String ?? ""
         self.cellPhone = dict[ManoUserCollectionKeys.cellPhoneKey] as? String ?? ""

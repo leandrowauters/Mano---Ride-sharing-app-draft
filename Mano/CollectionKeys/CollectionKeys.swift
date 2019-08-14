@@ -23,8 +23,8 @@ struct ManoUserCollectionKeys {
     static let patientsKey = "patients"
     static let joinedDateKey = "joinedDate"
     static let userIdKey = "userId"
-    static let myRidesKey = "myRides"
-    static let myPickUpsKey = "myPickUps"
+    static let numberOfRides = "numberOfRides"
+    static let numberOfMiles = "numberOfMiles"
     static let licencePlateKey = "licencePlate"
     static let carPictureKey = "carPicture"
     static let cellPhoneKey = "cellPhone"
@@ -65,6 +65,7 @@ struct RideCollectionKeys {
     static let pickupKey = "pickup"
     static let waitingForRequestKey = "waitingForRequest"
     static let rideStatusKey = "rideStatus"
+    static let totalMilesKey = "totalMiles"
 }
 
 struct MyLocationsCollectionKeys {

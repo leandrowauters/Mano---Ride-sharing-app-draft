@@ -19,7 +19,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
     private var duration: Int?
-    private var distance: Int?
+    private var distance: Double?
     private var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -99,6 +99,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
         MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat, destinationLon: ride.pickupLon , userLocation: userLocation) { (miles, time, milesInt, timeInt) in
             cell.distance.text = "Distance: \(miles) Mil"
             cell.duration.text = "Duration: \(time)"
+            self.distance = milesInt
         }
 
         cell.selectionStyle = .none
