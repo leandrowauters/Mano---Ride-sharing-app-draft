@@ -268,8 +268,6 @@
 				D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */,
 				D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */,
 				D5E39B9022E015FD008A919A /* Controllers */,
-				D5EF0AA922E2788B0061B67A /* Views */,
-				D5D6A76722E38121009C0029 /* Cells */,
 				D546E95A22DF8E3A000CF6AD /* Model */,
 				D546E95622DF8B6D000CF6AD /* FirebaseHelper */,
 				D59D1A7422E3C64D00E94D77 /* New Group */,
@@ -413,6 +411,8 @@
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
 				D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */,
 				D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */,
+				D5EF0AA922E2788B0061B67A /* Views */,
+				D5D6A76722E38121009C0029 /* Cells */,
 			);
 			path = Driver;
 			sourceTree = "<group>";
