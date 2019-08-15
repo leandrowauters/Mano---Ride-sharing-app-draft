@@ -16,6 +16,8 @@
 		D51CF7C022DF6F3B003F1385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */; };
 		D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */; };
 		D53AFD9522F0BFDA00822583 /* MainTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53AFD9422F0BFDA00822583 /* MainTimer.swift */; };
+		D53BD9BB2305F9C900B90428 /* DriverRideCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */; };
+		D53BD9BC2305F9C900B90428 /* DriverRideCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */; };
 		D542BC9522EE6916003C9CCA /* NotificationRecieved.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */; };
 		D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542BC9622EE708C003C9CCA /* InvitationHelper.swift */; };
 		D546E95822DF8BFD000CF6AD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D546E95722DF8BFD000CF6AD /* AuthService.swift */; };
@@ -129,6 +131,8 @@
 		D51CF7C222DF6F3B003F1385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D51CF7C422DF6F3B003F1385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D53AFD9422F0BFDA00822583 /* MainTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTimer.swift; sourceTree = "<group>"; };
+		D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRideCompletedViewController.swift; sourceTree = "<group>"; };
+		D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverRideCompletedViewController.xib; sourceTree = "<group>"; };
 		D542BC9022EE4E40003C9CCA /* Mano.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mano.entitlements; sourceTree = "<group>"; };
 		D542BC9422EE6916003C9CCA /* NotificationRecieved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRecieved.swift; sourceTree = "<group>"; };
 		D542BC9622EE708C003C9CCA /* InvitationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationHelper.swift; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 				D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */,
 				D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */,
 				D5E39B9022E015FD008A919A /* Controllers */,
+				D5EF0AA922E2788B0061B67A /* Views */,
+				D5D6A76722E38121009C0029 /* Cells */,
 				D546E95A22DF8E3A000CF6AD /* Model */,
 				D546E95622DF8B6D000CF6AD /* FirebaseHelper */,
 				D59D1A7422E3C64D00E94D77 /* New Group */,
@@ -275,6 +281,30 @@
 				D542BC9622EE708C003C9CCA /* InvitationHelper.swift */,
 			);
 			path = Mano;
+			sourceTree = SOURCE_ROOT;
+		};
+		D53BD9B72305F92F00B90428 /* RideControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
+				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
+				D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */,
+				D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */,
+				D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */,
+				D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */,
+			);
+			path = RideControllers;
+			sourceTree = "<group>";
+		};
+		D53BD9B82305F97100B90428 /* MessagesController */ = {
+			isa = PBXGroup;
+			children = (
+				D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */,
+				D5F4400022F64C7100DB0D01 /* MessageViewController.xib */,
+				D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */,
+				D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */,
+			);
+			path = MessagesController;
 			sourceTree = "<group>";
 		};
 		D546E95622DF8B6D000CF6AD /* FirebaseHelper */ = {
@@ -381,14 +411,8 @@
 				D5D6A76F22E38ABC009C0029 /* DriverProfileViewController.xib */,
 				D571BADF22E7B20D00FA9369 /* DriveViewController.swift */,
 				D571BAE022E7B20D00FA9369 /* DriveViewController.xib */,
-				D5F7635F22E8CB7300250C96 /* OnItsWayViewController.swift */,
-				D5F7636022E8CB7300250C96 /* OnItsWayViewController.xib */,
-				D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */,
-				D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */,
-				D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */,
-				D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */,
-				D5EF0AA922E2788B0061B67A /* Views */,
-				D5D6A76722E38121009C0029 /* Cells */,
+				D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */,
+				D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */,
 			);
 			path = Driver;
 			sourceTree = "<group>";
@@ -429,11 +453,9 @@
 				D5D6A77622E3A966009C0029 /* Passenger */,
 				D5D1298722E2296D00B5EDB2 /* Driver */,
 				D5E39B9122E01608008A919A /* Login+Create */,
+				D53BD9B72305F92F00B90428 /* RideControllers */,
 				D57557A422E761610063BD15 /* Messages+Alert */,
-				D5F43FFF22F64C7100DB0D01 /* MessageViewController.swift */,
-				D5F4400022F64C7100DB0D01 /* MessageViewController.xib */,
-				D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */,
-				D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */,
+				D53BD9B82305F97100B90428 /* MessagesController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -589,6 +611,7 @@
 				D59D1A7322E3BE4900E94D77 /* MyLocationsViewController.xib in Resources */,
 				D57D62F422E031C000F638DF /* CreateAccountViewController.xib in Resources */,
 				D5CCF96522FC631900DC7D59 /* ChooseLocationViewController.xib in Resources */,
+				D53BD9BC2305F9C900B90428 /* DriverRideCompletedViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
@@ -683,6 +706,7 @@
 				D5D7F5EC22F39321004CBA6C /* FilterView.swift in Sources */,
 				D542BC9722EE708C003C9CCA /* InvitationHelper.swift in Sources */,
 				D57D62EC22E0237200F638DF /* GoogleMapsAPI.swift in Sources */,
+				D53BD9BB2305F9C900B90428 /* DriverRideCompletedViewController.swift in Sources */,
 				D59D1A7822E3C8D200E94D77 /* MyLocation.swift in Sources */,
 				D59D1A7A22E3CA2000E94D77 /* DataPersistanceManager.swift in Sources */,
 				D5EF0AAE22E376CA0061B67A /* FavoritesViewController.swift in Sources */,
