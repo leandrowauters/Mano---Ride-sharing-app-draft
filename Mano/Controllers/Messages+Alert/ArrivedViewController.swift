@@ -44,19 +44,8 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         UIApplication.shared.open(number)
     }
     @IBAction func beginDropOffPressed(_ sender: Any) {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.changedToDropoff.rawValue) { (error) in
-            if let error = error {
-               self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
-            }
-        }
-//        DBService.updateRideToDropoff(ride: ride) { (error) in
-//            if let error = error {
-//                self.showAlert(title: "Error updating to dropoff", message: error.localizedDescription)
-//            }
-//
-//        }
-        self.dismiss(animated: true)
-        self.arriveDelegate.userPressBeginDropOff(ride: ride)
+        changeRideStatus()
+
     }
     @IBAction func cancelPressed(_ sender: Any) {
         dismiss(animated: true)
@@ -73,6 +62,22 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         }
     }
     
+    func changeRideStatus() {
+        var rideStatus = String()
+        if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue {
+            rideStatus = RideStatus.changedToReturnDropoff.rawValue
+        } else {
+            rideStatus = RideStatus.changedToDropoff.rawValue
+        }
+        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error updating ride status", message: error.localizedDescription)
+            } else {
+                self.dismiss(animated: true)
+                self.arriveDelegate.userPressBeginDropOff(ride: self.ride)
+            }
+        }
+    }
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch result {
         case .cancelled:

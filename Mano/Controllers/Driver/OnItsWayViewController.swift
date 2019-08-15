@@ -343,13 +343,7 @@ extension OnItsWayViewController: MessageDelegate {
 
 extension OnItsWayViewController: ArriveViewDelegate {
     func userPressBeginDropOff(ride: Ride) {
-        if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue {
-            DBService.updateRideStatus(ride: ride, status: RideStatus.changedToReturnDropoff.rawValue) { (error) in
-                if let error = error {
-                    self.showAlert(title: "Error updating ride status", message: error.localizedDescription)
-                }
-            }
-        }
+
         let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
         self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
     }
