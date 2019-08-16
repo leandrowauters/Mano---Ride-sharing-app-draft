@@ -11,7 +11,7 @@ import CoreLocation
 
 class OnWayToDropoffViewController: UIViewController {
     
-    let ride: Ride!
+    private var ride: Ride!
     private var graphics =  GraphicsClient()
     var thirtySecondTimer = 0
     private var userLocation = CLLocation()
@@ -38,13 +38,12 @@ class OnWayToDropoffViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
-            if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
-                changeToOnDropoffReturn()
-            } else {
-                changeToOnDropoff()
+            if ride.rideStatus == RideStatus.changedToDropoff.rawValue{
+                changeToOnDropoff(rideStatus: RideStatus.onDropoff.rawValue)
             }
-        } else {
-            if ride.rideStatus == RideStatus.changedToReturnDropoff.rawValue || ride.rideStatus == RideStatus.onDropoffReturnRide.rawValue {
+            
+            if ride.rideStatus == RideStatus.changedToReturnDropoff.rawValue {
+                changeToOnDropoff(rideStatus: RideStatus.onDropoffReturnRide.rawValue)
             }
         }
         setup()
@@ -53,6 +52,10 @@ class OnWayToDropoffViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+            listenToWaitingForRequest()
+            listenToRideIsOver()
+        }
         thirtyMinTimer()
         calculateMilesToDropoff()
     }
@@ -80,9 +83,6 @@ class OnWayToDropoffViewController: UIViewController {
         }
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
             driverView.isHidden = true
-            listenToWaitingForRequest()
-            
-            
         }
     }
     
@@ -131,25 +131,31 @@ class OnWayToDropoffViewController: UIViewController {
     }
     
     private func updateTotalMiles(miles: Double) {
-        DBService.updateTotalMiles(miles: miles) { (error) in
+        DBService.updateTotalMiles(ride: ride, miles: miles) { (error) in
             if let error = error {
                 self.showAlert(title: "Error updaing total miles", message: error.localizedDescription)
             }
         }
     }
     
-    private func changeToOnDropoff() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoff.rawValue) { (error) in
+    private func changeToOnDropoff(rideStatus: String) {
+        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                self.ride = ride
             }
         }
     }
     
     private func  changeToOnDropoffReturn() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoffReturnRide.rawValue) { (error) in
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoffReturnRide.rawValue) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                self.ride = ride
             }
         }
     }
@@ -167,17 +173,48 @@ class OnWayToDropoffViewController: UIViewController {
         }
     }
     
+    private func listenToRideIsOver() {
+        DBService.listenForRideStatus(ride: ride, status: RideStatus.rideIsOver.rawValue) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                self.timer = nil
+                self.timer?.invalidate()
+                print("RIDE IS OVER!!!!!!!!!")
+            }
+        }
+    }
+    
     @IBAction func arrivedPressed(_ sender: Any) {
         showConfimationAlert(title: "Arrived", message: "Are you sure?") { (okay) in
-                    DBService.updateRideStatus(ride: self.ride, status: RideStatus.changeToWaitingRequest.rawValue, completion: { (error) in
-                        if let error = error {
-                            self.showAlert(title: "Error updating request", message: error.localizedDescription)
-                        } else {
-                            let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: self.ride)
-                            self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
-                            
-                        }
-                    })
+            if self.ride.rideStatus == RideStatus.onDropoff.rawValue{
+                DBService.updateRideStatus(ride: self.ride, status: RideStatus.changeToWaitingRequest.rawValue, completion: { (error, ride) in
+                    if let error = error {
+                        self.showAlert(title: "Error updating request", message: error.localizedDescription)
+                    }
+                    
+                    if let ride = ride {
+                        let waitingForRequestVC = WaitingForRequestViewController.init(nibName: nil, bundle: nil, ride: ride)
+                        self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+                    }
+                    
+                })
+            }
+            
+            if self.ride.rideStatus == RideStatus.onDropoffReturnRide.rawValue {
+                DBService.updateRideStatus(ride: self.ride, status: RideStatus.rideIsOver.rawValue, completion: { (error, ride) in
+                    if let error = error {
+                        self.showAlert(title: "Error updating request", message: error.localizedDescription)
+                    }
+                    
+                    if let ride = ride {
+                        let driverRideCompleted = DriverRideCompletedViewController(nibName: nil, bundle: nil, ride: ride)
+                        self.navigationController?.pushViewController(driverRideCompleted, animated: true)
+                    }
+                })
+            }
+
         }
     }
     

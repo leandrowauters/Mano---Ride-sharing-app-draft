@@ -57,11 +57,13 @@ class OnItsWayViewController: UIViewController {
         setup()
         setupCoreLocation()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            var rideStatus = String()
             if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
-               changeToReturnPick()
+               rideStatus = RideStatus.onPickupReturnRide.rawValue
             } else {
-            changeToOnPickup()
+                rideStatus = RideStatus.onPickup.rawValue
             }
+            changeRideStatus(rideStatus: rideStatus)
         }       
     }
     
@@ -72,11 +74,11 @@ class OnItsWayViewController: UIViewController {
             
         } else {
             if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue{
-                changeToReturnPick()
                 listenToDuration()
-                listenToDropoffReturn()
-            } else {
-                listenToDropoffChanges()
+                listenRideStatusChanges(rideStatus: RideStatus.changedToReturnDropoff.rawValue)
+            }
+            if ride.rideStatus == RideStatus.onPickup.rawValue {
+                listenRideStatusChanges(rideStatus: RideStatus.changedToDropoff.rawValue)
             }
             activityIndicator.stopAnimating()
         }
@@ -131,17 +133,14 @@ class OnItsWayViewController: UIViewController {
             }
         }
     }
-    private func changeToOnPickup() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onPickup.rawValue) { (error) in
+    private func changeRideStatus(rideStatus: String) {
+        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error , ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
             }
-        }
-    }
-    private func changeToReturnPick() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onPickupReturnRide.rawValue) { (error) in
-            if let error = error {
-                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            
+            if let ride = ride {
+                self.ride = ride
             }
         }
     }
@@ -164,7 +163,7 @@ class OnItsWayViewController: UIViewController {
     }
     
    private func updateTotalMiles(miles: Double) {
-        DBService.updateTotalMiles(miles: miles) { (error) in
+        DBService.updateTotalMiles(ride: ride, miles: miles) { (error) in
             if let error = error {
                 self.showAlert(title: "Error updaing total miles", message: error.localizedDescription)
             }
@@ -250,19 +249,28 @@ class OnItsWayViewController: UIViewController {
         MapsHelper.openAppleMapsForDirection(currentLocation: userLocation.coordinate, destinationLat: ride.pickupLat, destinationLon: ride.pickupLon)
     }
     
-    private func listenToDropoffChanges() {
-        DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToDropoff.rawValue) { (error, ride) in
+    private func listenRideStatusChanges(rideStatus: String) {
+        DBService.fetchForRide(ride: ride) { (error, ride) in
             if let error = error {
-                self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
+                self.showAlert(title: "Error fetching ride", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.timer?.invalidate()
-                self.timer = nil
-                let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
-                self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
+                self.ride = ride
+                DBService.listenForRideStatus(ride: ride, status: rideStatus) { (error, ride) in
+                    if let error = error {
+                        self.showAlert(title: "Error listening to dropoff", message: error.localizedDescription)
+                    }
+                    if let ride = ride {
+                        self.timer?.invalidate()
+                        self.timer = nil
+                        let onWayToDropOffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
+                        self.navigationController?.pushViewController(onWayToDropOffVC, animated: true)
+                    }
+                    
+                }
             }
-
         }
+
     }
     
     private func listenToDropoffReturn() {

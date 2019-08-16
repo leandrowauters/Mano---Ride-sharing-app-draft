@@ -103,9 +103,12 @@ class WaitingForRequestViewController: UIViewController {
  
     
     private func changeToOnWaitingRequest() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onWaitingToRequest.rawValue) { (error) in
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onWaitingToRequest.rawValue) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+            }
+            if let ride = ride {
+                self.ride = ride
             }
         }
     }

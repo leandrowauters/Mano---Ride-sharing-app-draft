@@ -64,17 +64,20 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
     
     func changeRideStatus() {
         var rideStatus = String()
-        if ride.rideStatus == RideStatus.changedToReturnPickup.rawValue {
+        if ride.rideStatus == RideStatus.onPickupReturnRide.rawValue {
             rideStatus = RideStatus.changedToReturnDropoff.rawValue
-        } else {
+        }
+        if ride.rideStatus == RideStatus.onPickup.rawValue {
             rideStatus = RideStatus.changedToDropoff.rawValue
         }
-        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error) in
+        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error, ride) in
             if let error = error {
                 self.showAlert(title: "Error updating ride status", message: error.localizedDescription)
-            } else {
+            }
+
+            if let ride = ride {
                 self.dismiss(animated: true)
-                self.arriveDelegate.userPressBeginDropOff(ride: self.ride)
+                self.arriveDelegate.userPressBeginDropOff(ride: ride)
             }
         }
     }

@@ -236,7 +236,7 @@
                         <constraint firstItem="GeW-eu-A7x" firstAttribute="width" secondItem="Qjb-VV-sjJ" secondAttribute="width" multiplier="0.8" id="wg0-Vy-0o3"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEb-BR-z1Y">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEb-BR-z1Y">
                     <rect key="frame" x="0.0" y="10" width="414" height="846"/>
                     <subviews>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qh0-15-4Bh" customClass="BlueBorderedView" customModule="Mano" customModuleProvider="target">

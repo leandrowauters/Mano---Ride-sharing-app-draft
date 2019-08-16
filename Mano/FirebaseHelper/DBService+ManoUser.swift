@@ -65,6 +65,33 @@ extension DBService {
         }
         
     }
+    
+    static public func updateDriverStats(ride: Ride, completion: @escaping(Error?, ManoUser?) -> Void) {
+        if let numberOfMiles = currentManoUser.numberOfMiles,
+            let numberOfRides = currentManoUser.numberOfRides {
+            firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(currentManoUser.userId).updateData([ManoUserCollectionKeys.numberOfMiles : numberOfMiles + ride.totalMiles, ManoUserCollectionKeys.numberOfRides : numberOfRides + 1]) {(error) in
+                if let error = error {
+                    completion(error,nil)
+                }
+
+            }
+        } else {
+            firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(currentManoUser.userId).updateData([ManoUserCollectionKeys.numberOfMiles : ride.totalMiles, ManoUserCollectionKeys.numberOfRides : 1]) { (error) in
+                if let error = error {
+                    completion(error, nil)
+                }
+                
+            }
+        }
+        fetchManoUser(userId: currentManoUser.userId, completion: { (error, manoUser) in
+            if let error = error {
+                completion(error, nil)
+            }
+            if let manoUser = manoUser {
+                completion(nil, manoUser)
+            }
+        })
+    }
     static public func fetchManoUser(userId: String, completion: @escaping (Error?, ManoUser?) -> Void) {
         DBService.firestoreDB
             .collection(ManoUserCollectionKeys.collectionKey)
