@@ -131,7 +131,7 @@ class RequestRideViewController: UIViewController {
             }
 
         }
-        showAlert(title: "Ride request created!", message: "Please wait until a driver accepts request")
+
         
     }
 

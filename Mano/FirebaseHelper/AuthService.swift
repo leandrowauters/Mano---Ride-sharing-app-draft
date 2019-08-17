@@ -30,7 +30,7 @@ protocol AuthServiceSignInWithGoogleAccount: AnyObject {
 }
 
 enum TypeOfUser: String {
-    case Rider, Driver
+    case Passenger, Driver
 }
 
 final class AuthService {

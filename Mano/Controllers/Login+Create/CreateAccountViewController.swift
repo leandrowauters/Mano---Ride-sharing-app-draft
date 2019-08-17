@@ -139,7 +139,7 @@ class CreateAccountViewController: UIViewController {
         
     }
     @IBAction func patientButtonPressed(_ sender: Any) {
-        typeOfUser = TypeOfUser.Rider.rawValue
+        typeOfUser = TypeOfUser.Passenger.rawValue
         patientButton.setTitleColor(#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1), for: .normal)
         patientButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
         driverButton.setTitleColor(#colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1), for: .normal)

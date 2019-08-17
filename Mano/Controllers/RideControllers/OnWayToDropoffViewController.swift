@@ -52,7 +52,7 @@ class OnWayToDropoffViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             listenToWaitingForRequest()
             listenToRideIsOver()
         }
@@ -81,7 +81,7 @@ class OnWayToDropoffViewController: UIViewController {
             destinationName.text = ride.dropoffName
             destinationAddress.text = ride.dropoffAddress
         }
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             driverView.isHidden = true
         }
     }

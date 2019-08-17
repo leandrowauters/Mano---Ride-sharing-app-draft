@@ -44,7 +44,7 @@ class DriverProfileViewController: UIViewController {
         
         driverName.text = currentUser.fullName
         authservice.authserviceSignOutDelegate = self
-        if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if currentUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
             driverImage.contentMode = .scaleAspectFit
@@ -66,7 +66,7 @@ class DriverProfileViewController: UIViewController {
     }
     
     private func upcomingRides() {
-        if currentUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if currentUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             DBService.fetchPassangerRides(passangerId: currentUser.userId) { (error, rides) in
                 if let error = error {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
@@ -77,7 +77,7 @@ class DriverProfileViewController: UIViewController {
                 }
             }
         } else {
-            DBService.fetchDriverAcceptedRides(driverId: currentUser.userId) { (error, rides) in
+            DBService.fetchDriverAcceptedRides() { (error, rides) in
                 if let error = error {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
                 }
@@ -166,7 +166,7 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             UITableViewCell()
             
         }
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             cell.riderName.isHidden = true
         }
         let upcomingRides = upcomingEvents[indexPath.row]

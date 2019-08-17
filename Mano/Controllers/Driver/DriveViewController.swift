@@ -15,6 +15,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var ridesTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var noRidesLabel: UILabel!
     
     private var userLocation = CLLocation()
     private var locationManager = CLLocationManager()
@@ -59,12 +60,12 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private func checkForRideToday() {
         if rides.isEmpty {
-            showAlert(title: "No Rides Today", message: nil)
+            noRidesLabel.isHidden = false
         }
     }
     
     private func fetchYourAcceptedRides() {
-        DBService.fetchDriverAcceptedRides(driverId: DBService.currentManoUser.userId) { (error, rides) in
+        DBService.fetchDriverAcceptedRides() { (error, rides) in
             if let error = error {
                 self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }

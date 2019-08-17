@@ -46,7 +46,7 @@ class RideAcceptedAlertViewController: UIViewController {
     }
     
     @IBAction func continuePressed(_ sender: Any) {
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Rider.rawValue {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             DBService.updateRideToSeen(ride: ride) { (error) in
                 if let error = error {
                     self.showAlert(title: "Error updating ride", message: error.localizedDescription)

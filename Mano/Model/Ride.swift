@@ -35,10 +35,8 @@ class Ride: Codable {
     var pickupLon: Double
     var dropoffLat: Double
     var dropoffLon: Double
-    var accepted: Bool
-    var accptedBy: String
     var acceptenceWasSeen: Bool
-    var driverOnItsWay: Bool
+    var inProgress: Bool
     var duration: Int
     var distance: Double
     var dateRequested: String
@@ -59,7 +57,7 @@ class Ride: Codable {
     var rideStatus: String
     var totalMiles: Double
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,driverOnItsWay: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String, totalMiles: Double) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,inProgress: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String, totalMiles: Double) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -71,10 +69,8 @@ class Ride: Codable {
         self.pickupLon = pickupLon
         self.dropoffLat = dropoffLat
         self.dropoffLon = dropoffLon
-        self.accepted = accepted
-        self.accptedBy = accptedBy
         self.acceptenceWasSeen = acceptenceWasSeen
-        self.driverOnItsWay = driverOnItsWay
+        self.inProgress = inProgress
         self.duration = duration
         self.distance = distance
         self.dateRequested = dateRequested
@@ -108,10 +104,8 @@ class Ride: Codable {
         self.pickupLon = dict[RideCollectionKeys.pickupLonKey] as? Double ?? 0.0
         self.dropoffLat = dict[RideCollectionKeys.dropoffLatKey] as? Double ?? 0.0
         self.dropoffLon = dict[RideCollectionKeys.dropoffLonKey] as? Double ?? 0.0
-        self.accepted = dict[RideCollectionKeys.acceptedKey] as? Bool ?? false
-        self.accptedBy = dict[RideCollectionKeys.accptedByKey] as? String ?? ""
         self.acceptenceWasSeen = dict[RideCollectionKeys.acceptenceWasSeenKey] as? Bool ?? false
-        self.driverOnItsWay = dict[RideCollectionKeys.driverOnItsWayKey] as? Bool ?? false
+        self.inProgress = dict[RideCollectionKeys.inProgressKey] as? Bool ?? false
         self.duration = dict[RideCollectionKeys.durationKey] as? Int ?? 0
         self.distance = dict[RideCollectionKeys.distanceKey] as? Double ?? 0.0
         self.dateRequested = dict[RideCollectionKeys.dateRequestedKey] as? String ?? ""
