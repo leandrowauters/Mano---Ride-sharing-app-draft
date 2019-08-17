@@ -41,14 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
 //        AppDelegate.authservice.signOutAccount()
         
         if let manoUser = AppDelegate.authservice.getCurrentUser() {
-            let savedManoUser = DataPersistanceModel.getManoUser()
-            if savedManoUser.isEmpty {
+            
                 DBService.fetchManoUser(userId: manoUser.uid) { (error, manoUser) in
                     if let error = error {
                         print(error.localizedDescription)
                     }
                     if let manoUser = manoUser {
-                        DataPersistanceModel.addManoUser(manoUser: manoUser)
                         DBService.currentManoUser = manoUser
                         //TO DO
                         
@@ -61,17 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
                         
                     }
                 }
-            } else {
-                DBService.currentManoUser = savedManoUser.first!
-                //TO DO
-                
-                let tab = TabBarViewController.setTabBarVC(typeOfUser: savedManoUser.first!.typeOfUser)
-                let navigationController = UINavigationController(rootViewController: tab)
-                navigationController.setNavigationBarHidden(true, animated: false)
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window?.rootViewController = navigationController
-                self.window?.makeKeyAndVisible()
-            }
 
             
         } else {

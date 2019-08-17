@@ -10,29 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mano/FirebaseHelper/DBService+Ride.swift"
-            timestampString = "587610342.845981"
+            timestampString = "587692486.711969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "updateRideStatus(ride:status:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mano/Controllers/RideControllers/OnItsWayViewController.swift"
-            timestampString = "587610342.846576"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "listenRideStatusChanges(rideStatus:)"
-            landmarkType = "7">
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,13 +26,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mano/Controllers/RideControllers/OnWayToDropoffViewController.swift"
-            timestampString = "587610342.846975"
+            timestampString = "587692486.7125551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "arrivedPressed(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mano/Controllers/Driver/DriverProfileViewController.swift"
+            timestampString = "587692486.713289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "settingsPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mano/Controllers/Driver/DriverProfileViewController.swift"
+            timestampString = "587692486.7135299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mano/Controllers/Driver/DriverRideCompletedViewController.swift"
+            timestampString = "587693545.748381"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "updateDriverStats(ride:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mano.DriverRideCompletedViewController.(updateDriverStats in _B7EC39C0FB5DD9C8C4B1D6BA901C4736)(ride: Mano.Ride) -&gt; ()"
+                  moduleName = "Mano"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leandrowauters/Documents/Mano/Mano/Mano/Controllers/Driver/DriverRideCompletedViewController.swift"
+                  timestampString = "587693546.743921"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "38">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;, Swift.Optional&lt;Mano.ManoUser&gt;) -&gt; () in Mano.DriverRideCompletedViewController.(updateDriverStats in _B7EC39C0FB5DD9C8C4B1D6BA901C4736)(ride: Mano.Ride) -&gt; ()"
+                  moduleName = "Mano"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leandrowauters/Documents/Mano/Mano/Mano/Controllers/Driver/DriverRideCompletedViewController.swift"
+                  timestampString = "587693546.746666"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "278">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
