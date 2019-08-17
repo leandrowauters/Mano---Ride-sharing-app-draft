@@ -9,6 +9,8 @@
 import Foundation
 
 enum RideStatus: String {
+    case rideCreated
+    case rideAccepted
     case changedToPickup
     case onPickup
     case changedToDropoff
