@@ -55,18 +55,6 @@ class RequestRideViewController: UIViewController {
         pickupLon = DBService.currentManoUser.homeLon
     }
     
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        rideAlreadyCreated { (alreadyCreated) in
-//            if alreadyCreated {
-//                self.alertView.isHidden = false
-//                self.activityIndicator.stopAnimating()
-//            } else {
-//                self.alertView.isHidden = true
-//                self.activityIndicator.stopAnimating()
-//            }
-//        }
-//    }
     
     override func viewDidDisappear(_ animated: Bool) {
         listener.remove()
@@ -86,7 +74,7 @@ class RequestRideViewController: UIViewController {
   
     func fetchRideCreated() {
         activityIndicator.startAnimating()
-        DBService.fetchPassangerRides(passangerId: DBService.currentManoUser.userId) { [weak self] error, rides in
+        listener = DBService.fetchUserRides(typeOfUser: DBService.currentManoUser.userId) { [weak self] error, rides in
             if let error = error {
                 self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }

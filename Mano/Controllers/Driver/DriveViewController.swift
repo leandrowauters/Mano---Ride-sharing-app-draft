@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-
+import Firebase
 class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
@@ -21,6 +21,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private var locationManager = CLLocationManager()
     private var duration: Int?
     private var distance: Double?
+    private var listener: ListenerRegistration!
     private var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -67,12 +68,12 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func fetchYourAcceptedRides() {
-        DBService.fetchAcceptedRides() { (error, rides) in
+        listener = DBService.fetchUserRides(typeOfUser: TypeOfUser.Driver.rawValue) { [weak self] error, rides in
             if let error = error {
-                self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
+              self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                self.rides = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
+                self?.rides = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
             }
         }
     }

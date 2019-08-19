@@ -105,20 +105,20 @@ class ListenerHelper {
     }
     
     public func fetchAcceptedRides(vc: UITabBarController) -> ListenerRegistration {
-        return DBService.fetchAcceptedRides() { (error, rides) in
+        return DBService.fetchUserRides(typeOfUser: TypeOfUser.Driver.rawValue, completion: { (error, rides) in
             if let error = error {
                 vc.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }
             if let rides = rides {
                 let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
-                if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-                    if !ridesToday.isEmpty{
-                        vc.tabBar.items![2].badgeValue = ridesToday.count.description
-                    } else {
-                        vc.tabBar.items![2].badgeValue = nil
+                    if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
+                        if !ridesToday.isEmpty{
+                            vc.tabBar.items![2].badgeValue = ridesToday.count.description
+                        } else {
+                            vc.tabBar.items![2].badgeValue = nil
+                        }
                     }
                 }
-            }
-        }
+        })
     }
 }

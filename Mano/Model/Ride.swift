@@ -23,6 +23,7 @@ enum RideStatus: String {
     case onDropoffReturnRide
     case changedToIsOver
     case rideIsOver
+    case rideCancelled
 }
 class Ride: Codable {
     var passanger: String

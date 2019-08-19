@@ -37,7 +37,7 @@ extension DBService {
                 var rides = [Ride]()
                 for document in snapshot.documents {
                     let ride = Ride.init(dict: document.data())
-                    if ride.appointmentDate.stringToDate().dateExpired() {
+                    if ride.appointmentDate.stringToDate().dateExpired() && ride.rideStatus ==  RideStatus.rideRequested.rawValue {
                         deleteRide(ride: ride, completion: { (error) in
                             if let error = error {
                                 completion(error, nil)
@@ -52,26 +52,20 @@ extension DBService {
         }
     }
     
-    static public func fetchPassangerRides(passangerId: String, completion: @escaping(Error?, [Ride]?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.passangerId, isEqualTo: passangerId).addSnapshotListener { (snapshot, error) in
+    static public func fetchUserRides(typeOfUser: String, completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
+        var key = String()
+        if typeOfUser == TypeOfUser.Driver.rawValue {
+            key = RideCollectionKeys.driverIdKey
+        } else {
+           key = RideCollectionKeys.passangerId
+        }
+        return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(key, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)
             }
             if let snapshot = snapshot {
-                var passengerRides = [Ride]()
-                for document in snapshot.documents {
-                    let passangerRide = Ride.init(dict: document.data())
-                    if passangerRide.appointmentDate.stringToDate().dateExpired() {
-                        deleteRide(ride: passangerRide, completion: { (error) in
-                            if let error = error {
-                                completion(error, nil)
-                            }
-                        })
-                    } else {
-                        passengerRides.append(passangerRide)
-                    }
-                }
-                completion(nil, passengerRides)
+                let rides = snapshot.documents.map{Ride.init(dict: $0.data())}
+                completion(nil, rides)
             }
         }
     }
@@ -103,17 +97,17 @@ extension DBService {
         }
     }
     
-    static func fetchAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
-        return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue ).whereField(RideCollectionKeys.driverIdKey, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error,nil)
-            }
-            if let snapshot = snapshot {
-                let ridesAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
-                completion(nil, ridesAccepted)
-            }
-        }
-    }
+//    static func fetchAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
+//        return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue ).whereField(RideCollectionKeys.driverIdKey, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                completion(error,nil)
+//            }
+//            if let snapshot = snapshot {
+//                let ridesAccepted = snapshot.documents.map{Ride.init(dict: $0.data())}
+//                completion(nil, ridesAccepted)
+//            }
+//        }
+//    }
     
     static func listenForRideAcceptence(passangerId: String, completion: @escaping(Error?, Ride?) -> Void) ->ListenerRegistration {
         return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue).whereField(RideCollectionKeys.passangerId, isEqualTo: passangerId).whereField(RideCollectionKeys.acceptenceWasSeenKey, isEqualTo: false).addSnapshotListener { (snapshot, error) in

@@ -9,15 +9,18 @@
 import UIKit
 import Kingfisher
 import MessageUI
+import Firebase
 class DriverProfileViewController: UIViewController {
 
+    private var rideFetchListener: ListenerRegistration!
+    private var messageListener: ListenerRegistration!
+    
     @IBOutlet weak var driverImage: UIImageView!
     @IBOutlet weak var driverName: UILabel!
     @IBOutlet weak var upcomingTableView: UITableView!
     @IBOutlet weak var manoDriveLabel: UILabel!
     @IBOutlet weak var messageAlert: CircularView!
     @IBOutlet weak var optionView: BlueBorderedView!
-    
     @IBOutlet weak var topButton: BlueBorderedButton!
     @IBOutlet weak var secondButton: BlueBorderedButton!
     var upcomingEvents = [Ride]() {
@@ -40,6 +43,11 @@ class DriverProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         checkForNewMessages()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        rideFetchListener.remove()
+        messageListener.remove()
+    }
     func setup() {
         
         driverName.text = currentUser.fullName
@@ -48,10 +56,7 @@ class DriverProfileViewController: UIViewController {
             manoDriveLabel.isHidden = true
             driverImage.image = UIImage(named: "ManoLogo1")
             driverImage.contentMode = .scaleAspectFit
-
-            
         } else {
-
             guard let profilePicURL = URL(string: currentUser.profileImage!) else {
                 self.showAlert(title: "Error fetching profile image", message: nil)
                 return
@@ -66,30 +71,24 @@ class DriverProfileViewController: UIViewController {
     }
     
     private func upcomingRides() {
+        var typeOfUser = String()
         if currentUser.typeOfUser == TypeOfUser.Passenger.rawValue {
-            DBService.fetchPassangerRides(passangerId: currentUser.userId) { (error, rides) in
-                if let error = error {
-                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
-                }
-                if let rides = rides {
-                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
-                    self.upcomingEvents = ridesSortedByDate
-                }
-            }
+            typeOfUser = TypeOfUser.Passenger.rawValue
         } else {
-            DBService.fetchAcceptedRides() { (error, rides) in
-                if let error = error {
-                    self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
-                }
-                if let rides = rides {
-                    let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
-                    self.upcomingEvents = ridesSortedByDate
-                }
+            typeOfUser = TypeOfUser.Driver.rawValue
+        }
+        rideFetchListener = DBService.fetchUserRides(typeOfUser: typeOfUser) { (error, rides) in
+            if let error = error {
+                self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+            }
+            if let rides = rides {
+                let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
+                self.upcomingEvents = ridesSortedByDate
             }
         }
     }
     private func checkForNewMessages() {
-        DBService.fetchYourMessages { (error, messages) in
+       messageListener = DBService.fetchYourMessages { (error, messages) in
             if let messages = messages {
                 DBService.messagesRecieved = messages
                 let newMessage = messages.filter({$0.read == false})
