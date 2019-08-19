@@ -17,7 +17,8 @@ extension DBService {
                                                                                                    RideCollectionKeys.rideIdKey : ref.documentID,
                                                                                                    RideCollectionKeys.passangerName : passangerName,
                                                                                                    RideCollectionKeys.pickupAddressKey : pickupAddress, RideCollectionKeys.dropoffAddressKey : dropoffAddress, RideCollectionKeys.pickupLatKey : pickupLat, RideCollectionKeys.pickupLonKey : pickupLon, RideCollectionKeys.dropoffLonKey :dropoffLon, RideCollectionKeys.dropoffLatKey : dropoffLat, RideCollectionKeys.dateRequestedKey : dateRequested, RideCollectionKeys.passangerCellKey : passangerCell,
-            RideCollectionKeys.dropoffNameKey : dropoffName ?? "Drop-off name unavailable"
+            RideCollectionKeys.dropoffNameKey : dropoffName ?? "Drop-off name unavailable",
+            RideCollectionKeys.rideStatusKey : RideStatus.rideRequested.rawValue
                                                                 
         ]) { (error) in
             if let error = error {
@@ -102,7 +103,7 @@ extension DBService {
         }
     }
     
-    static func fetchDriverAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
+    static func fetchAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
         return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue ).whereField(RideCollectionKeys.driverIdKey, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)

@@ -77,7 +77,7 @@ class DriverProfileViewController: UIViewController {
                 }
             }
         } else {
-            DBService.fetchDriverAcceptedRides() { (error, rides) in
+            DBService.fetchAcceptedRides() { (error, rides) in
                 if let error = error {
                     self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
                 }

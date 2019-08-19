@@ -117,7 +117,7 @@ class ListenerHelper {
     }
     
     public func fetchAcceptedRides(vc: UITabBarController) -> ListenerRegistration {
-        return DBService.fetchDriverAcceptedRides() { (error, rides) in
+        return DBService.fetchAcceptedRides() { (error, rides) in
             if let error = error {
                 vc.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }

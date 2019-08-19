@@ -45,17 +45,7 @@ class RequestRideViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        listenForRideAcceptance()
-        rideAlreadyCreated { (alreadyCreated) in
-            if alreadyCreated {
-                self.alertView.isHidden = false
-                self.activityIndicator.stopAnimating()
-            } else {
-                self.alertView.isHidden = true
-                self.activityIndicator.stopAnimating()
-            }
-        }
-        
+        fetchRideCreated()
         setupTapsViews()
         datePicker.minimumDate = Date()
         pickupAddress = DBService.currentManoUser.homeAdress
@@ -63,18 +53,18 @@ class RequestRideViewController: UIViewController {
         pickupLon = DBService.currentManoUser.homeLon
     }
     
-
-    override func viewDidAppear(_ animated: Bool) {
-        rideAlreadyCreated { (alreadyCreated) in
-            if alreadyCreated {
-                self.alertView.isHidden = false
-                self.activityIndicator.stopAnimating()
-            } else {
-                self.alertView.isHidden = true
-                self.activityIndicator.stopAnimating()
-            }
-        }
-    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        rideAlreadyCreated { (alreadyCreated) in
+//            if alreadyCreated {
+//                self.alertView.isHidden = false
+//                self.activityIndicator.stopAnimating()
+//            } else {
+//                self.alertView.isHidden = true
+//                self.activityIndicator.stopAnimating()
+//            }
+//        }
+//    }
     
     override func viewDidDisappear(_ animated: Bool) {
         listener.remove()
@@ -89,33 +79,36 @@ class RequestRideViewController: UIViewController {
         let dropoffViewTap = UITapGestureRecognizer(target: self, action: #selector(dropoffViewPressed))
         dropoffView.addGestureRecognizer(dropoffViewTap)
     }
-    func listenForRideAcceptance() {
-        
-        listener = DBService.listenForRideAcceptence(passangerId: DBService.currentManoUser.userId) { (error, ride) in
+
+
+  
+    func fetchRideCreated() {
+        activityIndicator.startAnimating()
+        DBService.fetchPassangerRides(passangerId: DBService.currentManoUser.userId) { [weak self] error, rides in
             if let error = error {
-                self.showAlert(title: "Error fetching accepted ride", message: error.localizedDescription)
-            }
-            if ride != nil {
-                self.rideStatusLabel.text = "Accepted"
-                self.rideStatusLabel.textColor = #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1)
-            }
-        }
-    }
-    func rideAlreadyCreated(completion: @escaping(Bool) -> Void) {
-        DBService.fetchPassangerRides(passangerId: DBService.currentManoUser.userId) { (error, rides) in
-            if let error = error {
-                self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+                self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                if !rides.isEmpty {
-                    completion(true)
-                } else {
-                    completion(false)
+                if let ride = rides.last {
+                    switch ride.rideStatus {
+                    case RideStatus.rideRequested.rawValue:
+                        self?.setupAlertView(isHidden: false, labelText: "Finding Driver", labelColor: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
+                    case RideStatus.rideAccepted.rawValue:
+                        self?.setupAlertView(isHidden: false, labelText: "Accepted", labelColor: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
+                    default:
+                        self?.alertView.isHidden = true
+                    }
                 }
             }
         }
+        activityIndicator.stopAnimating()
     }
     
+    private func setupAlertView(isHidden: Bool, labelText: String, labelColor: UIColor) {
+        alertView.isHidden = isHidden
+        rideStatusLabel.text = labelText
+        rideStatusLabel.textColor = labelColor
+    }
     @objc func dateViewPressed(){
         datePickerView.isHidden = false
     }
