@@ -42,11 +42,12 @@ class DriverProfileViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         checkForNewMessages()
+        upcomingRides()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        rideFetchListener.remove()
         messageListener.remove()
+        rideFetchListener.remove()
     }
     func setup() {
         
@@ -165,15 +166,9 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             UITableViewCell()
             
         }
-        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
-            cell.riderName.isHidden = true
-        }
+
         let upcomingRides = upcomingEvents[indexPath.row]
-        cell.upcomingDate.text = upcomingRides.appointmentDate
-        cell.riderName.text = upcomingRides.passanger
-        cell.ridePickupAddress.text = "Pick-up: \(upcomingRides.pickupAddress)"
-        cell.rideDropoffAddress.text = "Drop-off \(upcomingRides.dropoffAddress)"
-        cell.selectionStyle = .none
+        cell.configure(with: upcomingRides)
         return cell
     }
     
@@ -194,19 +189,19 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             switch alert.title {
             case "Cancel Ride":
                 self.showConfimationAlert(title: "Cancel Ride", message: "Are you sure?", handler: { (yes) in
-                    DBService.deleteRide(ride: ride , completion: { (error) in
+                    DBService.updateRideStatus(ride: ride, status: RideStatus.rideCancelled.rawValue, completion: { [weak self] error, ride in
                         if let error = error {
-                            self.showAlert(title: "Error deleting ride", message: error.localizedDescription)
+                            self?.showAlert(title: "Error changing status", message: error.localizedDescription)
                         }
                     })
                 })
             case "Add To Calendar":
-                EventKitHelper.shared.addToCalendar(ride: ride, completion: { (error, calendar) in
+                EventKitHelper.shared.addToCalendar(ride: ride, completion: { [weak self] error, calendar in
                     if let error = error {
-                        self.showAlert(title: "Error Adding to calendar", message: error.errorMessage())
+                        self?.showAlert(title: "Error Adding to calendar", message: error.errorMessage())
                     }
                     if let calendar = calendar {
-                        self.showAlert(title: "Added!", message: "Calendar: \(calendar)")
+                        self?.showAlert(title: "Added!", message: "Calendar: \(calendar)")
                     }
                 })
             case "Contact Passenger":

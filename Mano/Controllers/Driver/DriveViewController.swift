@@ -38,7 +38,13 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        fetchYourAcceptedRides()
+    }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        listener.remove()
+    }
     private func setupCoreLocation() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             // we need to say how accurate the data should be

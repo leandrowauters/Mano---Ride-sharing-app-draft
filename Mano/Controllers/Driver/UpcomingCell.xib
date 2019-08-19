@@ -50,19 +50,28 @@
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancelled" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSo-a8-nCw">
+                                <rect key="frame" x="20" y="87.5" width="230" height="36"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="31"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.98823529409999999" green="0.51372549020000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="4Pf-21-o0H" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="3Cr-9n-Pc7"/>
                             <constraint firstItem="E3D-fH-Nl4" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="6S7-6z-GgW"/>
                             <constraint firstItem="E3D-fH-Nl4" firstAttribute="top" secondItem="tdv-SN-I2T" secondAttribute="bottom" constant="5" id="CV8-gK-VdI"/>
                             <constraint firstAttribute="trailing" secondItem="tdv-SN-I2T" secondAttribute="trailing" constant="35" id="Fwh-4e-Q52"/>
                             <constraint firstItem="tdv-SN-I2T" firstAttribute="top" secondItem="T9k-24-fM7" secondAttribute="top" constant="15" id="GQ9-dW-BIW"/>
+                            <constraint firstItem="TSo-a8-nCw" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="20" id="HHc-PR-v2s"/>
                             <constraint firstItem="4Pf-21-o0H" firstAttribute="top" secondItem="rqf-Vq-lcs" secondAttribute="bottom" constant="5" id="OXH-Wn-Jl7"/>
                             <constraint firstAttribute="trailing" secondItem="E3D-fH-Nl4" secondAttribute="trailing" constant="35" id="PeF-9L-gv1"/>
                             <constraint firstItem="rqf-Vq-lcs" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="Zjq-lz-98O"/>
                             <constraint firstItem="rqf-Vq-lcs" firstAttribute="top" secondItem="E3D-fH-Nl4" secondAttribute="bottom" constant="5" id="aBg-wp-R27"/>
                             <constraint firstItem="tdv-SN-I2T" firstAttribute="leading" secondItem="T9k-24-fM7" secondAttribute="leading" constant="35" id="jXy-U4-hHu"/>
+                            <constraint firstAttribute="trailing" secondItem="TSo-a8-nCw" secondAttribute="trailing" constant="20" id="m6j-Zi-gCF"/>
+                            <constraint firstItem="TSo-a8-nCw" firstAttribute="top" secondItem="E3D-fH-Nl4" secondAttribute="bottom" constant="15" id="mf2-FI-d5m"/>
                             <constraint firstAttribute="trailing" secondItem="rqf-Vq-lcs" secondAttribute="trailing" constant="35" id="pgI-SX-qyC"/>
                             <constraint firstAttribute="trailing" secondItem="4Pf-21-o0H" secondAttribute="trailing" constant="35" id="w1q-1l-OfM"/>
                         </constraints>
@@ -77,9 +86,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="cancelledLabel" destination="TSo-a8-nCw" id="aPf-AM-sgl"/>
                 <outlet property="rideDropoffAddress" destination="4Pf-21-o0H" id="v6E-dd-aU0"/>
                 <outlet property="ridePickupAddress" destination="rqf-Vq-lcs" id="QJM-Zk-fFI"/>
                 <outlet property="riderName" destination="E3D-fH-Nl4" id="ybz-2o-5Fk"/>
+                <outlet property="subView" destination="T9k-24-fM7" id="gR7-CJ-Tvg"/>
                 <outlet property="upcomingDate" destination="tdv-SN-I2T" id="vrW-IG-OV5"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="173.77232142857142"/>
