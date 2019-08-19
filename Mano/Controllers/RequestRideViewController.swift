@@ -22,6 +22,7 @@ class RequestRideViewController: UIViewController {
     private var dropoffLon: Double!
     private var date: String?
     private var pickup: Bool!
+    private var ride: Ride?
     private var listener: ListenerRegistration!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var dateView: RoundViewWithBorder!
@@ -41,6 +42,7 @@ class RequestRideViewController: UIViewController {
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var rideStatusLabel: UILabel!
+    @IBOutlet weak var addToCalendarButton: RoundedButton!
     
 
     override func viewDidLoad() {
@@ -90,11 +92,13 @@ class RequestRideViewController: UIViewController {
             }
             if let rides = rides {
                 if let ride = rides.last {
+                    self?.ride = ride
                     switch ride.rideStatus {
                     case RideStatus.rideRequested.rawValue:
                         self?.setupAlertView(isHidden: false, labelText: "Finding Driver", labelColor: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
                     case RideStatus.rideAccepted.rawValue:
                         self?.setupAlertView(isHidden: false, labelText: "Accepted", labelColor: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
+                        self?.addToCalendarButton.isHidden = false
                     default:
                         self?.alertView.isHidden = true
                     }
@@ -138,9 +142,9 @@ class RequestRideViewController: UIViewController {
             return
         }
         let timeStamp = Date().dateDescription
-        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, dropoffName: dropoffName, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp, passangerCell: DBService.currentManoUser.cellPhone!) { (error) in
+        DBService.createARide(date: date, passangerId: DBService.currentManoUser.userId  , passangerName: DBService.currentManoUser.fullName, pickupAddress: pickupAddress, dropoffAddress: dropoffAddress, dropoffName: dropoffName, pickupLat: pickupLat, pickupLon: pickupLon, dropoffLat: dropoffLat, dropoffLon: dropoffLon, dateRequested: timeStamp, passangerCell: DBService.currentManoUser.cellPhone!) { [weak self] error in
             if let error = error {
-                self.showAlert(title: "Error creating ride", message: error.localizedDescription)
+                self?.showAlert(title: "Error creating ride", message: error.localizedDescription)
             }
 
         }
@@ -153,15 +157,19 @@ class RequestRideViewController: UIViewController {
         createRide()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addToCalendarPressed(_ sender: Any) {
+        guard let ride = ride else {showAlert(title: "No ride to add to calendar", message: nil)
+            return}
+        EventKitHelper.shared.addToCalendar(ride: ride, completion: { [weak self] error, calendar in
+            if let error = error {
+                self?.showAlert(title: "Error Adding to calendar", message: error.errorMessage())
+            }
+            if let calendar = calendar {
+                self?.showAlert(title: "Added!", message: "Calendar: \(calendar)")
+            }
+        })
     }
-    */
+    
 
 }
 extension RequestRideViewController: GMSAutocompleteViewControllerDelegate {

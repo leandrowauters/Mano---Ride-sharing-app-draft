@@ -12,7 +12,7 @@ import Firebase
 class TabBarViewController: UITabBarController {
     
     
-    var listenerForAcceptence: ListenerRegistration!
+
     var listenerForDriverOnItsWay: ListenerRegistration!
     var listenerForMessages: ListenerRegistration!
     var listenerForFetchRides: ListenerRegistration!
@@ -26,7 +26,6 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
-            listenerForAcceptence = ListenerHelper.shared.listenForRideAcceptence(vc: self)
             listenerForDriverOnItsWay = ListenerHelper.shared.listenForDriverOnItsWay(vc: self)
         }
         ListenerHelper.shared.navigateToCurrentRideStatus(vc: self)
@@ -38,7 +37,6 @@ class TabBarViewController: UITabBarController {
     override func viewDidDisappear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
         listenerForDriverOnItsWay.remove()
-        listenerForAcceptence.remove()
         }
         listenerForMessages.remove()
         listenerForFetchRides.remove()

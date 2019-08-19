@@ -62,18 +62,6 @@ class ListenerHelper {
         }
     }
     
-    public func listenForRideAcceptence(vc: UIViewController) -> ListenerRegistration{
-        return DBService.listenForRideAcceptence(passangerId: DBService.currentManoUser.userId) { (error, ride) in
-            if let error = error {
-                vc.showAlert(title: "Error fetching accepted ride", message: error.localizedDescription)
-            }
-            if let ride = ride {
-                let rideAcceptedAlertView = RideAcceptedAlertViewController(nibName: nil, bundle: nil, ride: ride)
-                rideAcceptedAlertView.modalPresentationStyle = .overCurrentContext
-                vc.present(rideAcceptedAlertView, animated: true)
-            }
-        }
-    }
     
     public func listenForDriverOnItsWay(vc: UIViewController) -> ListenerRegistration {
         return DBService.listenForDriverOnItsWay {  (error, ride) in
