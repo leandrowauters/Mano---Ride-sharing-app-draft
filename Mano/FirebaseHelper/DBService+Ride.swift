@@ -36,16 +36,18 @@ extension DBService {
             if let snapshot = snapshot {
                 var rides = [Ride]()
                 for document in snapshot.documents {
-                    let ride = Ride.init(dict: document.data())
-                    if ride.appointmentDate.stringToDate().dateExpired() && ride.rideStatus ==  RideStatus.rideRequested.rawValue {
-                        deleteRide(ride: ride, completion: { (error) in
-                            if let error = error {
-                                completion(error, nil)
+                        let ride = Ride.init(dict: document.data())
+                        if ride.rideStatus ==  RideStatus.rideRequested.rawValue {
+                            if ride.appointmentDate.stringToDate().dateExpired() || (ride.rideStatus ==  RideStatus.rideCancelled.rawValue && ride.appointmentDate.stringToDate().dateExpired()) {
+                                deleteRide(ride: ride, completion: { (error) in
+                                    if let error = error {
+                                        completion(error, nil)
+                                    }
+                                })
+                            } else {
+                                rides.append(ride)
                             }
-                        })
-                    } else {
-                      rides.append(ride)
-                    }
+                        }
                 }
                 completion(nil, rides)
             }

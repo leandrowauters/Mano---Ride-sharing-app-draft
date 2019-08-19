@@ -79,6 +79,10 @@ class RequestRideViewController: UIViewController {
                 self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
+                if rides.isEmpty {
+                    self?.alertView.isHidden = true
+                    return
+                }
                 if let ride = rides.last {
                     self?.ride = ride
                     switch ride.rideStatus {
