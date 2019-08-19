@@ -172,7 +172,7 @@ class CreateAccountViewController: UIViewController {
                 return
         }
         let joineDate = Date().dateDescription
-        let manoUser = ManoUser(firstName: firstName, lastName: lastName, fullName: (user?.displayName)!, homeAdress: nil, homeLat: nil, homeLon: nil, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: typeOfUser, patients: nil, joinedDate:joineDate , userId: user!.uid, numberOfRides:  nil, numberOfMiles:  nil, licencePlate: nil, carPicture: nil, cellPhone: nil)
+        let manoUser = ManoUser(firstName: firstName, lastName: lastName, fullName: (user?.displayName)!, homeAdress: nil, homeLat: nil, homeLon: nil, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: typeOfUser, regulars: nil, joinedDate:joineDate , userId: user!.uid, numberOfRides:  nil, numberOfMiles:  nil, licencePlate: nil, carPicture: nil, cellPhone: nil,rides: nil)
         authservice.googleUserCreateAccount(manoUser: manoUser)
         
     }

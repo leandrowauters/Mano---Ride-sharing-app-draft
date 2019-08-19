@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PassengerRideCompletedViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="a4T-ez-INk" id="tPw-Rk-NxG"/>
                 <outlet property="driverImage" destination="EIn-L3-OV9" id="7dC-dD-hvG"/>
                 <outlet property="driverNameLabel" destination="6XS-zx-BcO" id="GFq-AD-nqD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -83,14 +84,21 @@
                         <action selector="continuePressed:" destination="-1" eventType="touchUpInside" id="8YJ-eK-qov"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="a4T-ez-INk">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="a4T-ez-INk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="0n3-Pd-Vnf"/>
+                <constraint firstItem="a4T-ez-INk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4OI-q2-Rv7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nb1-4Q-Xpt" secondAttribute="trailing" id="8L0-BD-Rxs"/>
                 <constraint firstItem="jPp-fw-Xzk" firstAttribute="top" secondItem="6XS-zx-BcO" secondAttribute="bottom" constant="25" id="A00-CD-Kgk"/>
                 <constraint firstItem="Grh-Kk-6MF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AaJ-VT-s3x"/>
                 <constraint firstItem="nb1-4Q-Xpt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="DU6-EL-arS"/>
                 <constraint firstItem="EIn-L3-OV9" firstAttribute="top" secondItem="Grh-Kk-6MF" secondAttribute="bottom" constant="45" id="IGk-1L-5cc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a4T-ez-INk" secondAttribute="trailing" id="Ixx-63-RUm"/>
                 <constraint firstItem="6XS-zx-BcO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="JJQ-GA-hmQ"/>
                 <constraint firstItem="6XS-zx-BcO" firstAttribute="top" secondItem="EIn-L3-OV9" secondAttribute="bottom" constant="20" id="P2E-SD-NMn"/>
                 <constraint firstItem="RLc-ZF-ZTh" firstAttribute="centerX" secondItem="jPp-fw-Xzk" secondAttribute="centerX" id="PXT-m9-97p"/>
@@ -100,6 +108,7 @@
                 <constraint firstItem="EIn-L3-OV9" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="hvL-cc-FDh"/>
                 <constraint firstItem="jPp-fw-Xzk" firstAttribute="centerX" secondItem="6XS-zx-BcO" secondAttribute="centerX" id="nJC-hm-drM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Grh-Kk-6MF" secondAttribute="trailing" id="tM0-oF-Id0"/>
+                <constraint firstItem="a4T-ez-INk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yZM-Yc-zf2"/>
                 <constraint firstItem="nb1-4Q-Xpt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zB8-z3-7At"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

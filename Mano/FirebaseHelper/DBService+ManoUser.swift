@@ -120,5 +120,51 @@ extension DBService {
                 }
         }
     }
+    
+    static public func addUserToRegulars(regularId: String, completion: @escaping(Error?) -> Void) {
+        fetchManoUser(userId: currentManoUser.userId) { (error, manoUser) in
+            if let error = error {
+                completion(error)
+            }
+            if let manoUser = manoUser {
+                var newRegulars = [String]()
+                if let regulars = manoUser.regulars {
+                    newRegulars = regulars
+                }
+                    newRegulars.append(regularId)
+                    firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(manoUser.userId).updateData([ManoUserCollectionKeys.regularsKey : newRegulars], completion: { (error) in
+                        if let error = error {
+                            completion(error)
+                        } else {
+                            completion(nil)
+                        }
+                    })
+                
+            
+            }
+        }
+    }
+    
+    static public func addRideToRides(ride: Ride, completion: @escaping(Error?) -> Void) {
+        fetchManoUser(userId: currentManoUser.userId) { (error, manoUser) in
+            if let error = error {
+                completion(error)
+            }
+            if let manoUser = manoUser {
+                var newRides = [String]()
+                if let rides = manoUser.rides {
+                    newRides = rides
+                }
+                newRides.append(ride.rideId)
+                firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(manoUser.userId).updateData([ManoUserCollectionKeys.ridesKey : newRides], completion: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+                })
+            }
+        }
+    }
 }
 

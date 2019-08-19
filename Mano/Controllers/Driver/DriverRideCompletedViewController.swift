@@ -16,6 +16,7 @@ class DriverRideCompletedViewController: UIViewController {
     @IBOutlet weak var milesTodayLabel: UILabel!
     @IBOutlet weak var totalMilesLabel: UILabel!
     @IBOutlet weak var numberOfRides: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +61,25 @@ class DriverRideCompletedViewController: UIViewController {
     }
     
     @IBAction func addToRegularPressed(_ sender: Any) {
-        
+        DBService.addUserToRegulars(regularId: ride.passangerId) { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Error adding user", message: error.localizedDescription)
+            } else {
+                self?.showAlert(title: "\(self?.ride.passanger ?? "") added to regulars", message: nil)
+            }
+        }
     }
     
     @IBAction func continuePressed(_ sender: Any) {
-        
+        activityIndicator.startAnimating()
+        DBService.addRideToRides(ride: ride) { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Error adding ride", message: error.localizedDescription)
+            } else {
+                self?.activityIndicator.stopAnimating()
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }
     }
     
 

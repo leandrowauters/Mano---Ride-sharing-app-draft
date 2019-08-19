@@ -20,7 +20,7 @@ struct ManoUserCollectionKeys {
     static let carMakerModelKey = "carMakerModel"
     static let bioKey = "bio"
     static let typeOfUserKey = "typeOfUser"
-    static let patientsKey = "patients"
+    static let regularsKey = "regulars"
     static let joinedDateKey = "joinedDate"
     static let userIdKey = "userId"
     static let numberOfRides = "numberOfRides"
@@ -28,6 +28,7 @@ struct ManoUserCollectionKeys {
     static let licencePlateKey = "licencePlate"
     static let carPictureKey = "carPicture"
     static let cellPhoneKey = "cellPhone"
+    static let ridesKey = "rides"
 }
 
 struct RideCollectionKeys {

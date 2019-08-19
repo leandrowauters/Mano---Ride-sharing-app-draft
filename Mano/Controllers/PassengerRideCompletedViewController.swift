@@ -14,6 +14,7 @@ class PassengerRideCompletedViewController: UIViewController {
     
     @IBOutlet weak var driverImage: RoundedImageViewWhite!
     @IBOutlet weak var driverNameLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var ride: Ride!
     
@@ -38,10 +39,25 @@ class PassengerRideCompletedViewController: UIViewController {
     }
     
     @IBAction func addWasPressed(_ sender: Any) {
-        
+        DBService.addUserToRegulars(regularId: ride.driverId) { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Error adding user", message: error.localizedDescription)
+            } else {
+                self?.showAlert(title: "\(self?.ride.driverName ?? "") added to regulars", message: nil)
+            }
+        }
     }
     
     @IBAction func continuePressed(_ sender: Any) {
+        activityIndicator.startAnimating()
+        DBService.addRideToRides(ride: ride) { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Error adding ride", message: error.localizedDescription)
+            } else {
+                self?.activityIndicator.stopAnimating()
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }
     }
     
 

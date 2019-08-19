@@ -47,7 +47,7 @@ final class AuthService {
             }
             else if let authDataResult = authDataResult {
                  let joinedDate = Date.getISOTimestamp()
-                let manoUser = ManoUser(firstName: firstName, lastName: lastName, fullName: ((firstName ) + " " + (lastName )).trimmingCharacters(in: .whitespacesAndNewlines), homeAdress: nil, homeLat: nil, homeLon: nil, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: typeOfUser, patients: nil, joinedDate: joinedDate, userId: authDataResult.user.uid, numberOfRides: nil, numberOfMiles:  nil, licencePlate: nil, carPicture: nil, cellPhone: nil)
+                let manoUser = ManoUser(firstName: firstName, lastName: lastName, fullName: ((firstName ) + " " + (lastName )).trimmingCharacters(in: .whitespacesAndNewlines), homeAdress: nil, homeLat: nil, homeLon: nil, profileImage: nil, carMakerModel: nil, bio: nil, typeOfUser: typeOfUser, regulars: nil, joinedDate: joinedDate, userId: authDataResult.user.uid, numberOfRides: nil, numberOfMiles:  nil, licencePlate: nil, carPicture: nil, cellPhone: nil, rides: nil)
                 DBService.createUser(manoUser: manoUser, completion: { (error) in
                     if let error = error {
                         self.authserviceCreateNewAccountDelegate?.didRecieveErrorCreatingAccount(self, error: error)

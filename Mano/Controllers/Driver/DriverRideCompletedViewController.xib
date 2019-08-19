@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DriverRideCompletedViewController" customModule="Mano" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="CbI-XR-PYy" id="4JU-19-uYp"/>
                 <outlet property="milesTodayLabel" destination="Ik8-lk-xos" id="WG4-Ya-082"/>
                 <outlet property="numberOfRides" destination="4ty-6I-jRF" id="Ke5-fu-vK4"/>
                 <outlet property="passengerNameLabel" destination="A3K-Wn-2Bb" id="gX0-YA-FTz"/>
@@ -177,19 +178,27 @@
                         <constraint firstItem="6Ot-xl-ZmJ" firstAttribute="top" secondItem="9em-u3-7gG" secondAttribute="top" id="qzJ-CW-NGB"/>
                     </constraints>
                 </scrollView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CbI-XR-PYy">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="0.49727097599999998" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hkV-4f-mA2" secondAttribute="trailing" id="22W-gd-TZn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CbI-XR-PYy" secondAttribute="trailing" id="4zb-sv-RRs"/>
                 <constraint firstItem="f4q-4M-DZc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6mn-Z0-Tsb"/>
                 <constraint firstItem="hkV-4f-mA2" firstAttribute="top" secondItem="f4q-4M-DZc" secondAttribute="bottom" id="8Yg-Nq-ABi"/>
                 <constraint firstItem="9em-u3-7gG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FMt-Qk-jh4"/>
                 <constraint firstItem="hkV-4f-mA2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="L92-cI-EJr"/>
+                <constraint firstItem="CbI-XR-PYy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LFC-a3-Ejc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9em-u3-7gG" secondAttribute="trailing" id="TqC-Hj-hgU"/>
+                <constraint firstItem="CbI-XR-PYy" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="bPe-ks-ngS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9em-u3-7gG" secondAttribute="bottom" id="hl0-CU-hDo"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f4q-4M-DZc" secondAttribute="trailing" id="j5H-QX-Hro"/>
                 <constraint firstItem="9em-u3-7gG" firstAttribute="top" secondItem="hkV-4f-mA2" secondAttribute="bottom" id="lEn-4E-F01"/>
                 <constraint firstItem="f4q-4M-DZc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pzg-Zm-qkC"/>
+                <constraint firstItem="CbI-XR-PYy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="qAN-fV-g3S"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
