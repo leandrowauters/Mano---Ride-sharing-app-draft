@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import MessageUI
+import Firebase
 
 class WaitingForRequestViewController: UIViewController {
 
@@ -26,6 +27,8 @@ class WaitingForRequestViewController: UIViewController {
     var ride: Ride!
     var graphics = GraphicsClient()
     var timer: Timer?
+    private var listener: ListenerRegistration!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCoreLocation()
@@ -40,29 +43,36 @@ class WaitingForRequestViewController: UIViewController {
             thirtyMinTimer()
             calculateCurrentMilesToPickup()
             graphics.pulsatingNoReverse(view: pulsingView)
-            DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnPickup.rawValue) { (error, ride) in
+            listener = DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToReturnPickup.rawValue) { [weak self] error, ride in
                 if let error = error {
-                    self.showAlert(title: "Error listening for ride status", message: error.localizedDescription)
+                    self?.showAlert(title: "Error listening for ride status", message: error.localizedDescription)
                 }
                 if let ride = ride {
-                    self.timer?.invalidate()
-                    self.timer = nil
+                    self?.timer?.invalidate()
+                    self?.timer = nil
                     let onItsWayVC = OnItsWayViewController(nibName: nil, bundle: nil, duration: nil, distance: nil, ride: ride)
-                    self.navigationController?.pushViewController(onItsWayVC, animated: true)
+                    self?.navigationController?.pushViewController(onItsWayVC, animated: true)
                     
                 }
             }
         } else {
-            DBService.listenForDistanceDurationUpdates(ride: ride) { (error, ride) in
+            DBService.listenForDistanceDurationUpdates(ride: ride) { [weak self] error, ride in
                 if let error = error {
-                    self.showAlert(title: "Error listening", message: error.localizedDescription)
+                    self?.showAlert(title: "Error listening", message: error.localizedDescription)
                 }
                 if let ride = ride {
-                    self.distanceLabel.text = "Distance: \n \(MainTimer.timeString(time: TimeInterval(ride.duration))) away"
+                    self?.distanceLabel.text = "Distance: \n \(MainTimer.timeString(time: TimeInterval(ride.duration))) away"
                 }
             }
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
+            listener.remove()
+        }
+    }
+    
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, ride: Ride) {
         self.ride = ride
         super.init(nibName: nil, bundle: nil)
@@ -103,35 +113,35 @@ class WaitingForRequestViewController: UIViewController {
  
     
     private func changeToOnWaitingRequest() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onWaitingToRequest.rawValue) { (error, ride) in
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onWaitingToRequest.rawValue) { [weak self] error, ride in
             if let error = error {
-                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+                self?.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.ride = ride
+                self?.ride = ride
             }
         }
     }
     
     @objc private func thirtyMinTimer() {
         if timer != nil {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-                if self.thirtySecondTimer == 30 {
-                    self.calculateCurrentMilesToPickup()
-                    self.thirtySecondTimer = 0
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                if self?.thirtySecondTimer == 30 {
+                    self?.calculateCurrentMilesToPickup()
+                    self?.thirtySecondTimer = 0
                 } else {
-                    self.thirtySecondTimer += 1
+                    self?.thirtySecondTimer += 1
                 }
             }
         }
     }
     
     func calculateCurrentMilesToPickup() {
-        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
-            self.distanceLabel.text = "Distance: \n \(time) Away"
-            DBService.updateRideDurationDistance(ride: self.ride, distance: milesInt, duration: timeInt, completion: { (error) in
+        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { [weak self] miles, time, milesInt, timeInt in
+            self?.distanceLabel.text = "Distance: \n \(time) Away"
+            DBService.updateRideDurationDistance(ride: self!.ride, distance: milesInt, duration: timeInt, completion: { [weak self] error in
                 if let error = error {
-                    self.showAlert(title: "Error updating duration", message: error.localizedDescription)
+                    self?.showAlert(title: "Error updating duration", message: error.localizedDescription)
                 }
             })
         }

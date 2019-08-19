@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class OnWayToDropoffViewController: UIViewController {
     
@@ -33,7 +34,7 @@ class OnWayToDropoffViewController: UIViewController {
     @IBOutlet weak var mapOptionView: RoundViewWithBorder10!
     @IBOutlet weak var driverView: UIView!
     
-    
+    var listener: ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class OnWayToDropoffViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
             listenToWaitingForRequest()
-            listenToRideIsOver()
+            listener = listenToRideIsOver()
         }
         thirtyMinTimer()
         calculateMilesToDropoff()
@@ -68,7 +69,15 @@ class OnWayToDropoffViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
+            listener.remove()
+        }
+    }
     
+    deinit {
+        
+    }
     private func setup() {
         locationManager.delegate = self
         graphics.pulsating(view: pulseView)
@@ -100,32 +109,32 @@ class OnWayToDropoffViewController: UIViewController {
     
     @objc private func thirtyMinTimer() {
         if timer != nil {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-                if self.thirtySecondTimer == 30 {
-                    self.calculateMilesToDropoff()
-                    self.thirtySecondTimer = 0
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                if self?.thirtySecondTimer == 30 {
+                    self?.calculateMilesToDropoff()
+                    self?.thirtySecondTimer = 0
                 } else {
-                    self.thirtySecondTimer += 1
+                    self?.thirtySecondTimer += 1
                 }
             }
         }
     }
     func calculateMilesToDropoff() {
-        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { (miles, time, milesInt, timeInt) in
-            self.distanceLabel.text = "Distance: \n \(miles) Mil"
-            self.durationLabel.text = "Duration: \n \(time)"
-            if self.firstTime {
-                self.updateTotalMiles(miles: milesInt)
-                self.firstTime = false
+        MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.dropoffLat, destinationLon: ride.dropoffLon, userLocation: userLocation) { [weak self] miles, time, milesInt, timeInt in
+            self?.distanceLabel.text = "Distance: \n \(miles) Mil"
+            self?.durationLabel.text = "Duration: \n \(time)"
+            if self?.firstTime ?? true {
+                self?.updateTotalMiles(miles: milesInt)
+                self?.firstTime = false
             }
-            self.activityIndicator.stopAnimating()
+            self?.activityIndicator.stopAnimating()
         }
     }
     private func searchGoogleForDirections() {
         let currentLocation = userLocation.coordinate
-        MapsHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.dropoffLat, destinationLon: self.ride.dropoffLon, completion: { (error) in
+        MapsHelper.openGoogleMapDirection(currentLat: currentLocation.latitude, currentLon: currentLocation.longitude, destinationLat: self.ride.dropoffLat, destinationLon: self.ride.dropoffLon, completion: { [weak self] error in
                 if let error = error {
-                    self.showAlert(title: "Error opening google maps", message: error.localizedDescription)
+                    self?.showAlert(title: "Error opening google maps", message: error.localizedDescription)
                 }
             })
     }
@@ -139,49 +148,50 @@ class OnWayToDropoffViewController: UIViewController {
     }
     
     private func changeToOnDropoff(rideStatus: String) {
-        DBService.updateRideStatus(ride: ride, status: rideStatus) { (error, ride) in
+        DBService.updateRideStatus(ride: ride, status: rideStatus) { [weak self] error, ride in
             if let error = error {
-                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+                self?.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.ride = ride
+                self?.ride = ride
             }
         }
     }
     
     private func  changeToOnDropoffReturn() {
-        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoffReturnRide.rawValue) { (error, ride) in
+        DBService.updateRideStatus(ride: ride, status: RideStatus.onDropoffReturnRide.rawValue) { [weak self] error, ride in
             if let error = error {
-                self.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
+                self?.showAlert(title: "Error updating to on pickup", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.ride = ride
+                self?.ride = ride
             }
         }
     }
     private func listenToWaitingForRequest() {
-        DBService.listenForRideStatus(ride: ride, status: RideStatus.changeToWaitingRequest.rawValue) { (error, ride) in
+        listener = DBService.listenForRideStatus(ride: ride, status: RideStatus.changeToWaitingRequest.rawValue) { [weak self] error, ride in
             if let error = error {
-                self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
+                self?.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.timer = nil
-                self.timer?.invalidate()
+                self?.timer = nil
+                self?.timer?.invalidate()
                 let waitingForRequestVC = WaitingForRequestViewController(nibName: nil, bundle: nil, ride: ride)
-                self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
+                self?.navigationController?.pushViewController(waitingForRequestVC, animated: true)
             }
         }
     }
     
-    private func listenToRideIsOver() {
-        DBService.listenForRideStatus(ride: ride, status: RideStatus.rideIsOver.rawValue) { (error, ride) in
+    private func listenToRideIsOver() -> ListenerRegistration {
+        return DBService.listenForRideStatus(ride: ride, status: RideStatus.changedToIsOver.rawValue) { [weak self] error, ride in
             if let error = error {
-                self.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
+                self?.showAlert(title: "Error listening to waiting request", message: error.localizedDescription)
             }
             if let ride = ride {
-                self.timer = nil
-                self.timer?.invalidate()
-                print("RIDE IS OVER!!!!!!!!!")
+                self?.timer = nil
+                self?.timer?.invalidate()
+                let passegerRideOverVC = PassengerRideCompletedViewController(nibName: nil, bundle: nil, ride: ride)
+                self?.navigationController?.pushViewController(passegerRideOverVC, animated: true)
             }
         }
     }
@@ -203,7 +213,7 @@ class OnWayToDropoffViewController: UIViewController {
             }
             
             if self.ride.rideStatus == RideStatus.onDropoffReturnRide.rawValue {
-                DBService.updateRideStatus(ride: self.ride, status: RideStatus.rideIsOver.rawValue, completion: { (error, ride) in
+                DBService.updateRideStatus(ride: self.ride, status: RideStatus.changedToIsOver.rawValue, completion: { (error, ride) in
                     if let error = error {
                         self.showAlert(title: "Error updating request", message: error.localizedDescription)
                     }

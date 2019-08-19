@@ -21,6 +21,7 @@ enum RideStatus: String {
     case onPickupReturnRide
     case changedToReturnDropoff
     case onDropoffReturnRide
+    case changedToIsOver
     case rideIsOver
 }
 class Ride: Codable {
@@ -51,13 +52,11 @@ class Ride: Codable {
     var passangerKnowsDriverOnItsWay: Bool
     var passangerCell: String
     var driverCell: String
-    var pickup: Bool
-    var dropoff: Bool
     var waitingForRequest: Bool
     var rideStatus: String
     var totalMiles: Double
     
-    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,accepted: Bool,accptedBy: String,acceptenceWasSeen: Bool,inProgress: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, pickup: Bool, dropoff: Bool, waitingForRequest: Bool, rideStatus: String, totalMiles: Double) {
+    init(passanger: String, passangerId: String, rideId: String, pickupAddress: String,pickupLat: Double, pickupLon: Double, dropoffLat: Double, dropoffLon: Double ,dropoffAddress: String, dropoffName: String, appointmentDate: String,acceptenceWasSeen: Bool,inProgress: Bool, duration: Int, distance: Double, dateRequested: String, driverName: String, driverId: String, driveProfileImage: String, driverMakerModel: String, originLat: Double, originLon: Double, licencePlate: String, carPicture: String, passangerKnowsDriverOnItsWay: Bool, passangerCell: String, driverCell: String, waitingForRequest: Bool, rideStatus: String, totalMiles: Double) {
         self.passanger = passanger
         self.passangerId = passangerId
         self.rideId = rideId
@@ -85,8 +84,6 @@ class Ride: Codable {
         self.passangerKnowsDriverOnItsWay = passangerKnowsDriverOnItsWay
         self.passangerCell = passangerCell
         self.driverCell = driverCell
-        self.pickup = pickup
-        self.dropoff = dropoff
         self.waitingForRequest = waitingForRequest
         self.rideStatus = rideStatus
         self.totalMiles = totalMiles
@@ -120,8 +117,6 @@ class Ride: Codable {
         self.passangerKnowsDriverOnItsWay = dict[RideCollectionKeys.passangerKnowsDriverOnItsWayKey] as? Bool ?? false
         self.passangerCell = dict[RideCollectionKeys.passangerCellKey] as? String ?? ""
         self.driverCell = dict[RideCollectionKeys.driverCellKey] as? String ?? ""
-        self.pickup = dict[RideCollectionKeys.pickupKey] as? Bool ?? false
-        self.dropoff = dict[RideCollectionKeys.dropoffKey] as? Bool ?? false
         self.waitingForRequest = dict[RideCollectionKeys.waitingForRequestKey] as? Bool ?? false
         self.rideStatus = dict[RideCollectionKeys.rideStatusKey] as? String ?? ""
         self.totalMiles = dict[RideCollectionKeys.totalMilesKey] as? Double ?? 0.0

@@ -15,8 +15,8 @@ protocol ArriveViewDelegate: AnyObject {
 
 class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
-    let delegate: MessageDelegate!
-    let arriveDelegate: ArriveViewDelegate
+    weak var delegate: MessageDelegate?
+    weak var arriveDelegate: ArriveViewDelegate?
     let ride: Ride!
     private var number: String!
     override func viewDidLoad() {
@@ -77,7 +77,7 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
 
             if let ride = ride {
                 self.dismiss(animated: true)
-                self.arriveDelegate.userPressBeginDropOff(ride: ride)
+                self.arriveDelegate?.userPressBeginDropOff(ride: ride)
             }
         }
     }
@@ -86,11 +86,11 @@ class ArrivedViewController: UIViewController, MFMessageComposeViewControllerDel
         case .cancelled:
             dismiss(animated: true)
         case .sent:
-            delegate.messageSent()
+            delegate?.messageSent()
         case .failed:
-            delegate.messageError(error: "Failed")
+            delegate?.messageError(error: "Failed")
         default:
-            delegate.messageError(error: "Default")
+            delegate?.messageError(error: "Default")
         }
     }
 

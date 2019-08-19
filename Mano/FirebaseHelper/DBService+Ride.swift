@@ -113,8 +113,8 @@ extension DBService {
         }
     }
     
-    static func listenForRideAcceptence(passangerId: String, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue).whereField(RideCollectionKeys.passangerId, isEqualTo: passangerId).whereField(RideCollectionKeys.acceptenceWasSeenKey, isEqualTo: false).addSnapshotListener { (snapshot, error) in
+    static func listenForRideAcceptence(passangerId: String, completion: @escaping(Error?, Ride?) -> Void) ->ListenerRegistration {
+        return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue).whereField(RideCollectionKeys.passangerId, isEqualTo: passangerId).whereField(RideCollectionKeys.acceptenceWasSeenKey, isEqualTo: false).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)
             }
@@ -125,9 +125,9 @@ extension DBService {
         }
     }
     
-    static public func updateDriverOntItsWay(ride: Ride, originLat: Double, originLon: Double, pickup: Bool, completion: @escaping(Error?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.inProgressKey : true, RideCollectionKeys.originLatKey : originLat, RideCollectionKeys.originLonKey : originLon, RideCollectionKeys.passangerKnowsDriverOnItsWayKey : false,
-                                                                                                             RideCollectionKeys.pickupKey : pickup]) { (error) in
+    static public func updateDriverOntItsWay(ride: Ride, originLat: Double, originLon: Double,  completion: @escaping(Error?) -> Void) {
+        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).document(ride.rideId).updateData([RideCollectionKeys.inProgressKey : true, RideCollectionKeys.originLatKey : originLat, RideCollectionKeys.originLonKey : originLon, RideCollectionKeys.passangerKnowsDriverOnItsWayKey : false, RideCollectionKeys.rideStatusKey : RideStatus.changedToPickup.rawValue]
+                                                                                                        ) { (error) in
             if let error = error {
                 completion(error)
             }
@@ -152,8 +152,8 @@ extension DBService {
             }
         }
     }
-    static public func listenForRideStatus(ride: Ride, status: String, completion: @escaping(Error?, Ride?) -> Void) {
-        DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: status).addSnapshotListener { (snapshot, error) in
+    static public func listenForRideStatus(ride: Ride, status: String, completion: @escaping(Error?, Ride?) -> Void) -> ListenerRegistration{
+        return  DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideIdKey, isEqualTo: ride.rideId).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: status).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             }
@@ -163,6 +163,7 @@ extension DBService {
             }
             
         }
+        
     }
     
     
@@ -172,6 +173,7 @@ extension DBService {
             if let error = error {
                 completion(error)
             }
+            completion(nil)
         }
     }
     static public func updateRideDurationDistance(ride: Ride, distance: Double, duration: Double, completion: @escaping(Error?) -> Void) {
@@ -182,8 +184,8 @@ extension DBService {
         }
     }
     
-    static public func listenForDriverOnItsWay(completion: @escaping(Error?, Ride?) -> Void) {
-         DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.passangerId, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.inProgressKey, isEqualTo: true).whereField(RideCollectionKeys.passangerKnowsDriverOnItsWayKey, isEqualTo: false).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.onPickup.rawValue).addSnapshotListener { (snapshot, error) in
+    static public func listenForDriverOnItsWay(completion: @escaping(Error?, Ride?) -> Void) -> ListenerRegistration {
+         return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.passangerId, isEqualTo: DBService.currentManoUser.userId).whereField(RideCollectionKeys.inProgressKey, isEqualTo: true).whereField(RideCollectionKeys.passangerKnowsDriverOnItsWayKey, isEqualTo: false).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.changedToPickup.rawValue).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)
             }

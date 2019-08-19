@@ -28,6 +28,8 @@
 		D54FD40122DF948D00F20AFE /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40022DF948D00F20AFE /* String+Date.swift */; };
 		D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40222DF9A4200F20AFE /* DBService.swift */; };
 		D54FD40522DF9A8900F20AFE /* DBService+ManoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */; };
+		D5588E2C2309E6CD00903430 /* PassengerRideCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5588E2A2309E6CD00903430 /* PassengerRideCompletedViewController.swift */; };
+		D5588E2D2309E6CD00903430 /* PassengerRideCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5588E2B2309E6CD00903430 /* PassengerRideCompletedViewController.xib */; };
 		D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D55E963F22FA592900CC9496 /* GoogleService-Info.plist */; };
 		D55E964322FB182900CC9496 /* WaitingForRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */; };
 		D55E964422FB182900CC9496 /* WaitingForRequestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */; };
@@ -145,6 +147,8 @@
 		D54FD40022DF948D00F20AFE /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		D54FD40222DF9A4200F20AFE /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		D54FD40422DF9A8900F20AFE /* DBService+ManoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+ManoUser.swift"; sourceTree = "<group>"; };
+		D5588E2A2309E6CD00903430 /* PassengerRideCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerRideCompletedViewController.swift; sourceTree = "<group>"; };
+		D5588E2B2309E6CD00903430 /* PassengerRideCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassengerRideCompletedViewController.xib; sourceTree = "<group>"; };
 		D55E963F22FA592900CC9496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D55E964122FB182800CC9496 /* WaitingForRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingForRequestViewController.swift; sourceTree = "<group>"; };
 		D55E964222FB182800CC9496 /* WaitingForRequestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingForRequestViewController.xib; sourceTree = "<group>"; };
@@ -445,6 +449,8 @@
 				D59D1A7022E3BE4900E94D77 /* MyLocationsViewController.swift */,
 				D59D1A7122E3BE4900E94D77 /* MyLocationsViewController.xib */,
 				D57557AB22E79C8F0063BD15 /* New Group */,
+				D5588E2A2309E6CD00903430 /* PassengerRideCompletedViewController.swift */,
+				D5588E2B2309E6CD00903430 /* PassengerRideCompletedViewController.xib */,
 			);
 			name = Passenger;
 			sourceTree = "<group>";
@@ -606,6 +612,7 @@
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
 				D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */,
 				D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */,
+				D5588E2D2309E6CD00903430 /* PassengerRideCompletedViewController.xib in Resources */,
 				D5D6A77122E38ABC009C0029 /* DriverProfileViewController.xib in Resources */,
 				D575579D22E63D9E0063BD15 /* MapDetailedView.xib in Resources */,
 				D55E964022FA592A00CC9496 /* GoogleService-Info.plist in Resources */,
@@ -744,6 +751,7 @@
 				D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */,
 				D54FD3FF22DF945500F20AFE /* Date+Extensions.swift in Sources */,
 				D5E39B9822E016A8008A919A /* IBDesignableViews.swift in Sources */,
+				D5588E2C2309E6CD00903430 /* PassengerRideCompletedViewController.swift in Sources */,
 				D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */,
 				D5CCF96422FC631900DC7D59 /* ChooseLocationViewController.swift in Sources */,
 				D5F7635622E886E700250C96 /* TestHelper.swift in Sources */,

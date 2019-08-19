@@ -19,6 +19,7 @@ class DriverRideCompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateToRideIsOver()
         setup()
         updateDriverStats(ride: ride)
     }
@@ -41,6 +42,16 @@ class DriverRideCompletedViewController: UIViewController {
             if let manoUser = manoUser {
                 self.totalMilesLabel.text = "Total Miles:\n\(manoUser.numberOfMiles?.description ?? "N/A")"
                 self.numberOfRides.text = "Number Of Rides:\n\(manoUser.numberOfRides?.description ?? "N/A")"
+            }
+        }
+    }
+    private func updateToRideIsOver() {
+        DBService.updateRideStatus(ride: ride, status: RideStatus.rideIsOver.rawValue) { (error, ride) in
+            if let error = error {
+                
+            }
+            if let ride = ride {
+                self.ride = ride
             }
         }
     }

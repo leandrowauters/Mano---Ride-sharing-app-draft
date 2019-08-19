@@ -8,9 +8,13 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 class TabBarViewController: UITabBarController {
     
-
+    
+    var listenerForAcceptence: ListenerRegistration!
+    var listenerForDriverOnItsWay: ListenerRegistration!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             self.tabBar.unselectedItemTintColor = UIColor.white
@@ -20,111 +24,42 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         RideStatusManager.shared.navigateToCurrentRideStatus(vc: self)
-        DBService.listenForRideAcceptence(passangerId: DBService.currentManoUser.userId) { (error, ride) in
-            if let error = error {
-                self.showAlert(title: "Error fetching accepted ride", message: error.localizedDescription)
-            }
-            if let ride = ride {
-                let rideAcceptedAlertView = RideAcceptedAlertViewController(nibName: nil, bundle: nil, ride: ride)
-                rideAcceptedAlertView.modalPresentationStyle = .overCurrentContext
-                self.present(rideAcceptedAlertView, animated: true)
-            }
-        }
-        DBService.listenForDriverOnItsWay { (error, ride) in
-
-            if let error = error {
-                self.showAlert(title: "Error updating to onItsWay", message: error.localizedDescription)
-            }
-            if let ride = ride {
-                let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-                MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
-                    self.showAlert(title: "Your Driver it's on his way", message: nil, handler: { (okay) in
-                        
-                        DBService.updatePassangerKnowsDriverOnItsWay(ride: ride, completion: { (error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                            
-                        })
-                        let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: nil, ride: ride)
-                        self.navigationController?.pushViewController(onItsWayVc, animated: true)
-                        
-                    })
-                })
-            }
-        }
+        listenerForAcceptence = RideStatusManager.shared.listenForRideAcceptence(vc: self)
+        listenerForDriverOnItsWay = RideStatusManager.shared.listenForDriverOnItsWay(vc: self)
         
-//        DBService.getRideStatusInProgressDriver { (error, ride) in
-//            if let error = error {
-//                self.showAlert(title: "Error getting ride status", message: error.localizedDescription)
-//            }
-//
-//            if let ride = ride {
-//                self.switchRideStatus(ride: ride)
-//            }
-//        }
-//
-//        DBService.getRideStatusInProgressPassenger { (error, ride) in
-//            if let error = error {
-//                self.showAlert(title: "Error getting ride status", message: error.localizedDescription)
-//            }
-//
-//            if let ride = ride {
-//                self.switchRideStatus(ride: ride)
-//
-//            }
-//        }
-        DBService.fetchYourMessages { (error, messages) in
+        DBService.fetchYourMessages { [weak self] error, messages in
             if let messages = messages {
                 DBService.messagesRecieved = messages
                 let newMessage = messages.filter({$0.read == false})
                 if !newMessage.isEmpty{
-                self.tabBar.items!.last!.badgeValue = newMessage.count.description
+                    self?.tabBar.items!.last!.badgeValue = newMessage.count.description
                 } else {
-                    self.tabBar.items!.last!.badgeValue = nil
+                    self?.tabBar.items!.last!.badgeValue = nil
                 }
             }
         }
-        DBService.fetchDriverAcceptedRides() { (error, rides) in
+        DBService.fetchDriverAcceptedRides() { [weak self] error, rides in
             if let error = error {
-                self.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
+                self?.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }
             if let rides = rides {
                 let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
                 if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
                     if !ridesToday.isEmpty{
-                        self.tabBar.items![2].badgeValue = ridesToday.count.description
+                        self?.tabBar.items![2].badgeValue = ridesToday.count.description
                     } else {
-                        self.tabBar.items![2].badgeValue = nil
+                        self?.tabBar.items![2].badgeValue = nil
                     }
                 }
             }
         }
     }
     
-//    private func switchRideStatus(ride: Ride) {
-//        self.showAlert(title: "Ride in progress", message: nil, handler: { (okay) in
-//            switch ride.rideStatus {
-//            case RideStatus.onPickup.rawValue:
-//                let location = CLLocation(latitude: ride.originLat, longitude: ride.originLon)
-//                MapsHelper.calculateMilesAndTimeToDestination(destinationLat: ride.pickupLat,destinationLon: ride.pickupLon, userLocation: location, completion: { (miles, time, milesInt, timeInt) in
-//                    
-//                    let onItsWayVc = OnItsWayViewController(nibName: nil, bundle: nil, duration: time, distance: nil, ride: ride)
-//                    self.navigationController?.pushViewController(onItsWayVc, animated: true)
-//                    
-//                    
-//                })
-//            case RideStatus.onDropoff.rawValue:
-//                let onWayToDropoffVC = OnWayToDropoffViewController(nibName: nil, bundle: nil, ride: ride)
-//                self.navigationController?.pushViewController(onWayToDropoffVC, animated: true)
-//            case RideStatus.onWaitingToRequest.rawValue:
-//                let waitingForRequestVC = WaitingForRequestViewController(nibName: nil, bundle: nil, ride: ride)
-//                self.navigationController?.pushViewController(waitingForRequestVC, animated: true)
-//            default:
-//                return
-//            }
-//        })
-//    }
+    override func viewDidDisappear(_ animated: Bool) {
+        listenerForDriverOnItsWay.remove()
+        listenerForAcceptence.remove()
+    }
+    
     static func setTabBarVC(typeOfUser: String) -> UITabBarController{
         let availableManoVC = AvailableManosViewController()
         let favoritesVC = FavoritesViewController()
