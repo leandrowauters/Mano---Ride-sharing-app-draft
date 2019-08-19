@@ -15,7 +15,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     
-    var favorites = [ManoUser]() {
+    var regulars = [ManoUser]() {
         didSet{
             DispatchQueue.main.async {
                 self.favoritesListTableView.reloadData()
@@ -26,7 +26,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-
+        fetchRegulars()
     }
     
     func setup() {
@@ -36,14 +36,27 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         favoritesListTableView.separatorStyle = .none
     }
 
+    func fetchRegulars() {
+        guard let regulars = DBService.currentManoUser.regulars else {return}
+        DBService.fetchYourRegularUsers(regulars: regulars) { [weak self] error, regulars in
+            if let error = error {
+                self?.showAlert(title: "Error fetching regulars", message: error.localizedDescription)
+            }
+            if let regulars = regulars {
+                self?.regulars = regulars
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return regulars.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as? FavoritesTableViewCell else {return UITableViewCell()}
-        cell.favoriteName.text = "Joseph Garcia"
-        cell.favoriteAddress.text = "86-10 37th Ave, Jackson Heights, NY 11372"
+        let regular = regulars[indexPath.row]
+        cell.favoriteName.text = regular.fullName
+        cell.alertView.isHidden = true
+        cell.favoriteAddress.text = regular.homeAdress
         cell.selectionStyle = .none
         return cell
     }

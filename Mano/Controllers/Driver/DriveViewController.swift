@@ -80,6 +80,7 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             if let rides = rides {
                 self?.rides = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
+                self?.rides = rides.filter{$0.rideStatus == RideStatus.rideAccepted.rawValue}
             }
         }
     }

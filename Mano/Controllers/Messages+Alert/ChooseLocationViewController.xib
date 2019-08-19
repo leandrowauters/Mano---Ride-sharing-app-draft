@@ -45,8 +45,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCF-Ur-C9K" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="49.999999999999986" y="186.33333333333334" width="231.33333333333331" height="50"/>
-                            <color key="backgroundColor" red="0.98823529409999999" green="0.51372549020000002" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="100.00000000000001" y="186.33333333333334" width="131.33333333333337" height="50"/>
+                            <color key="backgroundColor" red="0.3083096374" green="0.69699741920000002" blue="0.19760460699999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="F8T-a8-wgb"/>
                             </constraints>
@@ -59,7 +59,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZ4-hU-Gin" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">
-                            <rect key="frame" x="49.999999999999986" y="246.33333333333337" width="231.33333333333331" height="50"/>
+                            <rect key="frame" x="100.00000000000001" y="246.33333333333337" width="131.33333333333337" height="50"/>
                             <color key="backgroundColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="EdO-5o-uf6"/>
@@ -80,11 +80,11 @@
                         <constraint firstItem="lZ4-hU-Gin" firstAttribute="top" secondItem="jCF-Ur-C9K" secondAttribute="bottom" constant="10" id="GmO-WN-Qng"/>
                         <constraint firstAttribute="bottom" secondItem="lZ4-hU-Gin" secondAttribute="bottom" constant="35" id="Kva-xX-gn5"/>
                         <constraint firstAttribute="trailing" secondItem="8sV-1t-52p" secondAttribute="trailing" constant="50" id="O2c-Mi-K0A"/>
-                        <constraint firstItem="lZ4-hU-Gin" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="50" id="Ua7-Zd-zIg"/>
-                        <constraint firstAttribute="trailing" secondItem="lZ4-hU-Gin" secondAttribute="trailing" constant="50" id="YsN-nQ-USZ"/>
+                        <constraint firstItem="lZ4-hU-Gin" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="100" id="Ua7-Zd-zIg"/>
+                        <constraint firstAttribute="trailing" secondItem="lZ4-hU-Gin" secondAttribute="trailing" constant="100" id="YsN-nQ-USZ"/>
                         <constraint firstItem="8sV-1t-52p" firstAttribute="top" secondItem="2e0-3a-2Uj" secondAttribute="bottom" constant="35" id="a76-nQ-usC"/>
-                        <constraint firstAttribute="trailing" secondItem="jCF-Ur-C9K" secondAttribute="trailing" constant="50" id="k0K-Ml-UI1"/>
-                        <constraint firstItem="jCF-Ur-C9K" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="50" id="ocb-fF-Kby"/>
+                        <constraint firstAttribute="trailing" secondItem="jCF-Ur-C9K" secondAttribute="trailing" constant="100" id="k0K-Ml-UI1"/>
+                        <constraint firstItem="jCF-Ur-C9K" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="100" id="ocb-fF-Kby"/>
                         <constraint firstItem="2e0-3a-2Uj" firstAttribute="top" secondItem="CLI-pa-Jwn" secondAttribute="top" constant="30" id="qUx-6u-i6I"/>
                         <constraint firstItem="2e0-3a-2Uj" firstAttribute="leading" secondItem="CLI-pa-Jwn" secondAttribute="leading" constant="10" id="zdl-Uw-5Qo"/>
                     </constraints>

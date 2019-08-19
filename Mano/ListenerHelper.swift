@@ -110,7 +110,8 @@ class ListenerHelper {
                 vc.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
+                var ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
+                ridesToday = rides.filter{$0.rideStatus == RideStatus.rideAccepted.rawValue}
                     if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
                         if !ridesToday.isEmpty{
                             vc.tabBar.items![2].badgeValue = ridesToday.count.description
@@ -119,6 +120,14 @@ class ListenerHelper {
                         }
                     }
                 }
+        })
+    }
+    
+    public func listenToUserChanges(vc: UIViewController) -> ListenerRegistration {
+        return DBService.listenToUserChanges(completion: { (error) in
+            if let error = error {
+                vc.showAlert(title: "Error listening to user changes", message: error.localizedDescription)
+            }
         })
     }
 }

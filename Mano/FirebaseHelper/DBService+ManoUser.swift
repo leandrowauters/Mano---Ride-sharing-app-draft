@@ -108,6 +108,24 @@ extension DBService {
         }
     }
     
+    static public func fetchYourRegularUsers(regulars: [String], completion: @escaping(Error?, [ManoUser]?) -> Void) {
+        let query = firestoreDB.collection(ManoUserCollectionKeys.collectionKey)
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(error, nil)
+            }
+            if let snapshot = snapshot {
+                var yourRegulars = [ManoUser]()
+                for document in snapshot.documents {
+                    let regular = ManoUser.init(dict: document.data())
+                    if regulars.contains(regular.userId) {
+                        yourRegulars.append(regular)
+                    }
+                }
+                completion(nil, yourRegulars)
+            }
+        }
+    }
     static public func deleteAccount(user: ManoUser, completion: @escaping (Error?) -> Void) {
         DBService.firestoreDB
             .collection(ManoUserCollectionKeys.collectionKey)
@@ -142,6 +160,22 @@ extension DBService {
                 
             
             }
+        }
+    }
+    
+    static public func listenToUserChanges(completion: @escaping(Error?) -> Void) -> ListenerRegistration {
+        return firestoreDB.collection(ManoUserCollectionKeys.collectionKey).document(ManoUserCollectionKeys.userIdKey).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                completion(error)
+            }
+            fetchManoUser(userId: currentManoUser.userId, completion: { (error, manoUser) in
+                if let error = error {
+                    completion(error)
+                }
+                if let manoUser = manoUser {
+                    DBService.currentManoUser = manoUser
+                }
+            })
         }
     }
     

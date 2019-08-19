@@ -16,6 +16,7 @@ class TabBarViewController: UITabBarController {
     var listenerForDriverOnItsWay: ListenerRegistration!
     var listenerForMessages: ListenerRegistration!
     var listenerForFetchRides: ListenerRegistration!
+    var listenerForUserChanges: ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +32,16 @@ class TabBarViewController: UITabBarController {
         ListenerHelper.shared.navigateToCurrentRideStatus(vc: self)
         listenerForMessages = ListenerHelper.shared.fetchMessages(vc: self)
         listenerForFetchRides = ListenerHelper.shared.fetchAcceptedRides(vc: self)
-
+        listenerForUserChanges = ListenerHelper.shared.listenToUserChanges(vc: self)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
-        listenerForDriverOnItsWay.remove()
+            listenerForDriverOnItsWay.remove()
         }
         listenerForMessages.remove()
         listenerForFetchRides.remove()
+        listenerForUserChanges.remove()
     }
     
     static func setTabBarVC(typeOfUser: String) -> UITabBarController{
