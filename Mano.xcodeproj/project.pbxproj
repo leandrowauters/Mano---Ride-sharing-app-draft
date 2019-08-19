@@ -15,7 +15,7 @@
 		D51CF7BE22DF6F39003F1385 /* Mano.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D51CF7BC22DF6F39003F1385 /* Mano.xcdatamodeld */; };
 		D51CF7C022DF6F3B003F1385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */; };
 		D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51CF7C122DF6F3B003F1385 /* LaunchScreen.storyboard */; };
-		D51D8B702307904800D49BBE /* RideStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D8B6F2307904800D49BBE /* RideStatusManager.swift */; };
+		D51D8B702307904800D49BBE /* ListenerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D8B6F2307904800D49BBE /* ListenerHelper.swift */; };
 		D53AFD9522F0BFDA00822583 /* MainTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53AFD9422F0BFDA00822583 /* MainTimer.swift */; };
 		D53BD9BB2305F9C900B90428 /* DriverRideCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */; };
 		D53BD9BC2305F9C900B90428 /* DriverRideCompletedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */; };
@@ -133,7 +133,7 @@
 		D51CF7BF22DF6F3B003F1385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D51CF7C222DF6F3B003F1385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D51CF7C422DF6F3B003F1385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D51D8B6F2307904800D49BBE /* RideStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusManager.swift; sourceTree = "<group>"; };
+		D51D8B6F2307904800D49BBE /* ListenerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerHelper.swift; sourceTree = "<group>"; };
 		D53AFD9422F0BFDA00822583 /* MainTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTimer.swift; sourceTree = "<group>"; };
 		D53BD9B92305F9C900B90428 /* DriverRideCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRideCompletedViewController.swift; sourceTree = "<group>"; };
 		D53BD9BA2305F9C900B90428 /* DriverRideCompletedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverRideCompletedViewController.xib; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 				D57D62EA22E0235000F638DF /* API+Clients */,
 				D5F7635522E886E700250C96 /* TestHelper.swift */,
 				D542BC9622EE708C003C9CCA /* InvitationHelper.swift */,
-				D51D8B6F2307904800D49BBE /* RideStatusManager.swift */,
+				D51D8B6F2307904800D49BBE /* ListenerHelper.swift */,
 			);
 			path = Mano;
 			sourceTree = SOURCE_ROOT;
@@ -745,7 +745,7 @@
 				D5D6A77922E3A997009C0029 /* RequestRideViewController.swift in Sources */,
 				D55E964322FB182900CC9496 /* WaitingForRequestViewController.swift in Sources */,
 				D5E984CF22E235F70023B155 /* GraphicsClient.swift in Sources */,
-				D51D8B702307904800D49BBE /* RideStatusManager.swift in Sources */,
+				D51D8B702307904800D49BBE /* ListenerHelper.swift in Sources */,
 				D57557A622E784CC0063BD15 /* DBService+MyLocation.swift in Sources */,
 				D57557A922E79C870063BD15 /* MyLocationTableViewCell.swift in Sources */,
 				D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */,

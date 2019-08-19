@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Firebase
 extension DBService {
     
     static var messagesRecieved = [Message]()
@@ -28,8 +28,8 @@ extension DBService {
         completion(nil)
     }
     
-    static public func fetchYourMessages(completion: @escaping(Error?, [Message]?) -> Void) {
-        firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.recipientIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+    static public func fetchYourMessages(completion: @escaping(Error?, [Message]?) -> Void) -> ListenerRegistration {
+        return firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.recipientIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             }
@@ -40,8 +40,8 @@ extension DBService {
         }
     }
     
-    static public func fetchMessagesSent(completion: @escaping(Error?, [Message]?) -> Void) {
-        firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.senderIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+    static public func fetchMessagesSent(completion: @escaping(Error?, [Message]?) -> Void) -> ListenerRegistration{
+        return firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.senderIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             }

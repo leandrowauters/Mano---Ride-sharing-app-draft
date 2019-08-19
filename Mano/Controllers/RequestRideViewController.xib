@@ -23,6 +23,7 @@
                 <outlet property="dropoffView" destination="CfG-gh-x1W" id="fMb-dE-rXB"/>
                 <outlet property="pickupLabel" destination="xR6-3z-r3m" id="DAf-AB-Cfh"/>
                 <outlet property="pickupView" destination="3bR-C8-sAc" id="GgB-Jp-etN"/>
+                <outlet property="rideStatusLabel" destination="dpQ-hg-l5z" id="ZjE-Ci-uID"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -242,20 +243,20 @@
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qh0-15-4Bh" customClass="BlueBorderedView" customModule="Mano" customModuleProvider="target">
                             <rect key="frame" x="41.333333333333343" y="296" width="331.33333333333326" height="254"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride Already Requested" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6Vk-8p-n1k">
-                                    <rect key="frame" x="30" y="15.000000000000002" width="271.33333333333331" height="25.666666666666671"/>
-                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride Requested" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6Vk-8p-n1k">
+                                    <rect key="frame" x="30" y="14.999999999999998" width="271.33333333333331" height="31.333333333333329"/>
+                                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="27"/>
                                     <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ride Status:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1G7-7l-KFE">
-                                    <rect key="frame" x="30" y="60.666666666666686" width="271.33333333333331" height="26"/>
+                                    <rect key="frame" x="30" y="66.333333333333314" width="271.33333333333331" height="26"/>
                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                     <color key="textColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding Drivers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dpQ-hg-l5z">
-                                    <rect key="frame" x="30" y="101.66666666666669" width="271.33333333333331" height="26"/>
+                                    <rect key="frame" x="30" y="107.33333333333331" width="271.33333333333331" height="26"/>
                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                     <color key="textColor" red="0.99593228099999997" green="0.27651777859999999" blue="0.36207842829999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

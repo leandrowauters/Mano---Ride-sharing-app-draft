@@ -14,6 +14,8 @@ class TabBarViewController: UITabBarController {
     
     var listenerForAcceptence: ListenerRegistration!
     var listenerForDriverOnItsWay: ListenerRegistration!
+    var listenerForMessages: ListenerRegistration!
+    var listenerForFetchRides: ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,41 +25,23 @@ class TabBarViewController: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        RideStatusManager.shared.navigateToCurrentRideStatus(vc: self)
-        listenerForAcceptence = RideStatusManager.shared.listenForRideAcceptence(vc: self)
-        listenerForDriverOnItsWay = RideStatusManager.shared.listenForDriverOnItsWay(vc: self)
-        
-        DBService.fetchYourMessages { [weak self] error, messages in
-            if let messages = messages {
-                DBService.messagesRecieved = messages
-                let newMessage = messages.filter({$0.read == false})
-                if !newMessage.isEmpty{
-                    self?.tabBar.items!.last!.badgeValue = newMessage.count.description
-                } else {
-                    self?.tabBar.items!.last!.badgeValue = nil
-                }
-            }
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
+            listenerForAcceptence = ListenerHelper.shared.listenForRideAcceptence(vc: self)
+            listenerForDriverOnItsWay = ListenerHelper.shared.listenForDriverOnItsWay(vc: self)
         }
-        DBService.fetchDriverAcceptedRides() { [weak self] error, rides in
-            if let error = error {
-                self?.showAlert(title: "Error fetching your rides", message: error.localizedDescription)
-            }
-            if let rides = rides {
-                let ridesToday = rides.filter{ Calendar.current.isDateInToday($0.appointmentDate.stringToDate())}
-                if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue{
-                    if !ridesToday.isEmpty{
-                        self?.tabBar.items![2].badgeValue = ridesToday.count.description
-                    } else {
-                        self?.tabBar.items![2].badgeValue = nil
-                    }
-                }
-            }
-        }
+        ListenerHelper.shared.navigateToCurrentRideStatus(vc: self)
+        listenerForMessages = ListenerHelper.shared.fetchMessages(vc: self)
+        listenerForFetchRides = ListenerHelper.shared.fetchAcceptedRides(vc: self)
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        if DBService.currentManoUser.typeOfUser == TypeOfUser.Passenger.rawValue {
         listenerForDriverOnItsWay.remove()
         listenerForAcceptence.remove()
+        }
+        listenerForMessages.remove()
+        listenerForFetchRides.remove()
     }
     
     static func setTabBarVC(typeOfUser: String) -> UITabBarController{

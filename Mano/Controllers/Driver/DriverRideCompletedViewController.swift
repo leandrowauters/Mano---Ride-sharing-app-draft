@@ -48,7 +48,7 @@ class DriverRideCompletedViewController: UIViewController {
     private func updateToRideIsOver() {
         DBService.updateRideStatus(ride: ride, status: RideStatus.rideIsOver.rawValue) { (error, ride) in
             if let error = error {
-                
+                self.showAlert(title: "Error updating ride status", message: error.localizedDescription)
             }
             if let ride = ride {
                 self.ride = ride

@@ -102,7 +102,8 @@ extension DBService {
         }
     }
     
-    static func fetchDriverAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) { DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue ).whereField(RideCollectionKeys.driverIdKey, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+    static func fetchDriverAcceptedRides(completion: @escaping(Error?, [Ride]?) -> Void) -> ListenerRegistration {
+        return DBService.firestoreDB.collection(RideCollectionKeys.collectionKey).whereField(RideCollectionKeys.rideStatusKey, isEqualTo: RideStatus.rideAccepted.rawValue ).whereField(RideCollectionKeys.driverIdKey, isEqualTo: currentManoUser.userId).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error,nil)
             }

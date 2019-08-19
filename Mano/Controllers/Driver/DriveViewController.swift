@@ -60,6 +60,8 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private func checkForRideToday() {
         if rides.isEmpty {
+            noRidesLabel.isHidden = false
+        } else {
             noRidesLabel.isHidden = true
         }
     }

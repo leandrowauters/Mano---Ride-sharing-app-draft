@@ -38,7 +38,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-L3-OV9" customClass="RoundedImageViewWhite" customModule="Mano" customModuleProvider="target">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EIn-L3-OV9" customClass="CircularImageViewWhite" customModule="Mano" customModuleProvider="target">
                     <rect key="frame" x="147" y="245" width="120" height="120"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="EIn-L3-OV9" secondAttribute="height" multiplier="1:1" id="3El-mD-mhM"/>

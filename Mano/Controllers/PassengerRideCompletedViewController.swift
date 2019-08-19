@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PassengerRideCompletedViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class PassengerRideCompletedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setup()
     }
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, ride: Ride) {
@@ -29,6 +30,13 @@ class PassengerRideCompletedViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func setup() {
+        driverNameLabel.text = ride.driverName
+        guard let imageURL = URL(string: ride.driveProfileImage) else {return}
+        driverImage.kf.setImage(with: imageURL)
+    }
+    
     @IBAction func addWasPressed(_ sender: Any) {
         
     }

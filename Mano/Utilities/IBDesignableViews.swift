@@ -123,6 +123,17 @@ class RoundedImageViewWhite: UIImageView {
         clipsToBounds = true
     }
 }
+
+class CircularImageViewWhite: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .clear
+        layer.cornerRadius = bounds.height / 2.0
+        layer.borderWidth = 5
+        layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        clipsToBounds = true
+    }
+}
 class RoundedImageViewBlue: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()

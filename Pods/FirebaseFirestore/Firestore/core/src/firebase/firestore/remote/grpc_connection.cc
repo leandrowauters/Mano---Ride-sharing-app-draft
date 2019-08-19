@@ -72,7 +72,11 @@ class HostConfigMap {
   using Guard = std::lock_guard<std::mutex>;
 
  public:
-  const HostConfig* _Nullable find(const std::string& host) const {
+  /**
+   * Returns a pointer to the HostConfig entry for the given host or `nullptr`
+   * if there's no entry.
+   */
+  const HostConfig* find(const std::string& host) const {
     Guard guard{mutex_};
     auto iter = map_.find(host);
     if (iter == map_.end()) {
@@ -260,8 +264,8 @@ void GrpcConnection::RegisterConnectivityMonitor() {
         auto calls = active_calls_;
         for (GrpcCall* call : calls) {
           // This will trigger the observers.
-          call->FinishAndNotify(Status{FirestoreErrorCode::Unavailable,
-                                       "Network connectivity changed"});
+          call->FinishAndNotify(
+              Status{Error::Unavailable, "Network connectivity changed"});
         }
         // The old channel may hang for a long time trying to reestablish
         // connection before eventually failing. Note that gRPC Objective-C

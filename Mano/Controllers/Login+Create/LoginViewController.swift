@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
-class LoginViewController: UIViewController, GIDSignInUIDelegate {
+
+class LoginViewController: UIViewController{
 
     
     @IBOutlet weak var emailTextField: RoundedTextField!
@@ -53,12 +54,13 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(signinWithGoogle))
         signInButton.addGestureRecognizer(tap)
         signInButton.style = .wide
+        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
     
     @objc func signinWithGoogle() {
         activityIndicator.startAnimating()
-        GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
+        
     }
     private func setup() {
         

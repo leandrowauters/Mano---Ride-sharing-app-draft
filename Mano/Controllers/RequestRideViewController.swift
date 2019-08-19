@@ -10,6 +10,7 @@ import UIKit
 import GooglePlaces
 import UserNotifications
 import FirebaseMessaging
+import Firebase
 class RequestRideViewController: UIViewController {
     
     private var pickupAddress: String?
@@ -21,7 +22,7 @@ class RequestRideViewController: UIViewController {
     private var dropoffLon: Double!
     private var date: String?
     private var pickup: Bool!
-    
+    private var listener: ListenerRegistration!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var dateView: RoundViewWithBorder!
     
@@ -39,9 +40,12 @@ class RequestRideViewController: UIViewController {
     @IBOutlet weak var datePicker: RoundDatePicker!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var rideStatusLabel: UILabel!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        listenForRideAcceptance()
         rideAlreadyCreated { (alreadyCreated) in
             if alreadyCreated {
                 self.alertView.isHidden = false
@@ -51,6 +55,7 @@ class RequestRideViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
         }
+        
         setupTapsViews()
         datePicker.minimumDate = Date()
         pickupAddress = DBService.currentManoUser.homeAdress
@@ -70,6 +75,10 @@ class RequestRideViewController: UIViewController {
             }
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        listener.remove()
+    }
     private func setupTapsViews() {
         let dateViewTap = UITapGestureRecognizer(target: self, action: #selector(dateViewPressed))
         dateView.addGestureRecognizer(dateViewTap)
@@ -80,7 +89,18 @@ class RequestRideViewController: UIViewController {
         let dropoffViewTap = UITapGestureRecognizer(target: self, action: #selector(dropoffViewPressed))
         dropoffView.addGestureRecognizer(dropoffViewTap)
     }
-    
+    func listenForRideAcceptance() {
+        
+        listener = DBService.listenForRideAcceptence(passangerId: DBService.currentManoUser.userId) { (error, ride) in
+            if let error = error {
+                self.showAlert(title: "Error fetching accepted ride", message: error.localizedDescription)
+            }
+            if ride != nil {
+                self.rideStatusLabel.text = "Accepted"
+                self.rideStatusLabel.textColor = #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1)
+            }
+        }
+    }
     func rideAlreadyCreated(completion: @escaping(Bool) -> Void) {
         DBService.fetchPassangerRides(passangerId: DBService.currentManoUser.userId) { (error, rides) in
             if let error = error {
