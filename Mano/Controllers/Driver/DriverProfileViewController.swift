@@ -14,7 +14,7 @@ class DriverProfileViewController: UIViewController {
 
     private var rideFetchListener: ListenerRegistration!
     private var messageListener: ListenerRegistration!
-    private var upcominRidesPressed = true
+    private var upcomingRidesPressed = true
     
     @IBOutlet weak var driverImage: UIImageView!
     @IBOutlet weak var driverName: UILabel!
@@ -32,18 +32,19 @@ class DriverProfileViewController: UIViewController {
             }
         }
     }
+
     private var authservice = AppDelegate.authservice
     let currentUser = DBService.currentManoUser!
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        fetchRides(upcoming: true)
+        fetchRides(upcoming: upcomingRidesPressed)
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         checkForNewMessages()
-        fetchRides(upcoming: true)
+        fetchRides(upcoming: upcomingRidesPressed)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -128,11 +129,12 @@ class DriverProfileViewController: UIViewController {
                 if upcoming {
                     self?.topButton.setTitle("Upcoming", for: .normal)
                     sender.setTitle("History", for: .normal)
+                    
                 } else {
                     self?.topButton.setTitle("History", for: .normal)
                     sender.setTitle("Upcoming", for: .normal)
-                    
                 }
+                
                 self?.upcomingTableView.frame.origin.x -= self!.view.bounds.width
             })
         }
@@ -161,10 +163,12 @@ class DriverProfileViewController: UIViewController {
     }
     
     @IBAction func secondButtonPressed(_ sender: UIButton) {
-        if sender.currentTitle == "Upcoming" {
-            animateTableView(upcoming: true, sender: sender)
+        upcomingRidesPressed =  !upcomingRidesPressed
+        if upcomingRidesPressed {
+            animateTableView(upcoming: upcomingRidesPressed, sender: sender)
+            
         } else {
-            animateTableView(upcoming: false, sender: sender)
+            animateTableView(upcoming: upcomingRidesPressed, sender: sender)
         }
     }
 

@@ -90,7 +90,6 @@ class RequestRideViewController: UIViewController {
                     switch ride.rideStatus {
                     case RideStatus.rideRequested.rawValue:
                         self?.setupAlertView(isHidden: false, labelText: "Finding Driver", labelColor: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
-                        self?.addToCalendarButton.isHidden = true
                     case RideStatus.rideAccepted.rawValue:
                         self?.setupAlertView(isHidden: false, labelText: "Accepted", labelColor: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
                         self?.addToCalendarButton.isHidden = false
