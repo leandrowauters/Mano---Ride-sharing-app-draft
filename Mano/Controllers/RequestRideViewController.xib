@@ -271,7 +271,7 @@
                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                     <state key="normal" title="Cancel Ride"/>
                                     <connections>
-                                        <action selector="cancelRidePressed:" destination="-1" eventType="touchUpInside" id="8Dq-Ei-Eps"/>
+                                        <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="wGG-RJ-gwc"/>
                                     </connections>
                                 </button>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFL-Hl-wXh" customClass="RoundedButton" customModule="Mano" customModuleProvider="target">

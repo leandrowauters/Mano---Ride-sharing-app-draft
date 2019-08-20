@@ -81,15 +81,21 @@ class RequestRideViewController: UIViewController {
                 self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
+                let rides = rides.filter{$0.rideStatus == RideStatus.rideRequested.rawValue || $0.rideStatus == RideStatus.rideAccepted.rawValue}
                 if rides.isEmpty {
                     self?.alertView.isHidden = true
                     return
                 }
-                if let ride = rides.last {
+            
+                if rides.isEmpty {
+                    self?.alertView.isHidden = true
+                    return
+                }
+                if let ride = rides.first {
                     self?.ride = ride
                     switch ride.rideStatus {
                     case RideStatus.rideRequested.rawValue:
-                        self?.setupAlertView(isHidden: false, labelText: "Finding Driver", labelColor: #colorLiteral(red: 0.995932281, green: 0.2765177786, blue: 0.3620784283, alpha: 1))
+                        self?.setupAlertView(isHidden: false, labelText: "Requested", labelColor: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1))
                     case RideStatus.rideAccepted.rawValue:
                         self?.setupAlertView(isHidden: false, labelText: "Accepted", labelColor: #colorLiteral(red: 0, green: 0.7077997327, blue: 0, alpha: 1))
                         self?.addToCalendarButton.isHidden = false
@@ -164,7 +170,16 @@ class RequestRideViewController: UIViewController {
         })
     }
     
-
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.showConfimationAlert(title: "Cancel Ride", message: "Are you sure?", handler: { (yes) in
+            DBService.updateRideStatus(ride: self.ride!, status: RideStatus.rideCancelled.rawValue, completion: { [weak self] error, ride in
+                if let error = error {
+                    self?.showAlert(title: "Error changing status", message: error.localizedDescription)
+                }
+            })
+        })
+    }
+    
 }
 extension RequestRideViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {

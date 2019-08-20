@@ -15,6 +15,8 @@ class DriverProfileViewController: UIViewController {
     private var rideFetchListener: ListenerRegistration!
     private var messageListener: ListenerRegistration!
     private var upcomingRidesPressed = true
+    private var authservice = AppDelegate.authservice
+    let currentUser = DBService.currentManoUser!
     
     @IBOutlet weak var driverImage: UIImageView!
     @IBOutlet weak var driverName: UILabel!
@@ -24,6 +26,7 @@ class DriverProfileViewController: UIViewController {
     @IBOutlet weak var optionView: BlueBorderedView!
     @IBOutlet weak var topButton: BlueBorderedButton!
     @IBOutlet weak var secondButton: BlueBorderedButton!
+    
     var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
@@ -33,8 +36,7 @@ class DriverProfileViewController: UIViewController {
         }
     }
 
-    private var authservice = AppDelegate.authservice
-    let currentUser = DBService.currentManoUser!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -52,7 +54,6 @@ class DriverProfileViewController: UIViewController {
         rideFetchListener.remove()
     }
     func setup() {
-        
         driverName.text = currentUser.fullName
         authservice.authserviceSignOutDelegate = self
         if currentUser.typeOfUser == TypeOfUser.Passenger.rawValue {
@@ -80,8 +81,8 @@ class DriverProfileViewController: UIViewController {
             }
             if let rides = rides {
                 if upcoming{
-                    self?.rides = rides.filter{($0.rideStatus == RideStatus.rideAccepted.rawValue || $0.rideStatus == RideStatus.rideRequested.rawValue) && !$0.appointmentDate.stringToDate().dateExpired()}
-                    self?.rides = (self?.rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()})!
+                    self?.rides = rides.filter{($0.rideStatus == RideStatus.rideAccepted.rawValue || $0.rideStatus == RideStatus.rideRequested.rawValue || $0.rideStatus == RideStatus.rideCancelled.rawValue) && !$0.appointmentDate.stringToDate().dateExpired()}
+                    self?.rides = (self?.rides.sorted {$0.appointmentDate.stringToDate() > $1.appointmentDate.stringToDate()})!
                 } else {
                     self?.rides = rides.filter{$0.rideStatus == RideStatus.rideIsOver.rawValue}
                 }
@@ -190,7 +191,7 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
         }
 
         let upcomingRides = rides[indexPath.row]
-        cell.configure(with: upcomingRides)
+        cell.configure(with: upcomingRides, upcoming: upcomingRidesPressed)
         return cell
     }
     
