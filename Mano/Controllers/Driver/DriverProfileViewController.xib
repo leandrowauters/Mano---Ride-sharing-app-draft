@@ -122,7 +122,7 @@
                                 <color key="titleColor" red="0.0" green="0.49803921569999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
-                                <action selector="topButtonPressed:" destination="-1" eventType="touchUpInside" id="j1I-JX-JCe"/>
+                                <action selector="filterRidesButton:" destination="-1" eventType="touchUpInside" id="j1I-JX-JCe"/>
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-dc-7RH" customClass="BlueBorderedButton" customModule="Mano" customModuleProvider="target">
@@ -189,7 +189,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.01176470588" green="0.60784313729999995" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9fX-Rb-egI" secondAttribute="trailing" constant="20" id="3ve-5a-ZHB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OHt-td-Loj" secondAttribute="trailing" id="4W8-mK-mB6"/>

@@ -14,6 +14,7 @@ class DriverProfileViewController: UIViewController {
 
     private var rideFetchListener: ListenerRegistration!
     private var messageListener: ListenerRegistration!
+    private var upcominRidesPressed = true
     
     @IBOutlet weak var driverImage: UIImageView!
     @IBOutlet weak var driverName: UILabel!
@@ -23,7 +24,7 @@ class DriverProfileViewController: UIViewController {
     @IBOutlet weak var optionView: BlueBorderedView!
     @IBOutlet weak var topButton: BlueBorderedButton!
     @IBOutlet weak var secondButton: BlueBorderedButton!
-    var upcomingEvents = [Ride]() {
+    var rides = [Ride]() {
         didSet {
             DispatchQueue.main.async {
                 self.upcomingTableView.reloadData()
@@ -36,13 +37,13 @@ class DriverProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        upcomingRides()
+        fetchRides(upcoming: true)
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         checkForNewMessages()
-        upcomingRides()
+        fetchRides(upcoming: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,40 +72,40 @@ class DriverProfileViewController: UIViewController {
         upcomingTableView.separatorStyle = .none
     }
     
-    private func upcomingRides() {
-        var typeOfUser = String()
-        if currentUser.typeOfUser == TypeOfUser.Passenger.rawValue {
-            typeOfUser = TypeOfUser.Passenger.rawValue
-        } else {
-            typeOfUser = TypeOfUser.Driver.rawValue
-        }
-        rideFetchListener = DBService.fetchUserRides(typeOfUser: typeOfUser) { (error, rides) in
+    private func fetchRides(upcoming: Bool) {
+        rideFetchListener = DBService.fetchUserRides(typeOfUser: currentUser.typeOfUser) { [weak self] error, rides in
             if let error = error {
-                self.showAlert(title: "Error fetching rides", message: error.localizedDescription)
+                self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                let ridesSortedByDate = rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()}
-                self.upcomingEvents = ridesSortedByDate
-            }
-        }
-    }
-    private func checkForNewMessages() {
-       messageListener = DBService.fetchYourMessages { (error, messages) in
-            if let messages = messages {
-                DBService.messagesRecieved = messages
-                let newMessage = messages.filter({$0.read == false})
-                if !newMessage.isEmpty{
-                    self.tabBarItem.badgeValue = newMessage.count.description
-                    self.messageAlert.isHidden = false
+                if upcoming{
+                    self?.rides = rides.filter{($0.rideStatus == RideStatus.rideAccepted.rawValue || $0.rideStatus == RideStatus.rideRequested.rawValue) && !$0.appointmentDate.stringToDate().dateExpired()}
+                    self?.rides = (self?.rides.sorted {$0.appointmentDate.stringToDate() < $1.appointmentDate.stringToDate()})!
                 } else {
-                    self.tabBarItem.badgeValue = nil
-                    self.messageAlert.isHidden = true
+                    self?.rides = rides.filter{$0.rideStatus == RideStatus.rideIsOver.rawValue}
                 }
             }
         }
     }
 
-    func sendEmail() {
+    
+    private func checkForNewMessages() {
+       messageListener = DBService.fetchYourMessages { [weak self] error, messages in
+            if let messages = messages {
+                DBService.messagesRecieved = messages
+                let newMessage = messages.filter({$0.read == false})
+                if !newMessage.isEmpty{
+                    self?.tabBarItem.badgeValue = newMessage.count.description
+                    self?.messageAlert.isHidden = false
+                } else {
+                    self?.tabBarItem.badgeValue = nil
+                    self?.messageAlert.isHidden = true
+                }
+            }
+        }
+    }
+
+    private func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
@@ -113,6 +114,27 @@ class DriverProfileViewController: UIViewController {
             present(mail, animated: true)
         } else {
             showAlert(title: "Cannot send email", message: "Please contact manonyc.contact@gmail.com")
+        }
+    }
+    
+    private func animateTableView(upcoming: Bool, sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.secondButton.isHidden = !self.secondButton.isHidden
+            self.upcomingTableView.frame.origin.x += self.view.bounds.width
+        }) { [weak self] done in
+            UIView.animate(withDuration: 0.3, animations: {
+                self?.fetchRides(upcoming: upcoming)
+                if upcoming {
+                    self?.topButton.setTitle("Upcoming", for: .normal)
+                    sender.setTitle("History", for: .normal)
+                } else {
+                    self?.topButton.setTitle("History", for: .normal)
+                    sender.setTitle("Upcoming", for: .normal)
+                    
+                }
+                self?.upcomingTableView.frame.origin.x -= self!.view.bounds.width
+            })
         }
     }
     @IBAction func settingsPressed(_ sender: Any) {
@@ -132,22 +154,18 @@ class DriverProfileViewController: UIViewController {
         sendEmail()
     }
     
-    @IBAction func topButtonPressed(_ sender: UIButton) {
-            self.secondButton.isHidden = !self.secondButton.isHidden
+    @IBAction func filterRidesButton(_ sender: UIButton) {
+        self.secondButton.isHidden = !self.secondButton.isHidden
         self.view.layoutIfNeeded()
-
+        
     }
     
     @IBAction func secondButtonPressed(_ sender: UIButton) {
         if sender.currentTitle == "Upcoming" {
-            topButton.setTitle("Upcoming", for: .normal)
-            upcomingRides()
-            sender.setTitle("History", for: .normal)
+            animateTableView(upcoming: true, sender: sender)
         } else {
-            topButton.setTitle("History", for: .normal)
-            sender.setTitle("Upcoming", for: .normal)
+            animateTableView(upcoming: false, sender: sender)
         }
-        self.secondButton.isHidden = !self.secondButton.isHidden
     }
 
     
@@ -158,7 +176,7 @@ class DriverProfileViewController: UIViewController {
 }
 extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return upcomingEvents.count
+        return rides.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -167,7 +185,7 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
             
         }
 
-        let upcomingRides = upcomingEvents[indexPath.row]
+        let upcomingRides = rides[indexPath.row]
         cell.configure(with: upcomingRides)
         return cell
     }
@@ -178,7 +196,7 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let ride = upcomingEvents[indexPath.row]
+        let ride = rides[indexPath.row]
         var contact = String()
         if DBService.currentManoUser.typeOfUser == TypeOfUser.Driver.rawValue {
             contact = "Contact Passenger"
