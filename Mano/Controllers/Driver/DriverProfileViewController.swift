@@ -228,13 +228,15 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
                     }
                 })
             case "Contact Passenger":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil, sent: false)
-                messageVC.modalPresentationStyle = .overCurrentContext
-                self.present(messageVC, animated: true)
+                print("Contact passanger")
+//                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil, sent: false)
+//                messageVC.modalPresentationStyle = .overCurrentContext
+//                self.present(messageVC, animated: true)
             case "Contact Driver":
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil, sent: false)
-                messageVC.modalPresentationStyle = .overCurrentContext
-                self.present(messageVC, animated: true)
+                print("Contact driver")
+//                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil, sent: false)
+//                messageVC.modalPresentationStyle = .overCurrentContext
+//                self.present(messageVC, animated: true)
             default:
                 return
             }

@@ -1,22 +1,16 @@
 //
-//  MessageTableViewCell.swift
+//  SenderCell.swift
 //  Mano
 //
-//  Created by Leandro Wauters on 8/4/19.
+//  Created by Leandro Wauters on 8/21/19.
 //  Copyright © 2019 Leandro Wauters. All rights reserved.
 //
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class SenderCell: UITableViewCell {
 
-    @IBOutlet weak var newMessageView: CircularView!
-    @IBOutlet weak var senderName: UILabel!
-    @IBOutlet weak var messageDate: UILabel!
-    
-    
-    
-    
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

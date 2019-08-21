@@ -249,13 +249,22 @@ class RoundViewWithBorder: UIView {
 }
 
 @IBDesignable
-class RoundViewWithBorder10: UIView {
+class RoundViewWithBorder15: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = 15.0
         layer.borderWidth = 1
         layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
         clipsToBounds = true
+    }
+}
+
+class RoundView15: UIView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = 15.0
+        clipsToBounds = true
+//        bounds.size = intrinsicContentSize
     }
 }
 
@@ -273,4 +282,13 @@ class RoundDatePicker: UIDatePicker {
     }
 }
 
-
+@IBDesignable
+class TextViewWithBorder: UITextView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = 15.0
+        layer.borderWidth = 1
+        layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        clipsToBounds = true
+    }
+}

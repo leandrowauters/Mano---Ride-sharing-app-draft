@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D50010DF22E5F842006659DA /* MapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010DE22E5F842006659DA /* MapsHelper.swift */; };
 		D50010E522E6077D006659DA /* DBService+Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50010E422E6077D006659DA /* DBService+Ride.swift */; };
+		D50E0FB0230CBE660035423B /* MessageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E0FAE230CBE660035423B /* MessageListCell.swift */; };
+		D50E0FB1230CBE670035423B /* MessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E0FAF230CBE660035423B /* MessageListCell.xib */; };
 		D5122CE522E1124C00453359 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5122CE322E1124C00453359 /* BioViewController.swift */; };
 		D5122CE622E1124C00453359 /* BioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5122CE422E1124C00453359 /* BioViewController.xib */; };
 		D51CF7B622DF6F38003F1385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51CF7B522DF6F38003F1385 /* AppDelegate.swift */; };
@@ -61,6 +63,10 @@
 		D59D1A8222E3E41100E94D77 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59D1A8122E3E41100E94D77 /* StorageService.swift */; };
 		D5A33CC022F3691C00DD28D6 /* OnWayToDropoffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */; };
 		D5A33CC122F3691C00DD28D6 /* OnWayToDropoffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */; };
+		D5A8C9C1230DB8E300EA2B35 /* RecipientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8C9BF230DB8E300EA2B35 /* RecipientCell.swift */; };
+		D5A8C9C2230DB8E300EA2B35 /* RecipientCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5A8C9C0230DB8E300EA2B35 /* RecipientCell.xib */; };
+		D5A8C9C5230DB8F600EA2B35 /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A8C9C3230DB8F600EA2B35 /* SenderCell.swift */; };
+		D5A8C9C6230DB8F600EA2B35 /* SenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5A8C9C4230DB8F600EA2B35 /* SenderCell.xib */; };
 		D5CCF96422FC631900DC7D59 /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CCF96222FC631900DC7D59 /* ChooseLocationViewController.swift */; };
 		D5CCF96522FC631900DC7D59 /* ChooseLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5CCF96322FC631900DC7D59 /* ChooseLocationViewController.xib */; };
 		D5D1298622E228DA00B5EDB2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */; };
@@ -94,8 +100,6 @@
 		D5F4400622F653EC00DB0D01 /* DBService+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400522F653EC00DB0D01 /* DBService+Message.swift */; };
 		D5F4400922F7964400DB0D01 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */; };
 		D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */; };
-		D5F4400D22F7994300DB0D01 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */; };
-		D5F4400E22F7994300DB0D01 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */; };
 		D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635122E7C40000250C96 /* NetworkHelper.swift */; };
 		D5F7635422E7C52700250C96 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635322E7C52700250C96 /* AppError.swift */; };
 		D5F7635622E886E700250C96 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F7635522E886E700250C96 /* TestHelper.swift */; };
@@ -125,6 +129,8 @@
 		D0D079C4836965230C7A0B40 /* Pods_Mano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D50010DE22E5F842006659DA /* MapsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsHelper.swift; sourceTree = "<group>"; };
 		D50010E422E6077D006659DA /* DBService+Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Ride.swift"; sourceTree = "<group>"; };
+		D50E0FAE230CBE660035423B /* MessageListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListCell.swift; sourceTree = "<group>"; };
+		D50E0FAF230CBE660035423B /* MessageListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageListCell.xib; sourceTree = "<group>"; };
 		D5122CE322E1124C00453359 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
 		D5122CE422E1124C00453359 /* BioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BioViewController.xib; sourceTree = "<group>"; };
 		D51CF7B222DF6F38003F1385 /* Mano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mano.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +186,10 @@
 		D59D1A8122E3E41100E94D77 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		D5A33CBE22F3691C00DD28D6 /* OnWayToDropoffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnWayToDropoffViewController.swift; sourceTree = "<group>"; };
 		D5A33CBF22F3691C00DD28D6 /* OnWayToDropoffViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnWayToDropoffViewController.xib; sourceTree = "<group>"; };
+		D5A8C9BF230DB8E300EA2B35 /* RecipientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientCell.swift; sourceTree = "<group>"; };
+		D5A8C9C0230DB8E300EA2B35 /* RecipientCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipientCell.xib; sourceTree = "<group>"; };
+		D5A8C9C3230DB8F600EA2B35 /* SenderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
+		D5A8C9C4230DB8F600EA2B35 /* SenderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderCell.xib; sourceTree = "<group>"; };
 		D5CCF96222FC631900DC7D59 /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
 		D5CCF96322FC631900DC7D59 /* ChooseLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseLocationViewController.xib; sourceTree = "<group>"; };
 		D5D1298522E228DA00B5EDB2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -213,8 +223,6 @@
 		D5F4400522F653EC00DB0D01 /* DBService+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Message.swift"; sourceTree = "<group>"; };
 		D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
 		D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesListViewController.xib; sourceTree = "<group>"; };
-		D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		D5F7635122E7C40000250C96 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		D5F7635322E7C52700250C96 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		D5F7635522E886E700250C96 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
@@ -308,6 +316,7 @@
 				D5F4400022F64C7100DB0D01 /* MessageViewController.xib */,
 				D5F4400722F7964300DB0D01 /* MessagesListViewController.swift */,
 				D5F4400822F7964400DB0D01 /* MessagesListViewController.xib */,
+				D5A8C9BA230DB85600EA2B35 /* MessagesCells */,
 			);
 			path = MessagesController;
 			sourceTree = "<group>";
@@ -405,6 +414,19 @@
 			name = "New Group";
 			sourceTree = "<group>";
 		};
+		D5A8C9BA230DB85600EA2B35 /* MessagesCells */ = {
+			isa = PBXGroup;
+			children = (
+				D50E0FAE230CBE660035423B /* MessageListCell.swift */,
+				D50E0FAF230CBE660035423B /* MessageListCell.xib */,
+				D5A8C9BF230DB8E300EA2B35 /* RecipientCell.swift */,
+				D5A8C9C0230DB8E300EA2B35 /* RecipientCell.xib */,
+				D5A8C9C3230DB8F600EA2B35 /* SenderCell.swift */,
+				D5A8C9C4230DB8F600EA2B35 /* SenderCell.xib */,
+			);
+			path = MessagesCells;
+			sourceTree = "<group>";
+		};
 		D5D1298722E2296D00B5EDB2 /* Driver */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,8 +457,6 @@
 				D5D6A77222E39863009C0029 /* UpcomingCell.swift */,
 				D5F7635B22E8C09700250C96 /* DriveTableViewCell.swift */,
 				D5F7635C22E8C09700250C96 /* DriveTableViewCell.xib */,
-				D5F4400B22F7994300DB0D01 /* MessageTableViewCell.swift */,
-				D5F4400C22F7994300DB0D01 /* MessageTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -606,10 +626,10 @@
 				D51CF7C322DF6F3B003F1385 /* LaunchScreen.storyboard in Resources */,
 				D5D7F5EA22F38CC9004CBA6C /* FilterView.xib in Resources */,
 				D5D6A77A22E3A997009C0029 /* RequestRideViewController.xib in Resources */,
-				D5F4400E22F7994300DB0D01 /* MessageTableViewCell.xib in Resources */,
 				D56F4F0322EA439C004E103E /* DriverMoreInfoViewController.xib in Resources */,
 				D5122CE622E1124C00453359 /* BioViewController.xib in Resources */,
 				D5E984CD22E233230023B155 /* AvailableManosViewController.xib in Resources */,
+				D50E0FB1230CBE670035423B /* MessageListCell.xib in Resources */,
 				D5F4400222F64C7100DB0D01 /* MessageViewController.xib in Resources */,
 				D5F4400A22F7964400DB0D01 /* MessagesListViewController.xib in Resources */,
 				D5588E2D2309E6CD00903430 /* PassengerRideCompletedViewController.xib in Resources */,
@@ -623,8 +643,10 @@
 				D5CCF96522FC631900DC7D59 /* ChooseLocationViewController.xib in Resources */,
 				D53BD9BC2305F9C900B90428 /* DriverRideCompletedViewController.xib in Resources */,
 				D58D747522EE37B30081424D /* SendMessageViewController.xib in Resources */,
+				D5A8C9C2230DB8E300EA2B35 /* RecipientCell.xib in Resources */,
 				D5EF0AA022E252E40061B67A /* ManosList.xib in Resources */,
 				D59D1A8022E3D5E300E94D77 /* MoreInfoViewController.xib in Resources */,
+				D5A8C9C6230DB8F600EA2B35 /* SenderCell.xib in Resources */,
 				D57557A322E761590063BD15 /* RideAcceptedAlertViewController.xib in Resources */,
 				D57557AA22E79C870063BD15 /* MyLocationTableViewCell.xib in Resources */,
 				D5E39B9522E0163E008A919A /* LoginViewController.xib in Resources */,
@@ -719,14 +741,15 @@
 				D53BD9BB2305F9C900B90428 /* DriverRideCompletedViewController.swift in Sources */,
 				D59D1A7822E3C8D200E94D77 /* MyLocation.swift in Sources */,
 				D59D1A7A22E3CA2000E94D77 /* DataPersistanceManager.swift in Sources */,
+				D5A8C9C1230DB8E300EA2B35 /* RecipientCell.swift in Sources */,
 				D5EF0AAE22E376CA0061B67A /* FavoritesViewController.swift in Sources */,
 				D54FD40322DF9A4200F20AFE /* DBService.swift in Sources */,
 				D5F7635422E7C52700250C96 /* AppError.swift in Sources */,
+				D5A8C9C5230DB8F600EA2B35 /* SenderCell.swift in Sources */,
 				D57D62E922E0215C00F638DF /* ViewController+Alert.swift in Sources */,
 				D5F4400922F7964400DB0D01 /* MessagesListViewController.swift in Sources */,
 				D56F4F0222EA439C004E103E /* DriverMoreInfoViewController.swift in Sources */,
 				D58D747422EE37B30081424D /* SendMessageViewController.swift in Sources */,
-				D5F4400D22F7994300DB0D01 /* MessageTableViewCell.swift in Sources */,
 				D5F4400422F6515300DB0D01 /* Message.swift in Sources */,
 				D5F7635222E7C40000250C96 /* NetworkHelper.swift in Sources */,
 				D59D1A7F22E3D5E300E94D77 /* MoreInfoViewController.swift in Sources */,
@@ -759,6 +782,7 @@
 				D5D6A77422E39863009C0029 /* UpcomingCell.swift in Sources */,
 				D54FD3F922DF8EEA00F20AFE /* ManoUser.swift in Sources */,
 				D5F7636122E8CB7300250C96 /* OnItsWayViewController.swift in Sources */,
+				D50E0FB0230CBE660035423B /* MessageListCell.swift in Sources */,
 				D571BAE122E7B20D00FA9369 /* DriveViewController.swift in Sources */,
 				D59D1A7222E3BE4900E94D77 /* MyLocationsViewController.swift in Sources */,
 				D5122CE522E1124C00453359 /* BioViewController.swift in Sources */,
