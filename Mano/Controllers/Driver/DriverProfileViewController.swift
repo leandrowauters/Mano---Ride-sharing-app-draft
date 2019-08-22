@@ -45,7 +45,7 @@ class DriverProfileViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        checkForNewMessages()
+//        checkForNewMessages()
         fetchRides(upcoming: upcomingRidesPressed)
     }
     
@@ -145,8 +145,8 @@ class DriverProfileViewController: UIViewController {
     }
     
     @IBAction func messagePressed(_ sender: Any) {
-        let messageListVc = MessagesListViewController()
-        navigationController?.pushViewController(messageListVc, animated: true)
+//        let messageListVc = MessagesListViewController()
+//        navigationController?.pushViewController(messageListVc, animated: true)
     }
     
     @IBAction func signoutPressed(_ sender: Any) {
@@ -229,14 +229,14 @@ extension DriverProfileViewController: UITableViewDataSource, UITableViewDelegat
                 })
             case "Contact Passenger":
                 print("Contact passanger")
-//                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger, message: nil, sent: false)
-//                messageVC.modalPresentationStyle = .overCurrentContext
-//                self.present(messageVC, animated: true)
+                let messageVC = MessagesListViewController(nibName: nil, bundle: nil, recipientId: ride.passangerId, recipientName: ride.passanger)
+                messageVC.modalPresentationStyle = .overCurrentContext
+                self.present(messageVC, animated: true)
             case "Contact Driver":
                 print("Contact driver")
-//                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName, message: nil, sent: false)
-//                messageVC.modalPresentationStyle = .overCurrentContext
-//                self.present(messageVC, animated: true)
+                let messageVC = MessagesListViewController(nibName: nil, bundle: nil, recipientId: ride.driverId, recipientName: ride.driverName)
+                messageVC.modalPresentationStyle = .overCurrentContext
+                self.present(messageVC, animated: true)
             default:
                 return
             }

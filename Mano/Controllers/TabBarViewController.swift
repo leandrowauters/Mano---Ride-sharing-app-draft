@@ -52,6 +52,7 @@ class TabBarViewController: UITabBarController {
         let tab = TabBarViewController()
         let myLocations = MyLocationsViewController()
         let driveVC = DriveViewController()
+        let messagesVC = MessageViewController()
         var controllers = [UIViewController]()
         
 
@@ -59,8 +60,9 @@ class TabBarViewController: UITabBarController {
             availableManoVC.tabBarItem = UITabBarItem.init(title: "Manos", image: UIImage(named: "hand"), tag: 0)
             favoritesVC.tabBarItem = UITabBarItem.init(title: "Passenger", image: UIImage(named: "favorites"), tag: 1)
             driveVC.tabBarItem = UITabBarItem.init(title: "Today", image: UIImage(named: "car"), tag: 2)
-            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 3)
-            controllers = [availableManoVC,favoritesVC,driveVC,driverProfileVC]
+            messagesVC.tabBarItem = UITabBarItem.init(title: "Messages", image: UIImage(named: "envelope"), tag: 3)
+            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 4)
+            controllers = [availableManoVC,favoritesVC,driveVC,messagesVC,driverProfileVC]
             
             UITabBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1)
             UITabBar.appearance().tintColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
@@ -70,8 +72,9 @@ class TabBarViewController: UITabBarController {
             requestRideVC.tabBarItem = UITabBarItem(title: "Request", image: UIImage(named: "rider"), tag: 0)
             myLocations.tabBarItem = UITabBarItem(title: "My Locations", image: UIImage(named: "favorites"), tag: 1)
             favoritesVC.tabBarItem = UITabBarItem.init(title: "Drivers", image: UIImage(named: "wheel"), tag: 2)
-            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 3)
-            controllers = [requestRideVC, myLocations, favoritesVC, driverProfileVC]
+            messagesVC.tabBarItem = UITabBarItem.init(title: "Messages", image: UIImage(named: "envelope"), tag: 3)
+            driverProfileVC.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "account"), tag: 4)
+            controllers = [requestRideVC, myLocations, favoritesVC,messagesVC, driverProfileVC]
         }
        
 

@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class MessagesListViewController: UIViewController {
 
+    private var recipientId: String
+    private var recipientName: String
+    private var listener: ListenerRegistration!
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messagesTableView: UITableView!
@@ -26,7 +30,28 @@ class MessagesListViewController: UIViewController {
         setup()
         setupTextView()
         setupTableView()
+        fetchMessages()
         registerKeyboardNotifications()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchMessages()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        listener.remove()
+        unregisterKeyboardNotifications()
+    }
+    
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, recipientId: String, recipientName: String) {
+        self.recipientId = recipientId
+        self.recipientName = recipientName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setup() {
@@ -37,6 +62,7 @@ class MessagesListViewController: UIViewController {
     private func setupTableView() {
         messagesTableView.delegate = self
         messagesTableView.dataSource = self
+        messagesTableView.separatorStyle = .none
         messagesTableView.register(UINib(nibName: "RecipientCell", bundle: nil), forCellReuseIdentifier: "RecipientCell")
         messagesTableView.register(UINib(nibName: "SenderCell", bundle: nil), forCellReuseIdentifier: "SenderCell")
     }
@@ -46,14 +72,22 @@ class MessagesListViewController: UIViewController {
         messageTextView.isScrollEnabled = false
         textViewDidChange(messageTextView)
     }
+    
+    private func fetchMessages() {
+        listener = DBService.fetchYourMessages { [weak self] error, messages in
+            if let error = error {
+                self?.showAlert(title: "Error fetching messages", message: error.localizedDescription)
+            }
+            if let messages = messages {
+                self?.messages = messages
+            }
+        }
+    }
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        unregisterKeyboardNotifications()
-    }
+
     
     private func registerKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyBaord), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -80,7 +114,16 @@ class MessagesListViewController: UIViewController {
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
-        
+        guard let messageText = messageTextView.text else {
+            showAlert(title: "Please enter text", message: nil)
+            return
+        }
+        let message = Message(sender: DBService.currentManoUser.fullName, recipient: recipientName, senderId: DBService.currentManoUser.userId, recipientId: recipientId, message: messageText, messageId: "", messageDate: Date().dateDescription, read: false)
+        DBService.sendMessage(message: message) { [weak self] error in
+            if let error = error {
+                self?.showAlert(title: "Error sending message", message: error.localizedDescription)
+            }
+        }
     }
     
 
@@ -111,7 +154,7 @@ extension MessagesListViewController: UITextViewDelegate {
 
 extension MessagesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,10 +162,14 @@ extension MessagesListViewController: UITableViewDelegate, UITableViewDataSource
         guard let senderCell = tableView.dequeueReusableCell(withIdentifier: "SenderCell", for: indexPath) as? SenderCell else {
             fatalError()
         }
-
-        return recipientCell
-        
-        
+        let message = messages[indexPath.row]
+        recipientCell.configure(with: message)
+        senderCell.configure(with: message)
+        if message.senderId == DBService.currentManoUser.userId {
+            return senderCell
+        } else {
+            return recipientCell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

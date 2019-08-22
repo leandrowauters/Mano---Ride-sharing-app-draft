@@ -17,6 +17,11 @@ class SenderCell: UITableViewCell {
         // Initialization code
     }
 
+    public func configure(with message: Message) {
+        messageLabel.text = message.message
+        isUserInteractionEnabled = false
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -50,14 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
                         DBService.currentManoUser = manoUser
                         //TO DO
                         
-//                        let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
-//                        let navigationController = UINavigationController(rootViewController: tab)
-//                        navigationController.setNavigationBarHidden(true, animated: false)
-                        let messageVC = MessagesListViewController()
+                        let tab = TabBarViewController.setTabBarVC(typeOfUser: manoUser.typeOfUser)
+                        let navigationController = UINavigationController(rootViewController: tab)
+                        navigationController.setNavigationBarHidden(true, animated: false)
                         self.window = UIWindow(frame: UIScreen.main.bounds)
-                        self.window?.rootViewController = messageVC
-                        self.window?.makeKeyAndVisible()
-                        
+                        self.window?.rootViewController = navigationController
+                        self.window?.makeKeyAndVisible()                        
                     }
                 }
 

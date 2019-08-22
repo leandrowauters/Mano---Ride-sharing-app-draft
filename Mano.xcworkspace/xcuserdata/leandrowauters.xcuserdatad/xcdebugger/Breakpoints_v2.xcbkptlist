@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mano/FirebaseHelper/DBService+Ride.swift"
-            timestampString = "588013699.024574"
+            timestampString = "588124992.2440079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "updateRideStatus(ride:status:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mano/Controllers/RideControllers/OnWayToDropoffViewController.swift"
-            timestampString = "588106622.973747"
+            timestampString = "588124992.2441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"

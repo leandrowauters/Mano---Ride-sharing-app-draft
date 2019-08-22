@@ -292,3 +292,12 @@ class TextViewWithBorder: UITextView {
         clipsToBounds = true
     }
 }
+
+@IBDesignable
+class RoundedLabel: UILabel {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = 15.0
+        clipsToBounds = true
+    }
+}
