@@ -81,7 +81,7 @@ class RequestRideViewController: UIViewController {
                 self?.showAlert(title: "Error fetching rides", message: error.localizedDescription)
             }
             if let rides = rides {
-                let rides = rides.filter{$0.rideStatus == RideStatus.rideRequested.rawValue || $0.rideStatus == RideStatus.rideAccepted.rawValue}
+                let rides = rides.filter{$0.rideStatus == RideStatus.rideRequested.rawValue || ($0.rideStatus == RideStatus.rideAccepted.rawValue)}
                 if rides.isEmpty {
                     self?.alertView.isHidden = true
                     return
@@ -111,7 +111,7 @@ class RequestRideViewController: UIViewController {
     private func setupAlertView(isHidden: Bool, labelText: String, labelColor: UIColor) {
         alertView.isHidden = isHidden
         rideStatusLabel.text = labelText
-        rideStatusLabel.textColor = labelColor
+        rideStatusLabel.backgroundColor = labelColor
     }
     @objc func dateViewPressed(){
         datePickerView.isHidden = false

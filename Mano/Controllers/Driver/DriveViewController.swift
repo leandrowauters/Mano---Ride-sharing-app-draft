@@ -98,8 +98,8 @@ class DriveViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DriveTableViewCell", for: indexPath) as? DriveTableViewCell else {return
-            UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DriveTableViewCell", for: indexPath) as? DriveTableViewCell else {
+            fatalError()
         }
         let ride = rides[indexPath.row]
         cell.passangerName.text = ride.passanger

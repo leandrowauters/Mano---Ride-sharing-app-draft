@@ -48,7 +48,7 @@ class OnItsWayViewController: UIViewController {
     @IBOutlet weak var phoneView: BorderedView!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
-    @IBOutlet weak var mapOptionView: RoundViewWithBorder10!
+    @IBOutlet weak var mapOptionView: RoundViewWithBorder15!
     
     
     override func viewDidLoad() {

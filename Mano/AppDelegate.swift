@@ -55,8 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,  UNUserNotificationCenter
                         navigationController.setNavigationBarHidden(true, animated: false)
                         self.window = UIWindow(frame: UIScreen.main.bounds)
                         self.window?.rootViewController = navigationController
-                        self.window?.makeKeyAndVisible()
-                        
+                        self.window?.makeKeyAndVisible()                        
                     }
                 }
 

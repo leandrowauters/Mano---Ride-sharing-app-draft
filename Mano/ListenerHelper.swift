@@ -94,11 +94,11 @@ class ListenerHelper {
        return DBService.fetchYourMessages { (error, messages) in
             if let messages = messages {
                 DBService.messagesRecieved = messages
-                let newMessage = messages.filter({$0.read == false})
+                let newMessage = messages.filter({$0.read == false && $0.recipientId == DBService.currentManoUser.userId})
                 if !newMessage.isEmpty{
-                    vc.tabBar.items!.last!.badgeValue = newMessage.count.description
+                    vc.tabBar.items![3].badgeValue = newMessage.count.description
                 } else {
-                    vc.tabBar.items!.last!.badgeValue = nil
+                    vc.tabBar.items![3].badgeValue = nil
                 }
             }
         }

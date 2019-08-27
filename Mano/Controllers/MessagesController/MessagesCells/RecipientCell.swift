@@ -1,28 +1,28 @@
 //
-//  MessageTableViewCell.swift
+//  RecipientCell.swift
 //  Mano
 //
-//  Created by Leandro Wauters on 8/4/19.
+//  Created by Leandro Wauters on 8/21/19.
 //  Copyright © 2019 Leandro Wauters. All rights reserved.
 //
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class RecipientCell: UITableViewCell {
 
-    @IBOutlet weak var newMessageView: CircularView!
-    @IBOutlet weak var senderName: UILabel!
-    @IBOutlet weak var messageDate: UILabel!
     
-    
-    
-    
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    public func configure(with message: Message) {
+        messageLabel.text = message.message
+        isUserInteractionEnabled = false
+        
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

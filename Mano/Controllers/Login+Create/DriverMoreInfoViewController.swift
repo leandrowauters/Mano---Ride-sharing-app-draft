@@ -162,27 +162,27 @@ class DriverMoreInfoViewController: UIViewController {
         guard let userProfileImageData = selectedYourImage.jpegData(compressionQuality: 0.5),
         let userCarImageData = selectedYourCarImage.jpegData(compressionQuality: 0.5) else {return}
         
-        StorageService.postImage(imageData: userProfileImageData, imageName: manoUser.userId) { (error, url) in
+        StorageService.postImage(imageData: userProfileImageData, imageName: manoUser.userId) { [weak self] error, url in
             var urls = [URL]()
             if let error = error {
-                self.showAlert(title: "Error uploading photo", message: error.localizedDescription)
+                self?.showAlert(title: "Error uploading photo", message: error.localizedDescription)
             }
             if let url = url {
                 urls.append(url)
-                StorageService.postImage(imageData: userCarImageData, imageName: self.manoUser.userId + "car", completion: { (error, url) in
+                StorageService.postImage(imageData: userCarImageData, imageName: (self?.manoUser.userId)! + "car", completion: { [weak self] error, url in
                     if let error = error {
-                        self.showAlert(title: "Error uploading photo", message: error.localizedDescription)
+                        self?.showAlert(title: "Error uploading photo", message: error.localizedDescription)
                     }
                     if let url = url {
                         urls.append(url)
-                        let updatedManoUser = ManoUser(firstName: self.manoUser.firstName, lastName: self.manoUser.lastName, fullName: self.manoUser.fullName, homeAdress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, profileImage: urls[0].absoluteString, carMakerModel: carMakeModel, bio: nil, typeOfUser: self.manoUser.typeOfUser, regulars: nil, joinedDate: self.manoUser.joinedDate, userId: self.manoUser.userId, numberOfRides:  nil, numberOfMiles:  nil, licencePlate: licencePlate, carPicture: urls[1].absoluteString,cellPhone: cellPhone, rides: nil)
-                        DBService.updateDriverMoreInfo(userID: self.manoUser.userId, profileImage: urls[0].absoluteString, homeAddress: homeAddress, homeLat: self.homeLat, homeLon: self.homeLon, carMakerModel: carMakeModel, licencePlate: licencePlate, carPhoto: urls[1].absoluteString, cellPhone: cellPhone, completion: { (error) in
+                        let updatedManoUser = ManoUser(firstName: (self?.manoUser.firstName)!, lastName: (self?.manoUser.lastName)!, fullName: (self?.manoUser.fullName)!, homeAdress: homeAddress, homeLat: self?.homeLat, homeLon: self?.homeLon, profileImage: urls[0].absoluteString, carMakerModel: carMakeModel, bio: nil, typeOfUser: (self?.manoUser.typeOfUser)!, regulars: nil, joinedDate: (self?.manoUser.joinedDate)!, userId: (self?.manoUser.userId)!, numberOfRides:  nil, numberOfMiles:  nil, licencePlate: licencePlate, carPicture: urls[1].absoluteString,cellPhone: cellPhone, rides: nil)
+                        DBService.updateDriverMoreInfo(userID: (self?.manoUser.userId)!, profileImage: urls[0].absoluteString, homeAddress: homeAddress, homeLat: self!.homeLat, homeLon: self!.homeLon, carMakerModel: carMakeModel, licencePlate: licencePlate, carPhoto: urls[1].absoluteString, cellPhone: cellPhone, completion: { [weak self] error in
                             if let error = error {
-                                self.showAlert(title: "Error uploading more info", message: error.localizedDescription)
+                                self?.showAlert(title: "Error uploading more info", message: error.localizedDescription)
                             } else {
-                                let bioVC = BioViewController(nibName: nil, bundle: nil, manoUser: updatedManoUser, typeOfUser: self.typeOfUser)
+                                let bioVC = BioViewController(nibName: nil, bundle: nil, manoUser: updatedManoUser, typeOfUser: self!.typeOfUser)
                                 bioVC.modalPresentationStyle = .overCurrentContext
-                                self.present(bioVC, animated: true)
+                                self?.present(bioVC, animated: true)
                             }
                         })
                     }

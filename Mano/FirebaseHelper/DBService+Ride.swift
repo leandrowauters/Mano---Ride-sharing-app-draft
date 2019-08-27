@@ -37,26 +37,18 @@ extension DBService {
                 var rides = [Ride]()
                 for document in snapshot.documents {
                     let ride = Ride.init(dict: document.data())
-                    if ride.rideStatus ==  RideStatus.rideRequested.rawValue {
-                        if ride.appointmentDate.stringToDate().dateExpired() {
-                            deleteRide(ride: ride, completion: { (error) in
-                                if let error = error {
-                                    completion(error, nil)
-                                }
-                            })
-                        } else {
-                            rides.append(ride)
-                        }
-                    }
-                    if ride.rideStatus == RideStatus.rideCancelled.rawValue && ride.appointmentDate.stringToDate().dateExpired(){
+                    if ride.appointmentDate.stringToDate().dateExpired() && (ride.rideStatus != RideStatus.rideCancelled.rawValue || ride.rideStatus != RideStatus.rideIsOver.rawValue || ride.rideStatus != RideStatus.rideRequested.rawValue){
                         deleteRide(ride: ride, completion: { (error) in
                             if let error = error {
                                 completion(error, nil)
                             }
                         })
+                    } else {
+                        rides.append(ride)
                     }
+                    
                 }
-                completion(nil, rides)
+                completion(nil, rides.filter{$0.rideStatus == RideStatus.rideRequested.rawValue })
             }
         }
     }

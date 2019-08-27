@@ -31,7 +31,7 @@ class OnWayToDropoffViewController: UIViewController {
     @IBOutlet weak var driverMakeModelLabel: UILabel!
     @IBOutlet weak var driverLicencePlateLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var mapOptionView: RoundViewWithBorder10!
+    @IBOutlet weak var mapOptionView: RoundViewWithBorder15!
     @IBOutlet weak var driverView: UIView!
     
     var listener: ListenerRegistration!

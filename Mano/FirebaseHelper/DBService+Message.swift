@@ -11,6 +11,7 @@ import Firebase
 extension DBService {
     
     static var messagesRecieved = [Message]()
+    
     static public func sendMessage(message: Message, completion: @escaping(Error?) -> Void) {
         let ref = firestoreDB.collection(MessageCollectionKeys.collectionKey).document()
         firestoreDB.collection(MessageCollectionKeys.collectionKey).document(ref.documentID).setData(
@@ -29,28 +30,18 @@ extension DBService {
     }
     
     static public func fetchYourMessages(completion: @escaping(Error?, [Message]?) -> Void) -> ListenerRegistration {
-        return firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.recipientIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
+        return firestoreDB.collection(MessageCollectionKeys.collectionKey).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(error, nil)
             }
             if let snapshot = snapshot {
                 let messages = snapshot.documents.map({Message.init(dict: $0.data())})
-                completion(nil, messages)
+                completion(nil, messages.filter{$0.recipientId == currentManoUser.userId || $0.senderId == currentManoUser.userId})
             }
         }
     }
     
-    static public func fetchMessagesSent(completion: @escaping(Error?, [Message]?) -> Void) -> ListenerRegistration{
-        return firestoreDB.collection(MessageCollectionKeys.collectionKey).whereField(MessageCollectionKeys.senderIdKey, isEqualTo: DBService.currentManoUser.userId).addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(error, nil)
-            }
-            if let snapshot = snapshot {
-                let messages = snapshot.documents.map({Message.init(dict: $0.data())})
-                completion(nil, messages)
-            }
-        }
-    }
+
     
     static public func updateToMessageToRead(message: Message, completion: @escaping(Error?) -> Void) {
         firestoreDB.collection(MessageCollectionKeys.collectionKey).document(message.messageId).updateData([MessageCollectionKeys.readKey : true]) { (error) in

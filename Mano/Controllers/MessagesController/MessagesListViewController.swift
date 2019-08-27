@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 class MessagesListViewController: UIViewController {
 
+    private var recipientId: String
+    private var recipientName: String
+    private var listener: ListenerRegistration!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messagesTableView: UITableView!
-    
-    @IBOutlet weak var inboxButton: BlueBorderedButton!
-    
-    @IBOutlet weak var sentButton: BlueBorderedButton!
     
     var messages = [Message]() {
         didSet {
@@ -23,69 +25,131 @@ class MessagesListViewController: UIViewController {
             }
         }
     }
-    
-    var inbox = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        fetchInbox()
+        setupTextView()
+        setupTableView()
+        fetchMessages()
+        registerKeyboardNotifications()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        fetchInbox()
+        fetchMessages()
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        listener.remove()
+        unregisterKeyboardNotifications()
+    }
+    
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, recipientId: String, recipientName: String) {
+        self.recipientId = recipientId
+        self.recipientName = recipientName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setup() {
-        inboxButton.setTitleColor(.white, for: .normal)
-        inboxButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
-        messagesTableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: "MessageTableViewCell")
-        messagesTableView.dataSource = self
+        let screenTap = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(screenTap)
+    }
+    
+    private func setupTableView() {
         messagesTableView.delegate = self
-        messagesTableView.separatorStyle = .singleLine
+        messagesTableView.dataSource = self
+        messagesTableView.separatorStyle = .none
+        messagesTableView.register(UINib(nibName: "RecipientCell", bundle: nil), forCellReuseIdentifier: "RecipientCell")
+        messagesTableView.register(UINib(nibName: "SenderCell", bundle: nil), forCellReuseIdentifier: "SenderCell")
     }
-    @IBAction func backButtonPressed(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+    
+    private func setupTextView() {
+        messageTextView.delegate = self
+        messageTextView.isScrollEnabled = false
+        textViewDidChange(messageTextView)
     }
-    private func fetchInbox() {
-        inbox = true
-        DBService.fetchYourMessages { (error, inboxMessages) in
+    
+    private func fetchMessages() {
+        listener = DBService.fetchYourMessages { [weak self] error, messages in
             if let error = error {
-                self.showAlert(title: "Error fetching messages", message: error.localizedDescription)
+                self?.showAlert(title: "Error fetching messages", message: error.localizedDescription)
             }
-            if let inboxMessages = inboxMessages {
-                let messagesSorted = inboxMessages.sorted{$0.messageDate < $1.messageDate}
-                self.messages = messagesSorted
+            if let messages = messages {
+                self?.messages = messages
             }
         }
     }
-    @IBAction func inboxPressed(_ sender: Any) {
-        inboxButton.setTitleColor(.white, for: .normal)
-        inboxButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
-        sentButton.setTitleColor(#colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1), for: .normal)
-        sentButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        fetchInbox()
-        
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
-    @IBAction func sentPressed(_ sender: Any) {
-        inbox = false
-        sentButton.setTitleColor(.white, for: .normal)
-        sentButton.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.5137254902, blue: 0.2039215686, alpha: 1)
-        inboxButton.setTitleColor(#colorLiteral(red: 0, green: 0.4980392157, blue: 0.737254902, alpha: 1), for: .normal)
-        inboxButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        DBService.fetchMessagesSent { (error, messagesSent) in
+    
+
+    
+    private func registerKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyBaord), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyBaord), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func unregisterKeyboardNotifications(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func willShowKeyBaord(notification: Notification){
+        guard let info = notification.userInfo, let keyBoardFrame = info["UIKeyboardFrameEndUserInfoKey"] as? CGRect else {
+            print("UserInfo is nil")
+            return
+        }
+        sendButton.transform = CGAffineTransform.init(translationX: 0, y: -keyBoardFrame.height)
+        messageTextView.transform = CGAffineTransform.init(translationX: 0, y: -keyBoardFrame.height)
+    }
+    
+    @objc private func willHideKeyBaord(notification: Notification){
+        messageTextView.transform = CGAffineTransform.identity
+        sendButton.transform = CGAffineTransform.identity
+    }
+    
+    @IBAction func sendPressed(_ sender: UIButton) {
+        guard let messageText = messageTextView.text else {
+            showAlert(title: "Please enter text", message: nil)
+            return
+        }
+        let message = Message(sender: DBService.currentManoUser.fullName, recipient: recipientName, senderId: DBService.currentManoUser.userId, recipientId: recipientId, message: messageText, messageId: "", messageDate: Date().dateDescription, read: false)
+        DBService.sendMessage(message: message) { [weak self] error in
             if let error = error {
-                self.showAlert(title: "Error fetching messages", message: error.localizedDescription)
-            }
-            if let messagesSent = messagesSent {
-                let messagesSorted = messagesSent.sorted{$0.messageDate < $1.messageDate}
-                self.messages = messagesSorted
+                self?.showAlert(title: "Error sending message", message: error.localizedDescription)
             }
         }
     }
     
+
+
+    
+}
+
+extension MessagesListViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.bounds.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+        
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }
 
 extension MessagesListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -94,38 +158,33 @@ extension MessagesListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = messagesTableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell else {return UITableViewCell()}
+        guard let recipientCell = tableView.dequeueReusableCell(withIdentifier: "RecipientCell", for: indexPath) as? RecipientCell else { fatalError()}
+        guard let senderCell = tableView.dequeueReusableCell(withIdentifier: "SenderCell", for: indexPath) as? SenderCell else {
+            fatalError()
+        }
         let message = messages[indexPath.row]
-        if inbox {
-            if !message.read {
-                cell.newMessageView.isHidden = false
-            } else {
-                cell.newMessageView.isHidden = true
-            }
-            cell.senderName.text = message.sender
+        recipientCell.configure(with: message)
+        senderCell.configure(with: message)
+        if message.senderId == DBService.currentManoUser.userId {
+            return senderCell
         } else {
-            cell.senderName.text = message.recipient
+            return recipientCell
         }
-        cell.messageDate.text = message.messageDate
-        cell.accessoryType = .disclosureIndicator
-        return cell
     }
     
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let message = messages[indexPath.row]
-        DBService.updateToMessageToRead(message: message) { (error) in
-            if let error = error {
-                self.showAlert(title: "Error updating message", message: error.localizedDescription)
-            } else {
-                let messageVC = MessageViewController(nibName: nil, bundle: nil, recipientId: message.senderId, recipientName: message.sender, message: message, sent: !self.inbox)
-                self.navigationController?.pushViewController(messageVC, animated: true)
-            }
+        if indexPath.section == 0 {
+            return UITableView.automaticDimension
+        } else {
+            return 80
         }
     }
     
+   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return UITableView.automaticDimension
+        } else {
+            return 80
+        }
+    }
 }
